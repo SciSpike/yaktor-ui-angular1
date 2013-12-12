@@ -7,20 +7,32 @@
         "type": "button",
         "title": "Insert Money",
         "event": "click",
-        "action": "Using Machine"
+        "action": "Make Selection"
       }
     },
     {
       "title": "Using Machine"
     },
     {
-      "title": "Make Selection"
+      "title": "Make Selection",
+      "ui": {
+        "type": "button",
+        "title": "Make Your Selection",
+        "event": "click",
+        "action": "Collect Item"
+      }
     },
     {
       "title": "Waiting For Item"
     },
     {
-      "title": "Collect Item"
+      "title": "Collect Item",
+      "ui": {
+        "type": "button",
+        "title": "Buy More Soda",
+        "event": "click",
+        "action": "Has Money"
+      }
     },
     {
       "title": "Has No Money"
