@@ -15,7 +15,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "grunt nodeunit"
+    "test": "nodeunit test/json2angular_test.js"
   },
   "dependencies": {
     "optimist": "0.6.x",
@@ -24,10 +24,7 @@
     "mustache": "0.8.x"
   },
   "devDependencies": {
-    "grunt-contrib-jshint": "~0.6.4",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "grunt": "~0.4.2"
+    "nodeunit": "~0.8.2"
   },
   "keywords": []
 }

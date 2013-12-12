@@ -4,10 +4,25 @@ Generate an AngularJS application based on a JSON application grammer.
 
 ### Usage
 
-  json2angular [appname] [schema]
+  json2angular -s [schema]
+
+### Development
+
+`json2angular` is a Node module for generate AngularJS projects based on a to-be-defined JSON schema. The module consumes a JSON schema describing the application title, and application states. Each state is coupled with UI elements, and information about how those UI element affect the application state.
+
+In order to generate Angular code, the module uses [Mustache](https://npmjs.org/package/mustache) on file located in the `template` directory.
 
 ## Example JSON Structure (in-progress)
-
+    
+    {
+      name: 'AppName',
+      states: [
+      {
+        title: 'StateName1'
+      }
+      ]
+    }
+    
     [
       {
         state: 'state-1',

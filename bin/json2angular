@@ -1,2 +1,8 @@
 #!/usr/bin/env node
-require('../lib/schema2angular').exec();
+
+argv = require('optimist')
+  .usage('Usage: json2angular -s [schema]')
+  .demand(['s'])
+  .argv;
+
+require('../lib/json2angular').exec(argv.s);
