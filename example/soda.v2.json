@@ -1,0 +1,33 @@
+{
+  "hasMoney": {
+    "ui": {
+       "title": "Has Money", 
+       "type": "panel"
+    },
+    "elements": {
+      "spendMoney": {
+        "ui": {
+          "type": "form",
+          "title": "Spend Money"
+        },
+        "elements": {
+          "amount": {
+            "minimum": .01,
+            "type": "number"
+            "ui": {
+              "type": "input",
+              "title": "Amount"
+            }
+          },
+          "defaultAction": {
+            "ui": {
+              "type": "button"
+              "title": "Insert Money"
+            }
+          }
+          
+        }
+      }
+    }
+  }
+}
