@@ -21,6 +21,9 @@
     "optimist": "0.6.x",
     "jsonschema": "0.4.x",
     "ansi": "0.2.x",
+    "string": "1.7.x",
+    "node-json2html": "0.4.x",
+    "js-beautify": "1.4.x",
     "mustache": "0.8.x"
   },
   "devDependencies": {

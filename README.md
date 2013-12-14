@@ -53,7 +53,16 @@ In order to generate Angular code, the module uses [Mustache](https://npmjs.org/
     ]
 
 
-###
+### JSON Scheme
+
+* States are store in a JSON object. The key represents the state name.
+* Each state must have a `ui` and `elements` key.
+* The `ui` key specifies the HTML fragment to generate
+* The `elements` key specifies child nodes
+* Each child node is a container of UI elements associated with another state
+* It must contain a `ui` and `elements` key use to generate HTML fragments
+
+
 
 Soda Purchase Example
 
