@@ -17,8 +17,8 @@ This module uses two mechanisms for code generation.
   
 Though `mustache` is great for generating large templates, it can become cumbersome when generating fragments. `json2html` provides a better solution for AngularJS fragments since:
 
-  1) it provides a more readable fragment definition (especially when considering AngularJS's curly-braces syntax)
-  2) the fragment definition is directly borrowed from the application JSON specification.
+  * it provides a more readable fragment definition (especially when considering AngularJS's curly-braces syntax)
+  * the fragment definition is directly borrowed from the application JSON specification.
 
 
 ## JSON Specification
