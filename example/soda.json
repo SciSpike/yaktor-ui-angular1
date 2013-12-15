@@ -1,41 +1,71 @@
 {
   "name": "Soda Purchaser",
-  "states": [
-    {
-      "title": "Has Money",
+  "states": {
+    "hasMoney": {
       "ui": {
-        "type": "button",
-        "title": "Insert Money",
-        "event": "click",
-        "action": "Make Selection"
+         "title": "Has Money", 
+         "tag": "panel"
+      },
+      "elements": {
+        "spendMoney": {
+          "ui": {
+            "tag": "div",
+            "title": "Spend Money"
+          },
+          "elements": {
+            "amount": {
+              "minimum": 0.01,
+              "type": "number",
+              "ui": {
+                "tag": "input",
+                "type": "text"
+              }
+            },
+            "defaultAction": {
+              "ui": {
+                "tag": "button",
+                "title": "Insert Money"
+              }
+            }
+          
+          }
+        }
       }
     },
-    {
-      "title": "Using Machine"
-    },
-    {
-      "title": "Make Selection",
+    "usingMachine": {
       "ui": {
-        "type": "button",
-        "title": "Make Your Selection",
-        "event": "click",
-        "action": "Collect Item"
-      }
+        "title": "Using Machine",
+        "tag": "panel"
+      },
+      "elements": {}
     },
-    {
-      "title": "Waiting For Item"
-    },
-    {
-      "title": "Collect Item",
+    "makeSelection": {
       "ui": {
-        "type": "button",
-        "title": "Buy More Soda",
-        "event": "click",
-        "action": "Has Money"
-      }
+        "title": "Make Selection",
+        "tag": "panel"
+      },
+      "elements": {}
     },
-    {
-      "title": "Has No Money"
+    "waitingForItem": {
+      "ui": {
+        "title": "Waiting For Item",
+        "tag": "panel"
+      },
+      "elements": {}
+    },
+    "collectItem": {
+      "ui": {
+        "title": "Collect Item",
+        "tag": "panel"
+      },
+      "elements": {}
+    },
+    "hasNoMoney": {
+      "ui": {
+        "title": "Has No Money",
+        "tag": "panel"
+      },
+      "elements": {}
     }
-  ]
+  }
 }
