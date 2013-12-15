@@ -50,6 +50,8 @@ Each state transition must:
   * provide a `ui` key describing an HTML container for all child nodes.
   * provide an `elements` key describing an HTML fragment related to a specific UI element.
 
+
+
 ### Example
 
     {
