@@ -17,19 +17,19 @@ This module uses two mechanisms for code generation.
   
 Though `mustache` is great for generating large templates, it can become cumbersome when generating fragments. `json2html` provides a better solution for AngularJS fragments since:
 
-    1) it provides a more readable fragment definition (especially when considering AngularJS's curly-braces syntax)
-    2) the fragment definition is directly borrowed from the application JSON specification.
+  1) it provides a more readable fragment definition (especially when considering AngularJS's curly-braces syntax)
+  2) the fragment definition is directly borrowed from the application JSON specification.
 
 
 ## JSON Specification
 
-    * The application name is stored on the root level, and specified by the `name` key
-    * States are store in a JSON object. The key represents the state name.
-    * Each state must have a `ui` and `elements` key.
-    * The `ui` key specifies the HTML fragment to generate
-    * The `elements` key specifies child nodes
-    * Each child node is a container of UI elements associated with another state
-    * It must contain a `ui` key to generate another HTML fragment, and may contain an additional `elements` key
+  * The application name is stored on the root level, and specified by the `name` key
+  * States are store in a JSON object. The key represents the state name.
+  * Each state must have a `ui` and `elements` key.
+  * The `ui` key specifies the HTML fragment to generate
+  * The `elements` key specifies child nodes
+  * Each child node is a container of UI elements associated with another state
+  * It must contain a `ui` key to generate another HTML fragment, and may contain an additional `elements` key
 
 
 An application is described by a well-structure JSON specification, which is defined as a [JSON Schema](http://json-schema.org/). This allows AngularJS applications to be generated with minimal programming. The JSON spec is still in flux, so feel free to suggest/make improvements.
