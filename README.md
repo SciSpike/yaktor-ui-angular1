@@ -1,59 +1,27 @@
 # schema2angular
 
-Generate an AngularJS application based on a JSON application grammer.
+Generate AngularJS applications based on a JSON application grammer.
 
-### Usage
+## Usage
 
   json2angular -s [schema]
 
-### Development
+## Development
 
-`json2angular` is a Node module for generate AngularJS projects based on a to-be-defined JSON schema. The module consumes a JSON schema describing the application title, and application states. Each state is coupled with UI elements, and information about how those UI element affect the application state.
+`json2angular` is a Node module to generate AngularJS projects based on a JSON spec. The module consumes a JSON file describing the application title and states. Each state is coupled with UI elements, and information about how those UI element affect the application state.
 
-In order to generate Angular code, the module uses [Mustache](https://npmjs.org/package/mustache) on file located in the `template` directory.
+This module uses two mechanisms to generate code.
 
-## Example JSON Structure (in-progress)
-    
-    {
-      name: 'AppName',
-      states: [
-      {
-        title: 'StateName1'
-      }
-      ]
-    }
-    
-    [
-      {
-        state: 'state-1',
-        interface: [
-          {
-            widget: 'input',
-            type: 'text',
-            data: 'widget1'
-          },
-          {
-            widget: 'input',
-            type: 'date',
-            data: 'widget2'
-          }
-        ],
-        data: {
-          'widget1': 'some-value',
-          'widget2': 
-        }
-      },
-      {
-        state: 'state-2',
-        interface: [
-          {}
-        ],
-        data: {}
-      } 
-    ]
+  * [Mustache](https://npmjs.org/package/mustache) is used to generate multiline HTML templates (e.g. `index.html`) and Javascript (e.g. `app.js`).
+  * [json2html](http://json2html.com) is used to generate HTML fragments from a JSON definition.
+  
+Though `mustache` is great for generating large templates, it can become cumbersome when generating fragments. `json2html` provides a better solution for AngularJS fragments since:
+
+  1) it provides a more readable fragment definition (especially when considering AngularJS's curly-braces syntax)
+  2) the fragment definition is directly borrowed from the application JSON spec.
 
 
-### JSON Scheme
+## JSON Spec
 
 * States are store in a JSON object. The key represents the state name.
 * Each state must have a `ui` and `elements` key.
@@ -63,22 +31,64 @@ In order to generate Angular code, the module uses [Mustache](https://npmjs.org/
 * It must contain a `ui` and `elements` key use to generate HTML fragments
 
 
+An application is described by a well-structure JSON specification. This allows AngularJS applications to be generated with minimal programming. The JSON spec is still in flux, so feel free to suggest/make improvements.
 
-Soda Purchase Example
+### Rules
 
-* Initial State
-* Spend Money
-* Get Money Back
-* Select Soda
-* Happy
-* Disappointed
+The JSON must:
 
-1) Generate Service to store state of application
-2) State Service is injected into each generated directive
-3) 
+  * provide a `name` key at the top level with an application name. This will be inserted in the appropriate format (e.g. dashed, camel cased) throughout the project code.
+  * provide a `states` key at the top level containing an object of application states. Each key of the state object must be a state name.
 
-Start Simpler
+Each state object must:
 
-1) Generate State Service
-2) Generate Template based on JSON structure
-3) Generate Controller for data-binding
+  * provide a `ui` key describing an HTML container for all child nodes.
+  * provide an `elements` key describing all possible state transitions from the current state.
+
+Each state transition must:
+
+  * provide a `ui` key describing an HTML container for all child nodes.
+  * provide an `elements` key describing an HTML fragment related to a specific UI element.
+
+### Example
+
+    {
+      "name": "Soda Purchaser",
+      "states": {
+        "state1": {
+          "ui": {
+            "tag": "div",
+            "title": "State 1 Container"
+          },
+          "elements": {
+            "state2": {
+              "ui": {
+                "tag": "div",
+                "title": "Container for UI elements related to state2 transition."
+              },
+              "elements": {
+                "descriptiveName": {
+                  "ui": {
+                    "tag": "input",
+                    "type": "text"
+                  }
+                },
+                "someOtherName": {
+                  "ui": {
+                    "tag": "checkbox",
+                  }
+                }
+                "action": {
+                  "ui": {
+                    "tag": "button",
+                    "event": "click"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "state2": {},
+        "state3": {},
+      }
+    }
