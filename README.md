@@ -1,4 +1,4 @@
-# schema2angular
+# json2angular
 
 Generate AngularJS applications based on a JSON application grammer.
 
