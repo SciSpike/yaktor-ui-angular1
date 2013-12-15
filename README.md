@@ -1,6 +1,6 @@
 # json2angular
 
-Generate AngularJS applications based on a JSON application grammer.
+Generate AngularJS applications based on a JSON application grammar.
 
 ## Usage
 

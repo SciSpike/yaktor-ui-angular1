@@ -1,15 +1,15 @@
 {
-  "name": "schema2angular",
-  "description": "Generate an Angular application based on a to-be-defined JSON schema",
+  "name": "json2angular",
+  "description": "Generate AngularJS applications based on a JSON application grammar",
   "version": "0.1.0",
-  "homepage": "",
+  "homepage": "https://bitbucket.org/frontedgedigital/scid",
   "author": {
     "name": "Amit Kapadia",
     "email": "akapad@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://akapadia@bitbucket.org/akapadia/xforms-angular.git"
+    "url": "git@bitbucket.org:frontedgedigital/scid.git"
   },
   "engines": {
     "node": ">= 0.8.0"
@@ -19,15 +19,19 @@
   },
   "dependencies": {
     "optimist": "0.6.x",
-    "jsonschema": "0.4.x",
     "ansi": "0.2.x",
     "string": "1.7.x",
+    "jsonschema": "0.4.x",
     "node-json2html": "0.4.x",
-    "js-beautify": "1.4.x",
-    "mustache": "0.8.x"
+    "mustache": "0.8.x",
+    "js-beautify": "1.4.x"
   },
   "devDependencies": {
     "nodeunit": "~0.8.2"
   },
-  "keywords": []
+  "keywords": [
+    "angularjs",
+    "generator",
+    "json schema"
+  ]
 }
