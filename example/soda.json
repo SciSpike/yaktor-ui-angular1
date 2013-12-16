@@ -2,10 +2,6 @@
   "name": "Soda Purchaser",
   "states": {
     "hasMoney": {
-      "ui": {
-         "title": "Has Money", 
-         "tag": "panel"
-      },
       "elements": {
         "spendMoney": {
           "ui": {
@@ -31,41 +27,6 @@
           }
         }
       }
-    },
-    "usingMachine": {
-      "ui": {
-        "title": "Using Machine",
-        "tag": "panel"
-      },
-      "elements": {}
-    },
-    "makeSelection": {
-      "ui": {
-        "title": "Make Selection",
-        "tag": "panel"
-      },
-      "elements": {}
-    },
-    "waitingForItem": {
-      "ui": {
-        "title": "Waiting For Item",
-        "tag": "panel"
-      },
-      "elements": {}
-    },
-    "collectItem": {
-      "ui": {
-        "title": "Collect Item",
-        "tag": "panel"
-      },
-      "elements": {}
-    },
-    "hasNoMoney": {
-      "ui": {
-        "title": "Has No Money",
-        "tag": "panel"
-      },
-      "elements": {}
     }
   }
 }
