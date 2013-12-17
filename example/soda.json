@@ -1,6 +1,7 @@
 {
   "name": "Soda Purchaser",
   "states": {
+    
     "hasMoney": {
       "elements": {
         "spendMoney": {
@@ -23,7 +24,25 @@
                 "title": "Insert Money"
               }
             }
-          
+          }
+        }
+      }
+    },
+    
+    "spendMoney": {
+      "elements": {
+        "hasMoney": {
+          "ui": {
+            "tag": "div",
+            "title": "Has Money"
+          },
+          "elements": {
+            "defaultAction": {
+              "ui": {
+                "tag": "button",
+                "title": "Go back to has money state"
+              }
+            }
           }
         }
       }
