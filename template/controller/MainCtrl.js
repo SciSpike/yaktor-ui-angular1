@@ -6,6 +6,7 @@ angular.module('{{appname}}').controller('MainCtrl', function ($scope) {
   $scope.state = '{{initialState}}';
   
   $scope.onStateChange = function(state) {
+    console.log(state);
     $scope.state = state;
   };
   
