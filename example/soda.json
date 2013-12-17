@@ -21,7 +21,8 @@
             "defaultAction": {
               "ui": {
                 "tag": "button",
-                "title": "Insert Money"
+                "title": "Insert Money",
+                "class": "btn btn-primary"
               }
             }
           }
@@ -40,7 +41,8 @@
             "defaultAction": {
               "ui": {
                 "tag": "button",
-                "title": "Go back to has money state"
+                "title": "Go back to has money state",
+                "class": "btn btn-primary"
               }
             }
           }
