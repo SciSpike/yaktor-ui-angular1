@@ -9,7 +9,7 @@
         {{#states}}
         .state('{{name}}'), {
           url: '/{{url}}',
-          templateUrl: 'partials/{{url}}.html'
+          templateUrl: 'partial/{{url}}.html'
         })
         {{/states}}
         
