@@ -1,9 +1,9 @@
 {
   "name": "{{appname}}",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "dependencies": {
     "angular": "1.2.x",
-    "angular-route": "1.2.x",
+    "angular-ui-router": "0.2.x",
     "angular-bootstrap": "0.7.x",
     "bootstrap": "3.0.x"
   }

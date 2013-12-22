@@ -30,6 +30,11 @@
       }
     },
     
+    "usingMachine": {
+      "elements": {
+      }
+    },
+    
     "spendMoney": {
       "elements": {
         "hasMoney": {

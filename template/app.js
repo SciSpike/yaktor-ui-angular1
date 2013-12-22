@@ -1,18 +1,20 @@
 (function() {
   'use strict';
   
-  angular.module('{{appname}}', ['ngRoute'])
-    .config(function($routeProvider, $locationProvider) {
-      $locationProvider.html5Mode(true);
+  angular.module('{{appname}}', ['ui.router'])
+    .config(function($stateProvider, $urlRouterProvider) {
       
-      $routeProvider
-        .when('/', {
-          templateUrl: '/view/main.html',
-          controller: 'MainCtrl'
+      $stateProvider
+        
+        {{#states}}
+        .state('{{name}}'), {
+          url: '/{{url}}',
+          templateUrl: 'partials/{{url}}.html'
         })
-        .otherwise({
-          redirectTo: '/'
-        });
+        {{/states}}
+        
+      });
+      
     });
     
 })();
