@@ -18,15 +18,55 @@
                 "type": "text"
               }
             },
+            "someRange": {
+              "type": "number",
+              "ui": {
+                "tag": "input",
+                "type": "range",
+                "minimum": "0",
+                "maximum": "100",
+                "value": "5"
+              }
+            },
+            "someNumber": {
+              "type": "number",
+              "ui": {
+                "tag": "input",
+                "type": "number"
+              }
+            },
             "defaultAction": {
               "ui": {
                 "tag": "button",
                 "title": "Insert Money",
-                "class": "btn btn-primary"
+                "class": "btn btn-primary",
+                "type": "button"
               }
             }
           }
+        },
+      "doNotSpendMoney": {
+        "ui": {
+          "tag": "div",
+          "title": "Don't Spend Money"
+        },
+        "elements": {
+          "defaultAction": {
+            "ui": {
+              "tag": "button",
+              "title": "Don't Spend Money",
+              "class": "btn btn-default",
+              "type": "button"
+            }
+          }
         }
+      }
+      
+      }
+    },
+    
+    "doNotSpendMoney": {
+      "elements": {
       }
     },
     
