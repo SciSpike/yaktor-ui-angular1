@@ -48,13 +48,13 @@
       "doNotSpendMoney": {
         "ui": {
           "tag": "div",
-          "title": "Don't Spend Money"
+          "title": "Do Not Spend Money"
         },
         "elements": {
           "defaultAction": {
             "ui": {
               "tag": "button",
-              "title": "Don't Spend Money",
+              "title": "Do Not Spend Money",
               "class": "btn btn-default",
               "type": "button"
             }
