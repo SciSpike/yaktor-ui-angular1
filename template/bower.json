@@ -6,6 +6,7 @@
     "angular-ui-router": "0.2.x",
     "angular-bootstrap": "0.7.x",
     "bootstrap": "3.0.x",
-    "sockjs-client": "https://github.com/sockjs/sockjs-client.git#~0.3.4"
+    "sockjs-client": "https://github.com/sockjs/sockjs-client.git#~0.3.4",
+    "emitter": "component/emitter#~1.1.1"
   }
 }
