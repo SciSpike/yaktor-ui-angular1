@@ -8,6 +8,7 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, soc
   var service = {};
   
   service.socket = new SockJS(socketServer);
+  service.emitter = new Emitter();
   
   service.onload = function(e) {
     console.log('dummy onload function');
