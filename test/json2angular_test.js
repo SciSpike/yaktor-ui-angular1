@@ -33,7 +33,17 @@ exports['json2angular_test'] = {
     done();
   },
   
-  'create ui template': function(test) {
+  'should create actionable element': function(test) {
+    // TODO: Use ui element from JSON description
+    
+    test.done();
+  },
+  
+  'should create actionable': function(test) {
+    test.done();
+  },
+  
+  'should create ui template': function(test) {
     var ui = this.schema.states[0].ui;
     
     var expectedTemplatePath = path.join(__dirname, 'template', 'button.html');
@@ -42,7 +52,7 @@ exports['json2angular_test'] = {
     test.done();
   },
   
-  'create state template': function(test) {
+  'should create state template': function(test) {
     var state = this.schema.states[0];
     
     var expectedTemplatePath = path.join(__dirname, 'template', 'state.html');
@@ -50,5 +60,6 @@ exports['json2angular_test'] = {
     
     test.equal(json2angular.createStateTemplate(state), expectedTemplate);
     test.done();
-  }
+  },
+  
 };
