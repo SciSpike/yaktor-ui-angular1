@@ -1,98 +1,146 @@
 {
-  "name": "Soda Purchaser",
-  "states": {
-    
-    "hasMoney": {
-      "elements": {
-        "spendMoney": {
-          "ui": {
-            "tag": "div",
-            "title": "Spend Money"
-          },
-          "elements": {
-            "amount": {
-              "minimum": 0.01,
-              "type": "number",
-              "ui": {
-                "tag": "input",
-                "type": "text"
-              }
+   "name":"Soda Purchaser",
+   "states":{
+      "hasMoney":{
+         "elements":{
+            "spendMoney":{
+               "ui":{
+                  "tag":"div",
+                  "title":"Spend Money"
+               },
+               "elements":{
+                  "amount":{
+                     "minimum":0.01,
+                     "type":"number",
+                     "ui":{
+                        "tag":"input",
+                        "type":"text"
+                     }
+                  },
+                  "someRange":{
+                     "type":"number",
+                     "ui":{
+                        "tag":"input",
+                        "type":"range",
+                        "minimum":"0",
+                        "maximum":"100",
+                        "value":"5"
+                     }
+                  },
+                  "someNumber":{
+                     "type":"number",
+                     "ui":{
+                        "tag":"input",
+                        "type":"number"
+                     }
+                  },
+                  "defaultAction":{
+                     "ui":{
+                        "tag":"button",
+                        "title":"Insert Money",
+                        "class":"btn btn-primary",
+                        "type":"button"
+                     }
+                  }
+               }
             },
-            "someRange": {
-              "type": "number",
-              "ui": {
-                "tag": "input",
-                "type": "range",
-                "minimum": "0",
-                "maximum": "100",
-                "value": "5"
-              }
-            },
-            "someNumber": {
-              "type": "number",
-              "ui": {
-                "tag": "input",
-                "type": "number"
-              }
-            },
-            "defaultAction": {
-              "ui": {
-                "tag": "button",
-                "title": "Insert Money",
-                "class": "btn btn-primary",
-                "type": "button"
-              }
+            "doNotSpendMoney":{
+               "ui":{
+                  "tag":"div",
+                  "title":"Do Not Spend Money"
+               },
+               "elements":{
+                  "defaultAction":{
+                     "ui":{
+                        "tag":"button",
+                        "title":"Do Not Spend Money",
+                        "class":"btn btn-default",
+                        "type":"button"
+                     }
+                  }
+               }
             }
-          }
-        },
-      "doNotSpendMoney": {
-        "ui": {
-          "tag": "div",
-          "title": "Do Not Spend Money"
-        },
+         }
+      },
+      "doNotSpendMoney":{
+         "elements":{
+
+         }
+      },
+      "usingMachine":{
+         "elements":{
+
+         }
+      },
+      "makeSelection": {
+        "elements": {}
+      },
+      "waitingForItem": {
         "elements": {
-          "defaultAction": {
+          "collectItem": {
             "ui": {
-              "tag": "button",
-              "title": "Do Not Spend Money",
-              "class": "btn btn-default",
-              "type": "button"
-            }
-          }
-        }
-      }
-      
-      }
-    },
-    
-    "doNotSpendMoney": {
-      "elements": {
-      }
-    },
-    
-    "usingMachine": {
-      "elements": {
-      }
-    },
-    
-    "spendMoney": {
-      "elements": {
-        "hasMoney": {
-          "ui": {
-            "tag": "div",
-            "title": "Has Money"
-          },
-          "elements": {
-            "defaultAction": {
-              "ui": {
-                "tag": "button",
-                "title": "Go back to has money state",
-                "class": "btn btn-primary"
+              "tag": "div",
+              "title": "Collect Item"
+            },
+            "elements": {
+              "defaultAction": {
+                "ui": {
+                  "tag": "button",
+                  "title": "Collect Item",
+                  "class": "btn btn-primary",
+                  "type": "button"
+                }
               }
             }
+          },
+          "makeSelection": {
+            "ui": {
+              "tag": "div",
+              "title": "Make Selection"
+            },
+            "elements": {
+              "selectedItem": {
+                "type": "enum",
+                "ui": {
+                  "tag": "select",
+                  "options": ["Coke", "Sprite", "Pepsi"]
+                }
+              }
+            }
+          },
+          "hasMoney": {
+            "ui": {
+              "tag": "div",
+              "title": "Has Money"
+            },
+            "elements": {}
           }
         }
+      },
+      "collectItem": {
+        "elements": {}
+      },
+      "hasNoMoney": {
+        "elements": {}
+      },
+      "spendMoney":{
+         "elements":{
+            "hasMoney":{
+               "ui":{
+                  "tag":"div",
+                  "title":"Has Money"
+               },
+               "elements":{
+                  "defaultAction":{
+                     "ui":{
+                        "tag":"button",
+                        "title":"Go back to has money state",
+                        "class":"btn btn-primary"
+                     }
+                  }
+               }
+            }
+         }
       }
-    }
-  }
+   }
 }
