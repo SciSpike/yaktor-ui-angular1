@@ -57,6 +57,22 @@ exports['json2angular_test'] = {
     test.done();
   },
   
+  'should create checkbox ui': function(test) {
+    var description = {
+      "type": "checkbox",
+      "ui": {
+        "data": ["option1", "option2", "option3"]
+      }
+    };
+    var stateName = new S("hasMoney");
+    var elementName = "checkboxExample";
+    
+    var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
+    console.log(fragment);
+    
+    test.done();
+  },
+  
   'should create actionable': function(test) {
     test.done();
   },

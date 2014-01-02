@@ -86,7 +86,7 @@
               "defaultAction": {
                 "type": "submit",
                 "ui": {
-                  "title": "Collect Item",
+                  "title": "Collect Item"
                 }
               }
             }
@@ -112,11 +112,17 @@
               "title": "Has Money"
             },
             "elements": {
-              "toggleExample" : {
+              "toggleExample": {
                 "type": "toggle",
                 "ui": {
                   "tag": "button",
                   "class": "btn btn-primary"
+                }
+              },
+              "checkboxExample": {
+                "type": "checkbox",
+                "ui": {
+                  "data": ["option1", "option2", "option3"]
                 }
               }
             }
