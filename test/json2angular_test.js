@@ -3,6 +3,7 @@
 var json2angular = require('../lib/json2angular.js');
 var fs = require('fs');
 var path = require('path');
+var S = require('string');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -39,27 +40,35 @@ exports['json2angular_test'] = {
     test.done();
   },
   
+  'should create toggle ui': function(test) {
+    var description = {
+      "type": "toggle",
+      "ui": {
+        "tag": "button",
+        "class": "btn btn-primary"
+      }
+    };
+    var stateName = new S("hasMoney");
+    var elementName = "toggleExample";
+    
+    var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
+    console.log(fragment);
+    
+    test.done();
+  },
+  
   'should create actionable': function(test) {
     test.done();
   },
   
-  'should create ui template': function(test) {
-    var ui = this.schema.states[0].ui;
-    
-    var expectedTemplatePath = path.join(__dirname, 'template', 'button.html');
-    var expectedTemplate = fs.readFileSync(expectedTemplatePath, 'utf8');
-    test.equal(json2angular.createUITemplate(ui), expectedTemplate);
-    test.done();
-  },
-  
-  'should create state template': function(test) {
-    var state = this.schema.states[0];
-    
-    var expectedTemplatePath = path.join(__dirname, 'template', 'state.html');
-    var expectedTemplate = fs.readFileSync(expectedTemplatePath, 'utf8');
-    
-    test.equal(json2angular.createStateTemplate(state), expectedTemplate);
-    test.done();
-  },
+  // 'should create state template': function(test) {
+  //   var state = this.schema.states[0];
+  //   
+  //   var expectedTemplatePath = path.join(__dirname, 'template', 'state.html');
+  //   var expectedTemplate = fs.readFileSync(expectedTemplatePath, 'utf8');
+  //   
+  //   test.equal(json2angular.createStateTemplate(state), expectedTemplate);
+  //   test.done();
+  // },
   
 };
