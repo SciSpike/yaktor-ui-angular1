@@ -100,7 +100,6 @@
               "selectedItem": {
                 "type": "enum",
                 "ui": {
-                  "tag": "select",
                   "options": ["Coke", "Sprite", "Pepsi"]
                 }
               }
@@ -122,7 +121,13 @@
               "checkboxExample": {
                 "type": "checkbox",
                 "ui": {
-                  "data": ["option1", "option2", "option3"]
+                  "options": ["option1", "option2", "option3"]
+                }
+              },
+              "defaultAction":{
+                "type": "submit",
+                "ui":{
+                  "title":"Submit"
                 }
               }
             }

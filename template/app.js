@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  angular.module('{{appname}}', ['ui.router'])
+  angular.module('{{appname}}', ['ui.bootstrap', 'ui.router'])
     .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
       $locationProvider.html5Mode(true);
       
