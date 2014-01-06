@@ -32,5 +32,10 @@
   <script src="app.js"></script>
   <script src="constant/socketServer.js"></script>
   <script src="service/SocketService.js"></script>
+  {{#controllers}}
+  <script src="controller/{{.}}.js"></script>
+  {{/controllers}}
+  
+  
 </body>
 </html>
