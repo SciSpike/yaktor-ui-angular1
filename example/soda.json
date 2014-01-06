@@ -35,12 +35,13 @@
                      }
                   },
                   "defaultAction":{
-                     "ui":{
-                        "tag":"button",
-                        "title":"Insert Money",
-                        "class":"btn btn-primary",
-                        "type":"button"
-                     }
+                    "type": "submit",
+                    "ui":{
+                      "tag":"button",
+                      "title":"Insert Money",
+                      "class":"btn btn-primary",
+                      "type":"button"
+                    }
                   }
                }
             },
@@ -51,6 +52,7 @@
                },
                "elements":{
                   "defaultAction":{
+                    "type": "submit",
                      "ui":{
                         "tag":"button",
                         "title":"Do Not Spend Money",
