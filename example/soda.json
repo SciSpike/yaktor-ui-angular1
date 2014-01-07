@@ -123,7 +123,13 @@
               "checkboxExample": {
                 "type": "checkbox",
                 "ui": {
-                  "options": ["option1", "option2", "option3"]
+                  "options": ["checkbox1", "checkbox2", "checkbox3"]
+                }
+              },
+              "radioExample": {
+                "type": "radio",
+                "ui": {
+                  "options": ["radio1", "radio2", "radio3"]
                 }
               },
               "defaultAction":{
