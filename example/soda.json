@@ -98,6 +98,9 @@
                 "ui": {
                   "options": ["Coke", "Sprite", "Pepsi"]
                 }
+              },
+              "dateExample": {
+                "type": "date"
               }
             }
           },
