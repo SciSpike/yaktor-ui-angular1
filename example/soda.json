@@ -37,10 +37,7 @@
                   "defaultAction":{
                     "type": "submit",
                     "ui":{
-                      "tag":"button",
-                      "title":"Insert Money",
-                      "class":"btn btn-primary",
-                      "type":"button"
+                      "title":"Insert Money"
                     }
                   }
                }
@@ -54,10 +51,7 @@
                   "defaultAction":{
                     "type": "submit",
                      "ui":{
-                        "tag":"button",
-                        "title":"Do Not Spend Money",
-                        "class":"btn btn-default",
-                        "type":"button"
+                        "title":"Do Not Spend Money"
                      }
                   }
                }
@@ -114,11 +108,7 @@
             },
             "elements": {
               "toggleExample": {
-                "type": "toggle",
-                "ui": {
-                  "tag": "button",
-                  "class": "btn btn-primary"
-                }
+                "type": "toggle"
               },
               "checkboxExample": {
                 "type": "checkbox",
@@ -157,10 +147,9 @@
                },
                "elements":{
                   "defaultAction":{
+                    "type": "submit",
                      "ui":{
-                        "tag":"button",
-                        "title":"Go back to has money state",
-                        "class":"btn btn-primary"
+                        "title":"Go back to has money state"
                      }
                   }
                }
