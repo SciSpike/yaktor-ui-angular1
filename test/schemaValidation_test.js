@@ -14,7 +14,7 @@ exports['schemaValidation_test'] = {
     done();
   },
   
-  'spec should not validate due to missing name': function(test) {
+  'spec should not validate due to missing `name` property': function(test) {
     var spec = {
       "states": {}
     };
@@ -25,7 +25,18 @@ exports['schemaValidation_test'] = {
     test.done();
   },
   
-  'spec should not validate due to missing states': function(test) {
+  'spec `name` should be a string': function(test) {
+    var spec = {
+      "name": 5,
+      "states": {}
+    };
+    
+    var valid = tv4.validate(spec, schemata.app);
+    test.equal(tv4.errorCodes["INVALID_TYPE"], tv4.error.code);
+    test.done();
+  },
+  
+  'spec should not validate due to missing `states` property': function(test) {
     var spec = {
       "name": "Soda Purchaser"
     };
@@ -35,7 +46,7 @@ exports['schemaValidation_test'] = {
     test.done();
   },
   
-  'spec should not have additional properties': function(test) {
+  'spec should not have additional properties beyond `name` and `states`': function(test) {
     var spec = {
       "name": "Soda Purchaser",
       "states": {},
@@ -46,5 +57,54 @@ exports['schemaValidation_test'] = {
     test.equal(tv4.errorCodes["OBJECT_ADDITIONAL_PROPERTIES"], tv4.error.code);
     test.done();
   },
+  
+  'state should contain an `elements` key': function(test) {
+    var spec = {
+      "name": "Soda Purchaser",
+      "states": {
+        "exampleState1": {}
+      }
+    };
+    
+    var valid = tv4.validate(spec, schemata.app);
+    test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
+    test.done();
+  },
+  
+  'state element should contain a `ui` and `elements` keys': function (test) {
+    var spec = {
+      "name": "Soda Purchaser",
+      "states": {
+        "exampleState1": {
+          "elements": {
+            "exampleElement1": {}
+          }
+        }
+      }
+    };
+    
+    // Should fail validation for absence of `ui` property
+    var valid = tv4.validate(spec, schemata.app);
+    test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
+    
+    // Append `ui` property and required `ui.tag`
+    spec.states.exampleState1.elements.exampleElement1.ui = {};
+    spec.states.exampleState1.elements.exampleElement1.ui.tag = "div";
+    
+    // Should fail validation for absence of `elements` property
+    valid = tv4.validate(spec, schemata.app);
+    test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
+    
+    // Append `elements` property
+    spec.states.exampleState1.elements.exampleElement1.elements = {};
+    
+    // Now schema should validate
+    valid = tv4.validate(spec, schemata.app);
+    test.equal(valid, true);
+    
+    test.done();
+  },
+  
+  
   
 };
