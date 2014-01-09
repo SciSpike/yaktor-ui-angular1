@@ -100,7 +100,10 @@
                 }
               },
               "dateExample": {
-                "type": "date"
+                "type": "date",
+                "ui": {
+                  "tag": "div"
+                }
               }
             }
           },
@@ -111,7 +114,10 @@
             },
             "elements": {
               "toggleExample": {
-                "type": "toggle"
+                "type": "toggle",
+                "ui": {
+                  "tag": "div"
+                }
               },
               "checkboxExample": {
                 "type": "checkbox",
