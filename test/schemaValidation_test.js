@@ -19,7 +19,7 @@ exports['schemaValidation_test'] = {
       "states": {}
     };
     
-    var valid = tv4.validate(spec, schemata.app);
+    var valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
     
     test.done();
@@ -31,7 +31,7 @@ exports['schemaValidation_test'] = {
       "states": {}
     };
     
-    var valid = tv4.validate(spec, schemata.app);
+    var valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["INVALID_TYPE"], tv4.error.code);
     test.done();
   },
@@ -41,7 +41,7 @@ exports['schemaValidation_test'] = {
       "name": "Soda Purchaser"
     };
     
-    var valid = tv4.validate(spec, schemata.app);
+    var valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
     test.done();
   },
@@ -53,7 +53,7 @@ exports['schemaValidation_test'] = {
       "someExtraDefinition": {}
     };
     
-    var valid = tv4.validate(spec, schemata.app);
+    var valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["OBJECT_ADDITIONAL_PROPERTIES"], tv4.error.code);
     test.done();
   },
@@ -66,7 +66,7 @@ exports['schemaValidation_test'] = {
       }
     };
     
-    var valid = tv4.validate(spec, schemata.app);
+    var valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
     test.done();
   },
@@ -84,7 +84,7 @@ exports['schemaValidation_test'] = {
     };
     
     // Should fail validation for absence of `ui` property
-    var valid = tv4.validate(spec, schemata.app);
+    var valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
     
     // Append `ui` property and required `ui.tag`
@@ -92,14 +92,14 @@ exports['schemaValidation_test'] = {
     spec.states.exampleState1.elements.exampleElement1.ui.tag = "div";
     
     // Should fail validation for absence of `elements` property
-    valid = tv4.validate(spec, schemata.app);
+    valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
     
     // Append `elements` property
     spec.states.exampleState1.elements.exampleElement1.elements = {};
     
     // Now schema should validate
-    valid = tv4.validate(spec, schemata.app);
+    valid = tv4.validate(spec, schemata);
     test.equal(valid, true);
     
     test.done();
@@ -125,22 +125,22 @@ exports['schemaValidation_test'] = {
     };
     
     // Should fail validation for absence of `ui` property
-    var valid = tv4.validate(spec, schemata.app);
+    var valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
     
     // Adding a `ui` property
     spec.states.exampleState1.elements.exampleElement1.elements.exampleActionable.ui = {};
-    valid = tv4.validate(spec, schemata.app);
+    valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
     
     // Adding a `type` property
     spec.states.exampleState1.elements.exampleElement1.elements.exampleActionable.type = "";
-    valid = tv4.validate(spec, schemata.app);
+    valid = tv4.validate(spec, schemata);
     test.equal(tv4.errorCodes["ENUM_MISMATCH"], tv4.error.code);
     
     // Using correct value for `type` property
     spec.states.exampleState1.elements.exampleElement1.elements.exampleActionable.type = "enum";
-    valid = tv4.validate(spec, schemata.app);
+    valid = tv4.validate(spec, schemata);
     test.equal(valid, true);
     
     test.done();
