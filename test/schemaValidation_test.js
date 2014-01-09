@@ -105,6 +105,46 @@ exports['schemaValidation_test'] = {
     test.done();
   },
   
+  'an actionable should have a `ui` property': function (test) {
+    var spec = {
+      "name": "Soda Purchaser",
+      "states": {
+        "exampleState1": {
+          "elements": {
+            "exampleElement1": {
+              "ui": {
+                "tag": "div"
+              },
+              "elements": {
+                "exampleActionable": {}
+              }
+            }
+          }
+        }
+      }
+    };
+    
+    // Should fail validation for absence of `ui` property
+    var valid = tv4.validate(spec, schemata.app);
+    test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
+    
+    // Adding a `ui` property
+    spec.states.exampleState1.elements.exampleElement1.elements.exampleActionable.ui = {};
+    valid = tv4.validate(spec, schemata.app);
+    test.equal(tv4.errorCodes["OBJECT_REQUIRED"], tv4.error.code);
+    
+    // Adding a `type` property
+    spec.states.exampleState1.elements.exampleElement1.elements.exampleActionable.type = "";
+    valid = tv4.validate(spec, schemata.app);
+    test.equal(tv4.errorCodes["ENUM_MISMATCH"], tv4.error.code);
+    
+    // Using correct value for `type` property
+    spec.states.exampleState1.elements.exampleElement1.elements.exampleActionable.type = "enum";
+    valid = tv4.validate(spec, schemata.app);
+    test.equal(valid, true);
+    
+    test.done();
+  },
   
   
 };
