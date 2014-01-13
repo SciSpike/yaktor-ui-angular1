@@ -19,16 +19,15 @@
   </div>
   
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-cookies/angular-cookies.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   
   <!-- NOTE: The SockJS component must be built with `make build` -->
   <script src="bower_components/sockjs-client/sockjs.min.js"></script>
+  <script src="http://0.0.0.0:3000/emitter.js"></script>
   
-  <!-- Ugh ... need to define module to get emitter working client side. -->
-  <script type="text/javascript">var module = { exports: null };</script>
-  <script src="bower_components/emitter/index.js"></script>
-  
+  <script src="raw.js"></script>
   <script src="app.js"></script>
   <script src="constant/socketServer.js"></script>
   <script src="service/SocketService.js"></script>
