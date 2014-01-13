@@ -23,7 +23,7 @@
         .success(function() {
           var sessionId = $cookies["connect.sid"];
           
-          window.SodaPurchase.purchaser.socket.connectWithPrefix("http://0.0.0.0:3000/", sessionId, true, function() {
+          window.SodaPurchase.purchaser.socket.connectWithPrefix("http://0.0.0.0:3000", sessionId, true, function() {
             console.log('connected');
             console.log(arguments);
           });
