@@ -16,20 +16,23 @@
         {{/states}}
       
     });
-    
+  
   angular.module('{{appname}}')
-    .run(function($http, $cookies) {
-      $http.get("http://0.0.0.0:3000/")
+    .controller("ConnectionCtrl", function($scope, $http, $cookies) {
+      $scope.isConnected = true;
+      var host = "http://0.0.0.0:3000";
+      
+      $http.get(host)
         .success(function() {
           var sessionId = $cookies["connect.sid"].replace(/s:([^\.]*).*/, "$1");
-          
-          window.SodaPurchase.purchaser.socket.connectWithPrefix("http://0.0.0.0:3000", sessionId, true, function() {
-            console.log('connected');
-            console.log(arguments);
+          window.SodaPurchase.purchaser.socket.connectWithPrefix(host, sessionId, true, function() {
+            $scope.isConnected = true;
           });
-          
-      });
-    
+        })
+        .error(function(data, status, headers, config) {
+          $scope.isConnected = false;
+        });
+      
     });
     
     // console.log(window.SodaPurchase.purchaser.socket.connectWithPrefix);

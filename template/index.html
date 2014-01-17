@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 <body ng-app="{{appname}}">
+  <div ng-controller="ConnectionCtrl">
+    <alert ng-hide="isConnected">Unable to connect to server.</alert>
+  </div>
   
   <div class="container">
     <h1>Welcome to {{appname}}</h1>
