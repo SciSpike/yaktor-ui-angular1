@@ -21,7 +21,7 @@
     .run(function($http, $cookies) {
       $http.get("http://0.0.0.0:3000/")
         .success(function() {
-          var sessionId = $cookies["connect.sid"];
+          var sessionId = $cookies["connect.sid"].replace(/s:([^\.]*).*/, "$1");
           
           window.SodaPurchase.purchaser.socket.connectWithPrefix("http://0.0.0.0:3000", sessionId, true, function() {
             console.log('connected');
