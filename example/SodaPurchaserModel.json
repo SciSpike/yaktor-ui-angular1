@@ -82,14 +82,7 @@
                         "tag": "div",
                         "title": "Get money back"
                     },
-                    "elements": {
-                        "item": {
-                            "type": "radio",
-                            "ui": {
-                                "options": ["coke", "pepsi"]
-                            }
-                        }
-                    }
+                    "elements": {}
                 }
             }
         },
