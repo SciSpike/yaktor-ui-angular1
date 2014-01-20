@@ -1,0 +1,100 @@
+{
+    "name": "SodaPurchaser",
+    "states": {
+        "hasMoney": {
+            "elements": {
+                "spendMoney": {
+                    "ui": {
+                        "tag": "div",
+                        "title": "Spend money"
+                    },
+                    "elements": {
+                        "currency": {
+                            "type": "enum",
+                            "ui": {
+                                "options": ["$", "¥", "£", "€"]
+                            }
+                        },
+                        "amount": {
+                            "type": "number",
+                            "ui": {
+                                "minimum": 0.01
+                            }
+                        },
+                        "machine": {
+                            "type": "string",
+                            "ui": {
+                                "$typeRef": "inventory.Machine"
+                            }
+                        },
+                        "purchaser": {
+                            "type": "string",
+                            "ui": {
+                                "$typeRef": "inventory.User"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "hasNoMoney": {
+            "elements": {}
+        },
+        "collectItem": {
+            "elements": {
+                "isUnHappy": {
+                    "ui": {
+                        "tag": "div",
+                        "title": "Is un happy"
+                    },
+                    "elements": {}
+                },
+                "isHappy": {
+                    "ui": {
+                        "tag": "div",
+                        "title": "Is happy"
+                    },
+                    "elements": {}
+                }
+            }
+        },
+        "waitingForItem": {
+            "elements": {}
+        },
+        "makeSelection": {
+            "elements": {
+                "selection": {
+                    "ui": {
+                        "tag": "div",
+                        "title": "Selection"
+                    },
+                    "elements": {
+                        "item": {
+                            "type": "radio",
+                            "ui": {
+                                "options": ["coke", "pepsi"]
+                            }
+                        }
+                    }
+                },
+                "getMoneyBack": {
+                    "ui": {
+                        "tag": "div",
+                        "title": "Get money back"
+                    },
+                    "elements": {
+                        "item": {
+                            "type": "radio",
+                            "ui": {
+                                "options": ["coke", "pepsi"]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "usingMachine": {
+            "elements": {}
+        }
+    }
+}
