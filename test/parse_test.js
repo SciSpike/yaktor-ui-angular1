@@ -8,7 +8,7 @@ var prettyjson = require('prettyjson');
 exports['parse_test'] = {
   setUp: function(done) {
       
-    var f = require('../example/raw.js');
+    var f = require('../example/allInOne.js');
     this.stateMatrix = f.SodaPurchase.purchaser.stateMatrix;
     
     done();
