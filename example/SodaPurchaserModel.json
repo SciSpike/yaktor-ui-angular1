@@ -38,6 +38,12 @@
                                 "type": "text",
                                 "$typeRef": "inventory.User"
                             }
+                        },
+                        "defaultAction": {
+                            "type": "submit",
+                            "ui": {
+                                "title": "Spend money"
+                            }
                         }
                     }
                 }
@@ -79,6 +85,12 @@
                             "type": "radio",
                             "ui": {
                                 "options": ["coke", "pepsi"]
+                            }
+                        },
+                        "defaultAction": {
+                            "type": "submit",
+                            "ui": {
+                                "title": "Selection"
                             }
                         }
                     }
