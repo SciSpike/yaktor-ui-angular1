@@ -39,7 +39,9 @@ exports['parse_test'] = {
   
   'should create a string element': function(test) {
     var element = parse.createElement('machine', { '$typeRef': 'inventory.Machine', type: 'string' });
+    var model = { type: 'string', ui: { tag: "input", type: 'text', '$typeRef': 'inventory.Machine' } };
     
+    test.equal( JSON.stringify(element), JSON.stringify(model) );
     test.done();
   }
   

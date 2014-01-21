@@ -18,18 +18,24 @@
                         "amount": {
                             "type": "number",
                             "ui": {
+                                "tag": "input",
+                                "type": "number",
                                 "minimum": 0.01
                             }
                         },
                         "machine": {
                             "type": "string",
                             "ui": {
+                                "tag": "input",
+                                "type": "text",
                                 "$typeRef": "inventory.Machine"
                             }
                         },
                         "purchaser": {
                             "type": "string",
                             "ui": {
+                                "tag": "input",
+                                "type": "text",
                                 "$typeRef": "inventory.User"
                             }
                         }
