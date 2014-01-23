@@ -1,0 +1,121 @@
+{
+    "name": "Views",
+    "states": {
+        "page": {
+            "elements": {
+                "POST": {
+                    "ui": {
+                        "tag": "div",
+                        "title": "Post"
+                    },
+                    "elements": {
+                        "id": {
+                            "type": "integer",
+                            "ui": {
+                                "tag": "input",
+                                "type": "number"
+                            }
+                        },
+                        "subTypes": {
+                            "type": "array",
+                            "ui": {
+                                "tag": "input",
+                                "type": "text"
+                            }
+                        },
+                        "defaultAction": {
+                            "type": "submit",
+                            "ui": {
+                                "title": "Post"
+                            }
+                        }
+                    }
+                },
+                "GET": {
+                    "ui": {
+                        "tag": "div",
+                        "title": "Get"
+                    },
+                    "elements": {
+                        "id": {
+                            "type": "integer",
+                            "ui": {
+                                "tag": "input",
+                                "type": "number"
+                            }
+                        },
+                        "subTypes": {
+                            "type": "array",
+                            "ui": {
+                                "tag": "input",
+                                "type": "text"
+                            }
+                        },
+                        "defaultAction": {
+                            "type": "submit",
+                            "ui": {
+                                "title": "Get"
+                            }
+                        }
+                    }
+                },
+                "PUT": {
+                    "ui": {
+                        "tag": "div",
+                        "title": "Put"
+                    },
+                    "elements": {
+                        "id": {
+                            "type": "integer",
+                            "ui": {
+                                "tag": "input",
+                                "type": "number"
+                            }
+                        },
+                        "subTypes": {
+                            "type": "array",
+                            "ui": {
+                                "tag": "input",
+                                "type": "text"
+                            }
+                        },
+                        "defaultAction": {
+                            "type": "submit",
+                            "ui": {
+                                "title": "Put"
+                            }
+                        }
+                    }
+                },
+                "FIND": {
+                    "ui": {
+                        "tag": "div",
+                        "title": "Find"
+                    },
+                    "elements": {
+                        "id": {
+                            "type": "integer",
+                            "ui": {
+                                "tag": "input",
+                                "type": "number"
+                            }
+                        },
+                        "subTypes": {
+                            "type": "array",
+                            "ui": {
+                                "tag": "input",
+                                "type": "text"
+                            }
+                        },
+                        "defaultAction": {
+                            "type": "submit",
+                            "ui": {
+                                "title": "Find"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

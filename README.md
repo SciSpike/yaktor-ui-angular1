@@ -95,3 +95,17 @@ Each state transition must:
         "state3": {},
       }
     }
+
+
+#### Convention
+
+* Use Socket API when generating Angular app from allInOne.js
+* Use REST API when generating Angular app from views.js
+* Create tabbed view for each state using multiple pages (e.g. /has-money shows both actions whereas /has-money/selection shows only selection)
+* Create UI model from views.js (POST, GET, FIND, etc)
+* 
+
+#### Issues
+
+* In views schema, don't know how to handle array type. Enums with checkboxes are fine, but an open ended array is a bit more difficult to auto-generate aesthetically.
+* View names in view schema are mapped to state names and URLs in the Angular application. They should not contain slashes and extensions. I'm removing them now, but it's not general enough code to handle all cases of a view name.

@@ -1,5 +1,5 @@
 
-angular.module('SodaPurchaser')
+angular.module('{{appname}}')
   .controller('{{name}}Ctrl', ['$scope', 'SocketService', function ($scope, SocketService) {
     $scope.data = {};
     

@@ -15,7 +15,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "nodeunit test/parse_test.js"
+    "test": "nodeunit test/parseViews_test.js"
   },
   "dependencies": {
     "optimist": "0.6.x",

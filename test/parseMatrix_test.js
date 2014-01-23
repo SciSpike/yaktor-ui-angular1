@@ -5,7 +5,7 @@ var path = require('path');
 var parse = require('../lib/parse');
 var prettyjson = require('prettyjson');
 
-exports['parse_test'] = {
+exports['parseMatrix_test'] = {
   setUp: function(done) {
       
     var f = require('../example/allInOne.js');
