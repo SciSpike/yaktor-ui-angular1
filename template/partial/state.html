@@ -1,4 +1,8 @@
+{{=<% %>=}}
 <div class="row state">
-  <h2>{{name}}</h2>
-  {{{html}}}
+  <h2><%name%></h2>
+  <ul class="col-md-12 list-inline">
+    <li ng-repeat="(action, datum) in data" ng-click="onAction(action)">{{action}}</li>
+  </ul>
+  <%&html%>
 </div>

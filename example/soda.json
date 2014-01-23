@@ -1,6 +1,5 @@
 {
    "name":"Soda Purchaser",
-   "layout": "tabs",
    "states":{
       "hasMoney":{
          "elements":{

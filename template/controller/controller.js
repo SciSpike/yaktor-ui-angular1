@@ -10,6 +10,11 @@ angular.module('{{appname}}')
     {{/variables}}
     
     {{/scopeVariables}}
+    $scope.currentAction = null;
+    
+    $scope.onAction = function(action) {
+      $scope.currentAction = action;
+    }
     
     // TODO: Use the SocketService to push events with data to the server
     $scope.$on('$stateChangeStart', function(e, toState, toParams, fromState, fromParams) {
