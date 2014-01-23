@@ -109,3 +109,4 @@ Each state transition must:
 
 * In views schema, don't know how to handle array type. Enums with checkboxes are fine, but an open ended array is a bit more difficult to auto-generate aesthetically.
 * View names in view schema are mapped to state names and URLs in the Angular application. They should not contain slashes and extensions. I'm removing them now, but it's not general enough code to handle all cases of a view name.
+* When posting using views, the code assumes the endpoint is the same as the page name (e.g. in views.js /page.html is formatted to a state name of page and an endpoint of /page)
