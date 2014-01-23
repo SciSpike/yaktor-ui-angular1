@@ -1,13 +1,13 @@
 
 'use strict';
 
-angular.module('{{appname}}').service('SocketService', function ($rootScope, socketServer) {
+angular.module('{{appname}}').service('SocketService', function ($rootScope, serverLocation) {
   
   // // TODO: Create all socket connections here based on Jonathan's specs
   // 
   var service = {};
   // 
-  // service.socket = new SockJS(socketServer);
+  // service.socket = new SockJS(serverLocation);
   // service.emitter = new Emitter();
   // 
   // service.onload = function(e) {
