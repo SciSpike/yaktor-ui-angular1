@@ -1,7 +1,6 @@
 
-// TODO: Move $http to a service similar to SocketService
 angular.module('{{appname}}')
-  .controller('{{name}}Ctrl', ['$scope', '$http', 'SocketService', function ($scope, $http, SocketService) {
+  .controller('{{name}}Ctrl', ['$scope', 'RestService', 'SocketService', function ($scope, RestService, SocketService) {
     $scope.data = {};
     
     {{#scopeVariables}}
@@ -18,21 +17,10 @@ angular.module('{{appname}}')
       console.log($scope.data[stateName]);
     });
     
-    // Define CRUD methods for REST API
-    function POST(data) {
-      console.log(data);
-      
-      $http.post("http://localhost:3000", data)
-        .success(function(data, status, headers, config) {
-          console.log(data, status, headers, config);
-        })
-        .error(function(data, status, headers, config) {
-          console.log("ERROR:", data, status, headers, config);
-        });
-    }
-    
+    // This method is called when using a REST API
     $scope.onSubmit = function(method) {
-      POST($scope.data[method]);
+      var data = $scope.data[method];
+      RestService[method]('{{endpoint}}', data);
     }
   
 }]);
