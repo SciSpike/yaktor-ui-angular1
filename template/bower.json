@@ -4,7 +4,7 @@
   "dependencies": {
     "angular": "1.2.x",
     "angular-cookies": "~1.2.8",
-    "angular-ui-router": "0.2.x",
+    "angular-ui-router": "0.2.8-bowratic-tedium",
     "angular-bootstrap": "0.9.x",
     "bootstrap": "3.0.x",
     "sockjs-client": "https://github.com/sockjs/sockjs-client.git#~0.3.4",
