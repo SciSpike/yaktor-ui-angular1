@@ -3,7 +3,6 @@
   
   angular.module('{{appname}}', ['ngCookies', 'ui.bootstrap', 'ui.router'])
     .config(function($stateProvider, $locationProvider) {
-      $locationProvider.html5Mode(true);
       
       $stateProvider
         
