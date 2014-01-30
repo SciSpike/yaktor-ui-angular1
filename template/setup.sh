@@ -1,6 +1,6 @@
-
-bower install --offline
+pwd
+bower install
 cd bower_components/sockjs-client/
-npm install --offline
+npm install
 make build
 cd ../..
