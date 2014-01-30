@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  angular.module('{{appname}}', ['ngCookies', 'ui.bootstrap', 'ui.router'])
+  angular.module('{{appname}}', ['ui.bootstrap', 'ui.router'])
     .config(function($stateProvider, $locationProvider) {
       
       $stateProvider

@@ -3,7 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "1.2.x",
-    "angular-cookies": "~1.2.8",
     "angular-ui-router": "0.2.8-bowratic-tedium",
     "angular-bootstrap": "0.9.x",
     "bootstrap": "3.0.x",

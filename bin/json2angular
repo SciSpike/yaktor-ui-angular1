@@ -3,6 +3,7 @@
 var fs = require('fs'),
     path = require('path'),
     parse = require('../lib/parse'),
+    prettyjson = require('prettyjson');
     argv = require('optimist')
       .check(checkArguments)
       .demand('n')
@@ -16,6 +17,7 @@ function checkArguments(args) {
     var matrix = require(path.join(process.cwd(), args.s));
     var model = parse.fromStateMatrix(args.n, matrix);
     
+    console.log( prettyjson.render(model) );
   } else if (args.hasOwnProperty('d')) {
   
     // Create a UI model from SciSpike views and pass to json2angular.
