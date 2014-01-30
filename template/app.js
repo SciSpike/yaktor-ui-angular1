@@ -12,6 +12,12 @@
           templateUrl: 'partial/{{url}}.html',
           controller: '{{controller}}Ctrl'
         })
+        {{#actionables}}
+        .state('{{name}}.{{actionableName}}', {
+          url: '/{{actionableName}}',
+          templateUrl: 'partial/{{name}}.{{actionableName}}.html'
+        })
+        {{/actionables}}
         {{/states}}
       
     });
