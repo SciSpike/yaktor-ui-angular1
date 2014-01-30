@@ -14,7 +14,7 @@ A SciSpike application is automatically generated from a `.cdsl` file. The gener
 
     json2angular -n "Application Name" -d scispike-app/public
 
-In each case, the `json2angular` utility creates an intermediary user interface model that is used to generate an [AngularJS](http://angularjs.org/) application. This intermediary UI model is described in [JSON Specification](##JSON Specification)
+In each case, the `json2angular` utility creates an intermediary user interface model that is used to generate an [AngularJS](http://angularjs.org/) application. This intermediary UI model is described in [JSON Specification](#json-specification)
 
 ## Development
 
@@ -31,7 +31,7 @@ Though `mustache` is great for generating large templates, it can become cumbers
   * the fragment definition is directly borrowed from the application JSON specification.
 
 
-## JSON Specification
+## JSON Specification<a name="json-specification"></a>
 
   * The application name is stored on the root level, and specified by the `name` key
   * States are store in a JSON object. The key represents the state name.
