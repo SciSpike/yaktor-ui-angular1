@@ -2,7 +2,8 @@
 <div class="row state">
   <h2><%name%></h2>
   <ul class="col-md-12 list-inline">
-    <li ng-repeat="(action, datum) in data" ng-click="onAction(action)">{{action}}</li>
+    <li ng-repeat="(action, datum) in data"><a ui-sref=".{{action}}">{{action}}</a></li>
   </ul>
-  <%&html%>
+  
+  <div ui-view></div>
 </div>
