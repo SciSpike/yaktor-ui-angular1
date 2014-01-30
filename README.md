@@ -14,7 +14,7 @@ A SciSpike application is automatically generated from a `.cdsl` file. The gener
 
     json2angular -n "Application Name" -d scispike-app/public
 
-In each case, the `json2angular` utility creates an intermediary user interface model that is used to generate an [AngularJS](http://angularjs.org/) application. This intermediary UI model is described in [JSON Specification](#JSON Specification)
+In each case, the `json2angular` utility creates an intermediary user interface model that is used to generate an [AngularJS](http://angularjs.org/) application. This intermediary UI model is described in [JSON Specification](##JSON Specification)
 
 ## Development
 
