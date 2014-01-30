@@ -4,7 +4,17 @@ Generate AngularJS applications based on a JSON application grammar.
 
 ## Usage
 
-  json2angular -s [schema]
+A SciSpike application is automatically generated from a `.cdsl` file. The generated files include an `allInOne.js` file containing an application's state matrix and various view descriptions located in subdirectories of `public`. `json2angular` is able to generated a client side application using either mechanism.
+
+### State Matrix Usage
+
+    json2angular -n "Application Name" -s allInOne.js
+
+### Views Usage
+
+    json2angular -n "Application Name" -d scispike-app/public
+
+In each case, the `json2angular` utility creates an intermediary user interface model that is used to generate an [AngularJS](http://angularjs.org/) application. This intermediary UI model is described in [JSON Specification](#JSON Specification)
 
 ## Development
 
