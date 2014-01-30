@@ -1,8 +1,40 @@
 #!/usr/bin/env node
 
+var fs = require('fs'),
+    path = require('path'),
+    parse = require('../lib/parse'),
+    argv = require('optimist')
+      .check(checkArguments)
+      .demand('n')
+      .argv;
+
+function checkArguments(args) {
+  
+  if (args.hasOwnProperty('s')) {
+  
+    // Create a UI model from a SciSpike State Matrix and pass to json2angular.
+    var matrix = require(path.join(process.cwd(), args.s));
+    var model = parse.fromStateMatrix(args.n, matrix);
+    
+  } else if (args.hasOwnProperty('d')) {
+  
+    // Create a UI model from SciSpike views and pass to json2angular.
+    var views = require('../lib/driver').crawlForViews(args.d);
+    var model = parse.fromViews(args.n, views);
+    
+  } else {
+    return false;
+  }
+  
+  require('../lib/json2angular').exec(model);
+  return true;
+}
+
+/*
 argv = require('optimist')
   .usage('Usage: json2angular -s [schema]')
   .demand(['s'])
   .argv;
 
 require('../lib/json2angular').exec(argv.s);
+*/

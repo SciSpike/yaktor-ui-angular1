@@ -15,10 +15,14 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "nodeunit test/parseViews_test.js"
+    "test": "nodeunit test/driver_test.js"
+  },
+  "bin": {
+    "json2angular": "./bin/json2angular"
   },
   "dependencies": {
     "optimist": "0.6.x",
+    "walk": "2.3.x",
     "ansi": "0.2.x",
     "string": "1.7.x",
     "tv4": "1.0.x",
