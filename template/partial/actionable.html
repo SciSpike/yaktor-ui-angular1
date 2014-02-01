@@ -1,1 +1,14 @@
-{{{html}}}
+<div class="row">
+  <div title='{{stateName}}' class='actionable col-md-6'>
+    <div class='well'>
+      <h3>{{stateName}}</h3>
+      
+      {{#elements}}
+      <div class="row">
+        <label class="col-md-2">{{label}}</label>
+        {{{html}}}
+      </div>
+      {{/elements}}
+    </div>
+  </div>
+</div>

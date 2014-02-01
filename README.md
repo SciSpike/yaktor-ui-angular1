@@ -113,7 +113,6 @@ Each state transition must:
 * Use REST API when generating Angular app from views.js
 * Create tabbed view for each state using multiple pages (e.g. /has-money shows both actions whereas /has-money/selection shows only selection)
 * Create UI model from views.js (POST, GET, FIND, etc)
-* 
 
 #### Issues
 
@@ -124,7 +123,6 @@ Each state transition must:
 #### TODO:
 
 * Expect view key to be a valid URL. Parse accordingly.
-* Crawl the public directory for view.js files
 * Field labels
 * Column layout with field labels and form elements
 * Alt text
