@@ -15,10 +15,11 @@ var stateMatrix;
 function crawlForStateMatrix(obj) {
   if ( obj.hasOwnProperty('stateMatrix') ) {
     stateMatrix = obj.stateMatrix;
-  } else {
-    for (var key in obj) {
-      crawlForStateMatrix(obj[key]);
-    }
+    return;
+  }
+  
+  for (var key in obj) {
+    crawlForStateMatrix(obj[key]);
   }
 }
 
@@ -44,12 +45,3 @@ function checkArguments(args) {
   require('../lib/json2angular').exec(model);
   return true;
 }
-
-/*
-argv = require('optimist')
-  .usage('Usage: json2angular -s [schema]')
-  .demand(['s'])
-  .argv;
-
-require('../lib/json2angular').exec(argv.s);
-*/
