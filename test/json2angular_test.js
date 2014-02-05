@@ -66,10 +66,25 @@ exports['json2angular_test'] = {
     test.equal(beautify(controlFragment), beautify(fragment));
     test.done();
   },
-  // 
-  // 'should create radio ui': function(test) {
-  //   
-  // }
+  
+  'should create radio ui': function(test) {
+    var description = {
+      "type": "radio",
+      "ui": {
+        "options": ["option1", "option2", "option3"]
+      }
+    };
+    var stateName = new S("hasMoney");
+    var elementName = "radioExample";
+    
+    var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
+    
+    var controlFragment = "<div class='btn-group'><button class='btn btn-default btn-sm ' ng-model='data.hasMoney.radioExample' type='button' btn-radio='option' ng-repeat='option in [\"option1\", \"option2\", \"option3\"] track by $index'>{{option}}</button></div>";
+    
+    test.equal(beautify(controlFragment), beautify(fragment));
+    
+    test.done();
+  }
   
   // 'should create state template': function(test) {
   //   var state = this.schema.states[0];
