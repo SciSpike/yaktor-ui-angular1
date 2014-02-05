@@ -74,10 +74,6 @@ exports['json2angular_test'] = {
     test.done();
   },
   
-  'should create actionable': function(test) {
-    test.done();
-  },
-  
   // 'should create state template': function(test) {
   //   var state = this.schema.states[0];
   //   

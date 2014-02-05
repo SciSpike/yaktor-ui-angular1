@@ -9,15 +9,28 @@ var fs = require('fs'),
       .demand('n')
       .argv;
 
+
+// Search for the most shallow occurance of stateMatrix on an object
+var stateMatrix;
+function crawlForStateMatrix(obj) {
+  if ( obj.hasOwnProperty('stateMatrix') ) {
+    stateMatrix = obj.stateMatrix;
+  } else {
+    for (var key in obj) {
+      crawlForStateMatrix(obj[key]);
+    }
+  }
+}
+
 function checkArguments(args) {
   
   if (args.hasOwnProperty('s')) {
   
     // Create a UI model from a SciSpike State Matrix and pass to json2angular.
-    var matrix = require(path.join(process.cwd(), args.s));
-    var model = parse.fromStateMatrix(args.n, matrix);
+    var allInOne = require(path.join(process.cwd(), args.s));
     
-    console.log( prettyjson.render(model) );
+    crawlForStateMatrix(allInOne);
+    var model = parse.fromStateMatrix(args.n, stateMatrix);
   } else if (args.hasOwnProperty('d')) {
   
     // Create a UI model from SciSpike views and pass to json2angular.

@@ -15,7 +15,7 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "nodeunit test/driver_test.js"
+    "test": "nodeunit test/json2angular_test.js"
   },
   "bin": {
     "json2angular": "./bin/json2angular"
