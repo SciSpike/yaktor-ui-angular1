@@ -4,7 +4,7 @@ var json2angular = require('../lib/json2angular.js');
 var fs = require('fs');
 var path = require('path');
 var S = require('string');
-
+var beautify = require('js-beautify').html;
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -28,17 +28,7 @@ var S = require('string');
 
 exports['json2angular_test'] = {
   setUp: function(done) {
-    
-    var schemaPath = path.join(__dirname, '..', 'example', 'soda.json');
-    this.schema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
-    
     done();
-  },
-  
-  'should create actionable element': function(test) {
-    // TODO: Use ui element from JSON description
-    
-    test.done();
   },
   
   'should create toggle ui': function(test) {
@@ -46,14 +36,15 @@ exports['json2angular_test'] = {
       "type": "toggle",
       "ui": {
         "tag": "button",
-        "class": "btn btn-primary"
       }
     };
     var stateName = new S("hasMoney");
     var elementName = "toggleExample";
     
     var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
-    console.log(fragment);
+    
+    var controlFragment = "<button class='btn btn-default btn-sm ' ng-model='data.hasMoney.toggleExample' type='button' btn-checkbox btn-checkbox-true='0' btn-checkbox-false='1'>Has money</button>";
+    test.equal(beautify(controlFragment), beautify(fragment));
     
     test.done();
   },
@@ -62,17 +53,23 @@ exports['json2angular_test'] = {
     var description = {
       "type": "checkbox",
       "ui": {
-        "data": ["option1", "option2", "option3"]
+        "options": ["option1", "option2", "option3"]
       }
     };
     var stateName = new S("hasMoney");
     var elementName = "checkboxExample";
     
     var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
-    console.log(fragment);
     
+    var controlFragment = "<div class='btn-group'><button class='btn btn-default btn-sm ' ng-model='data.hasMoney.checkboxExample[option]' type='button' btn-checkbox ng-repeat='option in [\"option1\", \"option2\", \"option3\"] track by $index'>{{option}}</button></div>";
+
+    test.equal(beautify(controlFragment), beautify(fragment));
     test.done();
   },
+  // 
+  // 'should create radio ui': function(test) {
+  //   
+  // }
   
   // 'should create state template': function(test) {
   //   var state = this.schema.states[0];
