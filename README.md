@@ -20,16 +20,7 @@ In each case, the `json2angular` utility creates an intermediary user interface 
 
 `json2angular` is a Node module to generate AngularJS projects based on a JSON specification. The module consumes a JSON file describing the application title and states. Each state is coupled with UI elements, and information about how those UI elements affect the application state.
 
-This module uses two mechanisms for code generation.
-
-  * [Mustache](https://npmjs.org/package/mustache) is used to generate multiline HTML templates (e.g. `index.html`) and Javascript (e.g. `app.js`).
-  * [json2html](http://json2html.com) is used to generate HTML fragments from a JSON definition.
-  
-Though `mustache` is great for generating large templates, it can become cumbersome when generating fragments. `json2html` provides a better solution for AngularJS fragments since:
-
-  * it provides a more readable fragment definition (especially when considering AngularJS's curly-braces syntax)
-  * the fragment definition is directly borrowed from the application JSON specification.
-
+This module uses [Mustache](https://npmjs.org/package/mustache) to generate HTML templates.
 
 ## JSON Specification
 
