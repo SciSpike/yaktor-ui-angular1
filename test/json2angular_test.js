@@ -42,10 +42,9 @@ exports['json2angular_test'] = {
     var elementName = "toggleExample";
     
     var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
-    
     var controlFragment = "<button class='btn btn-default btn-sm ' ng-model='data.hasMoney.toggleExample' type='button' btn-checkbox btn-checkbox-true='0' btn-checkbox-false='1'>Has money</button>";
-    test.equal(beautify(controlFragment), beautify(fragment));
     
+    test.equal(beautify(controlFragment), beautify(fragment));
     test.done();
   },
   
@@ -60,7 +59,6 @@ exports['json2angular_test'] = {
     var elementName = "checkboxExample";
     
     var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
-    
     var controlFragment = "<div class='btn-group'><button class='btn btn-default btn-sm ' ng-model='data.hasMoney.checkboxExample[option]' type='button' btn-checkbox ng-repeat='option in [\"option1\", \"option2\", \"option3\"] track by $index'>{{option}}</button></div>";
 
     test.equal(beautify(controlFragment), beautify(fragment));
@@ -78,22 +76,59 @@ exports['json2angular_test'] = {
     var elementName = "radioExample";
     
     var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
-    
     var controlFragment = "<div class='btn-group'><button class='btn btn-default btn-sm ' ng-model='data.hasMoney.radioExample' type='button' btn-radio='option' ng-repeat='option in [\"option1\", \"option2\", \"option3\"] track by $index'>{{option}}</button></div>";
     
     test.equal(beautify(controlFragment), beautify(fragment));
+    test.done();
+  },
+  
+  'should create enum ui': function(test) {
+    var description = {
+      "type": "enum",
+      "ui": {
+        "options": ["option1", "option2", "option3"]
+      }
+    };
+    var stateName = new S("hasMoney");
+    var elementName = "enumExample";
     
+    var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
+    var controlFragment = "<select class='form-control input-sm' ng-model='data.hasMoney.enumExample' ng-options='option for option in [\"option1\", \"option2\", \"option3\"]'></select>";
+    
+    test.equal(beautify(controlFragment), beautify(fragment));
+    test.done();
+  },
+  
+  'should create date ui': function(test) {
+    var description = {
+      "type": "date",
+      "ui": {}
+    }
+    var stateName = new S("hasMoney");
+    var elementName = "dateExample";
+    
+    var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
+    var controlFragment = "<p class='input-group'><input type='text' class='form-control input-sm ' ng-model='data.hasMoney.dateExample' datepicker-popup='dd-MMMM-yyyy' show-weeks='false' show-button-bar='false'></input><span class='input-group-btn'><button class='btn btn-default btn-sm'><i class='glyphicon glyphicon-calendar'></i></button></span></p>";
+    
+    test.equal(beautify(controlFragment), beautify(fragment));
+    test.done();
+  },
+  
+  'should create submit ui': function(test) {
+    var description = {
+      "type": "submit",
+      "ui": {
+        title: "Submit"
+      }
+    }
+    var stateName = new S("hasMoney");
+    var elementName = "submitExample";
+    
+    var fragment = json2angular.createActionableElement(stateName, elementName, description.type, description.ui);
+    var controlFragment = "<button title='Submit' class='btn btn-default btn-sm ' type='button'>Has money</button>";
+    
+    test.equal(beautify(controlFragment), beautify(fragment));
     test.done();
   }
-  
-  // 'should create state template': function(test) {
-  //   var state = this.schema.states[0];
-  //   
-  //   var expectedTemplatePath = path.join(__dirname, 'template', 'state.html');
-  //   var expectedTemplate = fs.readFileSync(expectedTemplatePath, 'utf8');
-  //   
-  //   test.equal(json2angular.createStateTemplate(state), expectedTemplate);
-  //   test.done();
-  // },
   
 };

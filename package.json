@@ -26,7 +26,6 @@
     "ansi": "0.2.x",
     "string": "1.7.x",
     "tv4": "1.0.x",
-    "node-json2html": "0.4.x",
     "mustache": "0.8.x",
     "js-beautify": "1.4.x",
     "sockjs-client-ws": "0.1.0",
