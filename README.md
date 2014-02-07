@@ -113,9 +113,8 @@ Each state transition must:
 
 #### TODO:
 
+* Fix bug when generating from root directory
 * Expect view key to be a valid URL. Parse accordingly.
-* Field labels
-* Column layout with field labels and form elements
 * Alt text
 * ARIA support
 
