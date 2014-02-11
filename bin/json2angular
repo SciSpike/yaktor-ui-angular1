@@ -41,7 +41,6 @@ function checkArguments(args) {
   } else {
     return false;
   }
-  
   require('../lib/json2angular').exec(model);
   return true;
 }

@@ -21,7 +21,7 @@ domain-model inventory {
 	}
 	entity Page {
 		Numeric id
-		String subTypes
+		Address address
 	}
 	enum SodaItem {
 		COKE = 'Coke' PEPSI = 'Pepsi' SPRITE = 'Sprite'
