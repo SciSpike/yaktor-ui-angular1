@@ -5,10 +5,9 @@ var fs = require('fs'),
     parse = require('../lib/parse'),
     prettyjson = require('prettyjson');
     argv = require('optimist')
-      .check(checkArguments)
       .demand('n')
       .argv;
-
+checkArguments(argv)
 
 // Search for the most shallow occurance of stateMatrix on an object
 var stateMatrix;
