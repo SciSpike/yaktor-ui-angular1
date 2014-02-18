@@ -8,6 +8,7 @@
         
         {{#states}}
         .state('{{&name}}', {
+          url: '{{&url}}',
           templateUrl: 'partial/{{controller}}.html',
           controller: '{{controller}}Ctrl'
         })
