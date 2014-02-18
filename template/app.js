@@ -7,15 +7,15 @@
       $stateProvider
         
         {{#states}}
-        .state('{{name}}', {
-          url: '/{{url}}',
-          templateUrl: 'partial/{{name}}.html',
+        .state('{{&name}}', {
+          url: '/{{&url}}',
+          templateUrl: 'partial/{{controller}}.html',
           controller: '{{controller}}Ctrl'
         })
         {{#actionables}}
-        .state('{{name}}.{{actionableName}}', {
-          url: '/{{actionableName}}',
-          templateUrl: 'partial/{{name}}.{{actionableName}}.html'
+        .state('{{&name}}.{{actionableName}}', {
+          url: '/{{&actionableName}}',
+          templateUrl: 'partial/{{controller}}.{{actionableName}}.html'
         })
         {{/actionables}}
         {{/states}}

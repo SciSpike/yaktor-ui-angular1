@@ -1,6 +1,6 @@
 
 angular.module('{{appname}}')
-  .controller('{{name}}Ctrl', ['$scope', 'RestService', 'SocketService', function ($scope, RestService, SocketService) {
+  .controller('{{&name}}Ctrl', ['$scope', 'RestService', 'SocketService', function ($scope, RestService, SocketService) {
     $scope.data = {};
     
     {{#scopeVariables}}
@@ -25,7 +25,7 @@ angular.module('{{appname}}')
     // This method is called when using a REST API
     $scope.onSubmit = function(method) {
       var data = $scope.data[method];
-      RestService[method]('{{endpoint}}', data);
+      RestService[method]('{{&endpoint}}', data);
     }
   
 }]);
