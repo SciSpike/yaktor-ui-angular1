@@ -8,13 +8,12 @@
         
         {{#states}}
         .state('{{&name}}', {
-          url: '/{{&url}}',
           templateUrl: 'partial/{{controller}}.html',
           controller: '{{controller}}Ctrl'
         })
         {{#actionables}}
         .state('{{&name}}.{{actionableName}}', {
-          url: '/{{&actionableName}}',
+          url: '{{&url}}/{{actionableName}}',
           templateUrl: 'partial/{{controller}}.{{actionableName}}.html'
         })
         {{/actionables}}
