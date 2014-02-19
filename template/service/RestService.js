@@ -8,7 +8,7 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
   service.POST = function(endpoint, data) {
     console.log('service.POST', data);
     
-    $http.post(serverLocation + '/' + endpoint, data)
+    $http.post(serverLocation + endpoint, data)
       .success(function(data, status, headers, config) {
         console.log(data, status, headers, config);
       })
