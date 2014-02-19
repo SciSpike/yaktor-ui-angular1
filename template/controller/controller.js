@@ -4,9 +4,9 @@ angular.module('{{appname}}')
     $scope.data = {};
     
     {{#scopeVariables}}
-    $scope.data.{{stateName}} = {};
+    $scope.data['{{stateName}}'] = {};
     {{#variables}}
-    $scope.data.{{stateName}}.{{variable}} = {{type}};
+    $scope.data['{{stateName}}']['{{variable}}'] = {{type}};
     {{/variables}}
     
     {{/scopeVariables}}

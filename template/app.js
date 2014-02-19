@@ -14,7 +14,7 @@
         })
         {{#actionables}}
         .state('{{&name}}.{{actionableName}}', {
-          url: '{{&url}}/{{actionableName}}',
+          url: '{{&subPath}}/{{actionableName}}',
           templateUrl: 'partial/{{controller}}.{{actionableName}}.html'
         })
         {{/actionables}}
