@@ -1,15 +1,14 @@
 
-angular.module('{{appname}}')
-  .controller('{{&name}}Ctrl', ['$scope', 'RestService', 'SocketService', function ($scope, RestService, SocketService) {
-    $scope.data = {};
+angular.module('<%=appname%>')
+  .controller('<%-name%>Ctrl', ['$scope', 'RestService', 'SocketService', function ($scope, RestService, SocketService) {
+     $scope.data = {};
     
-    {{#scopeVariables}}
-    $scope.data['{{stateName}}'] = {};
-    {{#variables}}
-    $scope.data['{{stateName}}']['{{variable}}'] = {{type}};
-    {{/variables}}
-    
-    {{/scopeVariables}}
+    <% scopeVariables.forEach(function(sv){ %>
+      $scope.data['<%=sv.stateName%>'] = {};
+      <% sv.variables.forEach(function(v){ %>
+        $scope.data['<%=sv.stateName%>']['<%=v.variable%>'] = <%=v.type%>;
+      <% }); %>
+    <% }); %>
     $scope.currentAction = null;
     
     $scope.onAction = function(action) {
@@ -22,10 +21,19 @@ angular.module('{{appname}}')
       console.log($scope.data[stateName]);
     });
     
-    // This method is called when using a REST API
-    $scope.onSubmit = function(method) {
-      var data = $scope.data[method];
-      RestService[method]('{{&endpoint}}', data);
-    }
+    <% var ae = actionables.elements%>
+    <% Object.keys(ae).forEach(function(elem){ %>
+      <% var actionable = ae[elem] %>
+      <% var actions = actionable.components.actions %>
+      <% Object.keys(actions).forEach(function(action){ %>
+        //<%- action %>
+        <% var a = actions[action] %>
+        // This method is called when using a REST API
+        $scope.on<%= action %> = function(method) {
+          var data = $scope.data[method];
+          RestService[method]('<%- actionables.url%><%- actionable.subPath%>', data);
+        }
+      <% }); %>
+    <% }); %>
   
 }]);
