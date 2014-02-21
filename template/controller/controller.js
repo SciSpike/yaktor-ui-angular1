@@ -1,6 +1,6 @@
 //THIS REALLY ISN'T NEEDED
 angular.module('<%=appname%>')
-  .controller('<%-name%>Ctrl', ['$scope','$stateParams','$location', 'RestService', 'SocketService', function ($scope,$stateParams,$location, RestService, SocketService) {
+  .controller('<%-actionables.friendly%>Ctrl', ['$scope','$stateParams','$location', 'RestService', 'SocketService', function ($scope,$stateParams,$location, RestService, SocketService) {
     $scope.go = function(hash){
       $location.path(hash);
     }
