@@ -1,17 +1,31 @@
 <div class="row">
-  <div title='{{stateName}}' class='actionable col-md-6'>
+  <ul class="col-md-12 list-inline">
+    <li ng-repeat="(action, datum) in data">
+      <div ng-switch on="action">
+        
+        <% Object.keys(actionables.elements).forEach(function(a){ 
+             var actionable = actionables.elements[a];
+             var subPath =  actionable.subPath || "";%>
+          <a ng-href="#<%- actionables.url +"/"+a+(subPath.replace(":id","{{id}}")) %>" ng-switch-when="<%- a %>">{{action}}</a>
+        <% }); %>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="row">
+  <div title='<%=stateName%>' class='actionable col-md-6'>
     <div class='well'>
-      <h3>{{stateName}}</h3>
+      <h3><%=stateName%></h3>
       
-      {{#elements}}
+      <% elements.forEach(function(elem){ %>
       <div class="row">
-        <label class="col-md-2">{{label}}</label>
+        <label class="col-md-2"><%= elem.label %></label>
         <div class="col-md-10 fragment">
-          {{{fragment}}}
+          <%-elem.fragment%>
         </div>
         
       </div>
-      {{/elements}}
+      <% }); %>
     </div>
   </div>
 </div>

@@ -1,15 +1,6 @@
 {{=<% %>=}}
 <div class="row state">
   <h2><%name%></h2>
-  
-  <div class="row">
-    <ul class="col-md-12 list-inline">
-      <li ng-repeat="(action, datum) in data"><a ui-sref=".{{action}}">{{action}}</a></li>
-    </ul>
-  </div>
-  
-  <div class="row">
-    <div ui-view></div>
-  </div>
+  <div ui-view></div>
   
 </div>
