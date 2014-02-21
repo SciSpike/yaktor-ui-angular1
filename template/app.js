@@ -20,7 +20,7 @@
             var stateName = '<%=a.actionableName%>';
             var id = $scope.id = $stateParams.id;
             if(id){
-              RestService['GET']('<%- s.url %>', null,id,function(err,data){
+              RestService['FINDBYID']('<%- s.url %>', null,id,function(err,data){
                 $scope.data[stateName]=data;
                 console.log("Loaded %s",$stateParams.id,$scope.data[stateName]);
               });

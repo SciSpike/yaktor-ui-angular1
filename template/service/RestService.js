@@ -1,7 +1,7 @@
 
 'use strict';
 
-angular.module('{{appname}}').service('RestService', function (serverLocation, $http) {
+angular.module('{{appname}}').service('RestService', function (serverLocation, $http,$location) {
   
   var service = {};
   
@@ -16,8 +16,7 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
         console.log("ERROR:", data, status, headers, config);
       });
   }
-  
-  service.GET = function(endpoint,notUsed, id,cb) {
+  service.FINDBYID = function(endpoint,notUsed, id,cb) {
     $http.get(serverLocation + endpoint+"/"+id)
     .success(function(data, status, headers, config) {
       console.log(data, status, headers, config);
@@ -27,6 +26,9 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
       console.log("ERROR:", data, status, headers, config);
       cb(new Error(status));
     });
+  }
+  service.GET = function(endpoint,notUsed, id,cb) {
+    $location.path(endpoint+"/PUT/"+id);
   }
   
   service.FIND = function(endpoint, data,notUsed,cb) {

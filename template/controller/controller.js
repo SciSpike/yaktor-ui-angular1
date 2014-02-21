@@ -1,7 +1,9 @@
 //THIS REALLY ISN'T NEEDED
 angular.module('<%=appname%>')
-  .controller('<%-name%>Ctrl', ['$scope','$stateParams', 'RestService', 'SocketService', function ($scope,$stateParams, RestService, SocketService) {
-    
+  .controller('<%-name%>Ctrl', ['$scope','$stateParams','$location', 'RestService', 'SocketService', function ($scope,$stateParams,$location, RestService, SocketService) {
+    $scope.go = function(hash){
+      $location.path(hash);
+    }
      $scope.data = {};
     console.log($stateParams);
     <% scopeVariables.forEach(function(sv){ %>

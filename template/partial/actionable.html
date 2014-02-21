@@ -1,15 +1,12 @@
 <div class="row">
   <ul class="col-md-12 list-inline">
-    <li ng-repeat="(action, datum) in data">
-      <div ng-switch on="action">
-        
-        <% Object.keys(actionables.elements).forEach(function(a){ 
-             var actionable = actionables.elements[a];
-             var subPath =  actionable.subPath || "";%>
-          <a ng-href="#<%- actionables.url +"/"+a+(subPath.replace(":id","{{id}}")) %>" ng-switch-when="<%- a %>">{{action}}</a>
-        <% }); %>
-      </div>
+      <% Object.keys(actionables.elements).forEach(function(a){ 
+           var actionable = actionables.elements[a];
+           var subPath =  actionable.subPath || "";%>
+    <li>
+        <button ng-click="go('<%- actionables.url +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+id")) %>)" <% if(subPath.match(/:id/)){ %>ng-disabled="{{!id}}"<%}%> ><%-a%></button>
     </li>
+      <% }); %>
   </ul>
 </div>
 <div class="row">
