@@ -1,18 +1,10 @@
-<div class="row">
-  <ul class="col-md-12 list-inline">
-      <% Object.keys(actionables.elements).forEach(function(a){ 
-           var actionable = actionables.elements[a];
-           var subPath =  actionable.subPath || "";%>
-    <li>
-        <button ng-click="go('<%- actionables.url +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+id")) %>)" <% if(subPath.match(/:id/)){ %>ng-disabled="{{!id}}"<%}%> ><%-a%></button>
-    </li>
-      <% }); %>
-  </ul>
-</div>
-<div class="row">
-  <div title='<%=stateName%>' class='actionable col-md-6'>
+<% 
+if(actionables.proto.match(/http:/)) {
+    %><% include actionable/http.html%><%
+  } %>
+  <div title='<%=actionables.title%>' class='actionable col-md-6'>
     <div class='well'>
-      <h3><%=stateName%></h3>
+      <h3><%=actionables.title%></h3>
       
       <% elements.forEach(function(elem){ %>
       <div class="row">

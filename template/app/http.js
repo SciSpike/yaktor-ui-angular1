@@ -1,3 +1,8 @@
+.state('<%-s.friendly%>', {
+ url: '<%-s.proto.match(/ws:/)?s.url:stateName%>',
+ templateUrl: 'partial/<%=controller%>.html',
+ controller: '<%=controller%>Ctrl'
+})
 <% Object.keys(s.elements).forEach(function(actionableName){ 
 var a = s.elements[actionableName]; %>
 .state('<%-s.friendly%>.<%=actionableName%>', {

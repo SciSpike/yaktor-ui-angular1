@@ -1,32 +1,40 @@
-<% Object.keys(s.elements).forEach(function(actionableName){ 
-var a = s.elements[actionableName]; 
-%>
-.state('<%-stateName%>.<%=actionableName%>', {
-  url: '/<%=actionableName%><%-a.subPath%>',
-  templateUrl: 'partial/<%=controller%>.<%=actionableName%>.html',
-  controller:function($scope, $stateParams,RestService, SocketService) {
-    var stateName = '<%=actionableName%>';
-    var id = $scope.id = $stateParams.id;
-//    if(id){
-//      RestService['FINDBYID']('<%- s.url %>', null,id,function(err,data){
-//        $scope.data[stateName]=data;
-//        console.log("Loaded %s",$stateParams.id,$scope.data[stateName]);
-//      });
-//    }
-    <%
-      var actions= a.components.actions; 
-      Object.keys(actions).forEach(function(a){
-        var action = actions[a];
-      %>
-      // This method is called when using a REST API
-      $scope.on<%= a %> = function(method) {
-        var data = $scope.data[method];
-        RestService[method]('<%- s.url%>', data,id,function(err,data){
-          $scope.data[method]=data;
-        });
-      }
-    <%});%>
-    
-  }
-})
-<% }); %>
+<% var parentState = s.friendly.replace(":state",".state"); %>
+
+  .state('<%- parentState%>', {
+   url: '/<%-stateName.replace(/.*:state:/,"")%>',
+   templateUrl: 'partial/<%=controller%>.html',
+   controller: '<%=controller%>Ctrl'
+  })
+  <% Object.keys(s.elements).forEach(function(actionableName){ 
+  var a = s.elements[actionableName]; 
+  
+  %>
+  .state('<%-parentState %>.<%=actionableName%>', {
+    url: '<%-a.subPath%>',
+    templateUrl: 'partial/<%=controller%>.<%=actionableName%>.html',
+    controller:function($scope, $stateParams,RestService, SocketService) {
+      var stateName = '<%=actionableName%>';
+      var id = $scope.id = $stateParams.id;
+      <%
+        var actions= a.components.actions; 
+        Object.keys(actions).forEach(function(a){
+          var action = actions[a];
+        %>
+        // This method is called when using a REST API
+        $scope.on<%= a %> = function(method) {
+          var data = $scope.data[method];
+          var initData = $scope.data['init'];
+          if(SocketService[method]){
+            SocketService[method]('<%-s.url%>',initData, data,function(err,stateName){
+              $scope.goState(stateName)
+            });
+          } else {
+            SocketService.doAction('<%-s.url%>','<%-actionableName%>',initData,data,function(err,data){
+            });
+          }
+        }
+      <%});%>
+      
+    }
+  })
+  <% }); %>

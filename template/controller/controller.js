@@ -1,21 +1,27 @@
 //THIS REALLY ISN'T NEEDED
 angular.module('<%=appname%>')
-  .controller('<%-actionables.friendly%>Ctrl', ['$scope','$stateParams','$location', 'RestService', 'SocketService', function ($scope,$stateParams,$location, RestService, SocketService) {
+  .controller('<%-actionables.friendly%>Ctrl', ['$scope','$state','$stateParams','$location', 'RestService', 'SocketService', function ($scope,$state,$stateParams,$location, RestService, SocketService) {
     $scope.go = function(hash){
       $location.path(hash);
     }
-     $scope.data = {};
-    console.log($stateParams);
-    <% scopeVariables.forEach(function(sv){ %>
-      $scope.data['<%=sv.stateName%>'] = {};
-      <% sv.variables.forEach(function(v){ %>
-        $scope.data['<%=sv.stateName%>']['<%=v.variable%>'] = <%=v.type%>;
-      <% }); %>
-    <% }); %>
-    $scope.currentAction = null;
-    
-    $scope.onAction = function(action) {
-      $scope.currentAction = action;
+    $scope.goState = function(stateName){
+      try {
+        $state.go(stateName,null,{location:false});
+      } catch (e) {
+        try {
+          $state.go("^"+stateName,null,{location:false});
+        } catch(e){
+          $state.go("^.^"+stateName,null,{location:false});
+        }
+      }
     }
+    <% if(actionables.proto.match(/http:/)){
+
+      %><% include controller/http.js%><%
+    } else {
+
+      %><% include controller/ws.js%><%
+      
+    } %>
   
 }]);
