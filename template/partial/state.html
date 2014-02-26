@@ -1,5 +1,6 @@
 <div class="row state">
-  <h2><%-title%></h2>
+  <% var tTitle = title.match(/null/i)?"Begin on":title; %>
+  <h2><%-tTitle%></h2>
   <% if(proto.match(/ws:/)) {
     %><% include state/ws.html%><%
   } %>

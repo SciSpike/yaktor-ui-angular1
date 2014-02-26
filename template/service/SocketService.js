@@ -17,8 +17,8 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
   service.init=function(sUrl,initData,data,cb){
     //Connect api short circuits if already connected
     window.socketApi.connectWithPrefix(serverLocation,sessionId,true,function(){
-      if(!inited[sessionId]){
-        inited[sessionId]=true;
+      if(!inited[data._id]){
+        inited[data._id]=true;
         for(var onV in window["ws://"+sUrl].socket.on){
           (function(on){
             if(/state:.*/.test(on)){
