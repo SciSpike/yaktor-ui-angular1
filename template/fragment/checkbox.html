@@ -1,4 +1,3 @@
-{{=<% %>=}}
 <div class='btn-group'>
-  <button class='btn btn-default btn-sm <% class %>' ng-model='data.<% model %>[option]' type='button' btn-checkbox ng-repeat='option in [<%& options %>] track by $index'>{{option}}</button>
+  <button class='btn btn-default btn-sm <%= element.ui.class %>' ng-model='data.<%- model %>[option]' type='button' btn-checkbox ng-repeat='option in ['<%- element.options.join("','") %>'] track by $index'>{{option}}</button>
 </div>

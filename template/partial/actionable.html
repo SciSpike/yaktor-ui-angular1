@@ -1,22 +1,12 @@
-<% 
-  var actionable = actionables.elements[stateName];
-  var title = actionable.ui.title;
-  if(actionables.proto.match(/http:/)) {
-    %><% include actionable/http.html%><%
-  } %>
-  <div title='<%=title%>' class='actionable col-md-6'>
-    <div class='well'>
-      <h3><%=title%></h3>
-      
-      <% elements.forEach(function(elem){ %>
-      <div class="row">
-        <label class="col-md-2"><%= elem.label %></label>
-        <div class="col-md-10 fragment">
-          <%-elem.fragment%>
-        </div>
-        
-      </div>
-      <% }); %>
-    </div>
+  
+<div title='<%=actionable.ui.title%>' class='actionable col-md-6'>
+  <div class='well'>
+    <h3><%=actionable.ui.title%></h3>
+    
+    <%- contents %>
+    <% for(var elementName in actionable.components.actions){
+         var element =actionable.components.actions[elementName]; %>
+      <% include ../fragment/action.html %>
+    <% }%>
   </div>
 </div>

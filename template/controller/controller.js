@@ -4,23 +4,28 @@ angular.module('<%=appname%>')
     $scope.go = function(hash){
       $location.path(hash);
     }
-    $scope.goState = function(stateName){
-      try {
-        $state.go(stateName,null,{location:false});
-      } catch (e) {
-        try {
-          $state.go("^"+stateName,null,{location:false});
-        } catch(e){
-          $state.go("^.^"+stateName,null,{location:false});
-        }
-      }
-    }
     <% if(actionables.proto.match(/http:/)){
 
       %><% include controller/http.js%><%
     } else {
 
       %><% include controller/ws.js%><%
+
+      if(!!!statename.match(/:state:/)){
+        %>
+        $scope.goState = function(stateName){
+          try {
+            $state.go(stateName,null,{location:false});
+          } catch (e) {
+            try {
+              $state.go("^"+stateName,null,{location:false});
+            } catch(e){
+              $state.go("^.^"+stateName,null,{location:false});
+            }
+          }
+        }  
+        <% 
+      }
       
     } %>
   

@@ -1,1 +1,1 @@
-<select class='form-control input-sm' ng-model='data.{{model}}' ng-options='option for option in [{{{options}}}]'></select>
+<select placeholder="<%= element.ui.title%>" class='form-control input-sm' ng-model='data.<%- path %>'' ng-options='option for option in ['<%- element.options.join("','") %>']'></select>

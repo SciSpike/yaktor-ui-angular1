@@ -1,0 +1,10 @@
+<div class='form-group'>
+  <% if (element.ui) { %>
+    <label class="sr-only"
+      <% if (typeof label !== "undefined") { %>
+        for="<%- lable %>"
+      <%} %>    
+    ><%= element.ui.title %></label>
+  <%} %>
+  <%- contents %>
+</div>
