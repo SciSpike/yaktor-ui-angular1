@@ -16,10 +16,18 @@
   <div class="container">
     <div class="container" ui-view></div>
   </div>
-  
+  <script>
+    //define so emitter won't fail
+    module=window;
+    Object.defineProperty(module, "exports", {get : function(){ return window; },
+     set : function(newValue){ window[newValue]=newValue; },
+     enumerable : true,
+     configurable : true});
+  </script>
   <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/emitter/index.js"></script>
   
   <!-- NOTE: The SockJS component must be built with `make build` -->
   <script src="bower_components/sockjs-client/sockjs.min.js"></script>
@@ -31,7 +39,6 @@
   <script>
     var sessionId = "<@=sId@>";
   </script>
-  <script ng-src="{{serverLocation+'/emitter.js'}}"></script>
   <% 
     Object.keys(states).forEach(function(stateName){ 
       var state = states[stateName];
