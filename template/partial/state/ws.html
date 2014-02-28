@@ -1,12 +1,16 @@
 <div class="row">
   <ul class="col-md-12 list-inline">
       <% 
-      Object.keys(elements).forEach(function(a){ 
+      var actions = Object.keys(elements)
+      if(actions.length>1){
+      actions.forEach(function(a){ 
            var actionable = elements[a];
            var subPath =  actionable.subPath || "";%>
     <li>
         <button ng-click="goState('.<%-a%>')" ><%-actionable.ui.title%></button>
     </li>
-      <% }); %>
+      <% });} else {%>
+      <div ng-init="goState('.<%-actions[0]%>')">
+     <% } %>
   </ul>
 </div>
