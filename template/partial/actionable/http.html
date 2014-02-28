@@ -1,11 +1,11 @@
 <div class="row">
   <ul class="col-md-12 list-inline">
-      <% Object.keys(actionables.elements).forEach(function(a){ 
-           var actionable = actionables.elements[a];
-           var subPath =  actionable.subPath || "";%>
-    <li>
-        <button ng-click="go('<%- actionables.url +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+id")) %>)" <% if(subPath.match(/:id/)){ %>ng-disabled="{{!id}}"<%}%> ><%-a%></button>
-    </li>
-      <% }); %>
+    <% Object.keys(actionables.elements).forEach(function(a){ 
+       var actionable = actionables.elements[a];
+       var subPath =  actionable.subPath || "";%>
+      <li>
+        <button ng-click="go('<%- actionables.url +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+id")) %>)" <% if(subPath.match(/:id/)){ %>ng-disabled="{{!id}}"<%}%> ><%-actionable.ui.title%></button>
+      </li>
+    <% }); %>
   </ul>
 </div>

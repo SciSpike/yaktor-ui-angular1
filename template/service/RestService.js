@@ -31,8 +31,9 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
     $location.path(endpoint+"/PUT/"+id);
   }
   
-  service.FIND = function(endpoint, data,notUsed,cb) {
-    $http.get(serverLocation + endpoint, data)
+  service.FIND = function(endpoint, data,page,cb) {
+    data.page=page;
+    $http.get(serverLocation + endpoint, {params:data})
     .success(function(data, status, headers, config) {
       console.log(data, status, headers, config);
       cb(null,data, status, headers, config);

@@ -1,7 +1,8 @@
-  <% 
+<% 
   if(actionables.proto.match(/http:/)) {
     %><% include actionable/http.html%><%
-  } %>
+  } 
+%>
 <div title='<%=actionable.ui.title%>' class='actionable col-md-6'>
   <div class='well'>
     <h3><%=actionable.ui.title%></h3>
@@ -12,4 +13,20 @@
       <% include ../fragment/action.html %>
     <% }%>
   </div>
+  
+  <% 
+  if(actionables.proto.match(/http:/) && actionableName == "FIND") {
+    %>
+    <div ng-if="table.results">
+      <pagination total-items="table.total" page="currentPage" on-select-page="onFIND('FIND',page)" max-size="10" class="pagination-sm" boundary-links="true" rotate="false" num-pages="table.maxPage"></pagination>
+      <table class="table">
+        <tr ng-repeat="row in table.results">
+          <td ng-repeat="column in row" >{{column}}</td>
+        </tr>
+      </table> 
+      <pagination total-items="table.total" page="currentPage" on-select-page="onFIND('FIND',page)" max-size="10" class="pagination-sm" boundary-links="true" rotate="false" num-pages="table.maxPage"></pagination>
+    </div>
+    <%
+  } 
+%>
 </div>

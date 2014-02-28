@@ -23,12 +23,27 @@ var a = s.elements[actionableName]; %>
         var action = actions[a];
       %>
       // This method is called when using a REST API
-      $scope.on<%= a %> = function(method) {
-        var data = $scope.data[method];
-        RestService[method]('<%- s.url%>', data,id,function(err,data){
-          $scope.data[method]=data;
-        });
-      }
+      
+          <% if(a.match(/find/i)){ %>
+            $scope.currentPage=1; 
+            
+            $scope.on<%= a %> = function(notUsed,page) {
+              page = page || 1;
+              var data = $scope.data['<%= a %>'];
+              RestService['<%= a %>']('<%- s.url%>', data,page,function(err,data){
+                console.log("loading page:", JSON.stringify(data,null,2))
+                $scope.table=data;
+              });
+            }
+            //$scope.$watch( 'currentPage', $scope.on<%= a %> );
+          <% } else {%>
+            $scope.on<%= a %> = function(method) {
+              var data = $scope.data[method];
+              RestService[method]('<%- s.url%>', data,id,function(err,data){
+                $scope.data[method]=data;
+              });
+            }
+          <% }%>
     <%});%>
     
   }
