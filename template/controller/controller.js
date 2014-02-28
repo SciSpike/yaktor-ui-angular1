@@ -10,23 +10,16 @@ angular.module('<%=appname%>')
     } else {
 
       %><% include controller/ws.js%><%
-
-      if(!!!statename.match(/:state:/)){
-        %>
-        $scope.goState = function(stateName){
-          try {
-            $state.go(stateName,null,{location:false});
-          } catch (e) {
-            try {
-              $state.go("^"+stateName,null,{location:false});
-            } catch(e){
-              $state.go("^.^"+stateName,null,{location:false});
-            }
-          }
-        }  
-        <% 
-      }
-      
-    } %>
+      %>
+      $scope.goState = function(stateName){
+        !$state.includes(stateName) && $state.go(stateName,null,{location:false});
+      }  
+      <% var actions = Object.keys(actionables.elements);
+      if (actions.length >0){%>
+        $scope.goState('<%-actionables.friendly %>.<%-actions[0]%>')
+      <%}%>
+  <% 
+    }  %>
+    
   
 }]);

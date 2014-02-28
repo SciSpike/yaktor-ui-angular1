@@ -1,6 +1,4 @@
-<% var parentState = s.friendly.replace(":state",".state"); %>
-
-  .state('<%- parentState%>', {
+  .state('<%- s.friendly%>', {
    url: '/<%-stateName.replace(/.*:state:/,"")%>',
    templateUrl: 'partial/<%=controller%>.html',
    controller: '<%=controller%>Ctrl'
@@ -9,7 +7,7 @@
   var a = s.elements[actionableName]; 
   
   %>
-  .state('<%-parentState %>.<%=actionableName%>', {
+  .state('<%-s.friendly %>.<%=actionableName%>', {
     url: '<%-a.subPath%>',
     templateUrl: 'partial/<%=controller%>.<%=actionableName%>.html',
     controller:function($scope, $stateParams,RestService, SocketService) {
@@ -26,7 +24,7 @@
           var initData = $scope.data['init'];
           if(SocketService[method]){
             SocketService[method]('<%-s.url%>',initData, data,function(err,stateName){
-              $scope.goState(stateName)
+              $scope.goState('<%-s.friendly.replace(/\.state.*/,"") %>'+stateName)
             });
           } else {
             SocketService.doAction('<%-s.url%>','<%-actionableName%>',initData,data,function(err,data){

@@ -5,12 +5,13 @@
       if(actions.length>1){
       actions.forEach(function(a){ 
            var actionable = elements[a];
-           var subPath =  actionable.subPath || "";%>
+           var subPath =  actionable.subPath || "";
+           
+           %>
     <li>
-        <button ng-click="goState('.<%-a%>')" ><%-actionable.ui.title%></button>
+        <button ng-click="goState('<%-friendly%>.<%-a%>')" ><%-actionable.ui.title%></button>
     </li>
-      <% });} else {%>
-      <div ng-init="goState('.<%-actions[0]%>')">
-     <% } %>
+      <% });
+      } %>
   </ul>
 </div>

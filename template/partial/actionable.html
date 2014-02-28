@@ -1,4 +1,8 @@
-  
+  <% 
+  console.log(actionable)
+  if(actionables.proto.match(/http:/)) {
+    %><% include actionable/http.html%><%
+  } %>
 <div title='<%=actionable.ui.title%>' class='actionable col-md-6'>
   <div class='well'>
     <h3><%=actionable.ui.title%></h3>
