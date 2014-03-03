@@ -1,24 +1,26 @@
-<% 
-  if(actionables.proto.match(/http:/)) {
-    %><% include actionable/http.html%><%
-  } 
-%>
-<div title='<%=actionable.ui.title%>' class='actionable col-md-6'>
-  <div class='well'>
-    <h3><%=actionable.ui.title%></h3>
-    
-    <%- contents %>
-    <% for(var elementName in actionable.components.actions){
-         var element =actionable.components.actions[elementName]; %>
-      <% include ../fragment/action.html %>
-    <% }%>
-  </div>
-  
+<div id="simple" ng-controller="<%-actionables.friendly%><%-actionableName %>CustomCtrl">
   <% 
-  if(actionables.proto.match(/http:/) && actionableName == "FIND") {
-    %>
-    <% include actionable/find.html %>
-    <%
-  } 
-%>
+    if(actionables.proto.match(/http:/)) {
+      %><% include actionable/http.html%><%
+    } 
+  %>
+  <div title='<%=actionable.ui.title%>' class='actionable col-md-6'>
+    <div class='well'>
+      <h3><%=actionable.ui.title%></h3>
+      
+      <%- contents %>
+      <% for(var elementName in actionable.components.actions){
+           var element =actionable.components.actions[elementName]; %>
+        <% include ../fragment/action.html %>
+      <% }%>
+    </div>
+    
+    <% 
+    if(actionables.proto.match(/http:/) && actionableName == "FIND") {
+      %>
+      <% include actionable/find.html %>
+      <%
+    } 
+  %>
+  </div>
 </div>

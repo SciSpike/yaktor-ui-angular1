@@ -8,8 +8,9 @@
   
   %>
   .state('<%-s.friendly %>.<%=actionableName%>', {
-    url: '<%-a.subPath%>',
     templateUrl: 'partial/<%=controller%>.<%=actionableName%>.html',
+    //Allows custom controllers to pass in a string data blob on transition;
+    params:['initData'],
     controller:function($scope, $stateParams,RestService, SocketService) {
       var stateName = '<%=actionableName%>';
       var id = $scope.id = $stateParams.id;

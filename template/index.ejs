@@ -42,16 +42,19 @@
   <% 
     Object.keys(states).forEach(function(stateName){ 
       var state = states[stateName];
+      
+  %>
+        <script src="controller/<%= state.friendly %>.js"></script>
+  <%
       Object.keys(state.elements).forEach(function(actionName){
         if(actionName == "init"){
   %>
-  <script ng-src="{{serverLocation+'<%-state.url.replace(".","/")%>/allInOne.js'}}"></script>
-  <%    }
-      })
-    })%>
-  <% controllers.forEach(function(controller){ %>
-    <script src="controller/<%= controller %>.js"></script>
-  <%})%>
+        <script ng-src="{{serverLocation+'<%-state.url.replace(".","/")%>/allInOne.js'}}"></script>
+  <%   }  %>
+    <script src="controller/custom/<%= state.friendly %>.<%-actionName%>.js"></script>
+  <%  
+      });
+    });%>
   
   
   
