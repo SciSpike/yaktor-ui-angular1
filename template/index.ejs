@@ -28,7 +28,12 @@
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/emitter/index.js"></script>
-  
+  <script src="bower_components/node-querystring/index.js"></script>
+  <script>
+    qs={};
+    qs.parse = parse;
+    qs.stringify = stringify; 
+  </script>
   <!-- NOTE: The SockJS component must be built with `make build` -->
   <script src="bower_components/sockjs-client/sockjs.min.js"></script>
   

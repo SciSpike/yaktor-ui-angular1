@@ -7,6 +7,7 @@
     "angular-bootstrap": "0.9.x",
     "bootstrap": "3.1.x",
     "sockjs-client": "0.3.4",
-    "emitter": "component/emitter#~1.1.1"
+    "emitter": "component/emitter#~1.1.1",
+    "node-querystring":"0.6.6"
   }
 }
