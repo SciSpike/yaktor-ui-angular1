@@ -4,19 +4,19 @@ module.exports = function(grunt) {
 	
   var config, dir;
   
-  //dir = require("./gruntTasks/dirs");
+ dir = require("./gruntTasks/dirs");
   
-  /*try {
+  try {
     dir.app = require("<%= basePath %>/bower.json").appPath || dir.app;
-  } catch (_error) {}*/
+  } catch (_error) {}
   
   config = {
 	basePath: "./",
-    //dir: dir,
+    dir: dir,
     browserify: {
     	  dist: {
     	    files: {
-    	  		'<%= basePath %>module.js': ['<%= basePath %>app.js']
+    	  		'<%= basePath %>module.js': ['<%= basePath %>*.js']
     	    },
     	    options: {
     	      
@@ -27,11 +27,8 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   
-  //console.log(grunt.config())
-  
   grunt.loadNpmTasks('grunt-browserify');
   
   grunt.registerTask('default', ['browserify:dist']);
-  grunt.registerTask('copy', ['copy']);
   
 };
