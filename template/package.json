@@ -1,0 +1,12 @@
+{
+	"dependencies":{
+		"grunt-cli" :"0.1.13"
+		"grunt": "~0.4.2",
+		"grunt-browserify": "~1.3.0"
+		//,
+		//"load-grunt-tasks": "~0.1.0",
+		//"browserify": "~3.24.1",
+		//"matchdep": "~0.3.0"
+	}
+	"scripts": { "test": "grunt" }
+}
