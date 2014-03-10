@@ -20,37 +20,19 @@ module.exports = function(grunt) {
     browserify: {
 	  dist: {
 	  	files: {
-	  		'./libs/lib.js': ['./controller/*.js']
+	  		'./libs/controllers.js': ['./controller/*.js'],
+	  		'./libs/custom_controllers.js': ['./controller/custom/*.js'],
+	  		'./libs/all_in_one.js': ['../**/*allInOne.js']
 		},
 		options: {
-			//transform: ['uglifyify']
+			transform: ['uglifyify']
 		}
 	  }
-	}/*,
-	uglify: {
-		build: {
-			files: [{
-				expand: true,
-                src: '*.js',
-                dest: 'build/scripts',
-                cwd: './libs'
-            }]
-          }
 	}
-    */
   };
   
   grunt.initConfig(config);
-  
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.loadNpmTasks('uglifyjs');
-  
   grunt.registerTask('default', ['browserify:dist']);
-  //grunt.registerTask('default', ['uglify:build']);
-  
-  /*grunt.registerTask('default', 'Set a config property.', function(name, val) {
-	  grunt.config.set(name, val);
-	});*/
-
   
 };
