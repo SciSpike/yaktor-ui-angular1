@@ -45,22 +45,10 @@
   <script>
     var sessionId = "<@=sId@>";
   </script>
-  <% 
-    Object.keys(states).forEach(function(stateName){ 
-      var state = states[stateName];
-      
-  %>
-        <script src="controller/<%= state.friendly %>.js"></script>
-  <%
-      Object.keys(state.elements).forEach(function(actionName){
-        if(actionName == "init"){
-  %>
-        <script ng-src="{{serverLocation+'<%-state.url.replace(".","/")%>/allInOne.js'}}"></script>
-  <%   }  %>
-    <script src="controller/custom/<%= state.friendly %>.<%-actionName%>.js"></script>
-  <%  
-      });
-    });%>
+  
+  <script src="libs/controllers.js"></script>
+  <script src="libs/custom_controllers.js"></script>
+  <script src="libs/all_in_one.js"></script>
   
   
   

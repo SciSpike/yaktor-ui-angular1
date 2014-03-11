@@ -1,8 +1,9 @@
 <div ng-if="table.results">
   <pagination total-items="table.total" page="currentPage" on-select-page="onFIND('FIND',page)" max-size="10" class="pagination-sm" boundary-links="true" rotate="false" num-pages="table.maxPage"></pagination>
   <table class="table">
-    <tr ng-repeat="row in table.results" ng-click="$emit('rowClick', row);">
-      <td ng-repeat="column in row" >{{column}}</td>
+    <tr ng-repeat="row in table.results">
+      <td ng-repeat="column in row" ng-click="$emit('rowClick', row);">{{column}}</td>
+      <td><span class="glyphicon glyphicon-th-large" tooltip-html-unsafe="{{htmlTooltip}}"></span></td>
     </tr>
   </table> 
   <pagination total-items="table.total" page="currentPage" on-select-page="onFIND('FIND',page)" max-size="10" class="pagination-sm" boundary-links="true" rotate="false" num-pages="table.maxPage"></pagination>
