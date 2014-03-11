@@ -18,17 +18,17 @@ module.exports = function(grunt) {
 	basePath: basePath,
     dir: dir,
     browserify: {
-	  dist: {
-	  	files: {
-	  		'./libs/controllers.js': ['./controller/*.js'],
-	  		'./libs/custom_controllers.js': ['./controller/custom/*.js'],
-	  		'./libs/all_in_one.js': ['../**/*allInOne.js']
-		},
-		options: {
-			transform: ['uglifyify']
-		}
-	  }
-	}
+  	  dist: {
+  	  	files: {
+  	  		'./libs/controllers.js': ['./controller/*.js'],
+  	  		'./libs/custom_controllers.js': ['./controller/custom/*.js'],
+  	  		'./libs/all_in_one.js': ['../**/*allInOne.js']
+    		},
+    		options: {
+    			transform: ['uglifyify']
+    		}
+  	  }
+  	}
   };
   
   grunt.initConfig(config);
