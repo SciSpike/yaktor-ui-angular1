@@ -1,6 +1,7 @@
 <div class="row">
   <ul class="col-md-12 list-inline">
       <% 
+      var elements = description.elements;
       var actions = Object.keys(elements)
       if(actions.length>1){
       actions.forEach(function(a){ 
@@ -9,7 +10,7 @@
            
            %>
     <li>
-        <button ng-click="goState('<%-friendly%>.<%-a%>')" ><%-actionable.ui.title%></button>
+        <button class="btn btn-default btn-sm" ng-click="goState('<%-description.friendly%>.<%-a%>')" ><%-actionable.ui.title%></button>
     </li>
       <% });
       } %>

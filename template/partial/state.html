@@ -1,8 +1,13 @@
-<div class="row state">
-  <% var tTitle = title.match(/null/i)?"Begin":title; %>
-  <h2><%-tTitle%></h2>
-  <% if(proto.match(/ws:/)) {
-    %><% include state/ws.html%><%
-  }  %>
-  <div ui-view></div>
+<div ng-controller="<%-description.friendly%>CustomCtrl">
+  <div class="row state">
+    <% var tTitle = description.title.match(/null/i)?"Begin":description.title; %>
+    <h2><%-tTitle%></h2>
+    <% if(description.proto.match(/ws:/)) {
+      %><% include state/ws.html%><%
+    }  else  {
+        %><% include state/http.html%><%
+      } 
+    %>
+    <div class="view" ui-view></div>
+  </div>
 </div>

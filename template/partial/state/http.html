@@ -1,0 +1,12 @@
+<div class="row">
+  <ul class="col-md-12 list-inline">
+    <% 
+       Object.keys(description.elements).forEach(function(a){ 
+       var actionable = description.elements[a];
+       var subPath =  actionable.subPath || "";%>
+      <li>
+        <button class="btn btn-default btn-sm" ng-click="go('<%- stateName +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+params.id")) %>)" <% if(subPath.match(/:id/)){ %>ng-disabled="!params.id"<%}%> ><%-actionable.ui.title%></button>
+      </li>
+    <% }); %>
+  </ul>
+</div>

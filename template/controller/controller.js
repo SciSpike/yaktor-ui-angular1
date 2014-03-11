@@ -1,25 +1,39 @@
 //THIS REALLY ISN'T NEEDED
 angular.module('<%=appname%>')
-  .controller('<%-actionables.friendly%>Ctrl', ['$scope','$state','$stateParams','$location', 'RestService', 'SocketService', function ($scope,$state,$stateParams,$location, RestService, SocketService) {
+  .controller('<%-description.friendly%>Ctrl', ['$scope','$state','$stateParams','$location', 'RestService', 'SocketService', function ($scope,$state,$stateParams,$location, RestService, SocketService) {
+    $scope.params={};
+    $scope.refData={};
     $scope.go = function(hash){
       $location.path(hash);
     }
-    <% if(actionables.proto.match(/http:/)){
-
-      %><% include controller/http.js%><%
-    } else {
-
-      %><% include controller/ws.js%><%
+      
+      $scope.data = $scope.data || {};
+    <%  Object.keys(description.elements).forEach(function(e){
+        var element = description.elements[e];
+        var typeRefs = element.typeRefs;
+        var elements = element.components.elements;
       %>
+      $scope.data['<%-e%>'] = {};
+      <% Object.keys(elements).forEach(function(v){
+         var variable=elements[v];
+        %>
+        $scope.data['<%-e%>']['<%-v%>'] = null;
+      <% }); %>
+      <% Object.keys(typeRefs).forEach(function(t){
+        if(typeRefs[t]){
+          typeRefs[t]=false;
+         %>
+        $scope.refData['<%-t%>'] = function(filter){return []};
+      <% }}); %>
+    <% }); %>
+      
       $scope.goState = function(stateName){
         !$state.includes(stateName) && $state.go(stateName,null,{location:false});
       }  
-      <% var actions = Object.keys(actionables.elements);
+      <% var actions = Object.keys(description.elements);
       if (actions.length >0){%>
-        $scope.goState('<%-actionables.friendly %>.<%-actions[0]%>')
+        $scope.goState('<%-description.friendly %>.<%-actions[0]%>')
       <%}%>
-  <% 
-    }  %>
     
   
 }]);

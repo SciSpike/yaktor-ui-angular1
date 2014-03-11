@@ -1,1 +1,6 @@
-<input class="form-control" placeholder="<%= element.ui.title%>" type='text' ng-model='<%- path %>'></input>
+<input class="form-control" placeholder="<%= element.ui.title%>" type='text' ng-model='<%- path %>'
+  <%if(element.typeRef) {%>
+    value="{{<%- path %>.title}}"
+    typeahead="option.title for option in refData['<%- element.typeRef %>']($viewValue)"
+  <%} %>
+></input>

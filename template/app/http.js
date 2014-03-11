@@ -1,5 +1,5 @@
 .state('<%-s.friendly%>', {
- url: '<%-s.proto.match(/ws:/)?s.url:stateName%>',
+ url: '<%-stateName%>',
  templateUrl: 'partial/<%=controller%>.html',
  controller: '<%=controller%>Ctrl'
 })
@@ -10,7 +10,7 @@ var a = s.elements[actionableName]; %>
   templateUrl: 'partial/<%=controller%>.<%=actionableName%>.html',
   controller:function($scope, $stateParams,RestService, SocketService) {
     var stateName = '<%=actionableName%>';
-    var id = $scope.id = $stateParams.id;
+    var id = $scope.params.id= $stateParams.id;
     if(id){
       RestService['FINDBYID']('<%- s.url %>', null,id,function(err,data){
         $scope.data[stateName]=data;
