@@ -31,7 +31,7 @@ angular.module('<%=appname%>')
         !$state.includes(stateName) && $state.go(stateName,null,{location:false});
       }  
       <% var actions = Object.keys(description.elements);
-      if (actions.length >0){%>
+      if (actions.length == 1){%>
         $scope.goState('<%-description.friendly %>.<%-actions[0]%>')
       <%}%>
     
