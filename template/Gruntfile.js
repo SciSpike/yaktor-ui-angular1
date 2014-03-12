@@ -17,22 +17,11 @@ module.exports = function(grunt) {
   config = {
 	basePath: basePath,
     dir: dir,
-    browserify: {
-	  dist: {
-	  	files: {
-	  		'./libs/controllers.js': ['./controller/*.js'],
-	  		'./libs/custom_controllers.js': ['./controller/custom/*.js'],
-	  		'./libs/all_in_one.js': ['../**/*allInOne.js']
-		},
-		options: {
-			transform: ['uglifyify']
-		}
-	  }
-	}
+    browserify: require("./gruntTasks/browserify")
   };
   
   grunt.initConfig(config);
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.registerTask('default', ['browserify:dist']);
+  grunt.registerTask('default', ['browserify:libs', 'browserify:build']);
   
 };

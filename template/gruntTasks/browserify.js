@@ -1,43 +1,39 @@
-var browserifyLibExternal = [
-  '<%= basePath %>/<%= dir.bower %>/jquery/src/jquery.js',
-  '<%= basePath %>/<%= dir.bower %>/angular/angular.js',
-  '<%= basePath %>/<%= dir.bower %>/angular-ui-router/release/angular-ui-router.js',
-  '<%= basePath %>/<%= dir.bower %>/angular-bootstrap/ui-bootstrap.js'
-];
-
-var browserifyLibAlias = [
-  '<%= basePath %>/<%= dir.bower %>/jquery/src/jquery.js:jquery',
-  '<%= basePath %>/<%= dir.bower %>/angular/angular.js:angular',
-  '<%= basePath %>/<%= dir.bower %>/angular-ui-router/release/angular-ui-router.js:uirouter',
-  '<%= basePath %>/<%= dir.bower %>/angular-bootstrap/ui-bootstrap.js:bootstrap'
-];
-
 module.exports = {
   libs: {
     options: {
-      // Be sure to shim any libraries
       shim: {
         jquery: {
-          path: '<%= basePath %>/<%= dir.bower %>/jquery/jquery.js',
+          path: './bower_components/jquery/dist/jquery.js',
           exports: '$'
         },
         angular: {
-          path: '<%= basePath %>/<%= dir.bower %>/angular/angular.js',
+          path: './bower_components/angular/angular.js',
           exports: 'angular',
           depends: { jquery: '$' }
         },
         'uirouter': {
-          path: '<%= basePath %>/<%= dir.bower %>/angular-ui-router/release/angular-ui-router.js',
+          path: './bower_components/angular-ui-router/release/angular-ui-router.js',
           exports: 'uirouter',
           depends: {jquery: '$', angular:'angular'}
         },
         'bootstrap': {
-          path: '<%= basePath %>/<%= dir.bower %>/angular-bootstrap/ui-bootstrap.js',
+          path: './bower_components/angular-bootstrap/ui-bootstrap.js',
           exports: 'bootstrap'
         }
       }
     },
-    src: ['<%= basePath %>/<%= dir.libs %>/*.js'],
-    dest: '<%= basePath %>/<%= dir.build %>/scripts/libs/libs.js'
+    src: ['./bower_components/jquery/dist/jquery.js', './bower_components/angular/angular.js', './bower_components/angular-ui-router/release/angular-ui-router.js', './bower_components/angular-bootstrap/ui-bootstrap.js'],
+    dest: './libs/libs.js'
+  },
+  build: {
+	  	files: {
+	  		'./libs/controllers.js': ['./controller/*.js'],
+	  		'./libs/directives.js': ['./modules/**/*.js'],
+	  		'./libs/custom_controllers.js': ['./controller/custom/*.js'],
+	  		'./libs/all_in_one.js': ['../**/*allInOne.js']
+		},
+		options: {
+			
+		}
   }
-}
+};

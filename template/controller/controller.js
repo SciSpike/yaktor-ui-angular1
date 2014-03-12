@@ -4,6 +4,9 @@ angular.module('<%=appname%>')
     $scope.go = function(hash){
       $location.path(hash);
     }
+    
+    $scope.htmlTooltip = '<span ng-click="$emit(\'rowClick\', row);">edit</span>';
+    
     <% if(actionables.proto.match(/http:/)){
 
       %><% include controller/http.js%><%
