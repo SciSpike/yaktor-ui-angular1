@@ -6,12 +6,24 @@ angular.module('<%=appname%>')
     $scope.go = function(hash){
       $location.path(hash);
     }
+<<<<<<< HEAD
+    
+    $scope.htmlTooltip = '<span ng-click="$emit(\'rowClick\', row);">edit</span>';
+    
+    <% if(actionables.proto.match(/http:/)){
+
+      %><% include controller/http.js%><%
+    } else {
+
+      %><% include controller/ws.js%><%
+=======
       
       $scope.data = $scope.data || {};
     <%  Object.keys(description.elements).forEach(function(e){
         var element = description.elements[e];
         var typeRefs = element.typeRefs;
         var elements = element.components.elements;
+>>>>>>> dd46a6b1bc1d9c639cfd0b9d38ef950cf284b1ae
       %>
       $scope.data['<%-e%>'] = {};
       <% Object.keys(elements).forEach(function(v){

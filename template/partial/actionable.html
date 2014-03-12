@@ -1,9 +1,4 @@
-<div id="simple" ng-controller="<%-actionables.friendly%><%-actionableName %>CustomCtrl">
-  <% 
-    if(actionables.proto.match(/http:/)) {
-      %><% include actionable/http.html%><%
-    } 
-  %>
+<div ng-controller="<%-actionables.friendly%><%-actionableName %>CustomCtrl">
   <div title='<%=actionable.ui.title%>' class='actionable col-md-6'>
     <div class='well'>
       <h3><%=actionable.ui.title%></h3>
