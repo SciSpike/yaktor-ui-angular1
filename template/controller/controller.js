@@ -6,6 +6,34 @@ angular.module('<%=appname%>')
     $scope.go = function(hash){
       $location.path(hash);
     }
+    
+    $scope.popoverData = {
+    	test1: {
+    		title: 'test 1',
+    		event: 'go',
+    		target: 'init'
+    	},
+	    test2: {
+    		title: 'test 2',
+    		event: 'go',
+    		target: 'init'
+		},
+	    test3: {
+			title: 'test 3',
+    		event: 'go',
+    		target: 'init'
+		},
+	    test4: {
+			title: 'test 4',
+    		event: 'go',
+    		target: 'init'
+	    },
+	    test5: {
+	    	title: 'test 5',
+    		event: 'go',
+    		target: 'init'
+	    }
+    }
       
       $scope.data = $scope.data || {};
     <%  Object.keys(description.elements).forEach(function(e){

@@ -7,3 +7,19 @@ div.container h1, h2, h3, h4, h5, h6 {
 div.fragment > *:not(button) {
   width: 100%;
 }
+
+/* ===============
+    SCID-TOOLTIP 
+   =============== */
+   
+.ng-popover{
+	position:relative;
+}
+.scid-popover{
+	min-width:100px;
+	position:absolute;
+	top:100%;
+	right:0;
+	display:none;
+	z-index:100;
+}
