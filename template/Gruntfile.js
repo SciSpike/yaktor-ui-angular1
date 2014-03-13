@@ -22,6 +22,6 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.registerTask('default', ['browserify:libs', 'browserify:build']);
+  grunt.registerTask('default', ['browserify:build', 'browserify:appDep']);
   
 };

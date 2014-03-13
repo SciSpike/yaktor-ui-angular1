@@ -9,30 +9,17 @@ angular.module('<%=appname%>')
     
     $scope.popoverData = {
     	test1: {
-    		title: 'test 1',
-    		event: 'go',
-    		target: 'init'
+    		title: 'Home',
+    		event: {
+    			type: 'goState',
+    			target: 'homecard_PaymentProcessor.init'
+    		}
     	},
 	    test2: {
-    		title: 'test 2',
+    		title: 'Edit Payee',
     		event: 'go',
     		target: 'init'
-		},
-	    test3: {
-			title: 'test 3',
-    		event: 'go',
-    		target: 'init'
-		},
-	    test4: {
-			title: 'test 4',
-    		event: 'go',
-    		target: 'init'
-	    },
-	    test5: {
-	    	title: 'test 5',
-    		event: 'go',
-    		target: 'init'
-	    }
+		}
     }
       
       $scope.data = $scope.data || {};

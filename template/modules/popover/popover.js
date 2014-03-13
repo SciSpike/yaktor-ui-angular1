@@ -9,7 +9,7 @@ angular.module('<%=appname%>')
 	    		var ul = $("<ul>", {class: "scid-popover well"});
 	    		$.each(popoverData, function( key, value ) {
 	    			var li = $("<li>", {
-	    				html: "<span ng-click='popoverLinkClick($event)'>" + value.title + "</span>"
+	    				html: "<span ng-click='" + value.event.type + "(\"" + value.event.target + "\")'>" + value.title + "</span>"
 	    			});
 	    			ul.append(li);
 	    		});
@@ -23,10 +23,6 @@ angular.module('<%=appname%>')
 		    			}
 	    			});
 	    			ul.toggle();
-	    		}
-	    		scope.popoverLinkClick = function(e){
-	    			console.log('test');
-	    			console.log(e);
 	    		}
 	        }
 	    }

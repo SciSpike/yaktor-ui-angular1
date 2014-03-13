@@ -9,6 +9,42 @@ div.fragment > *:not(button) {
 }
 
 /* ===============
+    SCID-RESET 
+   =============== */
+   
+   ul, li{
+   	text-indent:0;
+   	margin-left:0;
+   	padding-left:0;
+   	list-style:none;
+   }
+   
+/* ===============
+    SCID-GLOBAL 
+   =============== */
+   
+   span[ng-click]{
+   	cursor:pointer;
+   }
+   span[ng-click]:hover{
+   	text-decoration:underline;
+   }
+   .view{
+   	margin-top:20px;
+   }
+   .tabbable{
+   	margin-left:15px;
+   }
+   
+ /* ===============
+    SCID-TABS 
+   =============== */
+     
+.col-md-12{
+	padding-left:0;
+}
+
+/* ===============
     SCID-TOOLTIP 
    =============== */
    
@@ -22,4 +58,5 @@ div.fragment > *:not(button) {
 	right:0;
 	display:none;
 	z-index:100;
+	white-space:nowrap;
 }

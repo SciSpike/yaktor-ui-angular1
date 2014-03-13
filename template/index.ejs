@@ -17,31 +17,28 @@
     <div class="logo"></div>
     <div class="container" ui-view></div>
   </div>
-  <script>
-    //define so emitter won't fail
-    module=window;
-    Object.defineProperty(module, "exports", {get : function(){ return window; },
-     set : function(newValue){ window[newValue]=newValue; },
-     enumerable : true,
-     configurable : true});
-  </script>
-  <script src="libs/libs.js"></script>
+  
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  <script src="bower_components/emitter/index.js"></script>
-  <script src="bower_components/node-querystring/index.js"></script>
-  <script>
-    qs={};
-    qs.parse = parse;
-    qs.stringify = stringify; 
-  </script>
+  
   <!-- NOTE: The SockJS component must be built with `make build` -->
   <script src="bower_components/sockjs-client/sockjs.min.js"></script>
+  
+  <script src="libs/build.js"></script>
   
   <script src="app.js"></script>
   <script src="constant/serverLocation.js"></script>
   <script src="service/SocketService.js"></script>
   <script src="service/RestService.js"></script>
+  
+  <script>
+    qs= require('qs');
+    console.log(qs);
+  </script>
+  
+  
   <script>
     var sessionId = "<@=sId@>";
   </script>
@@ -49,9 +46,16 @@
   <script src="libs/controllers.js"></script>
   <script src="libs/directives.js"></script>
   <script src="libs/custom_controllers.js"></script>
-  <script src="libs/all_in_one.js"></script>
   
-  
+  <% 
+    Object.keys(states).forEach(function(stateName){ 
+      var state = states[stateName];
+      Object.keys(state.elements).forEach(function(actionName){
+        if(actionName == "init"){%>
+        	<script ng-src="{{serverLocation+'<%-state.url.replace(".","/")%>/allInOne.js'}}"></script>
+  <%    }  
+      });
+   });%>
   
 </body>
 </html>
