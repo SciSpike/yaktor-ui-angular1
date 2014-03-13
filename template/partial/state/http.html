@@ -5,7 +5,7 @@
        var actionable = description.elements[a];
        var subPath =  actionable.subPath || "";%>
       
-        <tab ng-click="go('<%- stateName +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+params.id")) %>)" <% if(subPath.match(/:id/)){ %>ng-disabled="!params.id"<%}%> heading="<%-actionable.ui.title%>"></tab>
+        <tab ng-click="go('<%- stateName +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+params.id")) %>)" <% if(subPath.match(/:id/)){ %>ng-disabled="!params.id"<%}%> heading="{{'<%=actionable.ui.title%>'|translate}}"></tab>
       
     <% }); %>
   </tabset>

@@ -1,9 +1,9 @@
 <!doctype html>
-<html>
+<html ng-app="<%-appname %>">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title><%-appname %></title>
+    <title translate="APPNAME"><%-appname %></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
-<body ng-app="<%-appname %>">
+<body>
   
   <div class="container">
     <div class="logo"></div>
@@ -20,6 +20,7 @@
   
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-translate/angular-translate.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   
@@ -41,8 +42,10 @@
   
   <script>
     var sessionId = "<@=sId@>";
+    var defaultLocale = "<@=locale@>";
   </script>
   
+  <script src="libs/locale.js"></script>
   <script src="libs/controllers.js"></script>
   <script src="libs/directives.js"></script>
   <script src="libs/custom_controllers.js"></script>

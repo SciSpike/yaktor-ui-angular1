@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   
-  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router'])
-    .config(function($stateProvider, $locationProvider) {
-      
+  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router','pascalprecht.translate'])
+    .config(function($stateProvider, $locationProvider,$translateProvider) {
+      $translateProvider.preferredLanguage(defaultLocale);
       $stateProvider
         
         <% Object.keys(states).forEach(function(stateName){ 

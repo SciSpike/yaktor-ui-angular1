@@ -1,7 +1,7 @@
 <div ng-controller="<%-actionables.friendly%><%-actionableName %>CustomCtrl">
-  <div title='<%=actionable.ui.title%>' class='actionable col-md-6'>
+  <div title="{{'<%=actionable.ui.title%>'|translate}}" class='actionable col-md-6'>
     <div class='well'>
-      <h3><%=actionable.ui.title%></h3>
+      <h3>{{'<%=actionable.ui.title%>'|translate}}</h3>
       
       <%- contents %>
       <% for(var elementName in actionable.components.actions){

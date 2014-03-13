@@ -20,7 +20,8 @@ module.exports = {
 	  },
 	  appDep: {
 		  	files: {
-		  		'./libs/controllers.js': ['./controller/*.js'],
+          './libs/controllers.js': ['./controller/*.js'],
+          './libs/locale.js': ['./locale/*.js'],
 		  		'./libs/directives.js': ['./modules/**/*.js'],
 		  		'./libs/custom_controllers.js': ['./controller/custom/*.js'],
 		  		'./libs/all_in_one.js': ['../**/*allInOne.js']

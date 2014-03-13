@@ -1,7 +1,6 @@
 <div ng-controller="<%-description.friendly%>CustomCtrl">
   <div class="row state">
-    <% var tTitle = description.title.match(/null/i)?"Begin":description.title; %>
-    <h2><%-tTitle%></h2>
+    <h2>{{'<%-description.title%>'|translate}}</h2>
     <% if(description.proto.match(/ws:/)) {
       %><% include state/ws.html%><%
     }  else  {
