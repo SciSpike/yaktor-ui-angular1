@@ -50,15 +50,5 @@
   <script src="libs/directives.js"></script>
   <script src="libs/custom_controllers.js"></script>
   
-  <% 
-    Object.keys(states).forEach(function(stateName){ 
-      var state = states[stateName];
-      Object.keys(state.elements).forEach(function(actionName){
-        if(actionName == "init"){%>
-        	<script ng-src="{{serverLocation+'<%-state.url.replace(".","/")%>/allInOne.js'}}"></script>
-  <%    }  
-      });
-   });%>
-  
 </body>
 </html>

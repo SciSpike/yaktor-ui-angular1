@@ -16,13 +16,14 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
   var inited={};
   service.init=function(sUrl,initData,data,cb){
     //Connect api short circuits if already connected
-    window.socketApi.connectWithPrefix(serverLocation,sessionId,true,function(){
+    require('socketApi').connectWithPrefix(serverLocation,sessionId,true,function(){
+      var ws = require(sUrl.replace(".","/").substr(1));
       if(!inited[data._id]){
         inited[data._id]=true;
-        for(var onV in window["ws://"+sUrl].socket.on){
+        for(var onV in ws.socket.on){
           (function(on){
             if(/state:.*/.test(on)){
-              window["ws://"+sUrl].socket.on[on](
+              ws.socket.on[on](
                   sessionId,initData,function(){
                     console.log("Going to: %s", on);
                     cb(null,"."+on,null);
@@ -32,11 +33,11 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
           })(onV);
         }
       }
-      window["ws://"+sUrl].socket.emit.init(sessionId,initData);
+      ws.socket.emit.init(sessionId,initData);
     })
   }
   service.doAction=function(sUrl,action,initData,data,cb){
-    window["ws://"+sUrl.replace(/:state.*/,"")].socket.emit[action](sessionId,initData,data||{});
+    require(sUrl.replace(/:state.*/,"").replace(".","/").substr(1)).socket.emit[action](sessionId,initData,data||{});
   }
   
   
