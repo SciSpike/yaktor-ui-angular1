@@ -18,10 +18,9 @@
     "test": "nodeunit test/json2angular_test.js"
   },
   "bin": {
-    "engine-ui": "./bin/json2angular"
+    "engine-ui": "./bin/engine-ui"
   },
   "dependencies": {
-    "optimist": "0.6.x",
     "walk": "2.3.x",
     "ansi": "0.2.x",
     "string": "1.7.x",
@@ -30,7 +29,8 @@
     "ejs":"0.8.5",
     "js-beautify": "1.4.x",
     "sockjs-client-ws": "0.1.0",
-    "emitter-component": "1.1.1"
+    "emitter-component": "1.1.1",
+    "commander": "2.0.0"
   },
   "devDependencies": {
     "nodeunit": "~0.8.2",
