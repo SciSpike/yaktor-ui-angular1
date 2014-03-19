@@ -2,6 +2,10 @@
   <% if(element.options) {%>
     <button class='btn btn-primary btn-sm <%= element.ui.class %>' ng-model='<%- path %>[option]' type='button' btn-checkbox ng-repeat='option in ['<%- element.options.join("','") %>'] track by $index'>{{option}}</button>
   <% } else { %>
-    <button class='btn btn-primary btn-sm <%= element.ui.class %>' ng-model='<%- path %>' btn-checkbox btn-checkbox-true="1" btn-checkbox-false="0">{{'<%=element.ui.title%>'|translate}}</button>
+    <button class='btn btn-primary btn-sm <%= element.ui.class %>' ng-model='<%- path %>' btn-checkbox btn-checkbox-true="true" btn-checkbox-false="false"
+      <% if(element.ui.default) { %>
+        ng-init="<%- path %>=<%- element.ui.default %>"
+      <% } %>
+    >{{'<%=element.ui.title%>'|translate}}</button>
   <% } %>
 </div>

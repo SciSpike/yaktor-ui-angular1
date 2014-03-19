@@ -2,5 +2,7 @@
   <%if(element.typeRef) {%>
     value="{{<%- path %>.title}}"
     typeahead="option.title for option in refData['<%- element.typeRef %>']($viewValue)"
+  <%} else if(element.ui.default) { %>
+    ng-init="<%- path %>='<%- element.ui.default %>'"
   <%} %>
 ></input>
