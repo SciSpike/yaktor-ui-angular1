@@ -18,6 +18,9 @@ div.fragment > *:not(button) {
    	padding-left:0;
    	list-style:none;
    }
+   a{
+   	cursor:pointer;
+   }
    
 /* ===============
     SCID-GLOBAL 
@@ -62,4 +65,18 @@ div.fragment > *:not(button) {
 }
 .modal-content .well {
   margin-bottom:0px;
+}
+
+/* ===============
+    SCID-HEADER 
+   =============== */
+   
+.scidHeader{
+	float:right;
+	margin-bottom:20px;
+}  
+.scidHeader li{
+	display:inline-block;
+	vertical-align:top;
+	margin-left:20px;
 }

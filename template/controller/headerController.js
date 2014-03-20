@@ -1,5 +1,25 @@
 angular.module('views')
   .controller('headerCtrl', ["$scope",'$modal', 'RestService',  function ($scope,$modal, RestService) {
+    $scope.header = {
+        links: [
+          {
+            "title": "account",
+            "name": "account"
+          },
+          {
+            "title": "about",
+            "name": "about"
+          },
+          {
+            "title": "contact",
+            "name": "contact"
+          },
+          {
+            "title": "more",
+            "name": "more"
+          }
+        ]
+    }
     $scope.open = function(templateUrl,controller,resolve){
       $modal.open({
         templateUrl: templateUrl,
