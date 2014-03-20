@@ -3,7 +3,7 @@
     <% if (element.ui) { %>
       <label>{{'<%=element.ui.title%>'|translate}}</label>
     <%} %>
-    <div class="glyphicon glyphicon-plus" ng-click="<%-path%>=<%-path%>||[];console.log(<%-path%>);<%-path%>.push({})"></div>
+    <a class="glyphicon glyphicon-plus" ng-click="<%-path%>=<%-path%>||[];console.log(<%-path%>);<%-path%>.push({})"></a>
     <div ng-repeat="<%-pathPart%> in <%-path%>">
       <div class = 'well'>
         <%- contents %>
