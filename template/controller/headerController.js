@@ -1,5 +1,5 @@
 angular.module('views')
-  .controller('headerCtrl', ['$modal', 'RestService',  function ($modal, RestService) {
+  .controller('headerCtrl', ["$scope",'$modal', 'RestService',  function ($scope,$modal, RestService) {
     $scope.open = function(templateUrl,controller,resolve){
       $modal.open({
         templateUrl: templateUrl,
