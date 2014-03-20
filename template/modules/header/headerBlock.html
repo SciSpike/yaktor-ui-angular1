@@ -1,5 +1,9 @@
 <ul>
-	<li><a ng-click="login()" class="glyphicon glyphicon-log-in">&nbsp;login</a></li>
+	<li ng-if="!auth.access_token"><a ng-click="login()" class="glyphicon glyphicon-log-in">&nbsp;login</a></li>
+	<div ng-if="auth.access_token">
+		<li><a ng-click="logout()" class="glyphicon glyphicon-log-out">&nbsp;logout</a></li>
+		<li><a ng-click="account()" class="glyphicon glyphicon-log-in">&nbsp;account</a></li>
+	</div>
 	<li ng-repeat="link in header.links"><a href="#" ng-class="{'glyphicon glyphicon-plus': link.name == 'account', 'glyphicon glyphicon-th': link.name == 'more', 'glyphicon glyphicon-envelope': link.name == 'contact', 'glyphicon glyphicon-question-sign': link.name == 'about'}">&nbsp;{{link.title}}</a></li>
 </ul>
 <div ng-transclude></div>

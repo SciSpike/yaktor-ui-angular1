@@ -3,14 +3,6 @@ angular.module('views')
     $scope.header = {
         links: [
           {
-            "title": "account",
-            "name": "account"
-          },
-          {
-            "title": "about",
-            "name": "about"
-          },
-          {
             "title": "contact",
             "name": "contact"
           },
