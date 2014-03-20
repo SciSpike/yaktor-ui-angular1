@@ -1,5 +1,5 @@
 angular.module('views')
-  .controller('headerCtrl', ["$scope",'$modal', 'RestService',  function ($scope,$modal, RestService) {
+  .controller('headerCtrl', ["$scope",'$modal', 'RestService',"localStorageService","$http",  function ($scope,$modal, RestService,localStorageService,$http) {
     $scope.header = {
         links: [
           {
@@ -20,7 +20,20 @@ angular.module('views')
         resolve: resolve
       });
     }
-    $scope.auth={};
+    $scope.auth=localStorageService.get("auth")||{};
+    var updateAuth = function(){
+      if($scope.auth.access_token){
+        $http.defaults.headers.common.authorization = 'Bearer '+$scope.auth.access_token;
+      } else {
+        delete $http.defaults.headers.common.authorization;
+      }
+    }
+    updateAuth();
+    $scope.logout=function(){
+      $scope.auth={};
+      localStorageService.remove('auth');
+      updateAuth();
+    }
     $scope.login=function(){
       $scope.open("partial/login.POST.html",function($scope,$modalInstance,$http,auth){
         var data = $scope.data={};
@@ -36,7 +49,8 @@ angular.module('views')
               for(var a in data){
                 auth[a]=data[a];
               }
-              $http.defaults.headers.common.authorization = 'Bearer '+data.access_token;
+              updateAuth();
+              localStorageService.add('auth',JSON.stringify(auth));
               $modalInstance.dismiss('cancel');
             }
           });
