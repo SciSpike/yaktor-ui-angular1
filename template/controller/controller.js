@@ -1,4 +1,3 @@
-//THIS REALLY ISN'T NEEDED
 angular.module('<%=appname%>')
   .controller('<%-description.friendly%>Ctrl', ['$scope','$state','$stateParams','$location', 'RestService', 'SocketService', function ($scope,$state,$stateParams,$location, RestService, SocketService) {
     $scope.params={};

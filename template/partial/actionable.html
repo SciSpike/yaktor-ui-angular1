@@ -1,14 +1,15 @@
 <div ng-controller="<%-actionables.friendly%><%-actionableName %>CustomCtrl">
-  <div title="{{'<%=actionable.ui.title%>'|translate}}" class='actionable col-md-6'>
-    <div class='well'>
-      <h3>{{'<%=actionable.ui.title%>'|translate}}</h3>
-      
-      <%- contents %>
-      <% for(var elementName in actionable.components.actions){
-           var element =actionable.components.actions[elementName]; %>
-        <% include ../fragment/action.html %>
-      <% }%>
-    </div>
+  <div title="{{'<%=actionable.ui.title%>'|translate}}" class='actionable'>
+    <form>
+      <div class='well'>
+        <h3>{{'<%=actionable.ui.title%>'|translate}}</h3>
+        <%- contents %>
+        <% for(var elementName in actionable.components.actions){
+             var element =actionable.components.actions[elementName]; %>
+          <% include ../fragment/action.html %>
+        <% }%>
+      </div>
+    </form>
     
     <% 
     if(actionables.proto.match(/http:/) && actionableName == "FIND") {

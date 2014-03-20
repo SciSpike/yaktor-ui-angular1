@@ -60,3 +60,6 @@ div.fragment > *:not(button) {
 	z-index:100;
 	white-space:nowrap;
 }
+.modal-content .well {
+  margin-bottom:0px;
+}

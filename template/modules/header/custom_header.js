@@ -2,7 +2,6 @@ angular.module('<%=appname%>')
   .directive('customHeader', function($compile) {
       return{
           restrict: 'C',
-          replace: true,
           transclude: true,
           require: '^?scidHeader',
           templateUrl: "./modules/header/customHeaderBlock.html",
