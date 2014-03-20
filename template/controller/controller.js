@@ -7,6 +7,8 @@ angular.module('<%=appname%>')
       $location.path(hash);
     }
     
+    $scope.activeNav = "_" + $state.current.name.toUpperCase();
+    
     $scope.popoverData = {
     	test1: {
     		title: 'Home',

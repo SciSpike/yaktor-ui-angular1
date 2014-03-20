@@ -14,7 +14,13 @@
 <body>
   
   <div class="container">
-    <div class="scidHeader"></div>
+    <div class="scidHeader">
+    	<div class="customHeader">
+    		<ul>
+    			<li ng-repeat="link in header.links">{{link.name}}</li>
+    		</ul>
+    	</div>
+    </div>
     <div class="container" ui-view></div>
   </div>
   
