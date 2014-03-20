@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+
+var fs = require('fs'),
+    path = require('path'),
+    cp = require('child_process'),
+    parse = require('../lib/parse'),
+    prettyjson = require('prettyjson');
+    argv = require('commander');
+
+var getTrue = function(val){
+  return true;
+}
+
+
+argv.command('generate')
+  .description("re/build the ui")
+  .option("-n, --name [name]","the name which lots of stuff will expect to be views","views")
+  .option("-d, --directory [directory]","the name which lots of stuff will expect to be views","public/")
+  .action(function(args) {
+    // Create a UI model from SciSpike views and pass to json2angular.
+    var views = require('../lib/driver').crawlForViews(args.directory);
+    var model = parse.fromViews(args.name, views);
+      
+    require('../lib/json2angular').exec(model);
+  });
+  
+argv.command('file <file>')
+  .description("re/build the ui from a sinlge file")
+  .option("-n, --name [name]","the name which lots of stuff will expect to be views","views")
+  .action(function(file,args) {
+      // Create a UI model from a SciSpike State Matrix and pass to json2angular.
+      var allInOne = require(path.join(process.cwd(), file));
+      // Search for the most shallow occurance of stateMatrix on an object
+      var stateMatrix;
+      var crawlForStateMatrix = function (obj) {
+        if ( obj.hasOwnProperty('stateMatrix') ) {
+          stateMatrix = obj.stateMatrix;
+          return;
+        }
+        
+        for (var key in obj) {
+          crawlForStateMatrix(obj[key]);
+        }
+      }
+      crawlForStateMatrix(allInOne);
+      var model = parse.fromStateMatrix(args.name, stateMatrix);
+      require('../lib/json2angular').exec(model);
+  });
+argv.command('help [subCommand]')
+  .description("alias to [subCommand] -h")
+  .action(function(subCommand){
+    if(subCommand){
+      cp.fork(__filename, [subCommand, '-h']);
+    } else {
+      cp.fork(__filename, ['-h']);
+    }
+  })
+argv.parse(process.argv);
+if(argv.rawArgs.length <3){
+  argv.help();
+}
