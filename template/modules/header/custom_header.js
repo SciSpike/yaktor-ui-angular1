@@ -5,11 +5,19 @@ angular.module('<%=appname%>')
           transclude: true,
           require: '^?scidHeader',
           templateUrl: "./modules/header/customHeaderBlock.html",
-          link: function(scope, element, attrs, scidHeaderController) {
+          link: function(scope, element, attrs, scidHeaderController, $translate, $filter) {
+            
+            //console.log($filter('translate')('_BILL.DELETE.RECUR.INTERVAL'));
+            
+            /*scope.$on('$translateChangeSuccess', function () {
+              console.log('here');
+              console.log($translate('_BILL.DELETE.RECUR.INTERVAL'));
+            });*/
+            
             scope.header = {
                 links: [
                   {
-                    "title": "{{'_BILL.DELETE.RECUR.INTERVAL' | translate}}",
+                    "title": '_BILL',
                     "name": "contact"
                   },
                   {
@@ -20,4 +28,4 @@ angular.module('<%=appname%>')
             }
           }
       }
-  })
+  });
