@@ -6,7 +6,18 @@ angular.module('<%=appname%>')
           require: '^?scidHeader',
           templateUrl: "./modules/header/customHeaderBlock.html",
           link: function(scope, element, attrs, scidHeaderController) {
-            
+            scope.header = {
+                links: [
+                  {
+                    "title": "{{'_BILL.DELETE.RECUR.INTERVAL' | translate}}",
+                    "name": "contact"
+                  },
+                  {
+                    "title": "more",
+                    "name": "more"
+                  }
+                ]
+            }
           }
       }
   })

@@ -1,17 +1,5 @@
 angular.module('views')
   .controller('headerCtrl', ["$scope",'$modal', 'RestService',"localStorageService","$http",  function ($scope,$modal, RestService,localStorageService,$http) {
-    $scope.header = {
-        links: [
-          {
-            "title": "contact",
-            "name": "contact"
-          },
-          {
-            "title": "more",
-            "name": "more"
-          }
-        ]
-    }
     $scope.open = function(templateUrl,controller,resolve){
       $modal.open({
         templateUrl: templateUrl,

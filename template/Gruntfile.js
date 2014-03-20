@@ -15,13 +15,21 @@ module.exports = function(grunt) {
   } catch (_error) {}
   
   config = {
-	basePath: basePath,
+    basePath: basePath,
     dir: dir,
-    browserify: require("./gruntTasks/browserify")
+    browserify: require("./gruntTasks/browserify"),
+    cssmin: {
+      combine: {
+        files: {
+          './styles/customStyles.css': ['./styles/scispike.css']
+        }
+      }
+    }
   };
   
   grunt.initConfig(config);
   grunt.loadNpmTasks('grunt-browserify');
-  grunt.registerTask('default', ['browserify:build', 'browserify:appDep']);
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.registerTask('default', ['browserify:build', 'browserify:appDep', 'cssmin']);
   
 };
