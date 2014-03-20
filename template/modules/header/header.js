@@ -2,7 +2,6 @@ angular.module('<%=appname%>')
   .directive('scidHeader', function($compile) {
       return{
           restrict: 'C',
-          replace: true,
           transclude: true,
           templateUrl: "./modules/header/headerBlock.html",
           controller: function($scope) {
