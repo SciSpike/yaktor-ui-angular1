@@ -42,7 +42,11 @@ div.fragment > *:not(button) {
  /* ===============
     SCID-TABS 
    =============== */
-     
+
+.nav-tabs{
+	margin-top: 30px;
+	display: inline-block;
+}   
 .col-md-12{
 	padding-left:0;
 }
