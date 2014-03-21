@@ -2,7 +2,11 @@
   <div title="{{'<%=actionable.ui.title%>'|translate}}" class='actionable'>
     <form>
       <div class='well'>
-        <h3>{{'<%=actionable.ui.title%>'|translate}}</h3>
+        <% if(actionables.proto.match(/http:/)) { %>
+          <h3>{{'<%=actionables.title%>'|translate}}</h3>
+        <% } else { %>
+          <h3>{{'<%=actionable.ui.title%>'|translate}}</h3>
+        <% } %>
         <%- contents %>
         <% for(var elementName in actionable.components.actions){
              var element =actionable.components.actions[elementName]; %>
