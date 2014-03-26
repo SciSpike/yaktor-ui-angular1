@@ -1,12 +1,12 @@
 <div class = 'well'>
   <div class="form-group">
     <% if (element.ui) { %>
-      <label>{{'<%=element.ui.title%>'|translate}}</label>
+      <label>{{'<%-element.ui.title%>'|translate}}</label>
     <%} %>
-    <a class="glyphicon glyphicon-plus" ng-click="<%-path%>=<%-path%>||[];console.log(<%-path%>);<%-path%>.push({})"></a>
-    <div ng-repeat="<%-pathPart%> in <%-path%>">
+    <a class="glyphicon glyphicon-plus" ng-click="<%=path%>=<%=path%>||[];console.log(<%=path%>);<%=path%>.push({})"></a>
+    <div ng-repeat="<%=pathPart%> in <%=path%>">
       <div class = 'well'>
-        <%- contents %>
+        <%= contents %>
       </div>
     </div>
   </div>

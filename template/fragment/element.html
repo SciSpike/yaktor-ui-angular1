@@ -2,9 +2,9 @@
   <% if (element.ui) { %>
     <label class="sr-only"
       <% if (typeof label !== "undefined") { %>
-        for="<%- lable %>"
+        for="<%= lable %>"
       <%} %>    
-    >{{'<%=element.ui.title%>'|translate}}</label>
+    >{{'<%-element.ui.title%>'|translate}}</label>
   <%} %>
-  <%- contents %>
+  <%= contents %>
 </div>
