@@ -30,6 +30,7 @@ module.exports = function(grunt) {
   grunt.initConfig(config);
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.registerTask('default', ['browserify:build', 'browserify:appDep', 'cssmin']);
   
 };

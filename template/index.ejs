@@ -23,22 +23,10 @@
     <div class="container" ui-view></div>
   </div>
   
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-translate/angular-translate.js"></script>
-  <script src="bower_components/angular-local-storage/angular-local-storage.js"></script>
-  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-  
-  <!-- NOTE: The SockJS component must be built with `make build` -->
-  <script src="bower_components/sockjs-client/sockjs.min.js"></script>
-  
+  <script src="libs/resources.js"></script>
   <script src="libs/build.js"></script>
   
-  <script src="app.js"></script>
-  <script src="constant/serverLocation.js"></script>
-  <script src="service/SocketService.js"></script>
-  <script src="service/RestService.js"></script>
+  <script src="libs/app.js"></script>
   
   <script>
     qs= require('qs');
@@ -51,8 +39,8 @@
     var defaultLocale = "<@=locale@>";
   </script>
   
-  <script src="libs/locale.js"></script>
   <script src="libs/controllers.js"></script>
+  <script src="libs/locale.js"></script>
   <script src="libs/directives.js"></script>
   <script src="libs/custom_controllers.js"></script>
   
