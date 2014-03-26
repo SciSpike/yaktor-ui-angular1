@@ -27,6 +27,7 @@
     "tv4": "1.0.x",
     "mustache": "0.8.x",
     "ejs":"1.0.0",
+    "underscore":"1.6.0",
     "js-beautify": "1.4.x",
     "sockjs-client-ws": "0.1.0",
     "emitter-component": "1.1.1",
