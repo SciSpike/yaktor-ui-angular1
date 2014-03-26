@@ -1,5 +1,5 @@
-<div ng-controller="<%-actionables.friendly%><%-actionableName %>CustomCtrl">
-  <div title="{{'<%=actionable.ui.title%>'|translate}}" class='actionable'>
+<div class="<%-actionableName.toLowerCase() %>Class" ng-controller="<%-actionables.friendly%><%-actionableName %>CustomCtrl">
+  <div title="{{'<%=actionable.ui.title%>'|translate}}" class='<%=actionable.ui.title.trim().replace('.', '').toLowerCase()%> actionable'>
     <form>
       <div class='well'>
         <% if(actionables.proto.match(/http:/)) { %>
