@@ -1,8 +1,7 @@
-<ul>
+<ul class="customHeader">
 	<li ng-if="!auth.access_token"><a ng-click="login()" class="glyphicon glyphicon-log-in"><span class="inlineTranslate" translate>login</span></a></li>
 	<div ng-if="auth.access_token">
 		<li><a ng-click="logout()" class="glyphicon glyphicon-log-out"><span class="inlineTranslate" translate>logout</span></a></li>
 		<li><a ng-click="account()" class="glyphicon glyphicon-log-in"><span class="inlineTranslate" translate>account</span></a></li>
 	</div>
 </ul>
-<div ng-transclude></div>
