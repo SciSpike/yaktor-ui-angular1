@@ -1,12 +1,11 @@
-<div class="row">
-  <tabset>
+<div class="navList row">
     <% 
        Object.keys(description.elements).forEach(function(a){ 
+       var key = a;
        var actionable = description.elements[a];
        var subPath =  actionable.subPath || "";%>
       
-        <tab ng-init="evalActive<%=actionable.ui.title.replace(/\./g,"_")%> = '<%=actionable.ui.title%>' == activeNav" active='evalActive<%=actionable.ui.title.replace(/\./g,"_")%>' ng-click="go('<%- stateName +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+params.id")) %>)" <% if(subPath.match(/:id/)){ %>disabled="!params.id"<%}%> heading="{{'<%=actionable.ui.title%>'|translate}}"></tab>
+        <span ng-class="active = '<%=actionable.ui.title%>' == activeNav" ng-click="go('<%- stateName +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+params.id")) %>)" <% if(subPath.match(/:id/)){ %>disabled="!params.id"<%}%> id="<%=key.toLowerCase()%>">{{'<%=actionable.ui.title%>'|translate}}</span>
       
     <% }); %>
-  </tabset>
 </div>

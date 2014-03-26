@@ -7,6 +7,7 @@ angular.module('<%=appname%>')
     }
     
     $scope.activeNav = "_" + $state.current.name.toUpperCase();
+    console.log($scope.activeNav);
     
     $scope.popoverData = {
     	test1: {
