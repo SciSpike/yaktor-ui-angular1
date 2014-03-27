@@ -4,12 +4,16 @@
   "dependencies": {
     "angular": "1.2.x",
     "angular-translate": "2.0.1",
-    "angular-local-storage":"0.0.1",
+    "angular-local-storage": "0.0.1",
     "angular-ui-router": "0.2.8-bowratic-tedium",
     "angular-bootstrap": "0.10.x",
     "bootstrap": "3.1.x",
     "sockjs-client": "0.3.4",
     "emitter": "component/emitter#~1.1.1",
-    "node-querystring":"0.6.6"
+    "node-querystring": "0.6.6",
+    "ionic": "driftyco/ionic-bower#master"
+  },
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#master"
   }
 }
