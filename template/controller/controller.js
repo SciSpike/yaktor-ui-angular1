@@ -7,7 +7,18 @@ angular.module('<%=appname%>')
     }
     
     $scope.activeNav = "_" + $state.current.name.toUpperCase();
-    console.log($scope.activeNav);
+    
+    $scope.actionsList = {
+        <%  Object.keys(description.elements).forEach(function(e, index, array){
+          var element = description.elements[e];
+          var actions = element.components.actions;
+        %>
+        '<%-e%>': [{
+          action:"on<%-e%>",
+          title: '<%-actions[e].ui.title%>'
+        }],
+        <%});%>
+    };
     
     $scope.popoverData = {
     	test1: {
@@ -44,8 +55,8 @@ angular.module('<%=appname%>')
       <% }}); %>
     <% }); %>
       
-      $scope.goState = function(stateName){
-        !$state.includes(stateName) && $state.go(stateName,null,{location:false});
+      $scope.goState = function(stateName,params,location){
+        !$state.includes(stateName) && $state.go(stateName,params,{location:location});
       }  
       <% var actions = Object.keys(description.elements);
       if (actions.length == 1){%>

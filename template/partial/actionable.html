@@ -8,10 +8,9 @@
           <h3>{{'<%=actionable.ui.title%>'|translate}}</h3>
         <% } %>
         <%- contents %>
-        <% for(var elementName in actionable.components.actions){
-             var element =actionable.components.actions[elementName]; %>
-          <% include ../fragment/action.html %>
-        <% }%>
+        <div ng-repeat="element in actionsList['<%-actionableName %>']">
+        	<button title="{{element.title|translate}}" class='btn btn-primary btn-sm' ng-click='this[element.action]()'>{{element.title|translate}}</button>
+        </div>
       </div>
     </form>
     
