@@ -37,10 +37,10 @@ var a = s.elements[actionableName]; %>
             }
             //$scope.$watch( 'currentPage', $scope.on<%= a %> );
           <% } else {%>
-            $scope.on<%= a %> = function(method) {
-              var data = $scope.data[method];
-              RestService[method]('<%- s.url%>', data,id,function(err,data){
-                $scope.data[method]=data;
+            $scope.on<%= a %> = function() {
+              var data = $scope.data['<%= a %>'];
+              RestService['<%= a %>']('<%- s.url%>', data,id,function(err,data){
+                $scope.data['<%= a %>']=data;
               });
             }
           <% }%>

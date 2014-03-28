@@ -20,11 +20,11 @@
           var action = actions[a];
         %>
         // This method is called when using a REST API
-        $scope.on<%= a %> = function(method) {
-          var data = $scope.data[method];
+        $scope.on<%= a %> = function() {
+          var data = $scope.data['<%= a %>'];
           var initData = $scope.data['init'];
-          if(SocketService[method]){
-            SocketService[method]('<%-s.url%>',initData, data,function(err,stateName){
+          if(SocketService['<%= a %>']){
+            SocketService['<%= a %>']('<%-s.url%>',initData, data,function(err,stateName){
               $scope.goState('<%-s.friendly.replace(/\.state.*/,"") %>'+stateName)
             });
           } else {
