@@ -15,11 +15,12 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
   // }
   var inited={};
   service.init=function(sUrl,initData,data,cb){
+    inited[sUrl]=inited[sUrl]||{};
     //Connect api short circuits if already connected
     require('socketApi').connectWithPrefix(serverLocation,sessionId,true,function(){
       var ws = require(sUrl.replace(".","/").substr(1));
-      if(!inited[data._id]){
-        inited[data._id]=true;
+      if(!inited[sUrl][data._id]){
+        inited[sUrl][data._id]=true;
         for(var onV in ws.socket.on){
           (function(on){
             if(/state:.*/.test(on)){
