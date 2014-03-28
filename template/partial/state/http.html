@@ -5,7 +5,7 @@
        var actionable = description.elements[a];
        var subPath =  actionable.subPath || "";%>
       
-        <span ng-class="{active: '<%=actionable.ui.title%>'== activeNav}" ng-click="go('<%- stateName +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+params.id")) %>)" <% if(subPath.match(/:id/)){ %>disabled="!params.id"<%}%> id="<%=key.toLowerCase()%>">{{'<%=actionable.ui.title%>'|translate}}</span>
+        <span ng-class="{active: '<%-description.friendly%>.<%=stateName%>'== activeNav}" ng-click="go('<%- stateName +"/"+a+((subPath.replace(":id","id")+"'").replace("id'","'+params.id")) %>)" <% if(subPath.match(/:id/)){ %>disabled="!params.id"<%}%> id="<%=key.toLowerCase()%>">{{'<%=actionable.ui.title%>'|translate}}</span>
       
     <% }); %>
 </div>

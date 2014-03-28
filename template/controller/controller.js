@@ -6,7 +6,7 @@ angular.module('<%=appname%>')
       $location.path(hash);
     }
     
-    $scope.activeNav = "_" + $state.current.name.toUpperCase();
+    $scope.activeNav = $state.current.name;
     
     $scope.actionsList = {
         <%  Object.keys(description.elements).forEach(function(e, index, array){
@@ -14,11 +14,26 @@ angular.module('<%=appname%>')
           var actions = element.components.actions;
         %>
         '<%-e%>': [{
-          action:"on<%-e%>",
+          action:function($scope){$scope.on<%-e%>()},
           title: '<%-actions[e].ui.title%>'
         }],
         <%});%>
     };
+    $scope.navList = [
+        <%  
+          Object.keys(states).forEach(function(s){
+            var state = states[s];
+            if(state.proto.match(/ws:/)&& !state.url.match(/:state/)) {
+        %>
+        { id:'<%-state.friendly%>',
+          "class":"glyphicon glyphicon-tasks",
+          action:function($scope){
+            $scope.goState('<%-state.friendly%>',null,{location:true})
+            },
+          title: '<%-state.title%>'
+        },
+        <%}});%>
+    ];
     
     $scope.popoverData = {
     	test1: {

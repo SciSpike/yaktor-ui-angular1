@@ -18,5 +18,5 @@
   </ul>
 </div>
 <div class="navList row">
-    
+  <span ng-repeat="nav in navList" ng-class="{active: nav.id== activeNav}" ng-click='nav.action(this)'>{{nav.title|translate}}<span class="{{nav.class}}"><span></span>
 </div>

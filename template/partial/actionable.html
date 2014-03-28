@@ -10,7 +10,7 @@
         <%- contents %>
         <div class="btnGroup">
 	        <div class="inlineBtn" ng-repeat="element in actionsList['<%-actionableName %>']">
-	        	<button title="{{element.title|translate}}" class='btn btn-primary btn-sm' ng-click='this[element.action]()'>{{element.title|translate}}</button>
+	        	<button title="{{element.title|translate}}" class='btn btn-primary btn-sm' ng-click='element.action(this)'>{{element.title|translate}}</button>
 	        </div>
         </div>
       </div>
