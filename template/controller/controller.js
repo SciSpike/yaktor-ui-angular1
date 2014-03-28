@@ -41,12 +41,7 @@ angular.module('<%=appname%>')
         var typeRefs = element.typeRefs;
         var elements = element.components.elements;
       %>
-      $scope.data['<%-e%>'] = {};
-      <% Object.keys(elements).forEach(function(v){
-         var variable=elements[v];
-        %>
-        $scope.data['<%-e%>']['<%-v%>'] = null;
-      <% }); %>
+      $scope.data['<%-e%>'] =$scope.data['<%-e%>']|| {};
       <% Object.keys(typeRefs).forEach(function(t){
         if(typeRefs[t]){
           typeRefs[t]=false;
