@@ -15,5 +15,9 @@
   },
   "devDependencies": {
     "ionic": "driftyco/ionic-bower#master"
+  },
+  "resolutions": {
+    "angular-ui-router": "0.2.8-bowratic-tedium",
+    "angular": "1.3.x"
   }
 }
