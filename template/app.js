@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router','pascalprecht.translate','LocalStorageModule'])
+  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router','pascalprecht.translate','LocalStorageModule', 'ngGrid'])
     .config(function($stateProvider, $locationProvider,$translateProvider) {
       $translateProvider.preferredLanguage(defaultLocale);
       $stateProvider
