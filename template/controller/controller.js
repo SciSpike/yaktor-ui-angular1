@@ -39,9 +39,10 @@ angular.module('<%=appname%>')
     };
     $scope.navList = [
         <%  
+          var sMatch = new RegExp("^"+(description.title.replace(/([^.]*)\..*/,"$1\\.")));
           Object.keys(states).forEach(function(s){
             var state = states[s];
-            if(state.proto.match(/ws:/)&& !state.url.match(/:state/)) {
+            if(state.title.match(sMatch) && state.proto.match(/ws:/) && !state.url.match(/:state/)) {
         %>
         { id:'<%-state.friendly%>',
           "class":"glyphicon glyphicon-tasks",
