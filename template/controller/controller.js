@@ -8,6 +8,24 @@ angular.module('<%=appname%>')
     
     $scope.activeNav = $state.current.name;
     
+    var iconRef = {
+        'FIND': 'glyphicon glyphicon-question-sign',
+        'GET': 'glyphicon glyphicon-cloud-download',
+        'POST': 'glyphicon glyphicon-send',
+        'PUT': 'glyphicon glyphicon-cloud-upload',
+        'DELETE': 'glyphicon glyphicon-remove-sign' 
+    }
+    
+    $scope.getGlyph = {};
+    
+    $scope.setGlyph = function(string){
+      $.each( iconRef, function( key, value ) {
+        if (string.match(new RegExp(key))){
+          $scope.getGlyph[string] = value;
+        }
+      });
+    }  
+    
     $scope.actionsList = {
         <%  Object.keys(description.elements).forEach(function(e, index, array){
           var element = description.elements[e];

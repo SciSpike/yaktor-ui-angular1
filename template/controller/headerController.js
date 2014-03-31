@@ -8,6 +8,7 @@ angular.module('views')
         resolve: resolve
       });
     }
+    
     $scope.auth=localStorageService.get("auth")||{};
     var updateAuth = function(){
       if($scope.auth.access_token){
