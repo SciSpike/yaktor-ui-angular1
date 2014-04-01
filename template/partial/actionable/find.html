@@ -1,16 +1,6 @@
 <div ng-if="table.results">
   <pagination total-items="table.total" page="currentPage" on-select-page="onFIND('FIND',page)" max-size="10" class="pagination-sm" boundary-links="true" rotate="false" num-pages="table.maxPage"></pagination>
-  <table class="table">
-  	<thead>
-      <tr>
-      	<td ng-repeat="(key,val) in table.results[0]">{{key}}</td>
-    	</tr>
-    </thead>
-    <tr ng-repeat="row in table.results">
-      <td ng-repeat="column in row" ng-click="$emit('rowClick', row);">{{column}}</td>
-      <td><span class="ng-popover" popover-data="{{popoverData}}"></span></td>
-    </tr>
-  </table> 
+   <div class="gridStyle" ng-grid="gridOptions"></div>
   <pagination total-items="table.total" page="currentPage" on-select-page="onFIND('FIND',page)" max-size="10" class="pagination-sm" boundary-links="true" rotate="false" num-pages="table.maxPage"></pagination>
 </div>
 <button class="btn btn-primary btn-sm createCase" ng-click="go('/Case/POST')">Create</button>
