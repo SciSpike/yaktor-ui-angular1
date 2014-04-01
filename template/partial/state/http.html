@@ -1,5 +1,6 @@
-<div class="navPanel">
-	<div class="customNavPanel navList row" ng-click="togglePanel()">
+<div class="navPanel panelClosed">
+	<div class="customNavPanel navList row" ng-dblclick="togglePanel()">
+		<span class="dragHandle"></span>
 		<div class="navInner">
 		    <% 
 		       Object.keys(description.elements).forEach(function(a){ 

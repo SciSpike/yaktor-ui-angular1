@@ -5,6 +5,7 @@ angular.module('<%=appname%>')
           controller: function() {
             this.togglePanel = function(){
               $('.navPanel').toggleClass('panelOpen');
+              $('.navPanel').toggleClass('panelClosed');
             }
           }
       }

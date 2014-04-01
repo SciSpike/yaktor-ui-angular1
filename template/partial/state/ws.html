@@ -17,8 +17,9 @@
       } %>
   </ul>
 </div>
-<div class="navPanel">
-	<div class="customNavPanel navList row" ng-click="togglePanel()">
+<div class="navPanel panelClosed">
+	<div class="customNavPanel navList row" ng-dblclick="togglePanel()">
+		<span class="dragHandle"></span>
 		<div class="navInner">
 		  <span ng-repeat="nav in navList" ng-class="{active: nav.id== activeNav}" ng-click='nav.action(this)'><span>{{nav.title|translate}}</span><span class="{{nav.class}}"><span></span>
 		</div>

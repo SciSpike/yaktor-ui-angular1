@@ -45,6 +45,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
   
-  grunt.registerTask('default', ['less', 'browserify:build', 'browserify:appDep', 'cssmin', 'watch']);
+  grunt.registerTask('default', ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'cssmin', 'watch']);
   
 };
