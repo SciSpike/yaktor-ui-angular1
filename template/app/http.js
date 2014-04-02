@@ -34,7 +34,6 @@ var a = s.elements[actionableName]; %>
 //            enableCellEditOnFocus: true,
             columnDefs: [
                          <% 
-                         console.log(a.components);
                          var elems =a.components.elements;
                          Object.keys(elems).forEach(function(elem){
                            var element=elems[elem];
