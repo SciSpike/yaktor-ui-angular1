@@ -29,17 +29,29 @@ var a = s.elements[actionableName]; %>
         
         $scope.gridOptions = {
             data: 'table.results',
-//            enableCellSelection: true,
-//            enableRowSelection: false,
-//            enableCellEditOnFocus: true,
+            enablePinning: true,
+            enableColumnResize: true,
             columnDefs: [
                          <% 
-                         console.log(a.components);
                          var elems =a.components.elements;
-                         Object.keys(elems).forEach(function(elem){
+                         Object.keys(elems).forEach(function(elem, index, test){
+                           var width = 'auto';
+                           if(index == test.length-1){
+                             width = '*';
+                           }
                            var element=elems[elem];
                          %>
-                         {field: '<%-elem%>', headerCellTemplate:"<span>{{'<%-element.ui.title%>'|translate}}</span>"}, 
+                         {
+                           field: '<%-elem%>',
+                           width: '<%-width%>',
+                           minWidth: 150,
+                           resizable: true,
+                           headerCellTemplate:"<div>{{'<%-element.ui.title%>'|translate}}</div>" +
+                              "<div class='ngSortButtonDown ng-hide' ng-show='col.showSortButtonDown()'></div>" +
+                              "<div class='ngSortButtonUp ng-hide' ng-show='col.showSortButtonUp()'></div>" +
+                           	  "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
+                           		"<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
+                         }, 
                         <%});%>
                         ]
         }
