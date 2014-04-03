@@ -3,17 +3,17 @@ module.exports = {
     options: {
       ieCompat: true,
       paths: ['./less/'],
-      compress: true
+      compress: true,
+      syncImport: true
     },
-    files: {
-      './styles/customStyles.css': ["./less/**/*.less"],
+    files: [
+            {
+              expand: true,
+              cwd: './less/custom/',
+              src: ['*.less'],
+              dest: './styles/',
+              ext: '.css'
+            }
+          ]
     }
-      //[{
-        //expand: true,
-        //cwd: './less/',
-        //src: ['./**/*.less'],
-        //dest: './styles/',
-        //ext: '.css'
-      //}]
-  }
 };
