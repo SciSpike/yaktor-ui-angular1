@@ -22,14 +22,14 @@ module.exports = function(grunt) {
     cssmin: {
       combine: {
         files: {
-          './styles/customStyles.css': ['./styles/*.css',"./bower_components/ng-grid/*.min.css"]
+          './compiled.css': ['./styles/*.css',"./bower_components/ng-grid/*.min.css"]
         }
       }
     },
     watch: {
       scripts: {
         files: './**/*.less',
-        tasks: ['less'],
+        tasks: ['less', 'cssmin'],
         options: {
           interrupt: true,
         },
