@@ -30,7 +30,7 @@ div.fragment > *:not(button) {
    	cursor:pointer;
    }
    span[ng-click]:hover{
-   	text-decoration:underline;
+   	/*text-decoration:underline;*/
    }
    .view{
    	margin-top:20px;
@@ -38,6 +38,7 @@ div.fragment > *:not(button) {
    h1, .h1, h2, .h2, h3, .h3 {
 		margin-top: 0;
 	}
+	b
    
  /* ===============
     SCID-TABS 
@@ -50,6 +51,29 @@ div.fragment > *:not(button) {
 .col-md-12{
 	padding-left:0;
 }
+.navInner>span {
+	float: left;
+	margin-bottom: -1px;
+	position: relative;
+	display: block;
+}
+.navInner>span>span:first-child {
+	margin-right: 2px;
+	line-height: 1.42857143;
+	border: 1px solid transparent;
+	border-radius: 4px 4px 0 0;
+	position: relative;
+	display: block;
+	padding: 10px 15px;
+}
+.navInner>span.active>span, .navInner>span.active>span:hover, .navInner>span.active>span:focus {
+	color: #555;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-bottom-color: transparent;
+	cursor: default;
+}
+
 
 /* ===============
     SCID-TOOLTIP 
@@ -74,7 +98,12 @@ div.fragment > *:not(button) {
 /* ===============
     SCID-HEADER 
    =============== */
-   
+
+.headWrap{
+	display: block;
+	float: left;
+	width: 100%;
+}
 .scidHeader{
 	float:right;
 	margin:20px 0;
