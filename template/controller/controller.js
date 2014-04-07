@@ -45,7 +45,7 @@ angular.module('<%=appname%>')
             if(state.title.match(sMatch) && state.proto.match(/ws:/) && !state.url.match(/:state/)) {
         %>
         { id:'<%-state.friendly%>',
-          "class":"glyphicon glyphicon-tasks",
+          "class":"navicon",
           action:function($scope){
             $scope.goState('<%-state.friendly%>',null,{location:true})
             },
