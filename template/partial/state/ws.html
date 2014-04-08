@@ -17,6 +17,7 @@
       } %>
   </ul>
 </div>
+<% if (!description.url.match(/:state/)){%>
 <div class="navPanel panelClosed">
 	<div class="customNavPanel navList row" ng-dblclick="togglePanel()">
 		<span class="dragHandle"></span>
@@ -25,3 +26,4 @@
 		</div>
 	</div>
 </div>
+<%}%>
