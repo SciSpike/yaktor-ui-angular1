@@ -66,6 +66,18 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
       console.log("ERROR:", data, status, headers, config);
     });
   }
+  service.getRefData = function(URL   ){
+    return function(val) {
+      return $http.get(URL, {
+        params: {
+          id: "/^"+val+"/"
+        }
+      }).then(function(res){
+        return res.data.results;
+      });
+    };
+  }
+  
   
   return service;
 });

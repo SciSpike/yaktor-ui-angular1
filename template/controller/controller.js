@@ -1,5 +1,9 @@
 angular.module('<%=appname%>')
-  .controller('<%-description.friendly%>Ctrl', ['$scope','$state','$stateParams','$location', 'RestService', 'SocketService', function ($scope,$state,$stateParams,$location, RestService, SocketService) {
+  .controller('<%-description.friendly%>Ctrl', ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService', function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
+    <% if (!description.url.match(/:state/)){%>
+      $rootScope.title="<%- description.title %>"
+    <%}%>
+      
     $scope.params={};
     $scope.refData={};
     $scope.go = function(hash){
@@ -37,6 +41,7 @@ angular.module('<%=appname%>')
         }],
         <%});%>
     };
+    <% if (!description.url.match(/:state/)){%>
     $scope.navList = [
         <%  
           var sMatch = new RegExp("^"+(description.title.replace(/([^.]*)\..*/,"$1\\.")));
@@ -45,7 +50,7 @@ angular.module('<%=appname%>')
             if(state.title.match(sMatch) && state.proto.match(/ws:/) && !state.url.match(/:state/)) {
         %>
         { id:'<%-state.friendly%>',
-          "class":"glyphicon glyphicon-tasks",
+          "class":"navicon",
           action:function($scope){
             $scope.goState('<%-state.friendly%>',null,{location:true})
             },
@@ -53,7 +58,7 @@ angular.module('<%=appname%>')
         },
         <%}});%>
     ];
-    
+    <%}%>
     $scope.popoverData = {
     	test1: {
     		title: 'Home',
