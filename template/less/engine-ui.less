@@ -11,7 +11,6 @@
 
 // Reset
 @import "../bower_components/bootstrap/less/normalize.less";
-@import "../bower_components/bootstrap/less/print.less";
 
 // Core CSS
 @import "../bower_components/bootstrap/less/scaffolding.less";
@@ -21,9 +20,6 @@
 @import "../bower_components/bootstrap/less/tables.less";
 @import "../bower_components/bootstrap/less/forms.less";
 @import "../bower_components/bootstrap/less/buttons.less";
-
-// Components
-@import "../bower_components/bootstrap/less/component-animations.less";
 
 @import "../bower_components/bootstrap/less/glyphicons.less";
 @import "../bower_components/bootstrap/less/dropdowns.less";
@@ -39,12 +35,24 @@
 
 // Utility classes
 @import "../bower_components/bootstrap/less/utilities.less";
-@import "../bower_components/bootstrap/less/responsive-utilities.less";
 
 
+/* ===============
+    BOOTSTRAP RESET 
+   =============== */
 
-
-
+	.container{
+		width:100%;
+	}
+	.row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	
+	
+	
+	
+	
 
 div.container h1, h2, h3, h4, h5, h6 {
   font-family: "Open Sans", "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
@@ -84,7 +92,6 @@ div.fragment > *:not(button) {
    h1, .h1, h2, .h2, h3, .h3 {
 		margin-top: 0;
 	}
-	
    
  /* ===============
     SCID-TABS 
@@ -112,7 +119,7 @@ div.fragment > *:not(button) {
 	display: block;
 	padding: 10px 15px;
 }
-.navInner>span.active>span, .navInner>span.active>span:hover, .navInner>span.active>span:focus {
+.navInner>span.active>span:first-child, .navInner>span.active>span:first-child:hover, .navInner>span.active>span:first-child:focus {
 	color: #555;
 	background-color: #fff;
 	border: 1px solid #ddd;
