@@ -10,7 +10,7 @@ module.exports = {
             {
               expand: true,
               cwd: './less/custom/',
-              src: ['*.less'],
+              src: ['master.less'],
               dest: './styles/',
               ext: '.css'
             }
