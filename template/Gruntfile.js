@@ -22,7 +22,7 @@ module.exports = function(grunt) {
     cssmin: {
       combine: {
         files: {
-          './compiled.css': ['./styles/*.css',"./bower_components/ng-grid/*.min.css"]
+          './compiled.css': ['./styles/engine-ui.css', './styles/custom/master.css', './bower_components/ng-grid/*.min.css']
         }
       }
     },

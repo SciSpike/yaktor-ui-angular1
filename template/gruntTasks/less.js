@@ -9,8 +9,8 @@ module.exports = {
     files: [
             {
               expand: true,
-              cwd: './less/custom/',
-              src: ['master.less'],
+              cwd: './less/',
+              src: ['custom/master.less', 'engine-ui.less'],
               dest: './styles/',
               ext: '.css'
             }
