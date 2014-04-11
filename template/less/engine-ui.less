@@ -48,6 +48,9 @@
 		margin-left: 0;
 		margin-right: 0;
 	}
+	.glyphicon, .navicon {
+		margin-left:10px;
+	}
 	
 	
 	
@@ -65,7 +68,9 @@ div.fragment > *:not(button) {
 /* ===============
     SCID-RESET 
    =============== */
-   
+   body{
+   	padding-bottom: 70px;
+   }
    ul, li{
    	text-indent:0;
    	margin-left:0;
@@ -91,6 +96,10 @@ div.fragment > *:not(button) {
    }
    h1, .h1, h2, .h2, h3, .h3 {
 		margin-top: 0;
+	}
+	.inlineBtn{
+		display:inline-block;
+		margin-right:10px;
 	}
    
  /* ===============
@@ -180,4 +189,33 @@ div.fragment > *:not(button) {
 
 .inlineTranslate{
 	margin-left:5px;
+}
+
+/* ===============
+    FOOTER 
+   =============== */
+   
+.navbar .container, .navbar-nav{
+	display:table;
+}
+.navbar .container>div{
+	display:table-cell !important;
+	vertical-align: top;
+	width:100%;
+}
+.navbar .container>div.navbar-header{
+	padding:0 10px;
+	width:auto;
+}
+.navbar-nav{
+	width:100%;
+	margin:0;
+}
+.navbar-nav>li {
+	display:table-cell;
+	float:none;
+	text-align:center;
+}
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+	margin-left:0;
 }
