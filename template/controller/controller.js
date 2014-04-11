@@ -9,8 +9,10 @@ angular.module('<%=appname%>')
     $scope.go = function(hash){
       $location.path(hash);
     }
-    
-    $scope.activeNav = $state.current.name;
+    //used for ws nav; only evaled on parent;
+    $scope.activeState = $state.current;
+    //used for http nav; gives access to child state;
+    $scope.$state = $state;
     
     var iconRef = {
         'FIND': 'glyphicon glyphicon-question-sign',
