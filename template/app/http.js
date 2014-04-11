@@ -31,6 +31,12 @@ var a = s.elements[actionableName]; %>
             data: 'table.results',
             enablePinning: true,
             enableColumnResize: true,
+            init:function(grid,$scope){
+              console.log(arguments)
+              $scope.viewportStyle=function(){
+                return { };
+              }
+            },
             columnDefs: [
                          <% 
                          var elems =a.components.elements;
