@@ -1,15 +1,11 @@
 {
   "name": "engine-ui",
   "description": "Generate AngularJS applications based on a JSON application grammar",
-  "version": "0.1.0",
-  "homepage": "https://bitbucket.org/frontedgedigital/scid",
-  "author": {
-    "name": "Amit Kapadia",
-    "email": "akapad@gmail.com"
-  },
+  "version": "2.0.0",
+  "homepage": "https://github.com/SciSpike/engine-ui",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:frontedgedigital/scid.git"
+    "url": "git@github.com:SciSpike/engine-ui.git"
   },
   "engines": {
     "node": ">= 0.8.0"
