@@ -1,6 +1,12 @@
 <div class="<%-actionableName.toLowerCase() %>Class" ng-controller="<%-actionables.friendly%><%-actionableName %>CustomCtrl">
   <div title="{{'<%=actionable.ui.title%>'|translate}}" class='<%=actionable.ui.title.trim().replace('.', '').toLowerCase()%>Class actionable'>
     <form>
+      <alert ng-repeat="alert in alerts" type="alert.type" close="alerts.splice($index, 1);">
+      <span>{{alert.error.message}}</span>
+      <ul ng-if="alert.error.errors">
+        <li ng-repeat="error in alert.error.errors">{{error.message}}</li>
+      </ul>
+      </alert>
       <div class='well'>
         <% if(actionables.proto.match(/http:/)) { %>
           <h3>{{'<%=actionables.title%>'|translate}}</h3>
