@@ -9,6 +9,7 @@ var a = s.elements[actionableName]; %>
   url: '/<%=actionableName%><%-a.subPath%>',
   templateUrl: 'partial/<%=controller%>.<%=actionableName%>.html',
   controller:function($scope, $stateParams,RestService, SocketService,$translate) {
+    $scope.alerts=[];
     var stateName = '<%=actionableName%>';
     var id = $scope.params.id= $stateParams.id;
     if(id){
@@ -75,7 +76,12 @@ var a = s.elements[actionableName]; %>
         $scope.on<%= act %> = function() {
           var data = $scope.data['<%= act %>'];
           RestService['<%= act %>']('<%- s.url%>', data,id,function(err,data){
-            $scope.data['<%= act %>']=data;
+            if(err){
+                console.log(err)
+                $scope.alerts.push(err);
+            } else {
+              $scope.data['<%= act %>']=data;
+            }
           });
         }
       <% }%>

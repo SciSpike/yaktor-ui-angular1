@@ -14,7 +14,7 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
       })
       .error(function(data, status, headers, config) {
         console.log("ERROR:", data, status, headers, config);
-        cb(new Error(data&&data.error_description?data.error_description:status));
+        cb(data);
       });
   }
   service.FINDBYID = function(endpoint,notUsed, id,cb) {
@@ -25,7 +25,7 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
     })
     .error(function(data, status, headers, config) {
       console.log("ERROR:", data, status, headers, config);
-      cb(new Error(data&&data.error_description?data.error_description:status));
+      cb(data);
     });
   }
   service.GET = function(endpoint,notUsed, id,cb) {
@@ -41,7 +41,7 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
     })
     .error(function(data, status, headers, config) {
       console.log("ERROR:", data, status, headers, config);
-      cb(new Error(data&&data.error_description?data.error_description:status));
+      cb(data);
     });
   }
 
@@ -53,7 +53,7 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
     })
     .error(function(data, status, headers, config) {
       console.log("ERROR:", data, status, headers, config);
-      cb(new Error(data&&data.error_description?data.error_description:status));
+      cb(data);
     });
   }
   service.DELETE = function(endpoint, notUsed,id,cb) {
@@ -64,14 +64,16 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
     })
     .error(function(data, status, headers, config) {
       console.log("ERROR:", data, status, headers, config);
+      cb(data);
     });
   }
-  service.getRefData = function(URL   ){
+  service.getRefData = function(URL,attr){
+    var params = {};
+    attr=attr||"id";
     return function(val) {
+      params[attr]="/^"+val+"/";
       return $http.get(URL, {
-        params: {
-          id: "/^"+val+"/"
-        }
+        params: params
       }).then(function(res){
         return res.data.results;
       });
