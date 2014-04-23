@@ -14,10 +14,13 @@ var browserifyLibAlias = [
   './bower_components/ng-grid/ng-grid-2.0.7.debug.js:ngGrid',
   './bower_components/angular-touch/angular-touch.min.js:ngTouch',
   './bower_components/angular/angular.js:angular',
+  './bower_components/angular-resource/angular-resource.js:angular.resource',
   './bower_components/angular-translate/angular-translate.js:angular.translate',
   './bower_components/angular-ui-router/release/angular-ui-router.js:uirouter',
   './bower_components/angular-local-storage/angular-local-storage.js:localStorageService',
-  './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap'
+  './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
+  './bower_components/select2/select2.js:select2',
+  './bower_components/angular-ui-select2/src/select2.js:uiSelect'
 ];
 
 var mainExternals = [
@@ -25,10 +28,13 @@ var mainExternals = [
   './bower_components/ng-grid/ng-grid-2.0.7.debug.js',
   './bower_components/angular-touch/angular-touch.min.js',
   './bower_components/angular/angular.js',
+  './bower_components/angular-resource/angular-resource.js',
   './bower_components/angular-translate/angular-translate.js',
   './bower_components/angular-ui-router/release/angular-ui-router.js',
   './bower_components/angular-local-storage/angular-local-storage.js',
-  './bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
+  './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+  './bower_components/select2/select2.js',
+  './bower_components/angular-ui-select2/src/select2.js'
 ];
 
 var mergedExternals = browserifyLibExternal.concat(mainExternals);
@@ -61,6 +67,11 @@ module.exports = {
             exports: 'angular',
             depends: { jquery: '$' }
           },
+          'angular.resource' :{
+            path: './bower_components/angular-resource/angular-resource.js',
+            exports: '$resource',
+            depends: { jquery: '$', angular:'angular'}
+          },
           'angular.translate' :{
             path: './bower_components/angular-translate/angular-translate.js',
             exports: '$translate',
@@ -90,6 +101,16 @@ module.exports = {
             path: './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
             exports: 'uiBootstrap',
             depends: {jquery: '$', angular: 'angular'}
+          },
+          'select2': {
+              path: './bower_components/select2/select2.js',
+              exports: 'select2',
+              depends: {jquery: '$', angular: 'angular'}
+          },
+          'uiSelect': {
+              path: './bower_components/angular-ui-select2/src/select2.js',
+              exports: 'uiSelect',
+              depends: {jquery: '$', angular: 'angular'}
           }
         }
       },
@@ -98,12 +119,12 @@ module.exports = {
 	  },
 	  appDep: {
 		  	files: {
-          './libs/app.js': ["./app.js","constant/*.js","service/*.js"],
+          './libs/app.js': ["./app.js","constant/*.js","service/**/*.js", "./config/**/*.js"],
           './libs/controllers.js': ['./controller/*.js'],
           './libs/locale.js': ['./locale/*.js'],
 		  		'./libs/directives.js': ['./modules/**/*.js'],
 		  		'./libs/custom_controllers.js': ['./controller/custom/*.js'],
-	        './libs/resources.js': ["bower_components/sockjs-client/sockjs.min.js"]
+	        './libs/resources.js': ['bower_components/sockjs-client/sockjs.min.js']
 			},
 			options: {
 			  alias: browserifyLibAlias,

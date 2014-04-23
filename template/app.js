@@ -3,13 +3,16 @@
   
   require('angular');
   require('uirouter');
+  require('angular.resource');
   require('angular.translate');
   require('localStorageService');
   require('uiBootstrap');
   require('ngGrid');
   require('ngTouch');
+  require('select2');
+  require('uiSelect');
   
-  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router','pascalprecht.translate','LocalStorageModule', 'ngGrid'])
+  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router','pascalprecht.translate','LocalStorageModule', 'ngGrid', 'ngResource', 'ui.select2'])
     .config(function($stateProvider, $locationProvider,$translateProvider) {
       $translateProvider.preferredLanguage(defaultLocale);
       $stateProvider
