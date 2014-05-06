@@ -122,7 +122,7 @@ module.exports = {
           './libs/app.js': ["./app.js","constant/*.js","service/**/*.js", "./config/**/*.js"],
           './libs/controllers.js': ['./controller/*.js'],
           './libs/locale.js': ['./locale/*.js'],
-		  		'./libs/directives.js': ['./modules/**/*.js'],
+		  		'./libs/modules.js': ['./modules/**/*.js'],
 		  		'./libs/custom_controllers.js': ['./controller/custom/*.js'],
 	        './libs/resources.js': ['bower_components/sockjs-client/sockjs.min.js']
 			},
