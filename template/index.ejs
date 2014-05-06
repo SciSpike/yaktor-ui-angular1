@@ -44,8 +44,41 @@
   
   <script src="libs/controllers.js"></script>
   <script src="libs/locale.js"></script>
-  <script src="libs/directives.js"></script>
+  <script src="libs/modules.js"></script>
   <script src="libs/custom_controllers.js"></script>
+  
+  
+  
+  
+  
+  <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
+  
+  <!-- <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha256.js"></script> -->
+  
+  <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/components/enc-base64-min.js"></script>
+  
+  <script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/aes.js"></script>
+  
+	<script>
+	    var hash = CryptoJS.SHA3("password");
+	    var hashString = hash.toString(CryptoJS.enc.Base64);
+	    
+	    /*var hash2 = CryptoJS.SHA256("Message");
+	    console.log(hash.toString(CryptoJS.enc.Base64));*/
+	
+		function hex2a(hex) {
+		    var str = '';
+		    for (var i = 0; i < hex.length; i += 2)
+		        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+		    return str;
+		}
+	
+	    var encrypted = CryptoJS.AES.encrypt("This is an encrypted message", hashString);
+	    var decrypted = CryptoJS.AES.decrypt(encrypted, hashString);
+	    
+	    console.log('decrypted string');
+	    console.log(hex2a(decrypted.toString()));
+	</script>
   
 </body>
 </html>
