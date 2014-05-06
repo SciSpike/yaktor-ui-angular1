@@ -11,7 +11,7 @@ var browserifyLibAlias = [
   '../node_modules/tv4/tv4.js:tv4',
   '../public/socketApi.js:socketApi',
   './bower_components/jquery/dist/jquery.min.js:$',
-  './bower_components/ng-grid/ng-grid-2.0.7.debug.js:ngGrid',
+  './bower_components/ng-grid/build/ng-grid.debug.js:ngGrid',
   './bower_components/angular-touch/angular-touch.min.js:ngTouch',
   './bower_components/angular/angular.js:angular',
   './bower_components/angular-resource/angular-resource.js:angular.resource',
@@ -25,7 +25,7 @@ var browserifyLibAlias = [
 
 var mainExternals = [
   './bower_components/jquery/dist/jquery.min.js',
-  './bower_components/ng-grid/ng-grid-2.0.7.debug.js',
+  './bower_components/ng-grid/build/ng-grid.debug.js',
   './bower_components/angular-touch/angular-touch.min.js',
   './bower_components/angular/angular.js',
   './bower_components/angular-resource/angular-resource.js',
@@ -88,7 +88,7 @@ module.exports = {
             depends: {jquery: '$', angular:'angular'}
           },
           'ngGrid': {
-            path: './bower_components/ng-grid/ng-grid-2.0.7.debug.js',
+            path: './bower_components/ng-grid/build/ng-grid.debug.js',
             exports: 'ngGrid',
             depends: { jquery: '$' }
           },
