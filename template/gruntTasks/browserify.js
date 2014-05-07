@@ -20,7 +20,9 @@ var browserifyLibAlias = [
   './bower_components/angular-local-storage/angular-local-storage.js:localStorageService',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
   './bower_components/select2/select2.js:select2',
-  './bower_components/angular-ui-select2/src/select2.js:uiSelect'
+  './bower_components/angular-ui-select2/src/select2.js:uiSelect',
+  './bower_components/ngRepeatReorder/dist/ngRepeatReorder.js:ngRepeatReorder',
+  './bower_components/angular-hammer/angular-hammer.js:angularHammer'
 ];
 
 var mainExternals = [
@@ -34,7 +36,9 @@ var mainExternals = [
   './bower_components/angular-local-storage/angular-local-storage.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/select2/select2.js',
-  './bower_components/angular-ui-select2/src/select2.js'
+  './bower_components/angular-ui-select2/src/select2.js',
+  './bower_components/ngRepeatReorder/dist/ngRepeatReorder.js',
+  './bower_components/angular-hammer/angular-hammer.js'
 ];
 
 var mergedExternals = browserifyLibExternal.concat(mainExternals);
@@ -111,6 +115,16 @@ module.exports = {
               path: './bower_components/angular-ui-select2/src/select2.js',
               exports: 'uiSelect',
               depends: {jquery: '$', angular: 'angular'}
+          },
+          'angularHammer': {
+              path: './bower_components/angular-hammer/angular-hammer.js',
+              exports: 'angularHammer',
+              depends: {angular: 'angular'}
+          },
+          'ngRepeatReorder': {
+              path: './bower_components/ngRepeatReorder/dist/ngRepeatReorder.js',
+              exports: 'ngRepeatReorder',
+              depends: {angular: 'angular', angularHammer: 'angularHammer'}
           }
         }
       },

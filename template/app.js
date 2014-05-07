@@ -11,8 +11,9 @@
   require('ngTouch');
   require('select2');
   require('uiSelect');
+  require('ngRepeatReorder');
   
-  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router','pascalprecht.translate','LocalStorageModule', 'ngGrid', 'ngResource', 'ui.select2'])
+  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router','pascalprecht.translate','LocalStorageModule', 'ngGrid', 'ngResource', 'ui.select2', 'ngRepeatReorder'])
     .config(function($stateProvider, $locationProvider,$translateProvider) {
       $translateProvider.preferredLanguage(defaultLocale);
       $stateProvider
