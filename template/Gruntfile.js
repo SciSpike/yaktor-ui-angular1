@@ -45,17 +45,17 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   
-  grunt.registerTask('default', ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'cssmin', 'watch']);
+  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'cssmin'];
+  var serveTasks = ['watch'];
   
-  var customTasks = [];
+  grunt.registerTask('default', sharedTasks.concat(serveTasks));
   
-  for(var i=0; i<customGrunt.tasks.length; i++) {
-	  var taskName = customGrunt.tasks[i]['name'];
+  for (var key in customGrunt) {
+	  var taskName = customGrunt[key]['name'];
 	  var obj = {};
-	  obj[taskName] = customGrunt.tasks[i][taskName];
+	  obj[taskName] = customGrunt[key][taskName];
 	  grunt.extendConfig(obj);
-	  customTasks.push(customGrunt.tasks[i].name);
+	  var customTask = [customGrunt[key].name];
+	  grunt.registerTask(key, sharedTasks.concat(customTask));
   }
-  
-  grunt.registerTask('test', customTasks);
 };
