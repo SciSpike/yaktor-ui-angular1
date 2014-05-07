@@ -133,7 +133,8 @@ module.exports = {
 	  },
 	  appDep: {
 		  	files: {
-          './libs/app.js': ["./app.js","constant/*.js","service/**/*.js", "./config/**/*.js"],
+          './libs/app.js': ["./app.js","service/**/*.js", "./config/**/*.js"],
+          './libs/constants.js': ["./constants/*.js"],
           './libs/controllers.js': ['./controller/*.js'],
           './libs/locale.js': ['./locale/*.js'],
 		  		'./libs/modules.js': ['./modules/**/*.js'],
