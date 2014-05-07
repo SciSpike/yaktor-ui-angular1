@@ -11,7 +11,10 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "nodeunit test/json2angular_test.js"
+    "test": "nodeunit test/json2angular_test.js",
+    "gen-docs": "ruby doc/buildAll.rb",
+    "gen-views": "engine-ui generate",
+    "start": "node app.js"
   },
   "bin": {
     "engine-ui": "./bin/engine-ui"
@@ -20,18 +23,34 @@
     "walk": "2.3.x",
     "ansi": "0.2.x",
     "string": "1.7.x",
-    "tv4": "1.0.x",
+    "tv4": "1.0.8",
     "mustache": "0.8.x",
-    "ejs":"1.0.0",
-    "underscore":"1.6.0",
+    "ejs": "1.0.0",
+    "underscore": "1.6.0",
     "js-beautify": "1.4.x",
     "sockjs-client-ws": "0.1.0",
     "emitter-component": "1.1.1",
     "commander": "2.0.0",
-    "prettyjson": "~0.10.0"
+    "prettyjson": "~0.10.0",
+    "node-cassandra-cql": "0.2.10",
+    "bcrypt": "0.7.5",
+    "gossipmonger": "0.1.10",
+    "mongoose-pagination": "1.0.0",
+    "amqp-eventemitter": "0.5.1",
+    "locale": "0.0.14",
+    "node-uuid": "1.4.1",
+    "connect-flash": "0.1.0",
+    "mongoose": "3.6.x",
+    "conversation": "https://ccd206c41d68994a3f3edd5fb528829497362fa0:x-oauth-basic@github.com/SciSpike/cengine/tarball/master"
   },
   "devDependencies": {
-    "nodeunit": "~0.8.2"
+    "nodeunit": "~0.8.2",
+    "sockjs-client-ws": "0.1.0",
+    "commander": "2.0.0",
+    "cookie": "0.1.0",
+    "request": "2.29.0",
+    "async": "0.2.9",
+    "engine-ui": "https://ccd206c41d68994a3f3edd5fb528829497362fa0:x-oauth-basic@github.com/SciSpike/engine-ui/tarball/master"
   },
   "keywords": [
     "angularjs",

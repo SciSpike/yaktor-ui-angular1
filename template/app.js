@@ -1,7 +1,6 @@
 (function() {
   'use strict';
   
-  require('angular');
   require('uirouter');
   require('angular.resource');
   require('angular.translate');
@@ -11,9 +10,11 @@
   require('ngTouch');
   require('select2');
   require('uiSelect');
-  require('ngRepeatReorder');
+  //require('hammer');
+  //require('angularHammer');
+  //require('ngRepeatReorder');
   
-  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router','pascalprecht.translate','LocalStorageModule', 'ngGrid', 'ngResource', 'ui.select2', 'ngRepeatReorder'])
+  angular.module('<%=appname%>', ['ui.bootstrap', 'ui.router','pascalprecht.translate','LocalStorageModule', 'ngGrid', 'ngResource', 'ui.select2', 'hmTouchEvents', 'ngRepeatReorder'])
     .config(function($stateProvider, $locationProvider,$translateProvider) {
       $translateProvider.preferredLanguage(defaultLocale);
       $stateProvider
