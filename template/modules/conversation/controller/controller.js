@@ -1,4 +1,4 @@
-angular.module('<%=appname%>')
+angular.module('conversation')
   .controller('<%-description.friendly%>Ctrl', ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService', function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
     <% if (!description.url.match(/:state/)){%>
       $rootScope.title="<%- description.title %>"

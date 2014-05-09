@@ -1,4 +1,4 @@
-angular.module('views')
+angular.module('<%=appname%>')
   .controller('headerCtrl', ["$scope",'$modal', 'RestService',"localStorageService","$http",  function ($scope,$modal, RestService,localStorageService,$http) {
     $scope.open = function(templateUrl,controller,resolve){
       $modal.open({

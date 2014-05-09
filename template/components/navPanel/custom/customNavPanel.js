@@ -4,7 +4,7 @@ angular.module('<%=appname%>')
         restrict: 'C',
         transclude: true,
         require: '^?navPanel',
-        templateUrl: "./modules/footer/custom/footerTabs.html",
+        templateUrl: "./components/footer/custom/footerTabs.html",
         link: function(scope, element, attrs, scidFooterController, $translate, $filter) {
           
         }

@@ -1,13 +1,13 @@
 .state('<%-s.friendly%>', {
  url: '<%-stateName%>',
- templateUrl: 'partial/<%=controller%>.html',
+ templateUrl: 'modules/conversation/partial/<%=controller%>.html',
  controller: '<%=controller%>Ctrl'
 })
 <% Object.keys(s.elements).forEach(function(actionableName){ 
 var a = s.elements[actionableName]; %>
 .state('<%-s.friendly%>.<%=actionableName%>', {
   url: '/<%=actionableName%><%-a.subPath%>',
-  templateUrl: 'partial/<%=controller%>.<%=actionableName%>.html',
+  templateUrl: 'modules/conversation/partial/<%=controller%>.<%=actionableName%>.html',
   controller:function($scope, $stateParams,RestService, SocketService,$translate) {
     $scope.alerts=[];
     var stateName = '<%=actionableName%>';

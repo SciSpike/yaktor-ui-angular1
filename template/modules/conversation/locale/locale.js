@@ -1,6 +1,6 @@
 {{=<% %>=}}
 //This is where you customize the behavior.
-angular.module('<%appname%>')
+angular.module('conversation')
   .config(function ($translateProvider) {
     $translateProvider.translations('<%&locale%>',{
       <%#keys%>

@@ -4,7 +4,7 @@ angular.module('<%=appname%>')
           restrict: 'C',
           transclude: true,
           require: '^?scidHeader',
-          templateUrl: "./modules/header/custom/customHeaderBlock.html",
+          templateUrl: "./components/header/custom/customHeaderBlock.html",
           link: function(scope, element, attrs, scidHeaderController, $translate, $filter) {
             
           }

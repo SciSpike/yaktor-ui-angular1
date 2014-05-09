@@ -56,7 +56,7 @@ module.exports = {
   		dest: './libs/build.js'
 	  },
 	  libs:{
-      options: {
+       options: {
         shim: {
       	  jquery: {
             path: './bower_components/jquery/dist/jquery.min.js',
@@ -119,13 +119,11 @@ module.exports = {
 	  },
 	  appDep: {
 		  	files: {
-          './libs/app.js': ["./app.js","service/**/*.js", "./config/**/*.js"],
-          './libs/constants.js': ["./constants/*.js"],
-          './libs/controllers.js': ['./controller/*.js'],
-          './libs/locale.js': ['./locale/*.js'],
-		  		'./libs/modules.js': ['./modules/**/*.js'],
-		  		'./libs/custom_controllers.js': ['./controller/custom/*.js'],
-	        './libs/resources.js': ['bower_components/sockjs-client/sockjs.min.js']
+		  		'./libs/services.js': ["./service/**/*.js"],
+		  		'./libs/constants.js': ["./constant/*.js"],
+		  		'./libs/components.js': ["./components/**/*.js"],
+		  		'./libs/conversation.js': ["./modules/conversation/conversation.js", './modules/conversation/controller/**/*.js', './modules/conversation/locale/**/*.js'],
+		  		'./libs/resources.js': ['bower_components/sockjs-client/sockjs.min.js']
 			},
 			options: {
 			  alias: browserifyLibAlias,

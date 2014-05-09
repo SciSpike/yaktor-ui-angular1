@@ -4,7 +4,7 @@
     <%} else {%>
     url: '/<%-stateName.replace(/.*:state:/,"")%>',
     <% }%>
-   templateUrl: 'partial/<%=controller%>.html',
+   templateUrl: 'modules/conversation/partial/<%=controller%>.html',
    
    controller: '<%=controller%>Ctrl'
   })
@@ -13,7 +13,7 @@
   
   %>
   .state('<%-s.friendly %>.<%=actionableName%>', {
-    templateUrl: 'partial/<%=controller%>.<%=actionableName%>.html',
+    templateUrl: 'modules/conversation/partial/<%=controller%>.<%=actionableName%>.html',
     //Allows custom controllers to pass in a string data blob on transition;
     params:['initData'],
     controller:function($scope,$state, $stateParams,RestService, SocketService) {
