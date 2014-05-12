@@ -5,7 +5,8 @@ var fs = require('fs'),
     cp = require('child_process'),
     parse = require('../lib/parse'),
     prettyjson = require('prettyjson');
-    argv = require('commander');
+    argv = require('commander')
+  , which = require('which');
 
 var getTrue = function(val){
   return true;
