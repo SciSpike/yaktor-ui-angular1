@@ -7,7 +7,7 @@
   require('angular.translate');
   require('localStorageService');
   require('uiBootstrap');
-  require('ngGrid');
+  require('ngTable');
   require('ngTouch');
   require('select2');
   require('uiSelect');
@@ -18,7 +18,7 @@
 		   'ui.router',
 		   'pascalprecht.translate',
 		   'LocalStorageModule',
-		   'ngGrid',
+		   'ngTable',
 		   'ngResource',
 		   'ui.select2',
 		   'hmTouchEvents',

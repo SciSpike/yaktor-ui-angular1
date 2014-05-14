@@ -20,7 +20,8 @@ var browserifyLibAlias = [
   './bower_components/angular-local-storage/angular-local-storage.js:localStorageService',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
   './bower_components/select2/select2.js:select2',
-  './bower_components/angular-ui-select2/src/select2.js:uiSelect'
+  './bower_components/angular-ui-select2/src/select2.js:uiSelect',
+  './bower_components/ng-table/ng-table.min.js:ngTable'
 ];
 
 var mainExternals = [
@@ -34,7 +35,8 @@ var mainExternals = [
   './bower_components/angular-local-storage/angular-local-storage.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/select2/select2.js',
-  './bower_components/angular-ui-select2/src/select2.js'
+  './bower_components/angular-ui-select2/src/select2.js',
+  './bower_components/ng-table/ng-table.min.js'
 ];
 
 var mergedExternals = browserifyLibExternal.concat(mainExternals);
@@ -110,6 +112,11 @@ module.exports = {
           'uiSelect': {
               path: './bower_components/angular-ui-select2/src/select2.js',
               exports: 'uiSelect',
+              depends: {jquery: '$', angular: 'angular'}
+          },
+          'ngTable': {
+              path: './bower_components/ng-table/ng-table.min.js',
+              exports: 'ngTable',
               depends: {jquery: '$', angular: 'angular'}
           }
         }
