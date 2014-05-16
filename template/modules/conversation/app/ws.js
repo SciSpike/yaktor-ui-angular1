@@ -1,4 +1,4 @@
-  .state('<%- s.friendly%>', {
+  .state('main.<%- s.friendly%>', {
     <%if(stateName.match(/:state/)){%>
     params:['initData'],
     <%} else {%>
@@ -12,12 +12,12 @@
   var a = s.elements[actionableName]; 
   
   %>
-  .state('<%-s.friendly %>.<%=actionableName%>', {
+  .state('main.<%-s.friendly %>.<%=actionableName%>', {
     templateUrl: 'modules/conversation/partial/<%=controller%>.<%=actionableName%>.html',
     //Allows custom controllers to pass in a string data blob on transition;
     params:['initData'],
     controller:function($scope,$state, $stateParams,RestService, SocketService) {
-      var stateName = '<%=actionableName%>';
+      var stateName = 'main.<%=actionableName%>';
       var id = $scope.id = $stateParams.id;
       if($stateParams.initData){
         console.log($stateParams)
@@ -34,7 +34,7 @@
           var initData = $scope.data['init'];
           if(SocketService['<%= a %>']){
             SocketService['<%= a %>']('<%-s.url%>',initData, data,function(err,stateName){
-              $state.go('<%-s.friendly.replace(/\.state.*/,"") %>'+stateName,{initData:JSON.stringify(initData)},{location:true});
+              $state.go('main.<%-s.friendly.replace(/\.state.*/,"") %>'+stateName,{initData:JSON.stringify(initData)},{location:true});
             });
           } else {
             SocketService.doAction('<%-s.url%>','<%-actionableName%>',initData,data,function(err,data){

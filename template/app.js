@@ -26,6 +26,20 @@
 		   'conversation'])
     .config(function($stateProvider, $locationProvider,$translateProvider) {
       $translateProvider.preferredLanguage(defaultLocale);
+      
+      $translateProvider.preferredLanguage(defaultLocale);
+
+		$stateProvider
+				.state('main', {
+					abstract : true,
+					url : '',
+					templateUrl : '/main.html',
+					controller : 'mainController'
+				})
+				.controller('mainController',
+						function($scope) {
+
+						});
     });
 
 })();

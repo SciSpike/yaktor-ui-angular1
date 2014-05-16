@@ -20,11 +20,11 @@ angular.module('<%=appname%>')
     updateAuth();
     $scope.logout=function(){
       $scope.auth={};
-      localStorageService.remove('auth');
+      //localStorageService.remove('auth');
       updateAuth();
     }
     $scope.login=function(){
-      $scope.open("partial/login.POST.html",function($scope,$modalInstance,$http,auth){
+      $scope.open("/modules/conversation/partial/login.POST.html",function($scope,$modalInstance,$http,auth){
         var data = $scope.data={};
         data.POST={};
         $scope.onPOST = function(method) {
@@ -39,7 +39,7 @@ angular.module('<%=appname%>')
                 auth[a]=data[a];
               }
               updateAuth();
-              localStorageService.add('auth',JSON.stringify(auth));
+              //localStorageService.add('auth',JSON.stringify(auth));
               $modalInstance.dismiss('cancel');
             }
           });

@@ -1,4 +1,4 @@
-<div class="<%-description.friendly.toLowerCase() %>Class" ng-controller="<%-description.friendly%>CustomCtrl">
+<div class="partial <%-description.friendly.toLowerCase() %>Class" ng-controller="<%-description.friendly%>CustomCtrl">
   <div class="row state">
     <% if(description.proto.match(/ws:/)) {
       %><% include state/ws.html%><%

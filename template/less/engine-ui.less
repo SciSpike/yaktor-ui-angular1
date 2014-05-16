@@ -22,7 +22,7 @@
 @import "../bower_components/bootstrap/less/tables.less";
 @import "../bower_components/bootstrap/less/forms.less";
 @import "../bower_components/bootstrap/less/buttons.less";
-
+@import "../bower_components/bootstrap/less/modals.less";
 @import "../bower_components/bootstrap/less/glyphicons.less";
 @import "../bower_components/bootstrap/less/dropdowns.less";
 @import "../bower_components/bootstrap/less/button-groups.less";
@@ -108,23 +108,19 @@ div.fragment > *:not(button) {
     SCID-TABS 
    =============== */
 
-.navPanel{
+.tabPanel{
 	border-bottom: 1px solid #ddd;
 }
-.nav-tabs{
-	margin-top: 30px;
-	display: inline-block;
-}   
 .col-md-12{
 	padding-left:0;
 }
-.navInner>span {
+.tabInner>span {
 	float: left;
 	margin-bottom: -1px;
 	position: relative;
 	display: block;
 }
-.navInner>span>span:first-child {
+.tabInner>span>span:first-child {
 	margin-right: 2px;
 	line-height: 1.42857143;
 	border: 1px solid transparent;
@@ -133,14 +129,14 @@ div.fragment > *:not(button) {
 	display: block;
 	padding: 10px 15px;
 }
-.navInner>span.active>span:first-child, .navInner>span.active>span:first-child:hover, .navInner>span.active>span:first-child:focus {
+.tabInner>span.active>span:first-child, .tabInner>span.active>span:first-child:hover, .tabInner>span.active>span:first-child:focus {
 	color: #555;
 	background-color: #fff;
 	border: 1px solid #ddd;
 	border-bottom-color: transparent;
 	cursor: default;
 }
-.navInner>span.disabled>span:first-child, .navInner>span.disabled>span:first-child:hover, .navInner>span.disabled>span:first-child:focus {
+.tabInner>span.disabled>span:first-child, .tabInner>span.disabled>span:first-child:hover, .tabInner>span.disabled>span:first-child:focus {
 	opacity: .4;
 	cursor: not-allowed;
 }

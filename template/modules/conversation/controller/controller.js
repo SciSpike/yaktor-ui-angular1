@@ -54,7 +54,7 @@ angular.module('conversation')
         { id:'<%-state.friendly%>',
           "class":"navicon",
           action:function($scope){
-            $scope.goState('<%-state.friendly%>',null,{location:true})
+            $scope.goState('main.<%-state.friendly%>',null,{location:true})
             },
           title: '<%-state.title%>'
         },
@@ -96,7 +96,7 @@ angular.module('conversation')
       }  
       <% var actions = Object.keys(description.elements);
       if (actions.length == 1){%>
-        $scope.goState('<%-description.friendly %>.<%-actions[0]%>')
+        $scope.goState('main.<%-description.friendly %>.<%-actions[0]%>')
       <%}%>
     
   

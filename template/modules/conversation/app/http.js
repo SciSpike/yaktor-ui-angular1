@@ -1,16 +1,16 @@
-.state('<%-s.friendly%>', {
+.state('main.<%-s.friendly%>', {
  url: '<%-stateName%>',
  templateUrl: 'modules/conversation/partial/<%=controller%>.html',
  controller: '<%=controller%>Ctrl'
 })
 <% Object.keys(s.elements).forEach(function(actionableName){ 
 var a = s.elements[actionableName]; %>
-.state('<%-s.friendly%>.<%=actionableName%>', {
+.state('main.<%-s.friendly%>.<%=actionableName%>', {
   url: '/<%=actionableName%><%-a.subPath%>',
   templateUrl: 'modules/conversation/partial/<%=controller%>.<%=actionableName%>.html',
   controller:function($scope, $stateParams,RestService, SocketService,$translate) {
     $scope.alerts=[];
-    var stateName = '<%=actionableName%>';
+    var stateName = 'main.<%=actionableName%>';
     var id = $scope.params.id= $stateParams.id;
     if(id){
       RestService['FINDBYID']('<%- s.url %>', null,id,function(err,data){
