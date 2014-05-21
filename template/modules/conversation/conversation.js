@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = angular.module('conversation', ['ui.bootstrap', 'ui.router','pascalprecht.translate','LocalStorageModule', 'ngTable', 'ngResource', 'ui.select2'])
+module.exports = angular.module('conversation', ['ui.bootstrap', 'ui.router','pascalprecht.translate','ngStorage', 'ngTable', 'ngResource', 'ui.select2'])
     .config(function($stateProvider, $locationProvider,$translateProvider) {
       $translateProvider.preferredLanguage(defaultLocale);
       $stateProvider

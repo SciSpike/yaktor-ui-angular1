@@ -5,7 +5,7 @@
   require('uirouter');
   require('angular.resource');
   require('angular.translate');
-  require('localStorageService');
+  require('ngStorage');
   require('uiBootstrap');
   require('ngTable');
   require('ngTouch');
@@ -17,7 +17,7 @@
 		  ['ui.bootstrap',
 		   'ui.router',
 		   'pascalprecht.translate',
-		   'LocalStorageModule',
+		   'ngStorage',
 		   'ngTable',
 		   'ngResource',
 		   'ui.select2',
@@ -38,7 +38,7 @@
 				})
 				.controller('mainController',
 						function($scope) {
-
+							
 						});
     });
 

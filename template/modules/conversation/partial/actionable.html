@@ -15,7 +15,7 @@
         <% } %>
         <%- contents %>
         <div class="btnGroup">
-	        <div class="inlineBtn" ng-repeat="element in actionsList['<%-actionableName %>']">
+	        <div class="inlineBtn" ng-repeat="element in actionsList['<%-actionableName %>'] track by $index">
 	        	<button title="{{element.title|translate}}" class='btn btn-primary btn-sm' ng-click='element.action(this)'>{{element.title|translate}}</button>
 	        </div>
         </div>

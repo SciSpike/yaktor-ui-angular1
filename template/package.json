@@ -10,8 +10,7 @@
     "grunt-contrib-concat": "0.3.0",
     "grunt-contrib-less": "~0.9.0",
     "grunt-contrib-watch": "~0.5.2",
-    "grunt-sails-linker": "~0.9.5",
-    "ionic": "~1.0.0-beta.1"
+    "grunt-sails-linker": "~0.9.5"
   },
   "scripts": {
     "test": "grunt"

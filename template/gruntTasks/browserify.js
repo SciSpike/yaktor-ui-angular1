@@ -17,11 +17,12 @@ var browserifyLibAlias = [
   './bower_components/angular-resource/angular-resource.js:angular.resource',
   './bower_components/angular-translate/angular-translate.js:angular.translate',
   './bower_components/angular-ui-router/release/angular-ui-router.js:uirouter',
-  './bower_components/angular-local-storage/angular-local-storage.js:localStorageService',
+  './bower_components/ngstorage/ngstorage.min.js:ngStorage',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
   './bower_components/select2/select2.js:select2',
   './bower_components/angular-ui-select2/src/select2.js:uiSelect',
-  './bower_components/ng-table/ng-table.min.js:ngTable'
+  './bower_components/ng-table/ng-table.min.js:ngTable',
+  './bower_components/ng-grid/ng-grid-2.0.11.min.js:ngTable'
 ];
 
 var mainExternals = [
@@ -32,11 +33,12 @@ var mainExternals = [
   './bower_components/angular-resource/angular-resource.js',
   './bower_components/angular-translate/angular-translate.js',
   './bower_components/angular-ui-router/release/angular-ui-router.js',
-  './bower_components/angular-local-storage/angular-local-storage.js',
+  './bower_components/ngstorage/ngstorage.min.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/select2/select2.js',
   './bower_components/angular-ui-select2/src/select2.js',
-  './bower_components/ng-table/ng-table.min.js'
+  './bower_components/ng-table/ng-table.min.js',
+  './bower_components/ng-grid/ng-grid-2.0.11.min.js'
 ];
 
 var mergedExternals = browserifyLibExternal.concat(mainExternals);
@@ -84,9 +86,9 @@ module.exports = {
             exports: 'uirouter',
             depends: {jquery: '$', angular:'angular'}
           },
-          'localStorageService': {
-            path: './bower_components/angular-local-storage/angular-local-storage.js',
-            exports: 'localStorageService',
+          'ngStorage': {
+            path: './bower_components/ngstorage/ngstorage.min.js',
+            exports: 'ngStorage',
             depends: {jquery: '$', angular:'angular'}
           },
           'ngGrid': {
@@ -118,6 +120,11 @@ module.exports = {
               path: './bower_components/ng-table/ng-table.min.js',
               exports: 'ngTable',
               depends: {jquery: '$', angular: 'angular'}
+          },
+          'ngGrid': {
+              path: './bower_components/ng-grid/ng-grid-2.0.11.min.js',
+              exports: 'ngGrid',
+              depends: {jquery: '$', angular: 'angular'}
           }
         }
       },
@@ -129,6 +136,7 @@ module.exports = {
 		  		'./libs/services.js': ["./service/**/*.js"],
 		  		'./libs/constants.js': ["./constant/*.js"],
 		  		'./libs/components.js': ["./components/**/*.js"],
+		  		'./libs/locales.js': ["./locale/**/*.js"],
 		  		'./libs/conversation.js': ["./modules/conversation/conversation.js", './modules/conversation/controller/**/*.js', './modules/conversation/locale/**/*.js'],
 		  		'./libs/resources.js': ['bower_components/sockjs-client/sockjs.min.js']
 			},
