@@ -8,6 +8,7 @@
   require('ngStorage');
   require('uiBootstrap');
   require('ngTable');
+  require('ngGrid');
   require('ngTouch');
   require('select2');
   require('uiSelect');
@@ -18,25 +19,26 @@
 		   'pascalprecht.translate',
 		   'ngStorage',
 		   'ngTable',
+		   'ngGrid', 
 		   'ngResource',
 		   'ui.select2',
 		   'conversation'])
     .config(function($stateProvider, $locationProvider,$translateProvider) {
-      $translateProvider.preferredLanguage(defaultLocale);
-      
+    	
       $translateProvider.preferredLanguage(defaultLocale);
 
 		$stateProvider
 				.state('main', {
 					abstract : true,
 					url : '',
-					templateUrl : '/main.html',
+					templateUrl : '/main.ejs',
 					controller : 'mainController'
 				})
-				.controller('mainController',
-						function($scope) {
+    })
+    .controller('mainController',
+		function($scope) {
 							
-						});
-    });
+		}
+    );
 
 })();
