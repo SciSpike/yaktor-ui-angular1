@@ -136,6 +136,7 @@ module.exports = {
 		  		'./libs/services.js': ["./service/**/*.js"],
 		  		'./libs/constants.js': ["./constant/*.js"],
 		  		'./libs/components.js': ["./components/**/*.js"],
+		  		'./libs/controllers.js': ["./controllers/**/*.js"],
 		  		'./libs/locales.js': ["./locale/**/*.js"],
 		  		'./libs/conversation.js': ["./modules/conversation/conversation.js", './modules/conversation/controller/**/*.js', './modules/conversation/locale/**/*.js'],
 		  		'./libs/resources.js': ['bower_components/sockjs-client/sockjs.min.js']

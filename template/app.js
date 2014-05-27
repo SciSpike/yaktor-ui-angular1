@@ -11,7 +11,6 @@
   require('ngTouch');
   require('select2');
   require('uiSelect');
-  require('conversation');
   
   angular.module('views', 
 		  ['ui.bootstrap',
@@ -21,8 +20,6 @@
 		   'ngTable',
 		   'ngResource',
 		   'ui.select2',
-		   'hmTouchEvents',
-		   'ngRepeatReorder',
 		   'conversation'])
     .config(function($stateProvider, $locationProvider,$translateProvider) {
       $translateProvider.preferredLanguage(defaultLocale);
