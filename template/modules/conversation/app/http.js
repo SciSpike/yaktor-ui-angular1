@@ -10,12 +10,11 @@ var a = s.elements[actionableName]; %>
   templateUrl: 'modules/conversation/partial/<%=controller%>.<%=actionableName%>.html',
   controller:function($scope, $stateParams,RestService, SocketService,$translate) {
     $scope.alerts=[];
-    var stateName = 'main.<%=actionableName%>';
     var id = $scope.params.id= $stateParams.id;
     if(id){
       RestService['FINDBYID']('<%- s.url %>', null,id,function(err,data){
-        $scope.data[stateName]=data;
-        console.log("Loaded %s",$stateParams.id,$scope.data[stateName]);
+        $scope.data[ '<%=actionableName%>']=data;
+        console.log("Loaded %s",$stateParams.id,$scope.data[ '<%=actionableName%>']);
       });
     }
     <%
