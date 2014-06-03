@@ -2,7 +2,7 @@
   "name": "views",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "1.2.12",
+    "angular": "1.2.16",
     "angular-resource": "1.2.1",
     "angular-translate": "2.0.1",
     "ngstorage": "0.3.0",
@@ -15,10 +15,9 @@
     "emitter": "component/emitter#1.1.2",
     "node-querystring": "0.6.6",
     "d3": "3.4.6",
-    "angular-ui-select2": "0.0.5",
-    "ng-table": "0.3.2"
+    "angular-ui-select2": "0.0.5"
   },
   "resolutions": {
-    "angular": "1.2.12"
+    "angular": "1.2.16"
   }
 }
