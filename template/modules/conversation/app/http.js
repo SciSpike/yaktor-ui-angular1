@@ -48,7 +48,6 @@ var a = s.elements[actionableName]; %>
                            var element=elems[elem];
                            if(element.type.match(/^object|array$/)){
                              //DON'T RENDER
-                             console.log(element)
                              return;
                            }
                          %>
