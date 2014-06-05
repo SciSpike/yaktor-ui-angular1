@@ -7,7 +7,6 @@
   require('angular.translate');
   require('ngStorage');
   require('uiBootstrap');
-  require('ngTable');
   require('ngGrid');
   require('ngTouch');
   require('select2');
@@ -18,7 +17,6 @@
 		   'ui.router',
 		   'pascalprecht.translate',
 		   'ngStorage',
-		   'ngTable',
 		   'ngGrid', 
 		   'ngResource',
 		   'ui.select2',
@@ -35,9 +33,41 @@
 					controller : 'mainController'
 				})
     })
+    
+    .config(['$provide', function ($provide) {
+				$provide.decorator('$rootScope', ['$delegate', function ($delegate) {
+					Object.defineProperty($delegate.constructor.prototype, '$onRootScope', {
+						value: function (name, listener) {
+							var unsubscribe = $delegate.$on(name, listener);
+							this.$on('$destroy', unsubscribe);
+						},
+						enumerable: false
+					});
+		
+					return $delegate;
+				}]);
+			}])
+			
+
+			.constant('$eventsCommon', {
+				navPanel: {
+					toggleWidth: 'navPanel.toggle',
+					checkHeight: 'navPanel.height'
+				},
+				ngGrid:{
+					toggleWidth: 'navGrid.toggle'
+				}
+			})
+    
     .controller('mainController',
-		function($scope) {
-							
+		function($rootScope, $scope, $state, $location, $http, $sessionStorage, $eventsCommon) {
+    	
+    		$scope.$storage = $sessionStorage;
+    	
+	    	window.onresize = function(){
+		    	$rootScope.$emit($eventsCommon.navPanel.checkHeight);
+		    	$rootScope.$emit($eventsCommon.ngGrid.toggleWidth);
+		    }				
 		}
     );
 

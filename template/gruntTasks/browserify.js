@@ -21,8 +21,7 @@ var browserifyLibAlias = [
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
   './bower_components/select2/select2.js:select2',
   './bower_components/angular-ui-select2/src/select2.js:uiSelect',
-  './bower_components/ng-table/ng-table.min.js:ngTable',
-  './bower_components/ng-grid/ng-grid-2.0.11.min.js:ngTable'
+  './bower_components/ng-grid/ng-grid-2.0.11.min.js:ngGrid'
 ];
 
 var mainExternals = [
@@ -37,7 +36,6 @@ var mainExternals = [
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/select2/select2.js',
   './bower_components/angular-ui-select2/src/select2.js',
-  './bower_components/ng-table/ng-table.min.js',
   './bower_components/ng-grid/ng-grid-2.0.11.min.js'
 ];
 
@@ -114,11 +112,6 @@ module.exports = {
           'uiSelect': {
               path: './bower_components/angular-ui-select2/src/select2.js',
               exports: 'uiSelect',
-              depends: {jquery: '$', angular: 'angular'}
-          },
-          'ngTable': {
-              path: './bower_components/ng-table/ng-table.min.js',
-              exports: 'ngTable',
               depends: {jquery: '$', angular: 'angular'}
           },
           'ngGrid': {

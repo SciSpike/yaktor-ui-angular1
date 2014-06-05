@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             'appRoot': './'
           },
           'files': {
-            './index.ejs': ['./compiled_modules/*.js']
+            './index.ejs': ['./compiled_modules/*.js', './scripts/ng-grid-layout.js']
           }
         }
     },

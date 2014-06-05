@@ -1,5 +1,5 @@
 <div ng-if="table.results">
   <pagination total-items="table.total" page="currentPage" on-select-page="onFIND('FIND',page)" max-size="10" class="pagination-sm" boundary-links="true" rotate="false" num-pages="table.maxPage"></pagination>
-   <div class="gridStyle" ng-grid="gridOptions"></div>
+   <div class="ngGridDirective" grid-data='gridOptions.data' grid-options='gridOptions.options'></div>
   <pagination total-items="table.total" page="currentPage" on-select-page="onFIND('FIND',page)" max-size="10" class="pagination-sm" boundary-links="true" rotate="false" num-pages="table.maxPage"></pagination>
 </div>

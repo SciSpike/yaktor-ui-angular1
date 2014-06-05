@@ -28,38 +28,39 @@ var a = s.elements[actionableName]; %>
         $scope.currentPage=1; 
         
         $scope.gridOptions = {
-            data: 'table.results',
-            enablePinning: true,
-            enableColumnResize: true,
-            init:function(grid,$scope){
-              console.log(arguments)
-              $scope.viewportStyle=function(){
-                return { };
-              }
-            },
-            columnDefs: [
-                         <% 
-                         var elems =a.components.elements;
-                         Object.keys(elems).forEach(function(elem, index, test){
-                           var width = 'auto';
-                           if(index == test.length-1){
-                             width = '*';
-                           }
-                           var element=elems[elem];
-                         %>
-                         {
-                           field: '<%-elem%>',
-                           width: '<%-width%>',
-                           minWidth: 150,
-                           resizable: true,
-                           headerCellTemplate:"<div>{{'<%-element.ui.title%>'|translate}}</div>" +
-                              "<div class='ngSortButtonDown ng-hide' ng-show='col.showSortButtonDown()'></div>" +
-                              "<div class='ngSortButtonUp ng-hide' ng-show='col.showSortButtonUp()'></div>" +
-                           	  "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
-                           		"<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
-                         }, 
-                        <%});%>
-                        ]
+        	options: {
+	            enablePinning: true,
+	            enableColumnResize: true,
+	            init:function(grid,$scope){
+	              console.log(arguments)
+	              $scope.viewportStyle=function(){
+	                return { };
+	              }
+	            },
+	            columnDefs: [
+	                         <% 
+	                         var elems =a.components.elements;
+	                         Object.keys(elems).forEach(function(elem, index, test){
+	                           var width = 'auto';
+	                           if(index == test.length-1){
+	                             width = '*';
+	                           }
+	                           var element=elems[elem];
+	                         %>
+	                         {
+	                           field: '<%-elem%>',
+	                           width: '<%-width%>',
+	                           minWidth: 150,
+	                           resizable: true,
+	                           headerCellTemplate:"<div>{{'<%-element.ui.title%>'|translate}}</div>" +
+	                              "<div class='ngSortButtonDown ng-hide' ng-show='col.showSortButtonDown()'></div>" +
+	                              "<div class='ngSortButtonUp ng-hide' ng-show='col.showSortButtonUp()'></div>" +
+	                           	  "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
+	                           		"<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
+	                         }, 
+	                        <%});%>
+	                        ]
+        	}
         }
         
         $scope.on<%= act %> = function(notUsed,page) {
@@ -68,6 +69,7 @@ var a = s.elements[actionableName]; %>
           RestService['<%= act %>']('<%- s.url%>', data,page,function(err,data){
             console.log("loading page:", JSON.stringify(data,null,2))
             $scope.table=data;
+            $scope.gridOptions.data = $scope.table.results;
           });
         }
         //$scope.$watch( 'currentPage', $scope.on<%= act %> );
