@@ -56,10 +56,9 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   
-  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker', 'cssmin'];
+  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'browserify:components', 'sails-linker', 'cssmin'];
   var serveTasks = ['watch'];
-  
-  grunt.registerTask('default', sharedTasks.concat(serveTasks));
+  var allTasks = sharedTasks.concat(serveTasks)
   
   
   
@@ -85,21 +84,35 @@ module.exports = function(grunt) {
     }
     return obj1;
   }
-  
+
+
   for (var key in customGrunt) {
-	  var taskName = customGrunt[key]['name'];
-	  var obj = {};
-	  obj[taskName] = customGrunt[key][taskName];
-	  if(grunt.config.data[key]){
-		  if(grunt.config.data[key][taskName]){
-			  grunt.config.data[key][taskName] = MergeRecursive(grunt.config.data[key][taskName], obj[taskName]);
-		  }else{
-			  grunt.config.data[key][taskName] = obj[taskName];
-		  }
-	  }else{
-		  grunt.extendConfig(obj);
-		  var customTask = [customGrunt[key].name];
-		  grunt.registerTask(key, sharedTasks.concat(customTask));
-	  }
+    console.log('##########');
+    console.log(key);
+    for (var prop in customGrunt[key]) {
+      var taskName = prop;
+      var obj = {};
+      obj[taskName] = customGrunt[key][taskName];
+      if(grunt.config.data[key]){
+        if(grunt.config.data[key][taskName]){
+          grunt.config.data[key][taskName] = MergeRecursive(grunt.config.data[key][taskName], obj[taskName]);
+        }else{
+          grunt.config.data[key][taskName] = obj[taskName];
+        }
+      }else{
+    	grunt.config.data[key] = {};
+    	grunt.config.data[key][taskName] = obj[taskName];
+    	if(key == 'shell'){
+    		allTasks.unshift('shell');
+    	}
+    	//var customTask = [key];
+        //grunt.registerTask(key, customTask);
+      }
+    }
   }
+  
+  
+  //console.log(grunt.config.data);
+  console.log(allTasks);
+  grunt.registerTask('default', allTasks);
 };

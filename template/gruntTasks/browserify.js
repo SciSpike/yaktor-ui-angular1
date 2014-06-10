@@ -128,7 +128,6 @@ module.exports = {
 		  	files: {
 		  		'./libs/services.js': ["./service/**/*.js"],
 		  		'./libs/constants.js': ["./constant/*.js"],
-		  		'./libs/components.js': ["./components/**/*.js"],
 		  		'./libs/controllers.js': ["./controllers/**/*.js"],
 		  		'./libs/locales.js': ["./locale/**/*.js"],
 		  		'./libs/conversation.js': ["./modules/conversation/conversation.js", './modules/conversation/controller/**/*.js', './modules/conversation/locale/**/*.js'],
@@ -138,5 +137,18 @@ module.exports = {
 			  alias: browserifyLibAlias,
 			  external:mergedExternals
 			}
-	  }
+	  },
+      components: {
+          files: {
+            './libs/components.js': ["./components/footer/*.js",
+                                     "./components/header/*.js",
+                                     "./components/navPanel/*.js",
+                                     "./components/ngGrid/*.js",
+                                     "./components/popover/*.js"]
+          },
+          options: {
+            alias: browserifyLibAlias,
+            external:mergedExternals
+          }
+        }
 };

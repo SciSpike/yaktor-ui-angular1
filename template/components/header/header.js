@@ -2,7 +2,9 @@ angular.module('<%=appname%>')
   .directive('scidHeader', function($compile) {
       return{
           restrict: 'C',
-          templateUrl: "./components/header/headerBlock.html",
+          templateUrl : function($node, tattrs) {
+              return partialsBaseLocation + "/header/headerBlock.html"
+            },
           controller: "headerCtrl"
       }
   })
