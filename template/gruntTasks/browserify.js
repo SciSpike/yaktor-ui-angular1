@@ -140,11 +140,7 @@ module.exports = {
 	  },
       components: {
           files: {
-            './libs/components.js': ["./components/footer/*.js",
-                                     "./components/header/*.js",
-                                     "./components/navPanel/*.js",
-                                     "./components/ngGrid/*.js",
-                                     "./components/popover/*.js"]
+            './libs/components.js': ["./components/**/*.js"]
           },
           options: {
             alias: browserifyLibAlias,
