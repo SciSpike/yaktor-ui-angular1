@@ -102,7 +102,10 @@ module.exports = function(grunt) {
       }else{
     	grunt.config.data[key] = {};
     	grunt.config.data[key][taskName] = obj[taskName];
-    	if(key == 'shell'){
+    	if(key == 'copy'){
+    		allTasks.unshift('copy');
+    	}
+		if(key == 'shell'){
     		allTasks.unshift('shell');
     	}
     	//var customTask = [key];
