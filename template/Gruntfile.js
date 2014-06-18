@@ -8,10 +8,9 @@ module.exports = function(grunt) {
 	    scope: 'dependencies'
 	});
 	
-  var config, dir, customGrunt;
+  var config, customGrunt;
   var basePath = grunt.option('basePath') || "./";
   
- dir = require("./gruntTasks/dirs");
  customGrunt = require("./Gruntfile_custom.js");
   
   try {
@@ -19,8 +18,6 @@ module.exports = function(grunt) {
   } catch (_error) {}
   
   config = {
-    'basePath': basePath,
-    'dir': dir,
     'browserify': require("./gruntTasks/browserify"),
     'less': require("./gruntTasks/less"),
     'cssmin': {
@@ -56,11 +53,8 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   
-  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'browserify:components', 'sails-linker', 'cssmin'];
+  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker', 'cssmin'];
   var serveTasks = ['watch'];
-  var allTasks = sharedTasks.concat(serveTasks)
-  
-  
   
   
   
@@ -87,8 +81,6 @@ module.exports = function(grunt) {
 
 
   for (var key in customGrunt) {
-    console.log('##########');
-    console.log(key);
     for (var prop in customGrunt[key]) {
       var taskName = prop;
       var obj = {};
@@ -98,24 +90,27 @@ module.exports = function(grunt) {
           grunt.config.data[key][taskName] = MergeRecursive(grunt.config.data[key][taskName], obj[taskName]);
         }else{
           grunt.config.data[key][taskName] = obj[taskName];
+          
         }
       }else{
     	grunt.config.data[key] = {};
     	grunt.config.data[key][taskName] = obj[taskName];
-    	if(key == 'copy'){
-    		allTasks.unshift('copy');
+    	if(key == 'copy' || key == 'shell'){
+    		sharedTasks.unshift(key);
+    	}else{
+	    	grunt.extendConfig(obj);
+			if(key != 'unitTest' && key != 'e2eTest'){
+				sharedTasks.push(key);
+			}else{
+		        var customTasks = sharedTasks.concat([key]);
+				grunt.registerTask(key, customTasks);
+			}
     	}
-		if(key == 'shell'){
-    		allTasks.unshift('shell');
-    	}
-    	//var customTask = [key];
-        //grunt.registerTask(key, customTask);
       }
     }
   }
   
   
-  //console.log(grunt.config.data);
-  console.log(allTasks);
+  var allTasks = sharedTasks.concat(serveTasks)
   grunt.registerTask('default', allTasks);
 };
