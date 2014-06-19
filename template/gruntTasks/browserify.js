@@ -137,14 +137,5 @@ module.exports = {
 			  alias: browserifyLibAlias,
 			  external:mergedExternals
 			}
-	  },
-      components: {
-          files: {
-            './libs/components.js': ["./components/**/*.js"]
-          },
-          options: {
-            alias: browserifyLibAlias,
-            external:mergedExternals
-          }
-        }
+	  }
 };

@@ -1,5 +1,16 @@
 module.exports = {
 		
-	tasks: {}
+		'browserify':{
+			  'appDep': {
+					'files': {
+						'./libs/components.js': ["./components/**/*.js"]
+					}
+			  },
+			  'components':{
+			        'files':{
+			        	'./libs/components.js': ["./components/**/*.js"]
+			        }
+			  }
+		}
 		
 };
