@@ -56,7 +56,8 @@ module.exports = function(grunt) {
   var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker', 'cssmin'];
   var serveTasks = ['watch'];
   
-  
+  var allTasks = sharedTasks.concat(serveTasks)
+  grunt.registerTask('default', allTasks);
   
   
   /* ########## INCORPORATING CUSTOM TASKS DEFINED IN CUSTOMGRUNT ########## */
@@ -90,27 +91,15 @@ module.exports = function(grunt) {
           grunt.config.data[key][taskName] = MergeRecursive(grunt.config.data[key][taskName], obj[taskName]);
         }else{
           grunt.config.data[key][taskName] = obj[taskName];
-          
         }
       }else{
-    	grunt.config.data[key] = {};
-    	grunt.config.data[key][taskName] = obj[taskName];
-    	if(key == 'copy' || key == 'shell'){
-    		sharedTasks.unshift(key);
-    	}else{
-	    	grunt.extendConfig(obj);
-			if(key != 'unitTest' && key != 'e2eTest'){
-				sharedTasks.push(key);
-			}else{
-		        var customTasks = sharedTasks.concat([key]);
-				grunt.registerTask(key, customTasks);
-			}
-    	}
+        grunt.extendConfig(obj);
+        var customTasks = sharedTasks.concat([taskName]);
+		grunt.registerTask(key, customTasks);
       }
     }
   }
   
   
-  var allTasks = sharedTasks.concat(serveTasks)
-  grunt.registerTask('default', allTasks);
+
 };
