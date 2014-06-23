@@ -82,27 +82,34 @@ module.exports = function(grunt) {
 
 
   for (var key in customGrunt) {
-    for (var prop in customGrunt[key]) {
-      var taskName = prop;
-      var obj = {};
-      obj[taskName] = customGrunt[key][taskName];
-      if(grunt.config.data[key]){
-        if(grunt.config.data[key][taskName]){
-          grunt.config.data[key][taskName] = MergeRecursive(grunt.config.data[key][taskName], obj[taskName]);
-        }else{
-          grunt.config.data[key][taskName] = obj[taskName];
-        }
-      }else{
-			if(key == 'copy' || key == 'shell'){
-				sharedTasks.unshift(key);
-			}else{
-				grunt.extendConfig(obj);
-				var customTasks = sharedTasks.concat([taskName]);
-				grunt.registerTask(key, customTasks);
-			}
-      }
-    }
-  }
+	    for (var prop in customGrunt[key]) {
+	    	
+	      var obj = {};
+	      obj[prop] = customGrunt[key][prop];
+	      
+	      if(grunt.config.data[key]){
+	        if(grunt.config.data[key][prop]){
+	          grunt.config.data[key][prop] = MergeRecursive(grunt.config.data[key][prop], obj[prop]);
+	        }else{
+	          grunt.config.data[key][prop] = obj[prop];
+	        }
+	      }else{
+	    	  if(key == 'unitTest' || key == 'e2eTest'){
+	    		  grunt.extendConfig(obj);
+	    		  var customTasks = sharedTasks.concat([prop]);
+	    		  grunt.registerTask(key, customTasks);
+	    	  }else{
+	    		  grunt.config.data[key] = {};
+		      	  grunt.config.data[key][prop] = obj[prop];
+	    		  if(key == 'copy' || key == 'shell'){
+		    		  sharedTasks.unshift(key);
+		    	  }else{
+		    		  sharedTasks.push(key);
+		    	  }
+	    	  }
+	      }
+	    }
+	  }
   
   
 
