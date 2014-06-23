@@ -93,9 +93,13 @@ module.exports = function(grunt) {
           grunt.config.data[key][taskName] = obj[taskName];
         }
       }else{
-        grunt.extendConfig(obj);
-        var customTasks = sharedTasks.concat([taskName]);
-		grunt.registerTask(key, customTasks);
+			if(key == 'copy' || key == 'shell'){
+				sharedTasks.unshift(key);
+			}else{
+				grunt.extendConfig(obj);
+				var customTasks = sharedTasks.concat([taskName]);
+				grunt.registerTask(key, customTasks);
+			}
       }
     }
   }
