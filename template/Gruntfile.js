@@ -75,7 +75,7 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   
-  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:defaultOptions'];
+  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:defaultOptions', 'sails-linker:customs'];
   var serveTasks = ['sails-linker:prod', 'cssmin', 'watch'];
   var allTasks = sharedTasks.concat(serveTasks);
   
