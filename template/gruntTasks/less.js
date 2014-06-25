@@ -3,7 +3,7 @@ module.exports = {
     options: {
       ieCompat: true,
       paths: ['./less/'],
-      compress: true,
+      compress: false,
       syncImport: true
     },
     files: [
