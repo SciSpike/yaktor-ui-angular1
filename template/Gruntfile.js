@@ -47,7 +47,7 @@ module.exports = function(grunt) {
 			            'appRoot': './'
 			          },
 			          'files': {
-			            './index.ejs': ['./styles/engine-ui.css', './styles/custom/master.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+			            './index.ejs': ['./styles/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
 			          }
 		},
         'prod': {
