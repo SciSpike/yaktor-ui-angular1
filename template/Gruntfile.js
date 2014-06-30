@@ -79,11 +79,6 @@ module.exports = function(grunt) {
   var serveTasks = ['sails-linker:prod', 'cssmin', 'watch'];
   var allTasks = sharedTasks.concat(serveTasks);
   
-  
-  grunt.registerTask('default', allTasks);
-  grunt.registerTask('dev', sharedTasks.concat(['sails-linker:dev', 'watch']));
-  
-  
   /* ########## INCORPORATING CUSTOM TASKS DEFINED IN CUSTOMGRUNT ########## */
   
   /* ########## Recursively merge properties of two objects ########## */
@@ -135,6 +130,7 @@ module.exports = function(grunt) {
 	    }
 	  }
   
+  grunt.registerTask('default', allTasks);
+  grunt.registerTask('dev', sharedTasks.concat(['sails-linker:dev', 'watch']));
   
-
 };
