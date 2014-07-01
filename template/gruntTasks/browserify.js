@@ -122,7 +122,7 @@ module.exports = {
           },
           'qrcode': {
               path: './bower_components/angular-qrcode/qrcode.js',
-              exports: 'angular-qrcode',
+              exports: 'qrcode',
               depends: {angular: 'angular'}
           }
         }
