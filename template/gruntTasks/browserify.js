@@ -21,7 +21,8 @@ var browserifyLibAlias = [
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
   './bower_components/select2/select2.js:select2',
   './bower_components/angular-ui-select2/src/select2.js:uiSelect',
-  './bower_components/ng-grid/ng-grid-2.0.11.min.js:ngGrid'
+  './bower_components/ng-grid/ng-grid-2.0.11.min.js:ngGrid',
+  './bower_components/angular-qrcode/qrcode.js:qrcode',
 ];
 
 var mainExternals = [
@@ -118,6 +119,11 @@ module.exports = {
               path: './bower_components/ng-grid/ng-grid-2.0.11.min.js',
               exports: 'ngGrid',
               depends: {jquery: '$', angular: 'angular'}
+          },
+          'qrcode': {
+              path: './bower_components/angular-qrcode/qrcode.js',
+              exports: 'angular-qrcode',
+              depends: {angular: 'angular'}
           }
         }
       },
