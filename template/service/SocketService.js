@@ -25,9 +25,9 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
           (function(on){
             if(/state:.*/.test(on)){
               ws.socket.on[on](
-                  sessionId,initData,function(){
+                  sessionId,initData,function(data){
                     console.log("Going to: %s", on);
-                    cb(null,"."+on,null);
+                    cb(null,"."+on,data);
                   }
               )
             }
