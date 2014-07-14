@@ -23,22 +23,44 @@ module.exports = function(grunt) {
     'cssmin': {
       'combine': {
         'files': {
-          './compiled.css': ['./styles/engine-ui.css', './styles/custom/master.css', './bower_components/select2/select2.css', './bower_components/ng-table/ng-table.min.css', './bower_components/ng-grid/ng-grid.min.css']
+          './compiled.css': ['./styles/engine-ui.css', './styles/custom/master.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
         }
       }
     },
     'sails-linker': {
         'defaultOptions': {
-        'options': {
-            'startTag': '<!--SCRIPTS-->',
-            'endTag': '<!--SCRIPTS END-->',
-            'fileTmpl': '<script src="%s"></script>',
-            'appRoot': './'
-          },
-          'files': {
-            './index.ejs': ['./compiled_modules/*.js', './scripts/ng-grid-layout.js']
-          }
-        }
+	        'options': {
+	            'startTag': '<!--SCRIPTS-->',
+	            'endTag': '<!--SCRIPTS END-->',
+	            'fileTmpl': '<script src="%s"></script>',
+	            'appRoot': './'
+	          },
+	          'files': {
+	            './index.ejs': ['./compiled_modules/*.js', './scripts/ng-grid-layout.js']
+	          }
+        },
+        'dev': {
+        	'options': {
+			            'startTag': '<!--CSS-->',
+			            'endTag': '<!--CSS END-->',
+			            'fileTmpl': '<link rel="stylesheet" href="%s" />',
+			            'appRoot': './'
+			          },
+			          'files': {
+			            './index.ejs': ['./styles/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+			          }
+		},
+        'prod': {
+        	'options': {
+			            'startTag': '<!--CSS-->',
+			            'endTag': '<!--CSS END-->',
+			            'fileTmpl': '<link rel="stylesheet" href="%s" />',
+			            'appRoot': './'
+			          },
+			          'files': {
+			            './index.ejs': ['compiled.css']
+			          }
+		}
     },
     'watch': {
       'less': {
@@ -53,11 +75,9 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   
-  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker', 'cssmin'];
-  var serveTasks = ['watch'];
-  
-  
-  
+  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:defaultOptions'];
+  var serveTasks = ['sails-linker:prod', 'cssmin', 'watch'];
+  var allTasks = sharedTasks.concat(serveTasks);
   
   /* ########## INCORPORATING CUSTOM TASKS DEFINED IN CUSTOMGRUNT ########## */
   
@@ -81,36 +101,36 @@ module.exports = function(grunt) {
 
 
   for (var key in customGrunt) {
-    for (var prop in customGrunt[key]) {
-      var taskName = prop;
-      var obj = {};
-      obj[taskName] = customGrunt[key][taskName];
-      if(grunt.config.data[key]){
-        if(grunt.config.data[key][taskName]){
-          grunt.config.data[key][taskName] = MergeRecursive(grunt.config.data[key][taskName], obj[taskName]);
-        }else{
-          grunt.config.data[key][taskName] = obj[taskName];
-          
-        }
-      }else{
-    	grunt.config.data[key] = {};
-    	grunt.config.data[key][taskName] = obj[taskName];
-    	if(key == 'copy' || key == 'shell'){
-    		sharedTasks.unshift(key);
-    	}else{
-	    	grunt.extendConfig(obj);
-			if(key != 'unitTest' && key != 'e2eTest'){
-				sharedTasks.push(key);
-			}else{
-		        var customTasks = sharedTasks.concat([key]);
-				grunt.registerTask(key, customTasks);
-			}
-    	}
-      }
-    }
-  }
+	    for (var prop in customGrunt[key]) {
+	    	
+	      var obj = {};
+	      obj[prop] = customGrunt[key][prop];
+	      
+	      if(grunt.config.data[key]){
+	        if(grunt.config.data[key][prop]){
+	          grunt.config.data[key][prop] = MergeRecursive(grunt.config.data[key][prop], obj[prop]);
+	        }else{
+	          grunt.config.data[key][prop] = obj[prop];
+	        }
+	      }else{
+	    	  if(key == 'unitTest' || key == 'e2eTest'){
+	    		  grunt.extendConfig(obj);
+	    		  var customTasks = sharedTasks.concat([prop]);
+	    		  grunt.registerTask(key, customTasks);
+	    	  }else{
+	    		  grunt.config.data[key] = {};
+		      	  grunt.config.data[key][prop] = obj[prop];
+	    		  if(key == 'copy' || key == 'shell'){
+		    		  sharedTasks.unshift(key);
+		    	  }else{
+		    		  sharedTasks.push(key);
+		    	  }
+	    	  }
+	      }
+	    }
+	  }
   
-  
-  var allTasks = sharedTasks.concat(serveTasks)
   grunt.registerTask('default', allTasks);
+  grunt.registerTask('dev', sharedTasks.concat(['sails-linker:dev', 'watch']));
+  
 };

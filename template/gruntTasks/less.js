@@ -3,17 +3,29 @@ module.exports = {
     options: {
       ieCompat: true,
       paths: ['./less/'],
-      compress: true,
-      syncImport: true
+      compress: false,
+      syncImport: true,
+      sourceMap: true,
+      sourceMapFilename: './styles/main.css.map',
+      sourceMapURL: '/styles/main.css.map',
+      sourceMapBasepath: '',
+      sourceMapRootpath: ''
     },
     files: [
             {
               expand: true,
               cwd: './less/',
-              src: ['custom/master.less', 'engine-ui.less'],
+              src: ['engine-ui.less'],
               dest: './styles/',
               ext: '.css'
-            }
+            },
+            {
+                expand: true,
+                cwd: './less/custom/',
+                src: ['master.less'],
+                dest: './styles/',
+                ext: '.css'
+              }
           ]
     }
 };

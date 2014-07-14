@@ -21,6 +21,8 @@ angular.module('<%=appname%>')
                   column['field'] = property;
                   columnDefs.push(column);
                 }
+                console.log('columnDefs');
+                console.log(columnDefs);
                 columnDefs[columnDefs.length - 1].width = '*';
 
 	        	$scope.gridLayoutPlugin = new ngGridLayoutPlugin();

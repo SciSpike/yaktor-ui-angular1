@@ -16,7 +16,7 @@
     "node-querystring": "0.6.6",
     "d3": "3.4.6",
     "angular-ui-select2": "0.0.5"
-  },
+ },
   "resolutions": {
     "angular": "1.2.16"
   }

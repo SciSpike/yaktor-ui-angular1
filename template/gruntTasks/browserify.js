@@ -22,7 +22,7 @@ var browserifyLibAlias = [
   './bower_components/select2/select2.js:select2',
   './bower_components/angular-ui-select2/src/select2.js:uiSelect',
   './bower_components/ng-grid/ng-grid-2.0.11.min.js:ngGrid'
-];
+ ];
 
 var mainExternals = [
   './bower_components/jquery/dist/jquery.min.js',
