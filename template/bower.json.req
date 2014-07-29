@@ -16,7 +16,7 @@
     "node-querystring": "0.6.6",
     "d3": "3.4.6",
     "angular-ui-select2": "0.0.5",
-    "viz.js": "https://github.com/mdaines/viz.js/releases/download/0.0.3/viz.js"
+    "viz.js": "https://github.com/mdaines/viz.js/releases/download/0.0.2/viz.js"
  },
   "resolutions": {
     "angular": "1.2.16"
