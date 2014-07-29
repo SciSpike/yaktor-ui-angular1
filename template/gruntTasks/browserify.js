@@ -10,7 +10,6 @@ var browserifyLibAlias = [
   './bower_components/node-querystring/index.js:qs',
   '../node_modules/tv4/tv4.js:tv4',
   '../public/socketApi.js:socketApi',
-  './bower_components/viz.js/index.js:viz',
   './bower_components/jquery/dist/jquery.min.js:$',
   './bower_components/ng-grid/build/ng-grid.debug.js:ngGrid',
   './bower_components/angular-touch/angular-touch.min.js:ngTouch',
