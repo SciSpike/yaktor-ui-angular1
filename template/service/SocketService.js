@@ -18,7 +18,7 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
     inited[sUrl]=inited[sUrl]||{};
     //Connect api short circuits if already connected
     require('socketApi').connectWithPrefix(serverLocation,sessionId, function(cb){
-		cb(null,$sessionStorage.careToken);
+		cb(null,$sessionStorage.careToken.access_token);
 	},true,function(){
       var ws = require(sUrl.replace(".","/").substr(1));
       if(!inited[sUrl][data._id]){
