@@ -1,7 +1,7 @@
 
 'use strict';
 
-angular.module('{{appname}}').service('SocketService', function ($rootScope, $state,serverLocation) {
+angular.module('{{appname}}').service('SocketService', function ($rootScope, $state, serverLocation, $sessionStorage) {
   
   // // TODO: Create all socket connections here based on Jonathan's specs
   // 
@@ -17,7 +17,9 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
   service.init=function(sUrl,initData,data,cb){
     inited[sUrl]=inited[sUrl]||{};
     //Connect api short circuits if already connected
-    require('socketApi').connectWithPrefix(serverLocation,sessionId,true,function(){
+    require('socketApi').connectWithPrefix(serverLocation,sessionId, function(cb){
+		cb(null,$sessionStorage.careToken.access_token);
+	},true,function(){
       var ws = require(sUrl.replace(".","/").substr(1));
       if(!inited[sUrl][data._id]){
         inited[sUrl][data._id]=true;
@@ -25,9 +27,9 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
           (function(on){
             if(/state:.*/.test(on)){
               ws.socket.on[on](
-                  sessionId,initData,function(){
+                  sessionId,initData,function(data){
                     console.log("Going to: %s", on);
-                    cb(null,"."+on,null);
+                    cb(null,"."+on,data);
                   }
               )
             }
