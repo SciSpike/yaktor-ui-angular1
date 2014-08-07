@@ -1,7 +1,7 @@
 
 'use strict';
 
-angular.module('{{appname}}').service('SocketService', function ($rootScope, $state, serverLocation, $sessionStorage) {
+angular.module('{{appname}}').service('SocketService', function ($rootScope, $state, serverLocation, $sessionStorage, AuthService) {
   
   // // TODO: Create all socket connections here based on Jonathan's specs
   // 
@@ -20,12 +20,14 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
     require('socketApi').connectWithPrefix(serverLocation,sessionId, function(cb){
 		var token = null;
 		try {
-			token = $sessionStorage.careToken.access_token;
+			AuthService.getAuthToken().then(function(objToken){
+				token = objToken.access_token;
+				cb(null,token);
+			});
 		} catch(e){
 			console.log(e);
 		}
 		
-		cb(null,token);
 	},true,function(){
       var ws = require(sUrl.replace(".","/").substr(1));
       if(!inited[sUrl][data._id]){
