@@ -14,7 +14,7 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
   //   console.log('dummy onload function');
   // }
   var inited={};
-  service.init=function(sUrl,initData,data,cb){
+  service.init=function(sUrl,initData,__dontUse__,cb){
     inited[sUrl]=inited[sUrl]||{};
     //Connect api short circuits if already connected
     require('socketApi').connectWithPrefix(serverLocation,sessionId, function(cb){
@@ -30,8 +30,8 @@ angular.module('{{appname}}').service('SocketService', function ($rootScope, $st
 		
 	},true,function(){
       var ws = require(sUrl.replace(".","/").substr(1));
-      if(!inited[sUrl][data._id]){
-        inited[sUrl][data._id]=true;
+      if(!inited[sUrl][initData._id]){
+        inited[sUrl][initData._id]=true;
         for(var onV in ws.socket.on){
           (function(on){
             if(/state:.*/.test(on)){
