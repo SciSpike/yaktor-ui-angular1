@@ -48,7 +48,7 @@ angular.module('{{appname}}').service(
           var off = $rootScope.$on("$stateChangeStart",function(){
             off();
             connection.removeAllListeners();
-            listeners.each(function(off){
+            listeners.forEach(function(off){
               off();
             });
           });
