@@ -1,12 +1,12 @@
 var emitter = require('emitter-component');
 var $ = require('$');
 angular.module('views').factory('AuthService',
-    [ '$rootScope', '$q', '$sessionStorage', function ($rootScope, $q, $sessionStorage) {
+    [ '$browser','$rootScope', '$q', '$sessionStorage', function ($browser,$rootScope, $q, $sessionStorage) {
       var _authenticated = false;
       var _refreshing = false;
       var authEmitter = new emitter();
 
-      var _isAuthenticated = function (refresh) {
+      var _isAuthenticated = function (refresh,toState,fromState) {
         var deferAuth = $q.defer();
         // look for stored token, return true/false
         // console.log("checking authentication");
@@ -22,7 +22,7 @@ angular.module('views').factory('AuthService',
             deferAuth.resolve(false);
           } else if (result.access_token) {
             if (refresh) {
-              _refreshAuthToken().then(function (result) {
+              _refreshAuthToken(toState,fromState).then(function (result) {
                 deferAuth.resolve(true);
               }, function () {
                 deferAuth.resolve(false);
@@ -54,9 +54,9 @@ angular.module('views').factory('AuthService',
           if ($sessionStorage.careToken) {
             deferGetToken.resolve($sessionStorage.careToken);
           } else {
-	          authEmitter.once("token", function (objToken) {
-	            deferGetToken.resolve(objToken);
-	          });
+            authEmitter.once("token", function (objToken) {
+              deferGetToken.resolve(objToken);
+            });
           }
         }
         return deferGetToken.promise;
@@ -92,7 +92,7 @@ angular.module('views').factory('AuthService',
         return deferGetAccess.promise;
       };
 
-      var _refreshAuthToken = function () {
+      var _refreshAuthToken = function (toState,fromState) {
         _refreshing = true;
         var deferRefresh = $q.defer();
         var data = {
@@ -103,24 +103,46 @@ angular.module('views').factory('AuthService',
 
         // Angular $http FAIL. $ WIN.
         // get a new token or die
-        $.post('/auth/token', data, function (data) {
-          $sessionStorage.careToken = {};
-          console.log(JSON.stringify(data));
-          $sessionStorage.careToken.access_token = data.access_token;
-          $sessionStorage.careToken.refresh_token = data.refresh_token;
-          $sessionStorage.careToken.issued = data.issued;
-          $sessionStorage.careToken.expires_in = data.expires_in;
+        console.log("$$incOutstandingRequestCount")
+        $browser.$$incOutstandingRequestCount();
 
-          _refreshing = false;
-          // emit "new token"
-          authEmitter.emit("token", data);
-          deferRefresh.resolve($sessionStorage.careToken);
-        }).fail(function () {
-          // do error type stuff;
-          _refreshing = false;
-          delete $sessionStorage.careToken;
-          deferRefresh.reject({});
-        });
+        console.log(JSON.stringify(data))
+        var funTimes = 1;
+        var fun = function(){
+          var def = {type:"POST",headers:{"x-to-state":toState?JSON.stringify(toState):"unknown","x-from-state":fromState?JSON.stringify(fromState):"unknown"};
+          if(funTimes>0){
+            def.timeout=1000;
+          }
+          $.ajax('/auth/token', def,contentType:"application/json",data:JSON.stringify(data), success:function (data) {
+            $sessionStorage.careToken = {};
+            console.log(JSON.stringify(data));
+            $sessionStorage.careToken.access_token = data.access_token;
+            $sessionStorage.careToken.refresh_token = data.refresh_token;
+            $sessionStorage.careToken.issued = data.issued;
+            $sessionStorage.careToken.expires_in = data.expires_in;
+            
+            _refreshing = false;
+            // emit "new token"
+            authEmitter.emit("token", data);
+            deferRefresh.resolve($sessionStorage.careToken);
+            
+            console.log("$$completeOutstandingRequest")
+            $browser.$$completeOutstandingRequest(angular.noop);
+          }}).fail(function (jqXHR,status,error) {
+            // do error type stuff;
+            if(error == "timeout"){
+              if(0<funTimes--){
+                return fun();
+              }
+            }
+            _refreshing = false;
+            delete $sessionStorage.careToken;
+            deferRefresh.reject({});
+            console.log("$$completeOutstandingRequest")
+            $browser.$$completeOutstandingRequest(angular.noop);
+          });
+        };
+        fun();
         return deferRefresh.promise;
       };
 
@@ -129,7 +151,7 @@ angular.module('views').factory('AuthService',
         var deferSetToken = $q.defer();
 
         if (objToken.access_token) {
-          authEmitter.emit("token", data);
+          authEmitter.emit("token", objToken);
           $sessionStorage.careToken = objToken;
           _authenticated = true;
           deferSetToken.resolve(objToken);
