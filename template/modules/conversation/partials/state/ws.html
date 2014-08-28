@@ -1,8 +1,8 @@
 <div class="wsPartial row">
-  <h3>{{'<%=description.title%>'|translate}}</h3>
+  <h3>{{'<%=state.title%>'|translate}}</h3>
   <ul class="col-md-12 list-inline">
       <% 
-      var elements = description.elements;
+      var elements = state.elements;
       var actions = Object.keys(elements)
       if(actions.length>1){
       actions.forEach(function(a){ 
@@ -11,13 +11,13 @@
            
            %>
     <li>
-        <button class="btn btn-default btn-sm" ng-click="goState('<%-description.friendly%>.<%-a%>')" >{{'<%=actionable.ui.title%>'|translate}}</button>
+        <button class="btn btn-default btn-sm" ng-click="goState('<%-state.friendly%>.<%-a%>')" >{{'<%=actionable.ui.title%>'|translate}}</button>
     </li>
       <% });
       } %>
   </ul>
 </div>
-<% if (!description.url.match(/:state/)){%>
+<% if (!state.url.match(/:state/)){%>
 <div class="tabPanel">
 	<div class="tabList row">
 		<div class="tabInner">

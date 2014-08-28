@@ -1,6 +1,6 @@
-<div class="partial <%-description.friendly.toLowerCase() %>Class" ng-controller="<%-description.friendly%>CustomCtrl">
+<div class="<%- moduleName %><%- state.name %>">
   <div class="row state">
-    <% if(description.proto.match(/ws:/)) {
+    <% if(state.proto.match(/ws:/)) {
       %><% include state/ws.html%><%
     }  else  {
         %><% include state/http.html%><%
