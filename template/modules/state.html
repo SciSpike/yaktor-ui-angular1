@@ -1,0 +1,49 @@
+<div class="<%- moduleName %><%- state.name %>">
+  <div class="row state">
+    <% if(state.proto.match(/ws:/)) {%>
+	    	<div class="wsPartial row">
+			    <h3>{{'<%- state.title%>'|translate}}</h3>
+			    <ul class="col-md-12 list-inline">
+			    <% var elements = state.elements;
+			       var actions = Object.keys(elements);
+			       if(actions.length>0){
+			    	   	actions.forEach(function(a){ 
+			    		var actionable = elements[a];
+			        	var subPath =  actionable.subPath || "";%>
+			        <li>
+			        	<button class="btn btn-default btn-sm" ng-click="goState('main.<%- moduleName%>.<%-a%>')" >{{'<%- actionable.ui.title%>'|translate}}</button>
+			        </li><% });} %>
+			    </ul>
+		  </div>
+		  <!-- <% if (!state.url.match(/:state/)){%>
+			  <div class="tabPanel">
+			  	<div class="tabList row">
+			  		<div class="tabInner">
+			  		  <span ng-repeat="nav in navList track by $index" ng-class="{active: nav.id== activeState.name}" ng-click='nav.action(this)'><span class="navContainer"><span class="navText">{{nav.title|translate}}</span><span class="{{nav.class}}"></span></span></span>
+			  		</div>
+			  	</div>
+			  </div>
+		  <%}%> -->
+    <%}else{%>
+		    <% if(state.elements.length > 1){%>
+			    <div class="tabPanel">
+			    	<div class="tabList row">
+			    		<div class="tabInner">
+			    		    <% 
+			    		       Object.keys(state.elements).forEach(function(a){ 
+			    		       var key = a;
+			    		       var actionable = state.elements[a];
+			    		       var subPath =  actionable.subPath || "";
+			    		       %>
+			    		      
+			    		        <span ng-init="setGlyph('<%=actionable.ui.title%>')" ng-class="{active: $state.is('main.<%-state.friendly%>.<%=a%>')<% if(subPath.match(/:id/)){ %>,disabled:params.id==null<%}%>}" ng-click="<% if(subPath.match(/:id/)){ %>(params.id!=null) && <%}%>goState('main.<%-state.friendly%>.<%=a%>',{id:params.id},true)" id="<%=key.toLowerCase()%>"><span class="navContainer"><span class="navText">{{'<%=actionable.ui.title%>'|translate}}</span><span ng-class="getGlyph['<%=actionable.ui.title%>']"></span></span></span>
+			    		      
+			    		    <% }); %>
+			    	    </div>
+			    	</div>
+			    </div>
+		    <% } %>
+    <%}%>
+    <div class="view" ui-view autoscroll="false"></div>
+  </div>
+</div>

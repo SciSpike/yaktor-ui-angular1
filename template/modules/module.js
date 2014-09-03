@@ -18,13 +18,26 @@ angular.module('<%- moduleName %>',
 						},
 						controller:'<%- moduleName %>Controller'
 					}),
-					<% _.each(states, function(state, index){%>
-						.state('main.<%- moduleName %>.<%- state.name %>',{
-							url:'/<%- state.name %>',
+					<% _.each(states, function(state, index){
+						var stateName = state.name;
+					%>
+						.state('main.<%- moduleName %>.<%- stateName %>',{
+							url:'/<%- stateName %>',
 							templateUrl: function(){
-								return globalVarsProvider.partials.html + '/<%- moduleName %>/<%- state.name %>.html'
+								return globalVarsProvider.partials.html + '/<%- moduleName %>/<%- stateName %>.html'
 							},
-							conntroller:'<%- moduleName %><%- state.name %>Controller'
+							conntroller:'<%- moduleName %><%- stateName %>Controller'
+						});
+					<% _.each(state.elements, function(actionState, index){
+						var actionstateName = actionState.subPath.replace('/', '');
+					%>
+						.state('main.<%- moduleName %>.<%- stateName %>.<%- actionstateName %>',{
+							url:'/<%- actionstateName %>',
+							templateUrl: function(){
+								return globalVarsProvider.partials.html + '/<%- moduleName %>/<%- stateName %>/<%- actionstateName %>.html'
+							},
+							conntroller:'<%- moduleName %><%- stateName %><%- actionstateName %>Controller'
 						});
 					<% });%>
+				<% });%>
 		   });

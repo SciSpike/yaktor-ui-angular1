@@ -76,7 +76,7 @@ module.exports = function(grunt) {
   grunt.initConfig(config);
   
   var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:defaultOptions'];
-  var serveTasks = ['sails-linker:prod', 'cssmin', 'watch'];
+  var serveTasks = ['sails-linker:prod', 'cssmin'/*, 'watch'*/];
   var allTasks = sharedTasks.concat(serveTasks);
   
   /* ########## INCORPORATING CUSTOM TASKS DEFINED IN CUSTOMGRUNT ########## */
