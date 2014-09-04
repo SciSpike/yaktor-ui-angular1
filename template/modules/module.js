@@ -11,33 +11,39 @@ angular.module('<%- moduleName %>',
 			   $translateProvider.preferredLanguage(defaultLocale);
 			   $stateProvider
 				   .state('main.<%- moduleName %>',{
-						abstract:true,
 						url:'/<%- moduleName %>',
 						templateUrl: function(){
 							return globalVarsProvider.partials.html + '/<%- moduleName %>/index.html'
 						},
-						controller:'<%- moduleName %>Controller'
+						controller:'<%- moduleName %>Controller' //HANDLES CONNECTION AND STATE TRANSTITIONS (WITH ABILITY TO CUSTOMIZE ???)
+					}),
+					
+					.state('main.<%- moduleName %>.init',{ // TRANSITIONED TO IF NO INIT DATA IN PARENT
+						templateUrl: function(){
+							return globalVarsProvider.partials.html + '/<%- moduleName %>/init.html'
+						},
+						controller:'<%- moduleName %>initController'
 					}),
 					<% _.each(states, function(state, index){
 						var stateName = state.name;
 					%>
 						.state('main.<%- moduleName %>.<%- stateName %>',{
-							url:'/<%- stateName %>',
 							templateUrl: function(){
 								return globalVarsProvider.partials.html + '/<%- moduleName %>/<%- stateName %>.html'
 							},
-							conntroller:'<%- moduleName %><%- stateName %>Controller'
+							controller:'<%- moduleName %><%- stateName %>Controller',
+							views:{
+								<% _.each(state.elements, function(view, index){
+									var viewName = view.subPath.replace('/', '');
+								%>
+								'<%- viewName %>':{
+									templateUrl: function(){
+										return globalVarsProvider.partials.html + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
+									},
+									controller:'<%- moduleName %><%- stateName %><%- viewName %>Controller'
+								}
+								<% });%>
+							}
 						});
-					<% _.each(state.elements, function(actionState, index){
-						var actionstateName = actionState.subPath.replace('/', '');
-					%>
-						.state('main.<%- moduleName %>.<%- stateName %>.<%- actionstateName %>',{
-							url:'/<%- actionstateName %>',
-							templateUrl: function(){
-								return globalVarsProvider.partials.html + '/<%- moduleName %>/<%- stateName %>/<%- actionstateName %>.html'
-							},
-							conntroller:'<%- moduleName %><%- stateName %><%- actionstateName %>Controller'
-						});
-					<% });%>
 				<% });%>
 		   });

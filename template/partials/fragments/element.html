@@ -1,10 +1,11 @@
+<!-- TO DO -->
 <div class='form-group'>
   <% if (element.ui) { %>
     <label class="sr-only"
       <% if (typeof label !== "undefined") { %>
         for="<%= lable %>"
       <%} %>    
-    >{{'<%-element.ui.title%>'|translate}}</label>
+    >{{directiveData.ui.title | translate}}</label>
   <%} %>
   <%= contents %>
 </div>

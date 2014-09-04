@@ -1,8 +1,7 @@
+<!-- TO DO -->
 <div class = 'well'>
   <div class="form-group">
-    <% if (element.ui) { %>
-      <label>{{'<%-element.ui.title%>'|translate}}</label>
-    <%} %>
+    <label ng-if="directiveData.ui">{{directiveData.ui.title | translate}}</label>
     <a class="glyphicon glyphicon-plus" ng-click="<%=path%>=<%=path%>||[];console.log(<%=path%>);<%=path%>.push(null);"></a>
     <div ng-repeat="<%=path.replace(/\./g,"_")%> in <%=path%> track by $index">
       <div class = 'well'>

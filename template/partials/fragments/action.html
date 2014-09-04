@@ -1,1 +1,8 @@
-<button title="{{'<%-element.ui.title%>'|translate}}" class='btn btn-primary btn-sm <%- element.ui.class%>' ng-click='on<%= elementName %>("<%= actionableName %>")'>{{'<%-element.ui.title%>'|translate}}</button>
+<!-- TO DO NG-CLICK -->
+<button
+	title="{{directiveData.ui.title | translate}}"
+	class='btn btn-primary btn-sm'
+	ng-class="directiveData.ui.class"
+	ng-click='on<%= elementName %>("<%= actionableName %>")'>
+		{{directiveData.ui.title | translate}}
+</button>

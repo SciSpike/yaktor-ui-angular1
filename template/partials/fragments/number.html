@@ -1,5 +1,1 @@
-<input class="form-control" placeholder="{{'<%-element.ui.title%>'|translate}}"  type='number' ng-model='<%= path %>'
- <% if(element.ui.default != null) { %>
-    ng-init="<%= path %>=<%= element.ui.default %>"
-  <% } %>
-></input>
+<input class="form-control" placeholder="{{directiveData.ui.title | translate}}"  type='number' ng-model='directiveData.answer'></input>

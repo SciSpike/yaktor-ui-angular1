@@ -1,4 +1,5 @@
-<input class="form-control" placeholder="{{'<%-element.ui.title%>'|translate}}" type='<%- element.ui.obscured?"password":"text"%>' ng-model='<%= path %>'
+<!-- TO DO -->
+<input class="form-control" placeholder="{{directiveData.ui.title | translate}}" type='{{directiveData.ui.obscured?"password":"text"}}' ng-model='directiveData.answer'
   <%if(element.typeRef) {%>
     
     typeahead="option.title for option in refData['<%= element.typeRef %>']($viewValue)"

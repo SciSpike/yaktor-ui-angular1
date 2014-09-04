@@ -1,3 +1,4 @@
 <div class='btn-group'>
-  <button class='btn btn-default btn-sm <% element.ui.class %>' ng-model='<%= path %>' type='button' btn-radio='option' ng-repeat="option in ['<%= element.ui.options.join("','") %>'] track by $index">{{option}}</button>
+  <button
+  	class='btn btn-default btn-sm' ng-class='directiveData.ui.class' ng-model='directiveData.answer' type='button' btn-radio='option' ng-repeat="option in [directiveData.ui.options.join("','")] track by $index">{{option}}</button>
 </div>
