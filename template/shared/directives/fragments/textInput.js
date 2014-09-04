@@ -1,5 +1,5 @@
 angular.module('views')
-	.directive('engineUiActionInput', function($rootScope, $eventsCommon, $timeout) {
+	.directive('engineUiTextInput', function($rootScope, $eventsCommon, $timeout) {
 		return{
 	          restrict: 'C',
 	          template: '<div ng-include="getContentUrl()"></div>',

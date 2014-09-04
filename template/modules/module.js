@@ -13,14 +13,14 @@ angular.module('<%- moduleName %>',
 				   .state('main.<%- moduleName %>',{
 						url:'/<%- moduleName %>',
 						templateUrl: function(){
-							return globalVarsProvider.partials.html + '/<%- moduleName %>/index.html'
+							return partialsBaseLocation + '/<%- moduleName %>/index.html'
 						},
 						controller:'<%- moduleName %>Controller' //HANDLES CONNECTION AND STATE TRANSTITIONS (WITH ABILITY TO CUSTOMIZE ???)
 					}),
 					
 					.state('main.<%- moduleName %>.init',{ // TRANSITIONED TO IF NO INIT DATA IN PARENT
 						templateUrl: function(){
-							return globalVarsProvider.partials.html + '/<%- moduleName %>/init.html'
+							return partialsBaseLocation + '/<%- moduleName %>/init.html'
 						},
 						controller:'<%- moduleName %>initController'
 					}),
@@ -29,7 +29,7 @@ angular.module('<%- moduleName %>',
 					%>
 						.state('main.<%- moduleName %>.<%- stateName %>',{
 							templateUrl: function(){
-								return globalVarsProvider.partials.html + '/<%- moduleName %>/<%- stateName %>.html'
+								return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>.html'
 							},
 							controller:'<%- moduleName %><%- stateName %>Controller',
 							views:{
@@ -38,7 +38,7 @@ angular.module('<%- moduleName %>',
 								%>
 								'<%- viewName %>':{
 									templateUrl: function(){
-										return globalVarsProvider.partials.html + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
+										return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
 									},
 									controller:'<%- moduleName %><%- stateName %><%- viewName %>Controller'
 								}

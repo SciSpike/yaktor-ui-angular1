@@ -4,16 +4,20 @@ angular.module('<%- moduleName %>')
 		   function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
 			  
 $scope.directiveData = {};
-<% for(element in state.components.elements){
-var elementData = state.components.elements[element];
-%>
+$scope.directiveAnswer = {};
+<%
+var createDirectives = function(elements){
+	for(element in elements){
+		if(elements[element].components){
+			createDirectives(elements[element].components.elements);
+		}else{
+			var elementData = elements[element];%>
 $scope.directiveData['<%- element %>'] = <%= JSON.stringify(elementData,null,2)%>;
-$scope.directiveData['<%- element %>']['answer'] = null;
-<%}%>
-			  
-$scope.$watchCollection('directiveData', function(newValue, oldValue) {
-	console.log(newValue);
-});
+$scope.directiveAnswer['<%- element %>'] = null;
+		<%}
+	}
+}
+createDirectives(state.components.elements);%>
 
 $scope.submitForm = function(type){
 	if(type.toLowerCase() == 'init'){
