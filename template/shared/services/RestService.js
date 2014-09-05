@@ -1,7 +1,7 @@
 
 'use strict';
 
-angular.module('{{appname}}').service('RestService', function (serverLocation, $http,$location) {
+angular.module('<%=appname%>').service('RestService', function (serverLocation, $http,$location) {
   
   var service = {};
   

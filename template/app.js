@@ -11,7 +11,7 @@
   require('ngTouch');
   require('select2');
   require('uiSelect');
-  
+
   angular.module('views', 
 		  ['ui.bootstrap',
 		   'ui.router',

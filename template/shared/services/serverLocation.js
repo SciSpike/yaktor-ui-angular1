@@ -1,4 +1,4 @@
 'use strict';
 
-angular.module('{{appname}}')
+angular.module('<%=appname%>')
   .constant('serverLocation', window.location.origin);

@@ -10,11 +10,12 @@ angular.module('<%- moduleName %>')
 		      function initConversation(initData){
 		    	  var initData = initData;
 		    	  if(SocketService['init']){
-			            SocketService['init']('/<%- moduleName %>',initData, initData,function(err,stateName){
-			              $state.go('main.<%- moduleName %>.' + stateName + '.views', {initData:JSON.stringify(initData)}, {location:true});
+			            SocketService['init']('<%- actions.url%>',initData, initData,function(err,stateName){
+			            	var nextState = stateName.replace('state:', '');
+			              $state.go('main.<%- moduleName %>' + nextState + '.views', {initData:JSON.stringify(initData)}, {location:true});
 			            });
 			        } else {
-			            SocketService.doAction('/<%- moduleName %>','init', initData, initData, function(err,data){
+			            SocketService.doAction('<%- actions.url%>','init', initData, initData, function(err,data){
 			            	
 			            });
 			        }

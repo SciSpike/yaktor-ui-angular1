@@ -4,7 +4,6 @@ angular.module('<%- moduleName %>')
 		   function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
 			  
 $scope.directiveData = {};
-$scope.directiveAnswer = {};
 <%
 var createDirectives = function(elements){
 	for(element in elements){
@@ -13,14 +12,18 @@ var createDirectives = function(elements){
 		}else{
 			var elementData = elements[element];%>
 $scope.directiveData['<%- element %>'] = <%= JSON.stringify(elementData,null,2)%>;
-$scope.directiveAnswer['<%- element %>'] = null;
+$scope.directiveData['<%- element %>']['answer'] = '';
 		<%}
 	}
 }
 createDirectives(state.components.elements);%>
 $scope.submitForm = function(type){
 	if(type == 'init'){
-		$scope.initConversation($scope.directiveAnswer);
+		var initData = {};
+		for(key in $scope.directiveData){
+			initData[key] = $scope.directiveData[key].answer;
+		}
+		$scope.initConversation(initData);
 	}else{
 		var conversation = 'on' + type;
 		$scope[conversation]($scope.directiveAnswer);

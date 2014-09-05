@@ -5,26 +5,25 @@ angular.module('<%- moduleName %>',
 		   'ngStorage',
 		   'ngGrid', 
 		   'ngResource',
-		   'ui.select2')
+		   'ui.select2'])
 		   
 		   .config(function($stateProvider, $locationProvider,$translateProvider) {
 			   $translateProvider.preferredLanguage(defaultLocale);
 			   $stateProvider
 				   .state('main.<%- moduleName %>',{
 						url:'/<%- moduleName %>',
-						params:['initData'],
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/index.html'
 						},
 						controller:'<%- moduleName %>Controller' //HANDLES CONNECTION AND STATE TRANSTITIONS (WITH ABILITY TO CUSTOMIZE ???)
-					}),
+					})
 					
 					.state('main.<%- moduleName %>.init',{ // TRANSITIONED TO IF NO INIT DATA IN PARENT
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/init.html'
 						},
 						controller:'<%- moduleName %>initController'
-					}),
+					})
 					<% _.each(states, function(state, index){
 						var stateName = state.name;
 					%>
@@ -35,7 +34,7 @@ angular.module('<%- moduleName %>',
 							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>.html'
 						},
 						controller:'<%- moduleName %><%- stateName %>Controller'
-					},
+					})
 					.state('main.<%- moduleName %>.<%- stateName %>.views',{
 						views:{
 							<% _.each(state.elements, function(view, key){
@@ -47,6 +46,5 @@ angular.module('<%- moduleName %>',
 								controller:'<%- moduleName %><%- stateName %><%- viewName %>Controller'
 							}<% var lastKey = _.last(_.keys(state.elements)); if(key != lastKey){%>,<% }});%>
 						}
-					});
-			<% });%>
+					})<% });%>;
 		  });

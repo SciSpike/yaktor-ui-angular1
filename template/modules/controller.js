@@ -15,11 +15,11 @@ angular.module('<%- moduleName %>')
 			  $scope.on<%- element%> = function(initData){
 				  var initData = initData;
 				  if(SocketService['<%- element%>']){
-					  SocketService['<%- element%>']('/<%- moduleName %>',initData, initData,function(err,stateName){
+					  SocketService['<%- element%>']('<%- state.url%>',initData, initData,function(err,stateName){
 							$state.go('main.<%- moduleName %>' + stateName + '.views', {initData:JSON.stringify(initData)}, {location:true});
 					  });
 				  } else {
-					  SocketService.doAction('/<%- moduleName %>','<%- element%>',initData,initData,function(err,data){
+					  SocketService.doAction('<%- state.url%>', initData, initData, function(err,data){
 					  });
 				  }
 			  }
