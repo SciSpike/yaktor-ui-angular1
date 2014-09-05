@@ -8,12 +8,13 @@ angular.module('<%- moduleName %>')
 		      $scope.initData = {};
 		      
 		      function initConversation(initData){
+		    	  var initData = initData;
 		    	  if(SocketService['init']){
 			            SocketService['init']('/<%- moduleName %>',initData, initData,function(err,stateName){
-			              $state.go('main.<%- moduleName %>.' + stateName, {initData:JSON.stringify(initData)}, {location:true});
+			              $state.go('main.<%- moduleName %>.' + stateName + '.views', {initData:JSON.stringify(initData)}, {location:true});
 			            });
 			        } else {
-			            SocketService.doAction('/ClinicalTrials.AlertMonitor','init', initData, initData, function(err,data){
+			            SocketService.doAction('/<%- moduleName %>','init', initData, initData, function(err,data){
 			            	
 			            });
 			        }

@@ -20,7 +20,7 @@
 		   'ngGrid', 
 		   'ngResource',
 		   'ui.select2',
-		   <% _.each( moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
+		   <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
 		   <% }}); %>])
 		   
 		   .provider('localization', function LocalizationProvider() {

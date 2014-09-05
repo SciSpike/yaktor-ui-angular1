@@ -55,7 +55,7 @@ module.exports = {
         ]
   		},
   		src: [],
-  		dest: './libs/build.js'
+  		dest: './libs/resources/build.js'
 	  },
 	  libs:{
        options: {
@@ -122,16 +122,15 @@ module.exports = {
         }
       },
       src: [],
-      dest: './libs/libs.js'
+      dest: './libs/resources/libs.js'
 	  },
 	  appDep: {
 		  	files: {
-		  		'./libs/services.js': ["./service/**/*.js"],
-		  		'./libs/constants.js': ["./constant/*.js"],
-		  		'./libs/controllers.js': ["./controllers/**/*.js"],
-		  		'./libs/locales.js': ["./locale/**/*.js"],
-		  		'./libs/conversation.js': ["./modules/conversation/conversation.js", './modules/conversation/controller/**/*.js', './modules/conversation/locale/**/*.js'],
-		  		'./libs/resources.js': ['bower_components/sockjs-client/sockjs.min.js']
+		  		'./libs/resources/resources.js': ['bower_components/sockjs-client/sockjs.min.js'],
+		  		'./libs/shared.js': ['./shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/locale/**/*.js', './shared/services/**/*.js'],
+		  		<% _.each(moduleNames, function(moduleName, index){%>
+		  		'./libs/<%- moduleName %>.js': ['./modules/<%- moduleName %>/controllers/**/*.js', './modules/<%- moduleName %>/directives/**/*.js', './modules/<%- moduleName %>/locale/**/*.js', './modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+		 		<% }}); %>
 			},
 			options: {
 			  alias: browserifyLibAlias,

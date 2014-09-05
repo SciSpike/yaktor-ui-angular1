@@ -25,7 +25,7 @@
 		        }
 		        createDirectives(state.components.elements);%>
 		        
-				<button class="btn btn-default btn-sm" ng-click="submitForm(<%- state.ui.title%>)" >{{'SUBMIT'|translate}}</button>
+				<button class="btn btn-default btn-sm" ng-click="submitForm('<%- state.ui.title.toLowerCase()%>')" >{{'SUBMIT'|translate}}</button>
 	      </div>
       </form>
   </div>

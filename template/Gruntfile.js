@@ -23,12 +23,23 @@ module.exports = function(grunt) {
     'cssmin': {
       'combine': {
         'files': {
-          './compiled.css': ['./styles/engine-ui.css', './styles/custom/master.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+          './styles/css/compiled.css': ['./styles/css/engine-ui.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
         }
       }
     },
     'sails-linker': {
-        'defaultOptions': {
+    	'resources': {
+	        'options': {
+	            'startTag': '<!--RESOURCES-->',
+	            'endTag': '<!--RESOURCES END-->',
+	            'fileTmpl': '<script src="%s"></script>',
+	            'appRoot': './'
+	          },
+	          'files': {
+	            './index.html': ['./libs/resources/*.js']
+	          }
+	    },
+        'libs': {
 	        'options': {
 	            'startTag': '<!--SCRIPTS-->',
 	            'endTag': '<!--SCRIPTS END-->',
@@ -36,7 +47,7 @@ module.exports = function(grunt) {
 	            'appRoot': './'
 	          },
 	          'files': {
-	            './index.ejs': ['./compiled_modules/*.js', './scripts/ng-grid-layout.js']
+	            './index.html': ['./libs/*.js', './libs/vendor/*.js']
 	          }
         },
         'dev': {
@@ -47,7 +58,7 @@ module.exports = function(grunt) {
 			            'appRoot': './'
 			          },
 			          'files': {
-			            './index.ejs': ['./styles/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+			            './index.html': ['./styles/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
 			          }
 		},
         'prod': {
@@ -58,7 +69,7 @@ module.exports = function(grunt) {
 			            'appRoot': './'
 			          },
 			          'files': {
-			            './index.ejs': ['compiled.css']
+			            './index.html': ['./styles/css/compiled.css']
 			          }
 		}
     },
@@ -75,8 +86,8 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   
-  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:defaultOptions'];
-  var serveTasks = ['sails-linker:prod', 'cssmin'/*, 'watch'*/];
+  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:libs'];
+  var serveTasks = ['cssmin', 'sails-linker:prod'/*, 'watch'*/];
   var allTasks = sharedTasks.concat(serveTasks);
   
   /* ########## INCORPORATING CUSTOM TASKS DEFINED IN CUSTOMGRUNT ########## */

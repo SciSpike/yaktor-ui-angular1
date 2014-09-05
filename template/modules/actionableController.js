@@ -18,16 +18,12 @@ $scope.directiveAnswer['<%- element %>'] = null;
 	}
 }
 createDirectives(state.components.elements);%>
-
 $scope.submitForm = function(type){
-	if(type.toLowerCase() == 'init'){
-		var initData = {};
-		for(element in $scope.directiveData){
-			initData[element] = $scope.directiveData[element]['answer']
-		}
-		$scope.initConversation(initData);
+	if(type == 'init'){
+		$scope.initConversation($scope.directiveAnswer);
 	}else{
-		
+		var conversation = 'on' + type;
+		$scope[conversation]($scope.directiveAnswer);
 	}
 }
 			  

@@ -12,6 +12,7 @@ angular.module('<%- moduleName %>',
 			   $stateProvider
 				   .state('main.<%- moduleName %>',{
 						url:'/<%- moduleName %>',
+						params:['initData'],
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/index.html'
 						},
@@ -27,23 +28,25 @@ angular.module('<%- moduleName %>',
 					<% _.each(states, function(state, index){
 						var stateName = state.name;
 					%>
-						.state('main.<%- moduleName %>.<%- stateName %>',{
-							templateUrl: function(){
-								return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>.html'
-							},
-							controller:'<%- moduleName %><%- stateName %>Controller',
-							views:{
-								<% _.each(state.elements, function(view, index){
-									var viewName = view.subPath.replace('/', '');
-								%>
-								'<%- viewName %>':{
-									templateUrl: function(){
-										return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
-									},
-									controller:'<%- moduleName %><%- stateName %><%- viewName %>Controller'
-								}
-								<% });%>
-							}
-						});
-				<% });%>
-		   });
+					.state('main.<%- moduleName %>.<%- stateName %>',{
+						abstract:true,
+						params:['initData'],
+						templateUrl: function(){
+							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>.html'
+						},
+						controller:'<%- moduleName %><%- stateName %>Controller'
+					},
+					.state('main.<%- moduleName %>.<%- stateName %>.views',{
+						views:{
+							<% _.each(state.elements, function(view, key){
+								var viewName = view.subPath.replace('/', '');%>
+							'<%- viewName %>':{
+								templateUrl: function(){
+									return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
+								},
+								controller:'<%- moduleName %><%- stateName %><%- viewName %>Controller'
+							}<% var lastKey = _.last(_.keys(state.elements)); if(key != lastKey){%>,<% }});%>
+						}
+					});
+			<% });%>
+		  });
