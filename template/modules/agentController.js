@@ -3,20 +3,20 @@ angular.module('<%- moduleName %>')
 		  ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService',
 		   function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
 			  
-			  $scope.view = '';
-			  $scope.changeView = function(view){
-				  $scope.view = view;
+			  $scope.changeState = function(view){
+				  $state.go($state.current.name + '.' + view, {}, {location:true});
 			  }
 			  
 			  if($stateParams.initData){
 		    	  	//TO DO
 		      }
-			  <% for(element in state.elements){%>
-			  $scope.on<%- element%> = function(initData){
+			  <% for(element in state.elements){
+			  var elementName = element.toLowerCase()%>
+			  $scope.on_<%- elementName%> = function(initData){
 				  var initData = initData;
 				  if(SocketService['<%- element%>']){
 					  SocketService['<%- element%>']('<%- state.url%>',initData, initData,function(err,stateName){
-							$state.go('main.<%- moduleName %>' + stateName + '.views', {initData:JSON.stringify(initData)}, {location:true});
+							$state.go('main.<%- moduleName %>' + stateName, {initData:JSON.stringify(initData)}, {location:true});
 					  });
 				  } else {
 					  SocketService.doAction('<%- state.url%>', initData, initData, function(err,data){

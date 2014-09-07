@@ -7,4 +7,4 @@ angular.module('<%=appname%>')
             },
           controller: "headerCtrl"
       }
-  })
+  });

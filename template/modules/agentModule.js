@@ -24,27 +24,22 @@ angular.module('<%- moduleName %>',
 						},
 						controller:'<%- moduleName %>initController'
 					})
-					<% _.each(states, function(state, index){
+					<% _.each(states, function(state, key){
 						var stateName = state.name;
 					%>
 					.state('main.<%- moduleName %>.<%- stateName %>',{
-						abstract:true,
 						params:['initData'],
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>.html'
 						},
 						controller:'<%- moduleName %><%- stateName %>Controller'
 					})
-					.state('main.<%- moduleName %>.<%- stateName %>.views',{
-						views:{
-							<% _.each(state.elements, function(view, key){
-								var viewName = view.subPath.replace('/', '');%>
-							'<%- viewName %>':{
-								templateUrl: function(){
-									return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
-								},
-								controller:'<%- moduleName %><%- stateName %><%- viewName %>Controller'
-							}<% var lastKey = _.last(_.keys(state.elements)); if(key != lastKey){%>,<% }});%>
-						}
-					})<% });%>;
+					<% _.each(state.elements, function(view, key){
+					var viewName = view.subPath.replace('/', '');%>
+					.state('main.<%- moduleName %>.<%- stateName %>.<%- viewName%>',{
+						templateUrl: function(){
+							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
+						},
+						controller:'<%- moduleName %><%- viewName %>Controller'
+					})<% });%><% });%>
 		  });

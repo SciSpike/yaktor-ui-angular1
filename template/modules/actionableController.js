@@ -25,7 +25,8 @@ $scope.submitForm = function(type){
 		}
 		$scope.initConversation(initData);
 	}else{
-		var conversation = 'on' + type;
+		var conversation = 'on' + type.replace(/\./g,'').toLowerCase();
+		console.log(conversation);
 		$scope[conversation]($scope.directiveAnswer);
 	}
 }

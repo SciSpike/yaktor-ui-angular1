@@ -12,7 +12,7 @@ angular.module('<%- moduleName %>')
 		    	  if(SocketService['init']){
 			            SocketService['init']('<%- actions.url%>',initData, initData,function(err,stateName){
 			            	var nextState = stateName.replace('state:', '');
-			              $state.go('main.<%- moduleName %>' + nextState + '.views', {initData:JSON.stringify(initData)}, {location:true});
+			              $state.go('main.<%- moduleName %>' + nextState, {initData:JSON.stringify(initData)}, {location:true});
 			            });
 			        } else {
 			            SocketService.doAction('<%- actions.url%>','init', initData, initData, function(err,data){
