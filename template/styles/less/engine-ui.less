@@ -53,26 +53,34 @@
 	.glyphicon, .navicon {
 		margin-left:10px;
 	}
-	
-	
-	
-	
-	
-
-div.container h1, h2, h3, h4, h5, h6 {
-  font-family: "Open Sans", "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
-}
-
-div.fragment > *:not(button) {
-  width: 100%;
-}
 
 /* ===============
-    SCID-RESET 
+    NG-GRID RESET 
    =============== */
+
+	.ngViewport {
+		width: 100%;
+	}
+	.truncate{
+		margin-right: 30px;
+		white-space:nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+   
+/* ===============
+    ENGINE-UI-GLOBAL 
+   =============== */
+   
    body{
    	padding-bottom: 70px;
    }
+   div.container h1, h2, h3, h4, h5, h6 {
+	  font-family: "Open Sans", "Open Sans", "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif !important;
+	}
+	div.fragment > *:not(button) {
+	  width: 100%;
+	}
    ul, li{
    	text-indent:0;
    	margin-left:0;
@@ -82,10 +90,9 @@ div.fragment > *:not(button) {
    a{
    	cursor:pointer;
    }
-   
-/* ===============
-    SCID-GLOBAL 
-   =============== */
+   .outerUiView{
+   	clear:both;
+   }
    
    span[ng-click]{
    	cursor:pointer;
@@ -105,7 +112,7 @@ div.fragment > *:not(button) {
 	}
    
  /* ===============
-    SCID-TABS 
+    ENGINE-UI-TABS 
    =============== */
 
 .tabPanel{
@@ -141,13 +148,13 @@ div.fragment > *:not(button) {
 	cursor: not-allowed;
 }
 /* ===============
-    SCID-TOOLTIP 
+    ENGINE-UI-TOOLTIP 
    =============== */
    
 .ng-popover{
 	position:relative;
 }
-.scid-popover{
+.ENGINE-UI-popover{
 	min-width:100px;
 	position:absolute;
 	top:100%;
@@ -161,7 +168,7 @@ div.fragment > *:not(button) {
 }
 
 /* ===============
-    SCID-HEADER 
+    ENGINE-UI-HEADER 
    =============== */
 
 .headWrap{
@@ -169,22 +176,22 @@ div.fragment > *:not(button) {
 	float: left;
 	width: 100%;
 }
-.scidHeader{
+.ENGINE-UIHeader{
 	float:right;
 	margin:20px 0;
 	margin-right: 1%;
 } 
-.scidHeader ul, .scidHeader div{
+.ENGINE-UIHeader ul, .ENGINE-UIHeader div{
 	display:inline-block;
 } 
-.scidHeader li{
+.ENGINE-UIHeader li{
 	display:inline-block;
 	vertical-align:top;
 	margin-left:20px;
 }
 
 /* ===============
-    SCID-TRANSLATE 
+    ENGINE-UI-TRANSLATE 
    =============== */
 
 .inlineTranslate{

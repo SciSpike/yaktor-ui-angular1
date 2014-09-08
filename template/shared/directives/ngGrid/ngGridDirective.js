@@ -21,8 +21,6 @@ angular.module('<%=appname%>')
                   column['field'] = property;
                   columnDefs.push(column);
                 }
-                console.log('columnDefs');
-                console.log(columnDefs);
                 columnDefs[columnDefs.length - 1].width = '*';
 
 	        	$scope.gridLayoutPlugin = new ngGridLayoutPlugin();
@@ -53,9 +51,6 @@ angular.module('<%=appname%>')
                 }
 
                 $scope.gridOptions = MergeRecursive(defaultOptions, $scope.gridOptions);
-
-                console.log('Grid Options');
-                console.log($scope.gridOptions);
 	        		    
 	        	$scope.$onRootScope($eventsCommon.ngGrid.toggleWidth, function(){
 	  	        	console.log('update grid layout');

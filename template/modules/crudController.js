@@ -46,7 +46,7 @@ angular.module('<%- parentStateName %>')
 				                           width: '<%-width%>',
 				                           minWidth: 150,
 				                           resizable: true,
-				                           headerCellTemplate:"<div>{{'<%-element.ui.title%>'|translate}}</div>" +
+				                           headerCellTemplate:"<div class='truncate'>{{'<%-element.ui.title%>'|translate}}</div>" +
 				                              "<div class='ngSortButtonDown ng-hide' ng-show='col.showSortButtonDown()'></div>" +
 				                              "<div class='ngSortButtonUp ng-hide' ng-show='col.showSortButtonUp()'></div>" +
 				                           	  "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
