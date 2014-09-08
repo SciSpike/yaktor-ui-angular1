@@ -128,8 +128,11 @@ module.exports = {
 		  	files: {
 		  		'./libs/resources/resources.js': ['bower_components/sockjs-client/sockjs.min.js'],
 		  		'./libs/shared.js': ['./shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/locale/**/*.js', './shared/services/**/*.js'],
-		  		<% _.each(moduleNames, function(moduleName, index){%>
+		  		<% _.each(moduleNames.agents, function(moduleName, index){%>
 		  		'./libs/<%- moduleName %>.js': ['./modules/<%- moduleName %>/<%- moduleName %>.js', './modules/<%- moduleName %>/controllers/**/*.js', './modules/<%- moduleName %>/directives/**/*.js', './modules/<%- moduleName %>/locale/**/*.js', './modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+		 		<% }}); %>
+		 		<% _.each(moduleNames.crud, function(moduleName, index){%>
+		  		'./libs/<%- moduleName %>.js': ['./modules/crud/<%- moduleName %>/<%- moduleName %>.js', './modules/crud/<%- moduleName %>/controllers/**/*.js', './modules/crud/<%- moduleName %>/directives/**/*.js', './modules/crud/<%- moduleName %>/locale/**/*.js', './modules/crud/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
 		 		<% }}); %>
 			},
 			options: {

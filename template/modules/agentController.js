@@ -19,9 +19,10 @@ angular.module('<%- moduleName %>')
 							$state.go('main.<%- moduleName %>' + stateName, {initData:JSON.stringify(initData)}, {location:true});
 					  });
 				  } else {
-					  SocketService.doAction('<%- state.url%>', initData, initData, function(err,data){
+					  SocketService.doAction('<%- parentUrl%>', '<%- element%>', initData, function(err,data){
+						  
 					  });
 				  }
 			  }
-		<%}%>
+			  <%}%>
 }]);

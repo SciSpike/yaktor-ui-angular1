@@ -11,19 +11,19 @@ angular.module('<%- moduleName %>',
 			   $translateProvider.preferredLanguage(defaultLocale);
 			   $stateProvider
 				   .state('main.<%- moduleName %>',{
-						abstract: true,
+					   	url:'/<%- moduleName %>',
 						templateUrl: function(){
-							return partialsBaseLocation + '/<%- moduleName %>/index.html'
+							return partialsBaseLocation + '/crud/<%- moduleName %>/index.html'
 						},
-						controller:'<%- moduleName %>Controller' //HANDLES CONNECTION AND STATE TRANSTITIONS (WITH ABILITY TO CUSTOMIZE ???)
+						controller:'<%- moduleName %>Controller'
 					})
 					<% _.each(states, function(state, key){
 						var stateName = key;
 					%>
 					.state('main.<%- moduleName %>.<%- stateName %>',{
-						params:['initData'],
+						url:'/<%- stateName %>/:id',
 						templateUrl: function(){
-							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>.html'
+							return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>.html'
 						},
 						controller:'<%- moduleName %><%- stateName %>Controller'
 					})
@@ -31,7 +31,7 @@ angular.module('<%- moduleName %>',
 					var viewName = view.subPath.replace('/', '');%>
 					.state('main.<%- moduleName %>.<%- stateName %>.<%- viewName%>',{
 						templateUrl: function(){
-							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
+							return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
 						},
 						controller:'<%- moduleName %><%- viewName %>Controller'
 					})<% });%><% });%>
