@@ -1,4 +1,4 @@
-<div class="<%- moduleName %><%- parentStateName%><%- state.name %>">
+<div class="<%- moduleName.toLowerCase() %>{{'<%- parentStateName%>'|translate}}<%- state.name %>">
   <div title="{{'<%- state.ui.title%>' | translate}}">
     <form>
 	      <alert ng-repeat="alert in alerts" type="alert.type" close="alerts.splice($index, 1);">
@@ -9,26 +9,46 @@
 	      </alert>
 	      <div class='well'>
 		        <% if(state.proto && state.proto.match(/http:/)) { %>
-		        <h3>{{'<%- state.title%>'|translate}}</h3>
+		        	<h3>{{'<%- parentStateName%>'|translate}} {{'<%- state.title%>'|translate}}</h3>
 		        <% } else { %>
-		        <h3>{{'<%- state.ui.title%>'|translate}}</h3>
+		        	<h3>{{'<%- parentStateName%>'|translate}} {{'<%- state.ui.title%>'|translate}}</h3>
 		        <% } %>
-		        <% var createDirectives = function(elements){
-		        	_.each(elements, function(element, key){
-		        	if(element.components){%>
-		        	<div class='well'>
-		        		<% createDirectives(element.components.elements);%>
-		        	</div>
-		        	<%}else{
-		        	if(!element.ui.tag){
-		        		element.ui.type = element.type;
-		        		element.ui.tag = 'input';
-		        	}
-		        	%>
-			        	<div class='engineUi<%- element.ui.type.charAt(0).toUpperCase()%><%- element.ui.type.substr(1).toLowerCase()%><%- element.ui.tag.charAt(0).toUpperCase()%><%- element.ui.tag.substr(1).toLowerCase()%>' directive-data="directiveData['<%- key%>']"></div>
-					<%}});
+		        <%
+		        var nestedArray = [];
+		        function checkParent(parent) {
+		        	for(var i=nestedArray.length-1; i>=0; i--){
+						if(parent == nestedArray[i]){
+							nestedArray.splice(i+1);
+							return nestedArray; 
+						}
+					}
+		        	return [];
 		        }
-		        createDirectives(state.components.elements);%>
+		        var createDirectives = function(elements, parent){
+		        	_.each(elements, function(element, key){
+		        		if(parent){
+			        		nestedArray = checkParent(parent);
+			        	}else{
+			        		nestedArray = [];
+			        	}
+		        	if(element.components){
+		        		nestedArray.push(key);
+		        		%>
+			        	<div class='well'>
+			        		<h3><%- element.ui.title%></h3>
+			        		<% createDirectives(element.components.elements, key);%>
+			        	</div>
+		        	<%}else{
+			        	if(!element.ui.tag){
+			        		element.ui.type = element.type;
+			        		element.ui.tag = 'input';
+			        	}
+		        	%>
+		        	<div class='engineUi<%- element.ui.type.charAt(0).toUpperCase()%><%- element.ui.type.substr(1).toLowerCase()%><%- element.ui.tag.charAt(0).toUpperCase()%><%- element.ui.tag.substr(1).toLowerCase()%>' directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>']"></div>	
+		        	<%}
+		        	})
+		        }
+		        createDirectives(state.components.elements, null);%>
 		        
 				<button class="btn btn-default btn-sm" ng-click="submitForm('<%- state.ui.title.toLowerCase()%>')" >{{'SUBMIT'|translate}}</button>
 	      </div>

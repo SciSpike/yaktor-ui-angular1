@@ -6,10 +6,11 @@ angular.module('views')
 	          scope: {
             	  directiveData: '='
 	          },
-	          controller: function($scope, $filter) {
-	        	  
+	          controller: function($scope, $filter, clientSettings) {
+	        	  $scope.directiveData.ui.type = clientSettings.forms.elementTypes[$scope.directiveData.type];
 	          },
 	          link: function(scope, attrs, element){
+	        	  console.log(scope.directiveData);
 	        	  scope.getContentUrl = function() {
 	                  return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type + '.html';
 	             }

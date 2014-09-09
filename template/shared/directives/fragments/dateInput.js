@@ -6,8 +6,8 @@ angular.module('views')
 	          scope: {
             	  directiveData: '='
 	          },
-	          controller: function($scope, $filter) {
-	        	  
+	          controller: function($scope, $filter, clientSettings) {
+	        	  $scope.directiveData.ui.type = clientSettings.forms.elementTypes[$scope.directiveData.type];
 	          },
 	          link: function(scope, attrs, element){
 	        	 scope.getContentUrl = function() {

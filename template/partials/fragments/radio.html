@@ -1,4 +1,12 @@
-<div class='btn-group'>
-  <button
-  	class='btn btn-default btn-sm' ng-class='directiveData.ui.class' ng-model='directiveData.answer' type='button' btn-radio='option' ng-repeat="option in [directiveData.ui.options.join("','")] track by $index">{{option}}</button>
+<div class='radio'>
+	<div ng-repeat="option in directiveData.ui.options track by $index">
+		<label>
+			<input 
+				type="radio" 
+				name="{{directiveData.access}}Radios"
+				value="{{$index}}" 
+				ng-model="directiveData.answer" />
+			&nbsp;<span ng-bind="option"></span>
+		</label>
+	</div>
 </div>
