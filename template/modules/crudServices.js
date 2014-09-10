@@ -6,7 +6,7 @@ angular.module('<%- moduleName %>')
 	    var _<%- elementName%><%- moduleName %> = function(data, id){
 	    	var data = data;
 			var response = $q.defer();
-			$timeout(function(){
+			$timeout(function(){//NEED TO KNOW ID
 				RestService['<%- element%>']('<%- actions.url%>', data,id,function(err,data){
 			          if(err){
 			              console.log(err)
@@ -23,6 +23,6 @@ angular.module('<%- moduleName %>')
 	    return {
 	    	<% for(element in actions.elements){
 	    	var elementName = element.toLowerCase();%>
-	    	<%- elementName%><%- moduleName %>: _<%- elementName%><%- moduleName %>,<% }%>
+	    	_<%- elementName%><%- moduleName %>: _<%- elementName%><%- moduleName %>,<% }%>
 	    }
 	}]);

@@ -3,24 +3,15 @@ angular.module('<%- parentStateName %>')
 		  ['$rootScope','$scope','$state','$stateParams','$location', '<%- parentStateName %>Services',
 		   function ($rootScope,$scope,$state,$stateParams,$location, <%- parentStateName %>Services) {
 			  
-			  <% if(state.ui.title.toLowerCase() == 'find'){%>
+			  var id = $stateParams.id;
 			  
-				  var id = $stateParams.id;
+			  <% if(state.ui.title.toLowerCase() == '_find'){%>
 				  
 				  $scope.gridActions = {
 						changeState: function(state, index){
 							$scope.changeState(state,{id: index});
 						}
 				  };
-				  
-				  function findData(data){
-					  <%- parentStateName %>Services.find<%- parentStateName%>(data, id).then(function(response) {
-			           	  	$scope.gridOptions.data = response.results;
-			           });
-				  }
-				  if(id){
-					  findData({});
-				  }
 				  
 				  $scope.on_find = function(data) {
 					  findData(data);
@@ -42,21 +33,13 @@ angular.module('<%- parentStateName %>')
 				            columnDefs: [
 				                         <% 
 				                         var elems = state.components.elements;
+				                         var width = (90 / (_.pairs(elems).length)) + '%';
 				                         Object.keys(elems).forEach(function(elem, index, test){
-				                           var width = 'auto';
-				                           if(index == test.length-1){
-				                             width = '*';
-				                           }
 				                           var element=elems[elem];
 				                         %>
 				                         {
-				                           field: '<%-elem%>',
-				                           <% if(index == 0){
-				                        	   var putState = 'main.' + parentStateName + '.PUT';
-				                           %>
-				                           cellTemplate: "<div class='truncate'><a ng-click='gridOptions.actions.changeState(\"<%- putState%>\", row.rowIndex)'>{{row.getProperty(\'<%-elem%>\')}}</a></div>",
-				                           <% }%>
-				                           width: '<%-width%>',
+				                           field: '<%- elem%>',
+				                           width: '<%- width%>',
 				                           minWidth: 150,
 				                           resizable: true,
 				                           headerCellTemplate:"<div class='truncate'>{{'<%-element.ui.title%>'|translate}}</div>" +
@@ -66,11 +49,36 @@ angular.module('<%- parentStateName %>')
 				                           		"<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
 				                         }, 
 				                        <%});%>
+				                        {
+				                           <% var putState = 'main.' + parentStateName + '.PUT'; %>
+					                       cellTemplate: "<div class='truncate'><a ng-click='gridOptions.actions.changeState(\"<%- putState%>\", row.getProperty(\"_id\"))'>{{'EDIT'|translate}}</a></div>",
+					                       width: '*',
+					                       minWidth: 150,
+					                       resizable: false,
+					                       headerCellTemplate:"<div class='truncate'>{{'EDIT'|translate}}</div>"
+					                             
+					                     }
+				                        
 				            ]
 			        	}
 			        }
+			      
+			      function findData(data){
+					  <%- parentStateName %>Services._find<%- parentStateName%>(data, id).then(function(response) {
+			           	  	$scope.gridOptions.data = response.results;
+			           });
+				  }
+				  if(id){
+					  findData({});
+				  }
 			  	
 			  <% }else{%>
+			  
+			  	  <% if(state.ui.title.toLowerCase() == '_put'){%>
+					  	<%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
+			           	  	console.log(response);
+			           });
+			  	  <%}%>
 			  
 				  $scope.directiveData = {};
 				  <%
@@ -89,7 +97,6 @@ angular.module('<%- parentStateName %>')
 				  	$scope.directiveData = <%= JSON.stringify(dataObject,null,2)%>;
 				  <%}
 				  createDirectives(directiveData, state.components.elements);
-				  //console.log(directiveData);
 				  %>
 				  
 				  var answers = {};
@@ -109,6 +116,7 @@ angular.module('<%- parentStateName %>')
 					  var data = returnAnswers($scope.directiveData, answers);
 					  <%- parentStateName %>Services.<%- state.ui.title.toLowerCase()%><%- parentStateName%>(data).then(function(response) {
 			           	  	console.log(response);
+			           	  	$scope.changeState('main.<%- parentStateName %>.FIND', {id: 1});
 			            });
 				  }
 			  <%}%>

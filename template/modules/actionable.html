@@ -9,9 +9,9 @@
 	      </alert>
 	      <div class='well'>
 		        <% if(state.proto && state.proto.match(/http:/)) { %>
-		        	<h3>{{'<%- parentStateName%>'|translate}} {{'<%- state.title%>'|translate}}</h3>
+		        	<h3>{{'<%- state.title%>'|translate}}</h3>
 		        <% } else { %>
-		        	<h3>{{'<%- parentStateName%>'|translate}} {{'<%- state.ui.title%>'|translate}}</h3>
+		        	<h3>{{'<%- state.ui.title%>'|translate}}</h3>
 		        <% } %>
 		        <%
 		        var nestedArray = [];

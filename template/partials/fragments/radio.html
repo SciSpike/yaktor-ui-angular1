@@ -4,7 +4,7 @@
 			<input 
 				type="radio" 
 				name="{{directiveData.access}}Radios"
-				value="{{$index}}" 
+				value="{{directiveData.ui.options[$index]}}" 
 				ng-model="directiveData.answer" />
 			&nbsp;<span ng-bind="option"></span>
 		</label>

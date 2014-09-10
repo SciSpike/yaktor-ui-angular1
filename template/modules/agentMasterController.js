@@ -4,13 +4,13 @@ angular.module('<%- moduleName %>')
 		   function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
 	  
 			  var stateName = 'main.init';
-		      var id = $scope.id = $stateParams.id;
+			  
 		      $scope.initData = {};
 		      
 		      function initConversation(initData){
 		    	  var initData = initData;
 		    	  if(SocketService['init']){
-			            SocketService['init']('<%- actions.url%>',initData, initData,function(err,stateName){
+			            SocketService['init']('<%- actions.url%>',initData, initData, function(err,stateName){
 			            	var nextState = stateName.replace('state:', '');
 			              $state.go('main.<%- moduleName %>' + nextState, {initData:JSON.stringify(initData)}, {location:true});
 			            });
@@ -29,7 +29,14 @@ angular.module('<%- moduleName %>')
 		      }
 		      
 		      $scope.initConversation = function(initData){
+		    	  console.log(initData);
 		    	  initConversation(initData);
 		      }
 			  
 }]);
+
+/*
+{
+	_id: '12345'
+}
+*/

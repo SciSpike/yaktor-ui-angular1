@@ -36,10 +36,12 @@ $scope.directiveData = <%= JSON.stringify(dataObject,null,2)%>;
 
 $scope.submitForm = function(type){
 	var data = returnAnswers($scope.directiveData, answers);
-	if(type == 'init'){
+	type = type.toLowerCase();
+	if(type == '_init'){
 		$scope.initConversation(data);
 	}else{
-		var conversation = 'on' + type.replace(/\./g,'').toLowerCase();
+		var conversation = 'on' + type.replace(/\./g,'');
+		console.log(conversation);
 		$scope[conversation](data);
 	}
 }		  

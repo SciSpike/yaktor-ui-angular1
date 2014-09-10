@@ -7,20 +7,26 @@ angular.module('<%- moduleName %>')
 				  $state.go($state.current.name + '.' + view, {}, {location:true});
 			  }
 			  
-			  if($stateParams.initData){
-		    	  	//TO DO
+			  if(!$stateParams.initData){
+				  $state.go('main.<%- moduleName %>.init',{},{location:true});
 		      }
+			  
 			  <% for(element in state.elements){
 			  var elementName = element.toLowerCase()%>
-			  $scope.on_<%- elementName%> = function(initData){
-				  var initData = initData;
+			  $scope.on_<%- elementName%> = function(data){
+				  var data = data;
 				  if(SocketService['<%- element%>']){
-					  SocketService['<%- element%>']('<%- state.url%>',initData, initData,function(err,stateName){
+					  console.log('Should not be here');
+					  SocketService['<%- element%>']('<%- state.url%>',data, data, function(err,stateName){
 							$state.go('main.<%- moduleName %>' + stateName, {initData:JSON.stringify(initData)}, {location:true});
 					  });
 				  } else {
-					  SocketService.doAction('<%- parentUrl%>', '<%- element%>', initData, function(err,data){
-						  
+					  SocketService.doAction('<%- parentUrl%>', '<%- element%>', $stateParams.initData, data, function(err,data){
+						  if(err){
+							  console.log(err);
+						  }else{
+							  console.log(data);
+						  }
 					  });
 				  }
 			  }
