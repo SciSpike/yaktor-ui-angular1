@@ -1,25 +1,22 @@
 angular.module('<%- moduleName %>')
   .controller('<%- moduleName %>Controller',
-		  ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService',
-		   function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
+		  ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService', '<%- moduleName %>Services', '$eventsCommon',
+		   function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService, <%- moduleName %>Services, $eventsCommon) {
 	  
 			  var stateName = 'main.init';
 			  
 		      $scope.initData = {};
 		      
-		      function initConversation(initData){
+		      function init<%- moduleName %>Conversation(initData){
 		    	  var initData = initData;
-		    	  if(SocketService['init']){
-			            SocketService['init']('<%- actions.url%>',initData, initData, function(err,stateName){
-			            	var nextState = stateName.replace('state:', '');
-			              $state.go('main.<%- moduleName %>' + nextState, {initData:JSON.stringify(initData)}, {location:true});
-			            });
-			        } else {
-			            SocketService.doAction('<%- actions.url%>','init', initData, initData, function(err,data){
-			            	
-			            });
-			        }
+		    	  <%- moduleName %>Services.initConversation(initData);
 		      }
+		      
+		      $scope.$onRootScope($eventsCommon.conversations.<%- actions.url.replace('/', '')%>, function(event, data){
+		    	  if(data.nextState){
+	  	        	$scope.changeState('main.<%- moduleName %>' + data.nextState, {initData:JSON.stringify(data.data)});
+		    	  }
+	  	  	  });
 		      
 		      if($stateParams.initData){
 		    	  	var initData = JSON.parse($stateParams.initData);
@@ -28,15 +25,9 @@ angular.module('<%- moduleName %>')
 		    	  $state.go('main.<%- moduleName %>.init',{},{location:true});
 		      }
 		      
-		      $scope.initConversation = function(initData){
+		      $scope.init<%- moduleName %>Conversation = function(initData){
 		    	  console.log(initData);
-		    	  initConversation(initData);
+		    	  init<%- moduleName %>Conversation(initData);
 		      }
 			  
 }]);
-
-/*
-{
-	_id: '12345'
-}
-*/

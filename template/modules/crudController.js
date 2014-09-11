@@ -75,7 +75,7 @@ angular.module('<%- parentStateName %>')
 			  <% }else{%>
 			  
 			  	  <% if(state.ui.title.toLowerCase() == '_put'){%>
-					  	<%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
+					  	<%- parentStateName %>Services._get<%- parentStateName%>({}, id).then(function(response) {
 			           	  	console.log(response);
 			           });
 			  	  <%}%>

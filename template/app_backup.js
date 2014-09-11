@@ -37,6 +37,7 @@
 			
 			.config(['$translateProvider', 'localizationProvider', function($translateProvider, localizationProvider) {
 				localizationProvider.updateLocale = function(lang, langData){
+					//console.log(langData);
 					$translateProvider.translations(lang, langData);
 				};
 			}])
@@ -72,8 +73,16 @@
 					toggleWidth: 'navGrid.toggle'
 				},
 				conversations:{<%function createEvents(elements, baseUrl){%>
-					<%- baseUrl%>:{<% for(element in elements){%>
-							<%- elements[element].name%>:"conversations.<%- elements[element].actions.url.replace('/', '')%>",
+					<%- baseUrl%>:{<% for(element in elements){console.log(elements[element]);%>
+							<%- elements[element].name%>:"conversations.elements[element].actions.url.replace('/', '')",
+								/*{<% for(state in elements[element].states){
+								var keyLength = _.keys(elements[element].states[state].elements).length;
+								if(keyLength > 0){%>
+								<%- elements[element].states[state].name%>:{<% for(action in elements[element].states[state].elements){%>
+									<%- action%>: 'conversations.<%- elements[element].states[state].url.replace('/', '')%>.<%- action%>',<%}%>
+								},<%}else{%>
+								<%- elements[element].states[state].name%>: "conversations.<%- elements[element].states[state].url.replace('/', '')%>",<%}%><%}%>*/
+							},
 						<%}%>
 					}
 					<%}
