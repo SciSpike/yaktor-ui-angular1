@@ -4,8 +4,6 @@ angular.module('views')
 		   function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
 				
 				$scope.changeState = function(state, data){
-					console.log(state);
-					console.log(data);
 					if(!data){
 						data = {};
 					}

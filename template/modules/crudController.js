@@ -74,19 +74,15 @@ angular.module('<%- parentStateName %>')
 			  	
 			  <% }else{%>
 			  
-			  	  <% if(state.ui.title.toLowerCase() == '_put'){%>
-					  	<%- parentStateName %>Services._get<%- parentStateName%>({}, id).then(function(response) {
-			           	  	console.log(response);
-			           });
-			  	  <%}%>
-			  
 				  $scope.directiveData = {};
 				  <%
 				  var directiveData = {};
 				  var createDirectives = function(dataObject, elements){
 				  	for(element in elements){
 				  		if(elements[element].components){
-				  			dataObject[element] = {};
+				  			dataObject[element] = {
+				  				type: elements[element].type
+				  			};
 				  			createDirectives(dataObject[element], elements[element].components.elements);
 				  		}else{
 				  			var elementData = elements[element];
@@ -99,23 +95,62 @@ angular.module('<%- parentStateName %>')
 				  createDirectives(directiveData, state.components.elements);
 				  %>
 				  
+				  <% if(state.ui.title.toLowerCase() == '_put'){%>
+					  	function mergeAnswers(dataObject, answers){
+					  		if(Array.isArray(answers)){
+					  			for(var i=0; i<answers.length; i++){
+					  				mergeAnswers(dataObject, answers[i]);
+					  			}
+							  }else{
+						  		for(key in dataObject){
+						  			switch(dataObject[key].type) {
+									    case 'array':
+									    	mergeAnswers(dataObject[key], answers[key]);
+									        break;
+									    case 'map':
+											returnAnswers(dataObject[key], answers[key]);
+									        break;
+									    default:
+									    	dataObject[key]['answer'] = answers[key];
+									}
+						  		}
+							  }
+					  	}
+				  		<%- parentStateName %>Services._get<%- parentStateName%>({}, id).then(function(response) {
+				  			mergeAnswers($scope.directiveData, response);
+				  		});                 
+				  <%}%>
+				  
 				  var answers = {};
 				  function returnAnswers(dataObject, answers){
-					  for(key in dataObject){
-						  if(dataObject[key].answer){
-							  answers[key] = dataObject[key].answer;
+					  if(Array.isArray(answers)){
+					  		var arrayAnswers = {};
+					  		for(key in dataObject){
+					  			arrayAnswers[key] = dataObject[key].answer;
+					  		}
+					  		answers.push(arrayAnswers);
 						  }else{
-							  answers[key] = {};
-							  returnAnswers(dataObject[key], answers[key]);
-						  }
+							for(key in dataObject){
+								switch(dataObject[key].type) {
+								    case 'array':
+								    	answers[key] = [];
+										returnAnswers(dataObject[key], answers[key]);
+								        break;
+								    case 'map':
+								    	answers[key] = {};
+										returnAnswers(dataObject[key], answers[key]);
+								        break;
+								    default:
+								    	answers[key] = dataObject[key].answer;
+								}
+							}
 					  }
 					  return answers;
 				  }
 				  
 				  $scope.submitForm = function(type){
 					  var data = returnAnswers($scope.directiveData, answers);
-					  <%- parentStateName %>Services.<%- state.ui.title.toLowerCase()%><%- parentStateName%>(data).then(function(response) {
-			           	  	console.log(response);
+					  <%- parentStateName %>Services.<%- state.ui.title.toLowerCase()%><%- parentStateName%>(data, id).then(function(response) {
 			           	  	$scope.changeState('main.<%- parentStateName %>.FIND', {id: 1});
 			            });
 				  }

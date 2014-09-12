@@ -35,7 +35,7 @@
 		        		nestedArray.push(key);
 		        		%>
 			        	<div class='well'>
-			        		<h3><%- element.ui.title%></h3>
+			        		<h3>{{'<%- element.ui.title%>'|translate}}</h3>
 			        		<% createDirectives(element.components.elements, key);%>
 			        	</div>
 		        	<%}else{

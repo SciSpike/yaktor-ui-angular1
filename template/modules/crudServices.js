@@ -7,7 +7,11 @@ angular.module('<%- moduleName %>')
 	    	var data = data;
 			var response = $q.defer();
 			$timeout(function(){//NEED TO KNOW ID
+				<% if(element == 'GET'){%>
+				RestService['FINDBYID']('<%- actions.url%>', null,id,function(err,data){
+				<%}else{%>
 				RestService['<%- element%>']('<%- actions.url%>', data,id,function(err,data){
+				<%}%>
 			          if(err){
 			              console.log(err)
 			              //$scope.alerts.push(err);
