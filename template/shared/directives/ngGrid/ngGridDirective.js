@@ -31,6 +31,10 @@ angular.module('<%=appname%>')
 	        		        plugins: [$scope.gridLayoutPlugin],
 	        		        columnDefs: columnDefs
 	        	};
+	        	
+	        	$scope.$watch("gridData", function(newValue, oldValue) {
+		  		 	$scope.myData = newValue;
+            	});
 
                 /* ########## Recursively merge properties of two objects ########## */
                 function MergeRecursive(obj1, obj2) {

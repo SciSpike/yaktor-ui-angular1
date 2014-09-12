@@ -1,4 +1,8 @@
 <div ng-if="gridOptions.data">
    <div class="ngGridDirective" grid-data='gridOptions.data' grid-options='gridOptions.options'></div>
-  <pagination total-items="gridOptions.data.total" page="currentPage" on-select-page="onfind(page)" max-size="10" class="pagination-sm" boundary-links="true" rotate="false"></pagination>
+   <div class="btn-group">
+	   <button type="button" class="btn btn-default" ng-click="gotoPage(1)">First Page</button>
+	   <button type="button" class="btn btn-default" ng-repeat="page in pagingOptions.pageButtons" ng-click="gotoPage(page)">{{page}}</button>
+	   <button type="button" class="btn btn-default" ng-click="gotoPage(pagingOptions.totalPages)">LastPage</button>
+   </div>
 </div>

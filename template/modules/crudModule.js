@@ -21,7 +21,7 @@ angular.module('<%- moduleName %>',
 						var stateName = key;
 					%>
 					.state('main.<%- moduleName %>.<%- stateName %>',{
-						url:'/<%- stateName %>/:id',
+						<% if(stateName == 'FIND'){ %>url:'/<%- stateName %>',<%}else{%>url:'/<%- stateName %>/:id',<%}%>
 						templateUrl: function(){
 							return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>.html'
 						},

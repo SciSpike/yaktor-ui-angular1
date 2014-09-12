@@ -6,18 +6,42 @@ angular.module('<%- parentStateName %>')
 			  var id = $stateParams.id;
 			  
 			  <% if(state.ui.title.toLowerCase() == '_find'){%>
-				  
+			  		
 				  $scope.gridActions = {
 						changeState: function(state, index){
 							$scope.changeState(state,{id: index});
 						}
 				  };
 				  
-				  $scope.on_find = function(data) {
-					  findData(data);
+				  function range(start, length){
+					  var pageArray = [];
+					  for(var i=0; i<length; i++){
+						  pageArray.push(start);
+						  start++;
+					  }
+					  return pageArray;
 				  }
 				  
-				  $scope.currentPage=1; 
+				  $scope.gotoPage = function(page) {
+					  $scope.pagingOptions.currentPage = page;
+					  if(page-2 <= 1){
+						  page = 3;
+					  }
+					  if(page >= $scope.pagingOptions.totalPages){
+						  page = $scope.pagingOptions.totalPages;
+					  }
+					  $scope.pagingOptions['pageButtons'] = range(page-2, $scope.pagingOptions.pageNav);
+					  findData();
+				  };
+				  
+				  $scope.pagingOptions = {
+					  pageButtons: [1, 2, 3, 4, 5],
+					  pageSize: 10,
+					  currentPage: 1,
+					  pageNav: 5,
+					  totalPages: 5,
+					  totalServerItems: 5
+				  };	
 			        
 			      $scope.gridOptions = {
 			        	options: {
@@ -63,14 +87,19 @@ angular.module('<%- parentStateName %>')
 			        	}
 			        }
 			      
-			      function findData(data){
-					  <%- parentStateName %>Services._find<%- parentStateName%>(data, id).then(function(response) {
+			      function findData(){
+					  <%- parentStateName %>Services._find<%- parentStateName%>({}, $scope.pagingOptions.currentPage).then(function(response) {
 			           	  	$scope.gridOptions.data = response.results;
+			           	  	$scope.pagingOptions.totalServerItems = response.total;
+			           	  	$scope.pagingOptions.totalPages = Math.ceil($scope.pagingOptions.totalServerItems / $scope.pagingOptions.pageSize);
+							if($scope.pagingOptions.totalPages < $scope.pagingOptions.pageNav){
+								$scope.pagingOptions.pageNav = $scope.pagingOptions.totalPages;
+								$scope.pagingOptions.pageButtons = range($scope.pagingOptions.currentPage, $scope.pagingOptions.pageNav);
+							}
 			           });
 				  }
-				  if(id){
-					  findData({});
-				  }
+			      
+				  findData();
 			  	
 			  <% }else{%>
 			  
