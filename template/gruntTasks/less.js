@@ -18,6 +18,13 @@ module.exports = {
               src: ['engine-ui.less'],
               dest: './styles/css/',
               ext: '.css'
+            },
+            {
+              expand: true,
+              cwd: './clientConfig/<%- theme%>/',
+              src: ['index.less'],
+              dest: './styles/css/',
+              ext: '.css'
             }]
     }
 };
