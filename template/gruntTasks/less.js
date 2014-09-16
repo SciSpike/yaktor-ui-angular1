@@ -11,15 +11,7 @@ module.exports = {
       sourceMapBasepath: '',
       sourceMapRootpath: ''
     },
-    files: [
-            {
-              expand: true,
-              cwd: './styles/less/',
-              src: ['engine-ui.less'],
-              dest: './styles/css/',
-              ext: '.css'
-            },
-            {
+    files: [{
               expand: true,
               cwd: './clientConfig/<%- theme%>/',
               src: ['index.less'],

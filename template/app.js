@@ -23,6 +23,19 @@
 		   <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
 		   <% }}); %>])
 		   
+		   .config(function($stateProvider, $locationProvider,$translateProvider) {
+			   $translateProvider.preferredLanguage(defaultLocale);
+			   $stateProvider
+					.state('main.home',{
+						url: '/home',
+						templateUrl: function(){
+							return clientBaseLocation + '/homePage/home.html'
+						},
+						controller:'homeController'
+					});
+					
+		   })
+		   
 		   .provider('localization', function LocalizationProvider() {
 				return {
 					  updateLocale: function() {},

@@ -1,5 +1,5 @@
 angular.module('<%=appname%>')
-  .directive('scidHeader', function($compile) {
+  .directive('engineUiHeader', function($compile) {
       return{
           restrict: 'C',
           templateUrl : function($node, tattrs) {

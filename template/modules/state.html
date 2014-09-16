@@ -1,11 +1,11 @@
 <div class="<%- moduleName %><%- state.name %>">
-  <div class="row state">
+  <div class="state">
     <% 
     var actions;
     if(state.proto.match(/ws:/)) {%>
-	    	<div class="wsPartial row">
+	    	<div class="wsPartial">
 			    <h3>{{'<%- state.title%>'|translate}}</h3>
-			    <ul class="col-md-12 list-inline">
+			    <ul class="list-inline">
 			    <%var elements = state.elements;
 			       actions = Object.keys(elements);
 			       if(actions.length>0){
@@ -20,7 +20,7 @@
     <%}else{%>
 		    <% if(state.elements.length > 1){%>
 			    <div class="tabPanel">
-			    	<div class="tabList row">
+			    	<div class="tabList">
 			    		<div class="tabInner">
 			    		    <% 
 			    		       Object.keys(state.elements).forEach(function(a){ 

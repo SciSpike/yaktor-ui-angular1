@@ -1,12 +1,10 @@
 <div class='radio'>
 	<div ng-repeat="option in directiveData.ui.options track by $index">
-		<label>
-			<input 
-				type="radio" 
-				name="{{directiveData.access}}Radios"
-				value="{{directiveData.ui.options[$index]}}" 
-				ng-model="directiveData.answer" />
-			&nbsp;<span ng-bind="option"></span>
-		</label>
+		<input 
+			type="radio" 
+			name="{{directiveData.access}}Radios"
+			value="{{directiveData.ui.options[$index]}}" 
+			ng-model="directiveData.answer" />
+		<label><span ng-bind="option"></span></label>
 	</div>
 </div>

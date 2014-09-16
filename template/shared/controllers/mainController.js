@@ -2,6 +2,11 @@ angular.module('views')
   .controller('mainController',
 		  ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService',
 		   function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
+			  
+				$scope.$on('$stateNotFound', function(event, unfoundState, fromState, fromParams){
+					event.preventDefault();
+					$scope.changeState('main.home');
+				});
 				
 				$scope.changeState = function(state, data){
 					if(!data){

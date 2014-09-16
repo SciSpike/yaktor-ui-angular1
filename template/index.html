@@ -13,8 +13,8 @@
 </head>
 <body>
   
-  <div class="container wrapper">
-    <div class="container uiViewOuter" ui-view autoscroll="false"></div>
+  <div class="wrapper">
+    <div class="uiViewOuter" ui-view autoscroll="false"></div>
   </div>
   
   <script src="http://cdn.sockjs.org/sockjs-0.3.4.min.js"></script>
@@ -27,6 +27,7 @@
 	  var sessionId = "<%=sId%>";
 	  var defaultLocale = "<%=locale%>";
 	  var partialsBaseLocation = '/partials';
+	  var clientBaseLocation = '/clientConfig';
   </script>
   
   <script src="app.js"></script>

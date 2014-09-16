@@ -23,7 +23,7 @@ module.exports = function(grunt) {
     'cssmin': {
       'combine': {
         'files': {
-          './styles/css/compiled.css': ['./styles/css/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+          './styles/compiled.css': ['./styles/css/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
         }
       }
     },
@@ -58,7 +58,7 @@ module.exports = function(grunt) {
 			            'appRoot': './'
 			          },
 			          'files': {
-			            './index.html': ['./styles/css/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+			            './index.html': ['./styles/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
 			          }
 		},
         'prod': {
@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 			            'appRoot': './'
 			          },
 			          'files': {
-			            './index.html': ['./styles/css/compiled.css']
+			            './index.html': ['./styles/compiled.css']
 			          }
 		}
     },

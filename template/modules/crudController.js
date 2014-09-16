@@ -75,7 +75,7 @@ angular.module('<%- parentStateName %>')
 				                        <%});%>
 				                        {
 				                           <% var putState = 'main.' + parentStateName + '.PUT'; %>
-					                       cellTemplate: "<div class='truncate'><a ng-click='gridOptions.actions.changeState(\"<%- putState%>\", row.getProperty(\"_id\"))'>{{'EDIT'|translate}}</a></div>",
+					                       cellTemplate: "<div class='truncate editCell'><a ng-click='gridOptions.actions.changeState(\"<%- putState%>\", row.getProperty(\"_id\"))'>{{'EDIT'|translate}}</a></div>",
 					                       width: '*',
 					                       minWidth: 150,
 					                       resizable: false,
