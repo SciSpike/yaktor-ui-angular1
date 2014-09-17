@@ -40,7 +40,7 @@ $scope.submitForm = function(type){
 	if(type == 'init'){
 		$scope.init<%- moduleName %>Conversation(data);
 	}else{
-		var conversation = 'on' + type.replace(/\./g,'');
+		var conversation = 'on_' + type.replace(/\./g,'');
 		console.log(conversation);
 		$scope[conversation](data);
 	}
