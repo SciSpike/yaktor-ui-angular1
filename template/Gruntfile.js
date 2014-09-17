@@ -72,22 +72,13 @@ module.exports = function(grunt) {
 			            './index.html': ['./styles/compiled.css']
 			          }
 		}
-    },
-    'watch': {
-      'less': {
-        'files': './**/*.less',
-        'tasks': ['less', 'cssmin'],
-        'options': {
-          'interrupt': true,
-        }
-      }
     }
   };
   
   grunt.initConfig(config);
   
   var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:libs'];
-  var serveTasks = ['cssmin', 'sails-linker:prod'/*, 'watch'*/];
+  var serveTasks = ['cssmin', 'sails-linker:prod'];
   var allTasks = sharedTasks.concat(serveTasks);
   
   /* ########## INCORPORATING CUSTOM TASKS DEFINED IN CUSTOMGRUNT ########## */
