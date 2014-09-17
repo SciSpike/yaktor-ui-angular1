@@ -84,14 +84,30 @@
 				ngGrid:{
 					toggleWidth: 'navGrid.toggle'
 				},
-				conversations:{<%function createEvents(elements, baseUrl){%>
-					<%- baseUrl%>:{<% for(element in elements){%>
-							<%- elements[element].name%>:"conversations.<%- elements[element].actions.url.replace('/', '')%>",
+				conversations:{<%function createEvents(agents){
+					for(agent in agents){
+						var elements = agents[agent].elements;
+					%>
+					<%- agents[agent].name%>:{<% for(element in elements){%>
+							<%- _.last(elements[element].actions.url.replace('/', '').split('.'))%>: "conversations.<%- elements[element].actions.url.replace('/', '')%>",
 						<%}%>
+					},
+					<%}}
+				var agentNames = [],
+					agentObject = {};
+				for(agent in agents){
+					var agentName = agents[agent].actions.url.replace('/', '').split('.')[0];
+					if(agentNames.indexOf(agentName) == -1){
+						agentObject[agentName] = {
+							name: agentName,
+							elements: [agents[agent]]
+						}
+						agentNames.push(agentName);
+					}else{
+						agentObject[agentName].elements.push(agents[agent]);
 					}
-					<%}
-				var baseUrl = agents[0].actions.url.replace('/', '').split('.')[0];
-				createEvents(agents, baseUrl);%>
+				}
+				createEvents(agentObject);%>
 				}
 			});
 
