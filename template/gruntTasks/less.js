@@ -13,7 +13,7 @@ module.exports = {
     },
     files: [{
               expand: true,
-              cwd: './clientConfig/<%- theme%>/',
+              cwd: './clientConfig/themes/<%- theme%>/',
               src: ['index.less'],
               dest: './styles/css/',
               ext: '.css'

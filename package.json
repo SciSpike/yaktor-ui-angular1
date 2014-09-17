@@ -1,7 +1,7 @@
 {
   "name": "engine-ui",
   "description": "Generate AngularJS applications based on a JSON application grammar",
-  "version": "2.2.1",
+  "version": "3.0.1",
   "homepage": "https://github.com/SciSpike/engine-ui",
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
     "engine-ui": "./bin/engine-ui"
   },
   "dependencies": {
+	"async": "0.2.9",
     "walk": "2.3.x",
     "ansi": "0.2.x",
     "string": "1.7.x",

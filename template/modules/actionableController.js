@@ -36,8 +36,8 @@ $scope.directiveData = <%= JSON.stringify(dataObject,null,2)%>;
 
 $scope.submitForm = function(type){
 	var data = returnAnswers($scope.directiveData, answers);
-	type = type.toLowerCase();
-	if(type == '_init'){
+	type = type.replace('_', '').toLowerCase();
+	if(type == 'init'){
 		$scope.init<%- moduleName %>Conversation(data);
 	}else{
 		var conversation = 'on' + type.replace(/\./g,'');

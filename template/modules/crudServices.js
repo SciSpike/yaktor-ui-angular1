@@ -26,7 +26,7 @@ angular.module('<%- moduleName %>')
 	    <% }%>
 	    return {
 	    	<% for(element in actions.elements){
-	    	var elementName = element.toLowerCase();%>
-	    	_<%- elementName%><%- moduleName %>: _<%- elementName%><%- moduleName %>,<% }%>
+	    	var elementName = element.replace('_', '').toLowerCase();%>
+	    	<%- elementName%><%- moduleName %>: _<%- elementName%><%- moduleName %>,<% }%>
 	    }
 	}]);

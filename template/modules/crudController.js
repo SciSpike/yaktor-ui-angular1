@@ -5,7 +5,7 @@ angular.module('<%- parentStateName %>')
 			  
 			  var id = $stateParams.id;
 			  
-			  <% if(state.ui.title.toLowerCase() == '_find'){%>
+			  <% if(state.ui.title.replace('_', '').toLowerCase() == 'find'){%>
 			  		
 				  $scope.gridActions = {
 						changeState: function(state, index){
@@ -88,7 +88,7 @@ angular.module('<%- parentStateName %>')
 			        }
 			      
 			      function findData(){
-					  <%- parentStateName %>Services._find<%- parentStateName%>({}, $scope.pagingOptions.currentPage).then(function(response) {
+					  <%- parentStateName %>Services.find<%- parentStateName%>({}, $scope.pagingOptions.currentPage).then(function(response) {
 			           	  	$scope.gridOptions.data = response.results;
 			           	  	$scope.pagingOptions.totalServerItems = response.total;
 			           	  	$scope.pagingOptions.totalPages = Math.ceil($scope.pagingOptions.totalServerItems / $scope.pagingOptions.pageSize);
@@ -124,7 +124,7 @@ angular.module('<%- parentStateName %>')
 				  createDirectives(directiveData, state.components.elements);
 				  %>
 				  
-				  <% if(state.ui.title.toLowerCase() == '_put'){%>
+				  <% if(state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
 					  	function mergeAnswers(dataObject, answers){
 					  		if(Array.isArray(answers)){
 					  			for(var i=0; i<answers.length; i++){
@@ -145,7 +145,7 @@ angular.module('<%- parentStateName %>')
 						  		}
 							  }
 					  	}
-				  		<%- parentStateName %>Services._get<%- parentStateName%>({}, id).then(function(response) {
+				  		<%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
 				  			mergeAnswers($scope.directiveData, response);
 				  		});                 
 				  <%}%>
