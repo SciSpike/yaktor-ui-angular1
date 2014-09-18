@@ -27,6 +27,13 @@ module.exports = function(grunt) {
         }
       }
     },
+    'copy':{
+      viz:{
+        files:{
+          'libs/resources/viz.js':"./bower_components/viz.js/index.js"
+        }
+      }
+    },
     'sails-linker': {
     	'resources': {
 	        'options': {
@@ -77,7 +84,7 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   
-  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:libs'];
+  var sharedTasks = ['less','copy', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:libs'];
   var serveTasks = ['cssmin', 'sails-linker:prod'];
   var allTasks = sharedTasks.concat(serveTasks);
   
