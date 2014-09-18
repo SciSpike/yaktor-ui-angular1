@@ -20,6 +20,7 @@
 		   'ngGrid', 
 		   'ngResource',
 		   'ui.select2',
+		   'checklist-model',
 		   <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
 		   <% }}); %>])
 		   

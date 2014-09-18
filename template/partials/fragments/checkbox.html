@@ -1,18 +1,10 @@
-<div class='btn-group'>
-    <button
-    	ng-if='directiveData.options'
-    	class='btn btn-primary btn-sm'
-    	ng-class='directiveData.ui.class'
-    	ng-model='directiveData.answer'
-    	type='button'
-    	btn-checkbox
-    	ng-repeat='option in [directiveData.options.join("','")] track by $index'>{{option}}</button>
-    <button
-    	ng-if='!directiveData.options'
-    	class='btn btn-primary btn-sm'
-    	ng-class='directiveData.ui.class'
-    	ng-model='directiveData'
-    	btn-checkbox
-    	btn-checkbox-true="true"
-    	btn-checkbox-false="false">{{'directiveData.ui.title' | translate}}</button>
+<div class='radio'>
+	<label>{{directiveData.ui.title | translate}}: </label>{{directiveData.ui.items.enum}}
+	<div ng-repeat="option in directiveData.ui.items.enum track by $index">
+		<input 
+			type="checkbox"
+			checklist-model="directiveData.answer"
+			checklist-value="option" />
+		<label>{{option}}</label>
+	</div>
 </div>

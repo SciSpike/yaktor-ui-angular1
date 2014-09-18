@@ -5,7 +5,8 @@ angular.module('<%- moduleName %>',
 		   'ngStorage',
 		   'ngGrid', 
 		   'ngResource',
-		   'ui.select2'])
+		   'ui.select2',
+		   'checklist-model'])
 		   
 		   .config(function($stateProvider, $locationProvider,$translateProvider) {
 			   $translateProvider.preferredLanguage(defaultLocale);

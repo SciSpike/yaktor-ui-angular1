@@ -2,5 +2,7 @@
 	placeholder="{{directiveData.ui.title | translate}}"
 	class='form-control input-sm'
 	ng-model='directiveData.answer'
-	ng-options="option for option in directiveData.ui.options"></select>
+	ng-options="option for option in directiveData.ui.options">
+	<option class="placeholderText" value="">{{'MAKE.SELECTION' | translate}}</option>
+</select>
 <br />

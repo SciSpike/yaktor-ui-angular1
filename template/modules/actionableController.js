@@ -2,10 +2,7 @@ angular.module('<%- moduleName %>')
   .controller('<%- moduleName %><%- state.name %>Controller',
 		  ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService',
 		   function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
-			  
-			  $scope.directiveData = {};
-			  <%
-			  var directiveData = {};
+			  <%var directiveData = {};
 			  var createDirectives = function(dataObject, elements){
 			  	for(element in elements){
 			  		if(elements[element].components){
@@ -17,9 +14,10 @@ angular.module('<%- moduleName %>')
 			  			dataObject[element]['answer'] = '';
 			  		}	
 			  	}%>
-$scope.directiveData = <%= JSON.stringify(dataObject,null,2)%>;
 			  <%}
 			  createDirectives(directiveData, state.components.elements);%>
+			  
+			  $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
 			  
 			  var answers = {};
 			  function returnAnswers(dataObject, answers){

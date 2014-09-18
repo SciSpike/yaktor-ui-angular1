@@ -38,13 +38,8 @@
 			        		<h3>{{'<%- element.ui.title%>'|translate}}</h3>
 			        		<% createDirectives(element.components.elements, key);%>
 			        	</div>
-		        	<%}else{
-			        	if(!element.ui.tag){
-			        		element.ui.type = element.type;
-			        		element.ui.tag = 'input';
-			        	}
-		        	%>
-		        	<div class='engineUi<%- element.ui.type.charAt(0).toUpperCase()%><%- element.ui.type.substr(1).toLowerCase()%><%- element.ui.tag.charAt(0).toUpperCase()%><%- element.ui.tag.substr(1).toLowerCase()%>' directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>']"></div>	
+		        	<%}else{%>
+		        	<div class='engineUi<%- element.type.charAt(0).toUpperCase()%><%- element.type.substr(1).toLowerCase()%>Input' directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>']"></div>	
 		        	<%}
 		        	})
 		        }

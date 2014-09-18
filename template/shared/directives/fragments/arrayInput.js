@@ -1,5 +1,5 @@
 angular.module('views')
-	.directive('engineUiCheckboxInput', function($rootScope, $eventsCommon, $timeout) {
+	.directive('engineUiArrayInput', function($rootScope, $eventsCommon, $timeout) {
 		return{
 	          restrict: 'C',
 	          template: '<div ng-include="getContentUrl()"></div>',
