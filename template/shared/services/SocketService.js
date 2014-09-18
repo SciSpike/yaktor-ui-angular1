@@ -47,7 +47,7 @@ angular.module('<%=appname%>').service('SocketService', function ($rootScope, $s
     })
   }
   service.doAction=function(sUrl,action,initData,data,cb){
-    require(sUrl.replace(/:state.*/,"").replace(".","/").substr(1)).socket.emit[action](sessionId,initData,data||{});
+    require(sUrl.replace(/:state.*/,"").replace(".","/").substr(1)).socket.emit[action](sessionId,initData,data||{},cb);
   }
   
   

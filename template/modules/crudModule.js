@@ -12,7 +12,7 @@ angular.module('<%- moduleName %>',
 			   $translateProvider.preferredLanguage(defaultLocale);
 			   $stateProvider
 				   .state('main.<%- moduleName %>',{
-					   	url:'/<%- moduleName %>',
+					   	url:'/<%- moduleName.replace("_s_","/").replace("_d_",".") %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/crud/<%- moduleName %>/index.html'
 						},
@@ -22,7 +22,7 @@ angular.module('<%- moduleName %>',
 						var stateName = key;
 					%>
 					.state('main.<%- moduleName %>.<%- stateName %>',{
-						<% if(stateName == 'FIND'){ %>url:'/<%- stateName %>',<%}else{%>url:'/<%- stateName %>/:id',<%}%>
+						<% if(stateName == 'FIND' || stateName == 'POST'){ %>url:'/<%- stateName %>',<%}else{%>url:'/<%- stateName %>/:id',<%}%>
 						templateUrl: function(){
 							return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>.html'
 						},
