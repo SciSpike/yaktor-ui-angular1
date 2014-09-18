@@ -56,7 +56,7 @@ angular.module('{{appname}}').service(
       }
       service.doAction = function (sUrl, action, initData, data, cb) {
         require(sUrl.replace(/:state.*/, "").replace(".", "/").substr(1)).socket.emit[action](sessionId, initData,
-            data || {});
+            data || {},cb);
       }
 
       return service;
