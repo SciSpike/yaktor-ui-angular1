@@ -1,5 +1,5 @@
 <div class='radio'>
-	<label>{{directiveData.ui.title | translate}}: </label>
+	<h5>{{directiveData.ui.title | translate}}: </h5>
 	<div ng-repeat="option in directiveData.ui.items.enum track by $index">
 		<input 
 			type="checkbox"
@@ -8,3 +8,4 @@
 		<label>{{option}}</label>
 	</div>
 </div>
+<br />

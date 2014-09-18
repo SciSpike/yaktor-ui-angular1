@@ -1,5 +1,5 @@
 <div class='radio'>
-	<label>{{directiveData.ui.title | translate}}: </label>
+	<h5>{{directiveData.ui.title | translate}}: </h5>
 	<div ng-repeat="option in directiveData.ui.options track by $index">
 		<input 
 			type="radio"
@@ -10,3 +10,4 @@
 		<label for="{{directiveData.ui.title}}Radio{{$index}}"><span ng-bind="option"></span></label>
 	</div>
 </div>
+<br />
