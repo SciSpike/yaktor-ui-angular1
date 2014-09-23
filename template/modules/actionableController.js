@@ -19,18 +19,40 @@ angular.module('<%- moduleName %>')
 			  
 			  $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
 			  
-			  var answers = {};
-			  function returnAnswers(dataObject, answers){
-				  for(key in dataObject){
-					  if(dataObject[key].answer){
-						  answers[key] = dataObject[key].answer;
-					  }else{
-						  answers[key] = {};
-						  returnAnswers(dataObject[key], answers[key]);
-					  }
-				  }
-				  return answers;
+			  $scope.getData = function(nestedArray){
+			    console.log(nestedArray);
 			  }
+			  
+			  var answers = {};
+        function returnAnswers(dataObject, answersObject){
+          switch(dataObject.constructor.name.toLowerCase()) {
+            case 'array':
+              for(var i=0; i<dataObject.length; i++){
+                answersObject[i] = {};
+                returnAnswers(dataObject[i], answersObject[i]);
+              }
+              break;
+          }
+          for(key in dataObject){
+            if(dataObject[key]){
+              if(dataObject[key].answer || dataObject[key].answer == ''){
+                answersObject[key] = dataObject[key].answer;
+              }else{
+                switch(dataObject[key].constructor.name.toLowerCase()) {
+                  case 'array':
+                    answersObject[key] = [];
+                    returnAnswers(dataObject[key], answersObject[key]);
+                    break;
+                  case 'object':
+                    answersObject[key] = {};
+                    returnAnswers(dataObject[key], answersObject[key]);
+                    break;
+                }
+              }
+            }
+          }
+          return answers;
+        }
 
 $scope.submitForm = function(type){
 	var data = returnAnswers($scope.directiveData, answers);

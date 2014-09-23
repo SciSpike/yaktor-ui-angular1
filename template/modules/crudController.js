@@ -10,7 +10,17 @@ angular.module('<%- parentStateName %>')
 				  $scope.gridActions = {
 						changeState: function(state, index){
 							$scope.changeState(state,{id: index});
-						}
+						},
+						deleteItem: function(id){
+						  var id = id;
+						  <%- parentStateName %>Services.delete<%- parentStateName%>({}, id).then(function(response) {
+						    for(var i=0; i<$scope.gridOptions.data.length; i++){
+						      if($scope.gridOptions.data[i].id == id){
+						        $scope.gridOptions.data.splice(i, 1);
+						      }
+						    }
+						  });
+            }
 				  };
 				  
 				  function range(start, length){
@@ -26,8 +36,7 @@ angular.module('<%- parentStateName %>')
 					  $scope.pagingOptions.currentPage = page;
 					  if(page-2 <= 1){
 						  page = 3;
-					  }
-					  if(page >= $scope.pagingOptions.totalPages){
+					  }else if(page >= $scope.pagingOptions.totalPages){
 						  page = $scope.pagingOptions.totalPages;
 					  }
 					  $scope.pagingOptions['pageButtons'] = range(page-2, $scope.pagingOptions.pageNav);
@@ -41,11 +50,35 @@ angular.module('<%- parentStateName %>')
 					  pageNav: 5,
 					  totalPages: 5,
 					  totalServerItems: 5
-				  };	
+				  };
+				  
+				  $scope.allData = -1;
+				  $scope.gridHeaders = <%= JSON.stringify(state.components.elements)%>;
+				  $scope.gridFilter = {};
+				  $scope.filterGrid = function(){
+				    var filtersImplemented = angular.copy($scope.gridFilter);
+				    for(item in filtersImplemented){
+				      var itemType = filtersImplemented[item].constructor.name.toLowerCase();
+				      if(itemType == 'array'){
+				        var arrayEmpty = true;
+				        for(var i=0; i<filtersImplemented[item].length; i++){
+				          for(key in filtersImplemented[item][i]){
+				            arrayEmpty = false;
+				            break;
+				          } 
+				        }
+				        if(arrayEmpty == true){
+				          delete filtersImplemented[item];
+				        }
+				      }
+				    }
+				    findData(filtersImplemented);
+				  }
 			        
-			      $scope.gridOptions = {
+			    $scope.gridOptions = {
 			        	options: {
 				            enablePinning: true,
+				            enableSorting: true,
 				            enableColumnResize: true,
 				            enableRowSelection: false,
 				            actions: $scope.gridActions,
@@ -55,17 +88,16 @@ angular.module('<%- parentStateName %>')
 				              }
 				            },
 				            columnDefs: [
-				                         <% 
+				                         <%
 				                         var elems = state.components.elements;
-				                         var width = (90 / (_.pairs(elems).length)) + '%';
 				                         Object.keys(elems).forEach(function(elem, index, test){
 				                           var element=elems[elem];
 				                         %>
 				                         {
 				                           field: '<%- elem%>',
-				                           width: '<%- width%>',
 				                           minWidth: 150,
 				                           resizable: true,
+				                           sortable: true,
 				                           headerCellTemplate:"<div class='truncate'>{{'<%-element.ui.title%>'|translate}}</div>" +
 				                              "<div class='ngSortButtonDown ng-hide' ng-show='col.showSortButtonDown()'></div>" +
 				                              "<div class='ngSortButtonUp ng-hide' ng-show='col.showSortButtonUp()'></div>" +
@@ -74,76 +106,92 @@ angular.module('<%- parentStateName %>')
 				                         }, 
 				                        <%});%>
 				                        {
-				                           <% var putState = 'main.' + parentStateName + '.PUT'; %>
-					                       cellTemplate: "<div class='truncate editCell'><a ng-click='gridOptions.actions.changeState(\"<%- putState%>\", row.getProperty(\"_id\"))'>{{'EDIT'|translate}}</a></div>",
-					                       width: '*',
-					                       minWidth: 150,
+				                         <% var putState = 'main.' + parentStateName + '.PUT'; %>
+					                       cellTemplate: "<div class='editCell'><a ng-click='gridOptions.actions.changeState(\"<%- putState%>\", row.getProperty(\"_id\"))'>{{'EDIT'|translate}}</a></div>",
+					                       width: '75',
+					                       minWidth: 75,
 					                       resizable: false,
-					                       headerCellTemplate:"<div class='truncate'>{{'EDIT'|translate}}</div>"
-					                             
-					                     }
+					                       headerCellTemplate:"<div>{{'EDIT'|translate}}</div>" 
+					                     },
+					                     {
+                               <% var deleteState = 'main.' + parentStateName + '.DELETE'; %>
+                               cellTemplate: "<div class='editCell'><button class='btn btn-default btn-sm' ng-click='confirmDelete = !confirmDelete' ng-show='!confirmDelete'>{{'DELETE'|translate}}</button><button class='btn btn-default btn-sm' ng-click='confirmDelete = !confirmDelete' ng-show='confirmDelete'>{{'CANCEL.DELETE'|translate}}</button>&nbsp;<button class='btn btn-default btn-sm' ng-click='gridOptions.actions.deleteItem(row.getProperty(\"_id\"))' ng-show='confirmDelete'>{{'CONFIRM.DELETE'|translate}}</button></div>",
+                               width: '150',
+                               minWidth: 150,
+                               resizable: false,
+                               headerCellTemplate:"<div>{{'DELETE'|translate}}</div>" 
+                             }
 				                        
 				            ]
 			        	}
-			        }
+			      }
 			      
-			      function findData(){
-					  <%- parentStateName %>Services.find<%- parentStateName%>({}, $scope.pagingOptions.currentPage).then(function(response) {
+			      function findData(data){
+					  <%- parentStateName %>Services.find<%- parentStateName%>(data, $scope.pagingOptions.currentPage).then(function(response) {
 			           	  	$scope.gridOptions.data = response.results;
 			           	  	$scope.pagingOptions.totalServerItems = response.total;
+			           	  	if($scope.allData == -1){
+			           	  	 $scope.allData = response.total
+			           	  	}
 			           	  	$scope.pagingOptions.totalPages = Math.ceil($scope.pagingOptions.totalServerItems / $scope.pagingOptions.pageSize);
-							if($scope.pagingOptions.totalPages < $scope.pagingOptions.pageNav){
-								$scope.pagingOptions.pageNav = $scope.pagingOptions.totalPages;
-								$scope.pagingOptions.pageButtons = range($scope.pagingOptions.currentPage, $scope.pagingOptions.pageNav);
-							}
+        							if($scope.pagingOptions.totalPages < $scope.pagingOptions.pageNav){
+        								$scope.pagingOptions.pageNav = $scope.pagingOptions.totalPages;
+        								$scope.pagingOptions.pageButtons = range($scope.pagingOptions.currentPage, $scope.pagingOptions.pageNav);
+        							}
 			           });
 				  }
 			      
-				  findData();
+				  findData({});
 			  	
-			  <% }else{%>
-			  
-				  $scope.directiveData = {};
-				  <%
-				  var directiveData = {};
-				  var createDirectives = function(dataObject, elements){
-				  	for(element in elements){
-				  		if(elements[element].components){
-				  			dataObject[element] = {
-				  				type: elements[element].type
-				  			};
-				  			createDirectives(dataObject[element], elements[element].components.elements);
-				  		}else{
-				  			var elementData = elements[element];
-				  			dataObject[element] = elementData;
-				  			dataObject[element]['answer'] = '';
-				  		}	
-				  	}%>
-				  	$scope.directiveData = <%= JSON.stringify(dataObject,null,2)%>;
-				  <%}
-				  createDirectives(directiveData, state.components.elements);
-				  %>
+			  <% }else{
+			    var directiveData = {};
+			    var createDirectives = function(dataObject, elements){
+			      for(element in elements){
+			        if(elements[element].type == 'array'){
+			          if(elements[element].components){
+			            for(el in elements[element].components.elements){
+			              elements[element].components.elements[el].answer = '';
+			            }
+			            dataObject[element] = [elements[element].components.elements];
+			          }
+			        }else{
+			          if(!elements[element].components){
+                  dataObject[element] = elements[element];
+                  dataObject[element].answer = '';
+                }else{
+                  dataObject[element] = {};
+                  createDirectives(dataObject[element], elements[element].components.elements);
+                }
+			        }
+			      }
+			    }
+				  createDirectives(directiveData, state.components.elements);%>
+				  
+				  $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
+				  
+				  $scope.getData = function(nestedArray){
+	          console.log(nestedArray);
+	        }
 				  
 				  <% if(state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
-					  	function mergeAnswers(dataObject, answers){
-					  		if(Array.isArray(answers)){
-					  			for(var i=0; i<answers.length; i++){
-					  				mergeAnswers(dataObject, answers[i]);
-					  			}
-							  }else{
-						  		for(key in dataObject){
-						  			switch(dataObject[key].type) {
-									    case 'array':
-									    	mergeAnswers(dataObject[key], answers[key]);
-									        break;
-									    case 'map':
-											returnAnswers(dataObject[key], answers[key]);
-									        break;
-									    default:
-									    	dataObject[key]['answer'] = answers[key];
-									}
-						  		}
-							  }
+				  
+					  	function mergeAnswers(dataObject, answersObject){
+					  	  switch(dataObject.constructor.name.toLowerCase()) {
+  	              case 'array':
+  	                for(var i=0; i<dataObject.length; i++){
+  	                  mergeAnswers(dataObject[i], answersObject[i]);
+  	                }
+  	                break;
+  	            }
+					  	  for(key in dataObject){
+		              if(dataObject[key]){
+		                if(dataObject[key].answer || dataObject[key].answer == ''){
+		                  dataObject[key].answer = answersObject[key];
+		                }else{
+		                  mergeAnswers(dataObject[key], answersObject[key]);
+		                }
+		              }
+		            }
 					  	}
 				  		<%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
 				  			mergeAnswers($scope.directiveData, response);
@@ -151,31 +199,35 @@ angular.module('<%- parentStateName %>')
 				  <%}%>
 				  
 				  var answers = {};
-				  function returnAnswers(dataObject, answers){
-					  if(Array.isArray(answers)){
-					  		var arrayAnswers = {};
-					  		for(key in dataObject){
-					  			arrayAnswers[key] = dataObject[key].answer;
-					  		}
-					  		answers.push(arrayAnswers);
-						  }else{
-							for(key in dataObject){
-								switch(dataObject[key].type) {
-								    case 'array':
-								    	answers[key] = [];
-										returnAnswers(dataObject[key], answers[key]);
-								        break;
-								    case 'map':
-								    	answers[key] = {};
-										returnAnswers(dataObject[key], answers[key]);
-								        break;
-								    default:
-								    	answers[key] = dataObject[key].answer;
-								}
-							}
-					  }
-					  return answers;
-				  }
+	        function returnAnswers(dataObject, answersObject){
+	          switch(dataObject.constructor.name.toLowerCase()) {
+              case 'array':
+                for(var i=0; i<dataObject.length; i++){
+                  answersObject[i] = {};
+                  returnAnswers(dataObject[i], answersObject[i]);
+                }
+                break;
+            }
+	          for(key in dataObject){
+	            if(dataObject[key]){
+	              if(dataObject[key].answer || dataObject[key].answer == ''){
+                  answersObject[key] = dataObject[key].answer;
+                }else{
+                  switch(dataObject[key].constructor.name.toLowerCase()) {
+                    case 'array':
+                      answersObject[key] = [];
+                      returnAnswers(dataObject[key], answersObject[key]);
+                      break;
+                    case 'object':
+                      answersObject[key] = {};
+                      returnAnswers(dataObject[key], answersObject[key]);
+                      break;
+                  }
+                }
+	            }
+	          }
+	          return answers;
+	        }
 				  
 				  $scope.submitForm = function(type){
 					  var data = returnAnswers($scope.directiveData, answers);

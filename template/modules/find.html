@@ -1,8 +1,33 @@
-<div class="findView" ng-if="gridOptions.data">
-	<div class="btn-group">
-		<button type="button" class="btn btn-default" ng-click="gotoPage(1)">First Page</button>
-		<button type="button" class="btn btn-default" ng-repeat="page in pagingOptions.pageButtons" ng-click="gotoPage(page)">{{page}}</button>
-		<button type="button" class="btn btn-default" ng-click="gotoPage(pagingOptions.totalPages)">LastPage</button>
+<div ng-if="allData > 0" class="findView">
+	<a ng-click="showFilters = !showFilters">
+		<span ng-show="!showFilters">Show Filter Options</span>
+		<span ng-show="showFilters">Hide Filter Options</span>
+	</a>
+	<br /><br />
+	<div class="well" ng-show="showFilters">
+		<span ng-repeat="(key, value) in gridHeaders">
+			<span ng-switch="value.type">
+				<div ng-switch-when="array" ng-init="gridFilter[key] = []; gridFilter[key][0] = {}" class="form-group">
+					<input ng-repeat="(innerKey, innerValue) in value.components.elements" type="text" class="form-control" ng-model="gridFilter[key][0][innerKey]" placeholder="{{key}} {{innerKey}}" />
+				</div>
+				<input ng-switch-default type="text" class="form-control" ng-model="gridFilter[key]" placeholder="{{key}}" />
+			</span>
+		</span>
+		<br />
+		<button type="button" class="btn btn-default" ng-click="filterGrid()">Filter Grid</button>
 	</div>
-   <div class="ngGridDirective" grid-data='gridOptions.data' grid-options='gridOptions.options'></div>
+	<div ng-if="gridOptions.data.length > 0">
+		<div ng-if="pagingOptions.totalPages > 1" class="btn-group">
+			<button type="button" class="btn btn-default" ng-click="gotoPage(1)">First Page</button>
+			<button type="button" class="btn btn-default" ng-repeat="page in pagingOptions.pageButtons" ng-click="gotoPage(page)">{{page}}</button>
+			<button type="button" class="btn btn-default" ng-click="gotoPage(pagingOptions.totalPages)">LastPage</button>
+		</div>
+	   <div class="ngGridDirective" grid-data='gridOptions.data' grid-options='gridOptions.options'></div>
+   </div>
+   <div ng-if="gridOptions.data.length == 0">
+   		<h5>There are no results based on your filters</h5>
+   </div>
+</div>
+<div ng-if="allData == 0" class="findView">
+	<h5>There are no results to display</h5>
 </div>

@@ -9,6 +9,8 @@ angular.module('<%- moduleName %>')
 			$timeout(function(){//NEED TO KNOW ID
 				<% if(element == 'GET'){%>
 				RestService['FINDBYID']('<%- actions.url%>', null,id,function(err,data){
+				<%}else if(element == 'DELETE'){%>
+				RestService['<%- element%>']('<%- actions.url%>', null,id,function(err,data){
 				<%}else{%>
 				RestService['<%- element%>']('<%- actions.url%>', data,id,function(err,data){
 				<%}%>

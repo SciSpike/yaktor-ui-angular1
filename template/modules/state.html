@@ -1,10 +1,12 @@
 <div class="<%- moduleName %><%- state.name %>">
-  <div class="state">
+  <div ng-init="showTitle=true" class="state">
     <% 
     var actions;
-    if(state.proto.match(/ws:/)) {%>
+    var titleArray = parentUrl.replace('/', '').split('.');
+    %>
+    <h1><%- titleArray[0]%> <%- titleArray[1]%></h1>
 	    	<div class="wsPartial">
-			    <h3>{{'<%- state.title%>'|translate}}</h3>
+			    <% if(Object.keys(state.elements).length == 0){%><h3>{{'<%- state.title%>'|translate}}</h3><%}%>
 			    <ul class="list-inline">
 			    <%var elements = state.elements;
 			       actions = Object.keys(elements);
@@ -17,26 +19,6 @@
 			        </li><% });} %>
 			    </ul>
 		  </div>
-    <%}else{%>
-		    <% if(state.elements.length > 1){%>
-			    <div class="tabPanel">
-			    	<div class="tabList">
-			    		<div class="tabInner">
-			    		    <% 
-			    		       Object.keys(state.elements).forEach(function(a){ 
-			    		       var key = a;
-			    		       var actionable = state.elements[a];
-			    		       var subPath =  actionable.subPath || "";
-			    		       %>
-			    		      
-			    		        <span ng-init="setGlyph('<%=actionable.ui.title%>')" ng-class="{active: $state.is('main.<%-state.friendly%>.<%=a%>')<% if(subPath.match(/:id/)){ %>,disabled:params.id==null<%}%>}" ng-click="<% if(subPath.match(/:id/)){ %>(params.id!=null) && <%}%>goState('main.<%-state.friendly%>.<%=a%>',{id:params.id},true)" id="<%=key.toLowerCase()%>"><span class="navContainer"><span class="navText">{{'<%=actionable.ui.title%>'|translate}}</span><span ng-class="getGlyph['<%=actionable.ui.title%>']"></span></span></span>
-			    		      
-			    		    <% }); %>
-			    	    </div>
-			    	</div>
-			    </div>
-		    <% } %>
-    <%}%>
     <div class="view" ui-view="" autoscroll="false"></div>
   </div>
 </div>
