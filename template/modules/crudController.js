@@ -56,7 +56,9 @@ angular.module('<%- parentStateName %>')
 				  $scope.gridHeaders = <%= JSON.stringify(state.components.elements)%>;
 				  $scope.gridFilter = {};
 				  $scope.numFilters = 0;
+				  
 				  $scope.filterGrid = function(){
+				    $scope.numFilters = 0;
 				    $scope.filtersImplemented = angular.copy($scope.gridFilter);
 				    for(item in $scope.filtersImplemented){
 				      var itemType = $scope.filtersImplemented[item].constructor.name.toLowerCase();
@@ -64,15 +66,25 @@ angular.module('<%- parentStateName %>')
 				        var arrayEmpty = true;
 				        for(var i=0; i<$scope.filtersImplemented[item].length; i++){
 				          for(key in $scope.filtersImplemented[item][i]){
-				            arrayEmpty = false;
-				            $scope.numFilters++;
+				            if($scope.gridFilter[item][i][key] != '' && $scope.gridFilter[item][i][key] != null){
+				              arrayEmpty = false;
+		                  $scope.numFilters++;
+		                }else{
+		                  delete $scope.gridFilter[item][i][key];
+		                  delete $scope.filtersImplemented[item][i][key];
+		                }
 				          } 
 				        }
 				        if(arrayEmpty == true){
-				          delete $scope.filtersImplemented[item];
+                  delete $scope.filtersImplemented[item];
 				        }
 				      }else{
-				        $scope.numFilters++;
+				        if($scope.gridFilter[item] != '' && $scope.gridFilter[item] != null){
+				          $scope.numFilters++;
+				        }else{
+				          delete $scope.gridFilter[item];
+				          delete $scope.filtersImplemented[item];
+				        }
 				      }
 				    }
 				    findData($scope.filtersImplemented);

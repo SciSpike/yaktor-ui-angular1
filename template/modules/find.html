@@ -21,7 +21,7 @@
 		<span ng-switch="gridHeaders[key].type">
 			<span ng-switch-when='array' class="form-group">
 				<span ng-repeat="arrayItem in filtersImplemented[key] track by $index">
-					<button ng-repeat="(innerKey, innerValue) in filtersImplemented[key][$index]" class="btn btn-default filterBtn" ng-model="gridFilter[key][$index][innerKey]">{{key}} {{innerKey}}: {{innerValue}}<span ng-click="removeFilter(innerKey, key, $index);" class="glyphicon glyphicon-remove-circle"></span></button>
+					<button ng-repeat="(innerKey, innerValue) in filtersImplemented[key][$parent.$index]" class="btn btn-default filterBtn" ng-model="gridFilter[key][$parent.$index][innerKey]">{{key}} {{innerKey}}: {{innerValue}}<span ng-click="removeFilter(innerKey, key, $parent.$index);" class="glyphicon glyphicon-remove-circle"></span></button>
 				</span>
 			</span>
 			<button ng-switch-default ng-if="key != 'page'" class="btn btn-default filterBtn" ng-model="gridFilter[key]">{{key}}: {{value}}<span ng-click="removeFilter(key);" class="glyphicon glyphicon-remove-circle"></span></button>
