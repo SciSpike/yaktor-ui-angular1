@@ -4,7 +4,7 @@
 		<span ng-show="showFilters">{{'HIDE.FILTER.OPTIONS' | translate}}</span>
 	</a>
 	<br /><br />
-	<div class="well" ng-show="showFilters">
+	<div class="filters well" ng-show="showFilters">
 		<span ng-repeat="(key, value) in gridHeaders">
 			<span ng-switch="value.type">
 				<div ng-switch-when="array" ng-init="gridFilter[key] = []; gridFilter[key][0] = {}" class="form-group">
