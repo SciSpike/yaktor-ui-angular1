@@ -55,26 +55,42 @@ angular.module('<%- parentStateName %>')
 				  $scope.allData = -1;
 				  $scope.gridHeaders = <%= JSON.stringify(state.components.elements)%>;
 				  $scope.gridFilter = {};
+				  $scope.numFilters = 0;
 				  $scope.filterGrid = function(){
-				    var filtersImplemented = angular.copy($scope.gridFilter);
-				    for(item in filtersImplemented){
-				      var itemType = filtersImplemented[item].constructor.name.toLowerCase();
+				    $scope.filtersImplemented = angular.copy($scope.gridFilter);
+				    for(item in $scope.filtersImplemented){
+				      var itemType = $scope.filtersImplemented[item].constructor.name.toLowerCase();
 				      if(itemType == 'array'){
 				        var arrayEmpty = true;
-				        for(var i=0; i<filtersImplemented[item].length; i++){
-				          for(key in filtersImplemented[item][i]){
+				        for(var i=0; i<$scope.filtersImplemented[item].length; i++){
+				          for(key in $scope.filtersImplemented[item][i]){
 				            arrayEmpty = false;
-				            break;
+				            $scope.numFilters++;
 				          } 
 				        }
 				        if(arrayEmpty == true){
-				          delete filtersImplemented[item];
+				          delete $scope.filtersImplemented[item];
 				        }
+				      }else{
+				        $scope.numFilters++;
 				      }
 				    }
-				    findData(filtersImplemented);
+				    findData($scope.filtersImplemented);
 				  }
 			        
+				  $scope.removeFilter = function(child, parent, index){
+				    if(parent){
+				      delete $scope.gridFilter[parent][index][child];
+				      delete $scope.filtersImplemented[parent][index][child];
+				      $scope.numFilters--;
+				    }else{
+				      delete $scope.gridFilter[child];
+				      delete $scope.filtersImplemented[child];
+				      $scope.numFilters--;
+				    }
+				    findData($scope.filtersImplemented);
+				  }
+				  
 			    $scope.gridOptions = {
 			        	options: {
 				            enablePinning: true,

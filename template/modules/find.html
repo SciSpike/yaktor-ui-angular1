@@ -1,7 +1,7 @@
 <div ng-if="allData > 0" class="findView">
 	<a ng-click="showFilters = !showFilters">
-		<span ng-show="!showFilters">Show Filter Options</span>
-		<span ng-show="showFilters">Hide Filter Options</span>
+		<span ng-show="!showFilters">{{'SHOW.FILTER.OPTIONS' | translate}}</span>
+		<span ng-show="showFilters">{{'HIDE.FILTER.OPTIONS' | translate}}</span>
 	</a>
 	<br /><br />
 	<div class="well" ng-show="showFilters">
@@ -14,20 +14,37 @@
 			</span>
 		</span>
 		<br />
-		<button type="button" class="btn btn-default" ng-click="filterGrid()">Filter Grid</button>
+		<button type="button" class="btn btn-default" ng-click="filterGrid()">{{'FILTER.GRID' | translate}}</button>
 	</div>
+	<label ng-if="numFilters > 0">{{'FILTERS' | translate}}: </label>
+	<span ng-repeat="(key, value) in filtersImplemented">
+		<span ng-switch="gridHeaders[key].type">
+			<span ng-switch-when='array' class="form-group">
+				<span ng-repeat="arrayItem in filtersImplemented[key] track by $index">
+					<button ng-repeat="(innerKey, innerValue) in filtersImplemented[key][$index]" class="btn btn-default filterBtn" ng-model="gridFilter[key][$index][innerKey]">{{key}} {{innerKey}}: {{innerValue}}<span ng-click="removeFilter(innerKey, key, $index);" class="glyphicon glyphicon-remove-circle"></span></button>
+				</span>
+			</span>
+			<button ng-switch-default ng-if="key != 'page'" class="btn btn-default filterBtn" ng-model="gridFilter[key]">{{key}}: {{value}}<span ng-click="removeFilter(key);" class="glyphicon glyphicon-remove-circle"></span></button>
+		</span>
+	</span>
+	<br /><br />
+	<button class="btn btn-default" ui-sref="main.<%- parentStateName%>.POST">{{'CREATE.NEW' | translate}}</button>
+	<br /><br />
 	<div ng-if="gridOptions.data.length > 0">
 		<div ng-if="pagingOptions.totalPages > 1" class="btn-group">
-			<button type="button" class="btn btn-default" ng-click="gotoPage(1)">First Page</button>
+			<button type="button" class="btn btn-default" ng-click="gotoPage(1)">{{'FIRST.PAGE' | translate}}</button>
 			<button type="button" class="btn btn-default" ng-repeat="page in pagingOptions.pageButtons" ng-click="gotoPage(page)">{{page}}</button>
-			<button type="button" class="btn btn-default" ng-click="gotoPage(pagingOptions.totalPages)">LastPage</button>
+			<button type="button" class="btn btn-default" ng-click="gotoPage(pagingOptions.totalPages)">{{'LAST.PAGE' | translate}}</button>
 		</div>
 	   <div class="ngGridDirective" grid-data='gridOptions.data' grid-options='gridOptions.options'></div>
    </div>
    <div ng-if="gridOptions.data.length == 0">
-   		<h5>There are no results based on your filters</h5>
+   		<h5>{{'NO.FILTER.RESULTS' | translate}}</h5>
    </div>
 </div>
 <div ng-if="allData == 0" class="findView">
-	<h5>There are no results to display</h5>
+	<h5>{{'NO.RESULTS' | translate}}</h5>
 </div>
+<br />
+<button class="btn btn-default" ui-sref="main.<%- parentStateName%>.POST">{{'CREATE.NEW' | translate}}</button>
+<br />
