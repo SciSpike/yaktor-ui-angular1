@@ -40,7 +40,7 @@ angular.module('<%- parentStateName %>')
 						  page = $scope.pagingOptions.totalPages;
 					  }
 					  $scope.pagingOptions['pageButtons'] = range(page-2, $scope.pagingOptions.pageNav);
-					  findData();
+					  findData({});
 				  };
 				  
 				  $scope.pagingOptions = {
