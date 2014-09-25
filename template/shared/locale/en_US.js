@@ -19,6 +19,7 @@ angular.module('views').config(function ($translateProvider) {
     'NO.RESULTS': 'There are no results to display',
     'FIRST.PAGE': 'First Page',
     'LAST.PAGE': 'Last Page',
-    'FILTERS': 'Filters'
+    'FILTERS': 'Filters',
+    'INVALID.NUMBER': 'Please check your number input fields for incorrect values'
   })
 });
