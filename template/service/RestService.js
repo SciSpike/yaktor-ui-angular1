@@ -57,7 +57,7 @@ angular.module('{{appname}}').service('RestService', function (serverLocation, $
     });
   }
   service.DELETE = function(endpoint, notUsed,id,cb) {
-    $http.put(serverLocation + endpoint+"/"+id)
+    $http.delete(serverLocation + endpoint+"/"+id)
     .success(function(data, status, headers, config) {
       console.log(data, status, headers, config);
       cb(null,data, status, headers, config);
