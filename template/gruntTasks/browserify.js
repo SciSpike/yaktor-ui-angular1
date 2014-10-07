@@ -131,7 +131,7 @@ module.exports = {
 		  		'./libs/controllers.js': ["./controllers/**/*.js"],
 		  		'./libs/locales.js': ["./locale/**/*.js"],
 		  		'./libs/conversation.js': ["./modules/conversation/conversation.js", './modules/conversation/controller/**/*.js', './modules/conversation/locale/**/*.js'],
-		  		'./libs/resources.js': ['bower_components/sockjs-client/sockjs.min.js']
+		  		'./libs/resources.js': ['bower_components/sockjs-client/dist/sockjs.js']
 			},
 			options: {
 			  alias: browserifyLibAlias,
