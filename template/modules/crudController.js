@@ -186,6 +186,8 @@ angular.module('<%- parentStateName %>')
 			              elements[element].components.elements[el].answer = '';
 			            }
 			            dataObject[element] = [elements[element].components.elements];
+			          }else{
+			            dataObject[element] = elements[element];
 			          }
 			        }else{
 			          if(!elements[element].components){

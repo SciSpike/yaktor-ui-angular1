@@ -57,6 +57,17 @@ module.exports = function(grunt) {
 	            './index.html': ['./libs/*.js', './libs/vendor/*.js']
 	          }
         },
+        'modules': {
+          'options': {
+              'startTag': '<!--MODULES-->',
+              'endTag': '<!--MODULES END-->',
+              'fileTmpl': '<script src="%s"></script>',
+              'appRoot': './'
+            },
+            'files': {
+              './index.html': ['./libs/modules/*.js']
+            }
+        },
         'dev': {
         	'options': {
 			            'startTag': '<!--CSS-->',
@@ -84,7 +95,7 @@ module.exports = function(grunt) {
   
   grunt.initConfig(config);
   
-  var sharedTasks = ['less','copy', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:libs'];
+  var sharedTasks = ['less','copy', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs'];
   var serveTasks = ['cssmin', 'sails-linker:prod'];
   var allTasks = sharedTasks.concat(serveTasks);
   

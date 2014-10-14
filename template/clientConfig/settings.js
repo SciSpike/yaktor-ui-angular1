@@ -8,9 +8,11 @@ angular.module('views')
         'date': 'date',
         'integer': 'integer',
         'toggle': 'toggle',
-        'radio': 'radio',
+        'excMulti': 'radio',
         'boolean': 'boolean',
-        'array': 'checkbox'
+        'incMulti': 'checkbox',
+        'geo': 'geo',
+        'array': 'array'
       }
     },
     'theme': 'default'

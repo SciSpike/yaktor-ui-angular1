@@ -6,9 +6,10 @@ angular.module('<%- moduleName %>',
 		   'ngGrid', 
 		   'ngResource',
 		   'ui.select2',
-		   'checklist-model'])
+		   'checklist-model',
+		   'sharedModule'])
 		   
-		   .config(function($stateProvider, $locationProvider,$translateProvider) {
+		   .config(function($stateProvider, $locationProvider,$translateProvider,routesExtendedProvider) {
 			   $translateProvider.preferredLanguage(defaultLocale);
 			   $stateProvider
 				   .state('main.<%- moduleName %>',{
@@ -16,14 +17,14 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/index.html'
 						},
-						controller:'<%- moduleName %>Controller' //HANDLES CONNECTION AND STATE TRANSTITIONS (WITH ABILITY TO CUSTOMIZE ???)
+						controller: routesExtendedProvider.routes.<%- moduleName %> || '<%- moduleName %>Controller' //HANDLES CONNECTION AND STATE TRANSTITIONS (WITH ABILITY TO CUSTOMIZE ???)
 					})
 					
 					.state('main.<%- moduleName %>.init',{ // TRANSITIONED TO IF NO INIT DATA IN PARENT
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/init.html'
 						},
-						controller:'<%- moduleName %>initController'
+						controller: '<%- moduleName %>initController'
 					})
 					<% _.each(states, function(state, key){
 						var stateName = state.name;
@@ -33,7 +34,7 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>.html'
 						},
-						controller:'<%- moduleName %><%- stateName %>Controller'
+						controller: '<%- moduleName %><%- stateName %>Controller'
 					})
 					<% _.each(state.elements, function(view, key){
 					var viewName = view.subPath.replace('/', '');%>
@@ -41,6 +42,6 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
 						},
-						controller:'<%- moduleName %><%- viewName %>Controller'
+						controller: '<%- moduleName %><%- viewName %>Controller'
 					})<% });%><% });%>
 		  });

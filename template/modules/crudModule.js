@@ -6,9 +6,10 @@ angular.module('<%- moduleName %>',
 		   'ngGrid', 
 		   'ngResource',
 		   'ui.select2',
-		   'checklist-model'])
+		   'checklist-model',
+		   'sharedModule'])
 		   
-		   .config(function($stateProvider, $locationProvider,$translateProvider) {
+		   .config(function($stateProvider, $locationProvider,$translateProvider,routesExtendedProvider) {
 			   $translateProvider.preferredLanguage(defaultLocale);
 			   $stateProvider
 				   .state('main.<%- moduleName %>',{
@@ -16,7 +17,7 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/crud/<%- moduleName %>/index.html'
 						},
-						controller:'<%- moduleName %>Controller'
+						controller: routesExtendedProvider.routes.<%- moduleName %> || '<%- moduleName %>Controller'
 					})
 					<% _.each(states, function(state, key){
 						var stateName = key;
@@ -26,7 +27,7 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>.html'
 						},
-						controller:'<%- moduleName %><%- stateName %>Controller'
+						controller: '<%- moduleName %><%- stateName %>Controller'
 					})
 					<% _.each(state.elements, function(view, key){
 					var viewName = view.subPath.replace('/', '');%>
@@ -34,6 +35,6 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
 						},
-						controller:'<%- moduleName %><%- viewName %>Controller'
+						controller: '<%- moduleName %><%- viewName %>Controller'
 					})<% });%><% });%>
 		  });

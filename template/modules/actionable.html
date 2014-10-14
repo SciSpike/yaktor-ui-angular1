@@ -46,10 +46,10 @@
 		        						<div ng-repeat="(innerKey, innerValue) in item" class="engineUiFormInput" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>'][$parent.$index][innerKey]"></div>
 		        					</div>
 		        					</div>
-			        		<%}else{%>
-			        			<% createDirectives(element.components.elements, key);%>
-			        		<%}
-		        			nestedArray.push(key);%>	
+			        		<%}else{
+			        			nestedArray.push(key);
+			        			createDirectives(element.components.elements, key);%>
+			        		<%}%>	
 					        </div>
 		        		<%}else{%>
 				        	<div class='engineUiFormInput' directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>']"></div>	
