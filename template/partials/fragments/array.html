@@ -1,0 +1,8 @@
+<div class='well'>
+	<h5>{{directiveData.ui.title | translate}}: </h5>
+	<input ng-repeat="answer in directiveData.answer track by $index" class="form-control arrayInput" type='text' name="input" ng-model='directiveData.answer[$index]'></input>
+	<br />
+	<span class="glyphicon glyphicon-plus-sign" ng-click="addArrayItem()"></span>
+	<br />
+</div>
+<br />

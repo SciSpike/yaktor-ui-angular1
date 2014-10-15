@@ -24,10 +24,13 @@ angular.module('views')
                 $scope.directiveData.ui.type = clientSettings.forms.elementTypes[$scope.directiveData.type];
               }
             },
-            link: function(scope, attrs, element){
+            link: function(scope, element, attrs){
               scope.getContentUrl = function() {
                     return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type + '.html';
                }
+              scope.addArrayItem = function(){
+                scope.directiveData.answer.push("");
+              }
             }
         }
   });

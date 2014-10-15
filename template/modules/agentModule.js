@@ -24,7 +24,7 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/init.html'
 						},
-						controller: '<%- moduleName %>initController'
+						controller: routesExtendedProvider.routes.<%- moduleName %>Init || '<%- moduleName %>initController'
 					})
 					<% _.each(states, function(state, key){
 						var stateName = state.name;
@@ -34,7 +34,7 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>.html'
 						},
-						controller: '<%- moduleName %><%- stateName %>Controller'
+						controller: routesExtendedProvider.routes['<%- moduleName %>.<%- stateName %>'] || '<%- moduleName %><%- stateName %>Controller'
 					})
 					<% _.each(state.elements, function(view, key){
 					var viewName = view.subPath.replace('/', '');%>
@@ -42,6 +42,6 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
 						},
-						controller: '<%- moduleName %><%- viewName %>Controller'
+						controller: routesExtendedProvider.routes['<%- moduleName %>.<%- viewName %>'] || '<%- moduleName %><%- viewName %>Controller'
 					})<% });%><% });%>
 		  });

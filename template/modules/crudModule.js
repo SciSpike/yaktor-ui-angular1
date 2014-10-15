@@ -27,7 +27,7 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>.html'
 						},
-						controller: '<%- moduleName %><%- stateName %>Controller'
+						controller: routesExtendedProvider.routes['<%- moduleName %>.<%- stateName %>'] || '<%- moduleName %><%- stateName %>Controller'
 					})
 					<% _.each(state.elements, function(view, key){
 					var viewName = view.subPath.replace('/', '');%>
@@ -35,6 +35,6 @@ angular.module('<%- moduleName %>',
 						templateUrl: function(){
 							return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
 						},
-						controller: '<%- moduleName %><%- viewName %>Controller'
+						controller: routesExtendedProvider.routes['<%- moduleName %>.<%- viewName %>'] || '<%- moduleName %><%- viewName %>Controller'
 					})<% });%><% });%>
 		  });

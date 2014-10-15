@@ -1,7 +1,8 @@
 <div class="<%- moduleName.toLowerCase() %>{{'<%- parentStateName%>'|translate}}<%- state.name %>">
   <div title="{{'<%- state.ui.title%>' | translate}}">
-  <% 
-  var titleArray = moduleUrl.replace('/', '').split('.');
+  <%
+  var regex = new RegExp('/', "g");
+  var titleArray = moduleUrl.split('/');
   %>
   <h1 ng-if="!showTitle"><%- titleArray[0]%> <%- titleArray[1]%></h1>
     <form name="actionableForm" ng-submit="submitForm('<%- state.ui.title.toLowerCase()%>')">
@@ -43,7 +44,7 @@
 		        				<div ng-repeat="item in directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>'] track by $index">
 		        					<div ng-if="item.ui" class="engineUiFormInput" directive-data="item"></div>
 		        					<div ng-if="!item.ui">
-		        						<div ng-repeat="(innerKey, innerValue) in item" class="engineUiFormInput" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>'][$parent.$index][innerKey]"></div>
+		        						<div ng-repeat="(innerKey, innerValue) in item" class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%- nestedArray[i]%> <%}%><%- key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>'][$parent.$index][innerKey]"></div>
 		        					</div>
 		        					</div>
 			        		<%}else{
@@ -52,7 +53,7 @@
 			        		<%}%>	
 					        </div>
 		        		<%}else{%>
-				        	<div class='engineUiFormInput' directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>']"></div>	
+				        	<div class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%- nestedArray[i]%> <%}%><%- key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>']"></div>	
 				        <%}
 		        	})
 		        }

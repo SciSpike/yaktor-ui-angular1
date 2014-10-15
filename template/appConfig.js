@@ -8,14 +8,14 @@ angular.module('views')
       templateUrl : function(){
         return partialsBaseLocation+ '/shared/main.html'
       },
-      controller : routesExtendedProvider.routes.main || 'mainController'
+      controller : routesExtendedProvider.routes['main.index'] || 'mainController'
     })
    .state('main.home',{
      url: '/home',
      templateUrl: function(){
        return clientBaseLocation + '/custom/homePage/home.html'
      },
-     controller: routesExtendedProvider.routes.home || 'homeController'
+     controller: routesExtendedProvider.routes['home.index'] || 'homeController'
    });
    
 })

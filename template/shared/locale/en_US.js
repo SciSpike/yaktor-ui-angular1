@@ -20,6 +20,9 @@ angular.module('views').config(function ($translateProvider) {
     'FIRST.PAGE': 'First Page',
     'LAST.PAGE': 'Last Page',
     'FILTERS': 'Filters',
-    'INVALID.NUMBER': 'Please check your number input fields for incorrect values'
+    'INVALID.NUMBER': 'Please check your number input fields for incorrect values',
+    'GEOLOCATION': 'Geolocation',
+    'LATITUDE': 'Latitude',
+    'LONGITUDE': 'Longitude'
   })
 });
