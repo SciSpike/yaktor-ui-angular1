@@ -1,0 +1,14 @@
+<input type="text" 
+	ng-model="directiveData.answer" 
+	placeholder="{{directiveData.ui.title | translate}}"
+	typeahead="item for item in directiveData.ui.data | filter:$viewValue | limitTo:10" 
+	class="form-control" />
+
+<!-- 
+ASYNCH
+<input type="text" 
+	ng-model="directiveData.answer" 
+	placeholder="{{directiveData.ui.title | translate}}"
+	typeahead="item for item in directiveData.ui.data" 
+	typeahead-loading="loadingLocations" 
+	class="form-control" /> -->

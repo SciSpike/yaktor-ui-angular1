@@ -1,5 +1,5 @@
 angular.module('views')
-  .directive('engineUiFormInput', function($rootScope, $eventsCommon, $timeout) {
+  .directive('engineUiFormInput', function($rootScope, $eventsCommon, $timeout, typeRefService) {
     return{
             restrict: 'C',
             template: '<div ng-include="getContentUrl()"></div>',
@@ -7,13 +7,20 @@ angular.module('views')
                 directiveData: '='
             },
             controller: function($scope, $filter, clientSettings) {
-              if($scope.directiveData.type == 'array'){
+              if($scope.directiveData.typeRef){
+                typeRefService.getTypeRef($scope.directiveData.typeRef).then(function(response){
+                  $scope.directiveData.ui.data = response;
+                  $scope.directiveData.ui.type = clientSettings.forms.elementTypes.typeAhead;
+                });
+              }else if($scope.directiveData.type == 'array'){
                 if($scope.directiveData.ui.items.enum){
                   //This means there are the enum values constrain the set of valid values, hence radio or select / could be checkbox ???
                   $scope.directiveData.ui.type = clientSettings.forms.elementTypes.excMulti;
                 }else{
                   if($scope.directiveData.ui.metaType && $scope.directiveData.ui.metaType == 'geo'){
                     //This is a special case and has set number of inputs, 2 in total - lat and lng
+                    $scope.directiveData.mapLoaded = false;
+                    $scope.directiveData.useCurrent = true;
                     $scope.directiveData.ui.type = clientSettings.forms.elementTypes.geo;
                   }else{
                     //This is a group of inputs, initally 1, with the option to add more

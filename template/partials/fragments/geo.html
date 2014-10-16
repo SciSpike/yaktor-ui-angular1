@@ -1,10 +1,12 @@
 <div class='geo well'>
 	<h5>{{directiveData.ui.title | translate}}: </h5>
-	<!-- INCLUDE GOOGLE MAP -->
+	<div id="map-canvas" ng-if="directiveData.mapLoaded == true"></div>
 	<span>{{'LATITUDE' | translate}}:</span>
 	<input class="form-control" type='number' name="input" ng-disabled="true" ng-model='directiveData.answer[0]'></input>
+	&nbsp;
 	<span>{{'LONGITUDE' | translate}}:</span>
 	<input class="form-control" type='number' name="input" ng-disabled="true" ng-model='directiveData.answer[1]'></input>
-	<br />
+	&nbsp;
+	<button type="button" class="btn btn-default" ng-click="directiveData.mapLoaded = 'pending'" ng-show="!directiveData.useCurrent">Show Location</span>
 </div>
 <br />
