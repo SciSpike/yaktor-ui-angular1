@@ -137,6 +137,9 @@ module.exports = {
 		 		<% _.each(moduleNames.crud, function(moduleName, index){%>
 		  		'./libs/modules/<%- moduleName %>.js': ['./modules/crud/<%- moduleName %>/<%- moduleName %>.js', './modules/crud/<%- moduleName %>/controllers/**/*.js', './modules/crud/<%- moduleName %>/directives/**/*.js', './modules/crud/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
 		 		<% }}); %>
+		 		<% _.each(moduleNames.resources, function(moduleName, index){%>
+        './libs/modules/<%- moduleName %>.js': ['./shared/modules/<%- moduleName %>/<%- moduleName %>.js', './shared/modules/<%- moduleName %>/controllers/**/*.js', './shared/modules/<%- moduleName %>/directives/**/*.js', './shared/modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+      <% }}); %>
 			},
 			options: {
 			  alias: browserifyLibAlias,

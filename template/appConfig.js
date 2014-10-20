@@ -80,4 +80,8 @@ angular.module('views')
  }
  createEvents(agentObject);%>
  }
-});
+})
+
+ .config(['defaultSettingsProvider', 'clientConstants', function (defaultSettingsProvider, clientConstants) {
+   defaultSettingsProvider.setElementTypes(clientConstants.forms.elementTypes);
+}]);

@@ -4,31 +4,28 @@ angular.module('views')
             restrict: 'C',
             template: '<div ng-include="getContentUrl()"></div>',
             scope: {
-                directiveData: '='
+                directiveData: '=',
+                key: '@'
             },
-            controller: function($scope, $filter, clientSettings) {
+            controller: function($scope, $filter, defaultSettings, $state, settingsInstances) {
               if($scope.directiveData.typeRef){
-                typeRefService.getTypeRef($scope.directiveData.typeRef).then(function(response){
-                  $scope.directiveData.ui.data = response;
-                  $scope.directiveData.ui.type = clientSettings.forms.elementTypes.typeAhead;
-                });
-              }else if($scope.directiveData.type == 'array'){
-                if($scope.directiveData.ui.items.enum){
-                  //This means there are the enum values constrain the set of valid values, hence radio or select / could be checkbox ???
-                  $scope.directiveData.ui.type = clientSettings.forms.elementTypes.excMulti;
-                }else{
-                  if($scope.directiveData.ui.metaType && $scope.directiveData.ui.metaType == 'geo'){
-                    //This is a special case and has set number of inputs, 2 in total - lat and lng
-                    $scope.directiveData.mapLoaded = false;
-                    $scope.directiveData.useCurrent = true;
-                    $scope.directiveData.ui.type = clientSettings.forms.elementTypes.geo;
-                  }else{
-                    //This is a group of inputs, initally 1, with the option to add more
-                    $scope.directiveData.ui.type = clientSettings.forms.elementTypes.array;
-                  }
+                if(!$scope.directiveData.endPoint){
+                  $scope.directiveData.endPoint = settingsInstances.getTyprRefsInstance('default');
                 }
-              }else{
-                $scope.directiveData.ui.type = clientSettings.forms.elementTypes[$scope.directiveData.type];
+                typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef]).then(function(response){
+                  $scope.directiveData.ui.data = response.results;
+                });
+              }
+              $scope.directiveData.ui.type = defaultSettings.forms.elementTypes[$scope.directiveData.type];
+              if($scope.directiveData.type == 'geo' || $scope.key == 'useCurrentLocation'){
+                $rootScope.$on('maps.setCoords', function (e, data) {
+                  if($scope.key == 'useCurrentLocation' && data.reset == true){
+                    $scope.directiveData.answer = 'false';
+                  }
+                  if($scope.directiveData.type == 'geo'){
+                    $scope.directiveData.answer = [data.lat, data.lng];
+                  }
+                });
               }
             },
             link: function(scope, element, attrs){
@@ -37,6 +34,11 @@ angular.module('views')
                }
               scope.addArrayItem = function(){
                 scope.directiveData.answer.push("");
+              }
+              scope.booleanChange = function(data){
+                if(scope.key == 'useCurrentLocation'){
+                  $rootScope.$emit('maps.useCurrent', {useCurrent: data});
+                }
               }
             }
         }

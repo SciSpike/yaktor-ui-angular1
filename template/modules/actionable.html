@@ -44,7 +44,7 @@
 		        				<div ng-repeat="item in directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>'] track by $index">
 		        					<div ng-if="item.ui" class="engineUiFormInput" directive-data="item"></div>
 		        					<div ng-if="!item.ui">
-		        						<div ng-repeat="(innerKey, innerValue) in item" class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%- nestedArray[i]%> <%}%><%- key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>'][$parent.$index][innerKey]"></div>
+		        						<div ng-repeat="(innerKey, innerValue) in item" class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%- nestedArray[i]%> <%}%><%- key%>" key="<%- key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>'][$parent.$index][innerKey]"></div>
 		        					</div>
 		        					</div>
 			        		<%}else{
@@ -53,7 +53,7 @@
 			        		<%}%>	
 					        </div>
 		        		<%}else{%>
-				        	<div class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%- nestedArray[i]%> <%}%><%- key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>']"></div>	
+				        	<div class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%- nestedArray[i]%> <%}%><%- key%>" key="<%- key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>']"></div>	
 				        <%}
 		        	})
 		        }

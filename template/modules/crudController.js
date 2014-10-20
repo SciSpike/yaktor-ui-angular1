@@ -1,7 +1,7 @@
 angular.module('<%- parentStateName %>')
   .controller('<%- parentStateName %><%- moduleName %>Controller',
-		  ['$rootScope','$scope','$state','$stateParams','$location', '<%- parentStateName %>Services',
-		   function ($rootScope,$scope,$state,$stateParams,$location, <%- parentStateName %>Services) {
+		  ['$rootScope','$scope','$state','$stateParams','$location', '<%- parentStateName %>Services', '$timeout',
+		   function ($rootScope,$scope,$state,$stateParams,$location, <%- parentStateName %>Services, $timeout) {
 			  
 			  var id = $stateParams.id;
 			  
@@ -205,10 +205,6 @@ angular.module('<%- parentStateName %>')
 				  
 				  $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
 				  
-				  $scope.getData = function(nestedArray){
-	          console.log(nestedArray);
-	        }
-				  
 				  <% if(state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
 				  
 					  	function mergeAnswers(dataObject, answersObject){
@@ -264,7 +260,7 @@ angular.module('<%- parentStateName %>')
 	          }
 	          return answers;
 	        }
-				  
+	        
 				  $scope.submitForm = function(type){
 					  var data = returnAnswers($scope.directiveData, answers);
 					  <%- parentStateName %>Services.<%- state.ui.title.toLowerCase()%><%- parentStateName%>(data, id).then(function(response) {
