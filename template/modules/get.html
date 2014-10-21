@@ -1,0 +1,17 @@
+<div>
+  <div title="{{'<%- state.ui.title%>' | translate}}">
+  	<div ng-include="'repeat.html'" ng-model="directiveData"></div>
+  </div>
+</div>
+
+<script type="text/ng-template" id="repeat.html">
+	<ul>
+		<li ng-repeat="(key, value) in directiveData">
+		    <div ng-if="testType(value)">{{key}}: {{value}}</div>
+		    <div ng-if="!testType(value)">
+		    	<h5>{{key}}</h5>
+		        <div ng-init="directiveData = directiveData[key];" ng-include="'repeat.html'"></div>
+		    </div>
+		</li>
+	</ul>
+</script>

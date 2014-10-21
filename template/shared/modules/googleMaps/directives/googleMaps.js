@@ -10,6 +10,7 @@ angular.module('googleMaps')
               directiveData: '='
             },
 	          controller: function($scope, $filter, $state, $controller, googleMapService) {
+	            
 	            function buildAddress(addressObj){
 	              var address = [];
 	              for(key in addressObj){
@@ -20,13 +21,22 @@ angular.module('googleMaps')
 	              return address;
 	            }
 	            
-	            var addressArray;
+	            $scope.addressArray;
+	            $scope.directiveData.useCurrent = true;
+	            
+	            $scope.$watch('addressArray', function(newValue, oldValue){
+	              for(var i=0; i<newValue.length; i++){
+	                if(newValue[i].answer != null && newValue[i].answer != "" && newValue[i].answer != undefined){
+	                  $scope.directiveData.useCurrent = false;
+	                }
+	              }
+	            }, true);
 	            
 	            function checkProperties(data){
 	              var address;
 	              for(key in data){
 	                if(key == 'address'){
-	                  addressArray = buildAddress(data[key]);
+	                  $scope.addressArray = buildAddress(data[key]);
 	                  
 	                }
 	                if(typeof data[key] == 'object'){
@@ -65,9 +75,9 @@ angular.module('googleMaps')
 	            $scope.searchAddress = function(){
 	              checkProperties($scope.directiveData);
 	              var addressString = '';
-	              for(var i=0; i<addressArray.length; i++){
-	                if(addressArray[i].answer != 'undefined'){
-	                  addressString = addressString + addressArray[i].answer + ',';
+	              for(var i=0; i<$scope.addressArray.length; i++){
+	                if($scope.addressArray[i].answer != 'undefined'){
+	                  addressString = addressString + $scope.addressArray[i].answer + ',';
 	                }
 	              }
 	              useSetAddress(addressString);
