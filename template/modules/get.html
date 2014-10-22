@@ -1,17 +1,25 @@
 <div>
   <div title="{{'<%- state.ui.title%>' | translate}}">
   	<div ng-include="'repeat.html'" ng-model="directiveData"></div>
+  	<button class="btn btn-default" ui-sref="main.<%- parentStateName%>.PUT({id: userId})">{{'EDIT' | translate}}</button>
   </div>
 </div>
 
 <script type="text/ng-template" id="repeat.html">
-	<ul>
-		<li ng-repeat="(key, value) in directiveData">
-		    <div ng-if="testType(value)">{{key}}: {{value}}</div>
-		    <div ng-if="!testType(value)">
-		    	<h5>{{key}}</h5>
-		        <div ng-init="directiveData = directiveData[key];" ng-include="'repeat.html'"></div>
-		    </div>
-		</li>
-	</ul>
+	<div ng-repeat="(key, value) in directiveData">
+		<ul class="list-group" ng-if="testType(value)">
+			<li class="list-group-item">
+				<dl class="dl-horizontal" ng-if="testType(value)">
+				  <dt>{{key}}</dt>
+				  <dd>{{value}}</dd>
+				</dl>
+			</li>
+		</ul>
+		<div ng-if="!testType(value)" class="panel panel-default">
+			<div class="panel-heading">
+			  <h3 class="panel-title">{{key}}</h3>
+			</div>
+			<div ng-init="directiveData = directiveData[key];" ng-include="'repeat.html'"></div>
+		</div>
+	</div>
 </script>

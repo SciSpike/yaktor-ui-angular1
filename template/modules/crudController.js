@@ -4,6 +4,7 @@ angular.module('<%- parentStateName %>')
 		   function ($rootScope,$scope,$state,$stateParams,$location, <%- parentStateName %>Services, $timeout) {
 			  
 			  var id = $stateParams.id;
+			  $scope.userId = id;
 			  
 			  <% if(state.ui.title.replace('_', '').toLowerCase() == 'get'){%>
   			  function findData(data){
