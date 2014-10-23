@@ -1,7 +1,8 @@
-angular.module('<%=appname%>')
-  .directive('scidFooter', function($compile) {
+angular.module('views')
+  .directive('engineUIFooter', function($compile) {
       return{
           restrict: 'C',
+          transclude: true,
           templateUrl : function($node, tattrs) {
               return partialsBaseLocation + "/footer/footerBlock.html"
             },

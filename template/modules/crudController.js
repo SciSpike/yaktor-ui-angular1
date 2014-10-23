@@ -7,6 +7,10 @@ angular.module('<%- parentStateName %>')
 			  $scope.userId = id;
 			  
 			  <% if(state.ui.title.replace('_', '').toLowerCase() == 'get'){%>
+			    $scope.actionButtons = [{
+			        state: 'PUT',
+			        title: 'EDIT'
+			      }];
   			  function findData(data){
             <%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
                   $scope.directiveData = response;
@@ -22,6 +26,11 @@ angular.module('<%- parentStateName %>')
 			  <% }%>
 			  
 			  <% if(state.ui.title.replace('_', '').toLowerCase() == 'find'){%>
+  			  $scope.actionButtons = [{
+            state: 'POST',
+            title: 'CREATE.NEW'
+          }];
+  			  $scope.grid = true;
 				  $scope.gridActions = {
 						changeState: function(state, index){
 							$scope.changeState(state,{id: index});

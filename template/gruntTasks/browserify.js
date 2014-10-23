@@ -129,7 +129,7 @@ module.exports = {
 		  		'./libs/resources/resources.js': ['bower_components/sockjs-client/sockjs.min.js'],
 		  		'./libs/shared.js': ['./shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/services/**/*.js'],
 		  		'./clientConfig/clientSetup.js': ['./clientConfig/init/**/*.js'],
-		  		'./libs/clientConfig.js': ['./clientConfig/settings.js', './clientConfig/custom/*.js'],
+		  		'./libs/clientConfig.js': ['./clientConfig/custom/**/*.js'],
 		  		'./libs/locale.js': ['./shared/locale/**/*.js', './modules/locale/**/*.js'], 
 		  		<% _.each(moduleNames.agents, function(moduleName, index){%>
 		  		'./libs/modules/<%- moduleName %>.js': ['./modules/<%- moduleName %>/<%- moduleName %>.js', './modules/<%- moduleName %>/controllers/**/*.js', './modules/<%- moduleName %>/directives/**/*.js', './modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,

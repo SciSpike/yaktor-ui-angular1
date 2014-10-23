@@ -1,19 +1,22 @@
 angular.module('views')
-.config(function($stateProvider, $locationProvider, $translateProvider, routesExtendedProvider) {
+.config(function($stateProvider, $locationProvider, $translateProvider, routesExtendedProvider, htmlExtendedProvider) {
   $translateProvider.preferredLanguage(defaultLocale);
   $stateProvider
     .state('main', {
       abstract : true,
       url : '',
       templateUrl : function(){
-        return partialsBaseLocation+ '/shared/main.html'
+        if(htmlExtendedProvider.views['main.index']){
+          return htmlExtendedProvider.views['main.index'];
+        }
+        return partialsBaseLocation + '/shared/main.html';
       },
       controller : routesExtendedProvider.routes['main.index'] || 'mainController'
     })
    .state('main.home',{
      url: '/home',
      templateUrl: function(){
-       return clientBaseLocation + '/custom/homePage/home.html'
+       return clientBaseLocation + '/custom/homePage/home.html';
      },
      controller: routesExtendedProvider.routes['home.index'] || 'homeController'
    });

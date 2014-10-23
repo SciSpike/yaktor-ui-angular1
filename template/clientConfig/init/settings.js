@@ -18,6 +18,15 @@
               var routes = this.routes;
             }
         }
+      })
+      .provider('htmlExtended', function() {
+        return {
+            views: {
+               
+            },
+            $get: function() {
+              var views = this.views;
+            }
+        }
       });
-
 })();

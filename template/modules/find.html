@@ -1,9 +1,13 @@
-<div ng-if="allData > 0" class="findView">
-	<a ng-click="showFilters = !showFilters">
-		<span ng-show="!showFilters">{{'SHOW.FILTER.OPTIONS' | translate}}</span>
-		<span ng-show="showFilters">{{'HIDE.FILTER.OPTIONS' | translate}}</span>
-	</a>
-	<br /><br />
+<div class='viewChange' ng-click="grid = !grid">	
+	<span ng-show="grid" class="glyphicon glyphicon-th-list"></span>
+	<span ng-show="!grid" class="glyphicon glyphicon-th"></span>
+</div>
+<a ng-click="showFilters = !showFilters">
+	<span ng-show="!showFilters">{{'SHOW.FILTER.OPTIONS' | translate}}</span>
+	<span ng-show="showFilters">{{'HIDE.FILTER.OPTIONS' | translate}}</span>
+</a>
+<br /><br />
+<div ng-if="allData > 0 && grid" class="findView">
 	<div class="filters well" ng-show="showFilters">
 		<span ng-repeat="(key, value) in gridHeaders">
 			<span ng-switch="value.type">
@@ -41,10 +45,26 @@
    <div ng-if="gridOptions.data.length == 0">
    		<h5>{{'NO.FILTER.RESULTS' | translate}}</h5>
    </div>
+   <div ng-if="allData == 0" class="findView">
+		<h5>{{'NO.RESULTS' | translate}}</h5>
+	</div>
+	<br />
+	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
+	<br />
 </div>
-<div ng-if="allData == 0" class="findView">
-	<h5>{{'NO.RESULTS' | translate}}</h5>
+<div ng-if="allData > 0 && !grid" class="findView">
+	<br /><br />
+	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
+	<br /><br />
+	<div ng-repeat="row in gridOptions.data track by $index" class="panel panel-default">
+		<div class="panel-heading">
+		  <h3 class="panel-title">{{row.name}} <small>- {{row.whenTeeOff}}</small></h3>
+		</div>
+		<div class="panel-body">
+			{{row.description}}
+		</div>
+	</div>
+	<br />
+	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
+	<br />
 </div>
-<br />
-<button class="btn btn-default" ui-sref="main.<%- parentStateName%>.POST">{{'CREATE.NEW' | translate}}</button>
-<br />
