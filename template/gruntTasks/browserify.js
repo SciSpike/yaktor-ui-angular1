@@ -126,7 +126,7 @@ module.exports = {
 	  },
 	  appDep: {
 		  	files: {
-		  		'./libs/resources/resources.js': ['bower_components/sockjs-client/sockjs.min.js'],
+		  		'./libs/resources/resources.js': ['bower_components/sockjs-client/dist/sockjs.js'],
 		  		'./libs/shared.js': ['./shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/services/**/*.js'],
 		  		'./clientConfig/clientSetup.js': ['./clientConfig/init/**/*.js'],
 		  		'./libs/clientConfig.js': ['./clientConfig/custom/**/*.js'],
