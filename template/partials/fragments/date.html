@@ -1,0 +1,14 @@
+<div class='input-group'>
+  <input
+  	placeholder="{{directiveData.ui.title | translate}}"
+  	type='text'
+  	class='form-control input-sm'
+  	ng-class='directiveData.ui.class'
+  	ng-model='directiveData.answer'
+  	datepicker-popup='dd-MMMM-yyyy'
+  	show-weeks='false'
+  	show-button-bar='false'>
+  </input>
+  <span class='input-group-btn'><button class='btn btn-default btn-sm'><i class='glyphicon glyphicon-calendar'></i></button></span>
+</div>
+<br />

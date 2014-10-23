@@ -23,12 +23,30 @@ module.exports = function(grunt) {
     'cssmin': {
       'combine': {
         'files': {
-          './compiled.css': ['./styles/engine-ui.css', './styles/custom/master.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+          './styles/compiled.css': ['./styles/css/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+        }
+      }
+    },
+    'copy':{
+      viz:{
+        files:{
+          'libs/resources/viz.js':"./bower_components/viz.js/index.js"
         }
       }
     },
     'sails-linker': {
-        'defaultOptions': {
+    	'resources': {
+	        'options': {
+	            'startTag': '<!--RESOURCES-->',
+	            'endTag': '<!--RESOURCES END-->',
+	            'fileTmpl': '<script src="%s"></script>',
+	            'appRoot': './'
+	          },
+	          'files': {
+	            './index.html': ['./libs/resources/*.js']
+	          }
+	    },
+        'libs': {
 	        'options': {
 	            'startTag': '<!--SCRIPTS-->',
 	            'endTag': '<!--SCRIPTS END-->',
@@ -36,8 +54,19 @@ module.exports = function(grunt) {
 	            'appRoot': './'
 	          },
 	          'files': {
-	            './index.ejs': ['./compiled_modules/*.js', './scripts/ng-grid-layout.js']
+	            './index.html': ['./libs/*.js', './libs/vendor/*.js']
 	          }
+        },
+        'modules': {
+          'options': {
+              'startTag': '<!--MODULES-->',
+              'endTag': '<!--MODULES END-->',
+              'fileTmpl': '<script src="%s"></script>',
+              'appRoot': './'
+            },
+            'files': {
+              './index.html': ['./libs/modules/*.js']
+            }
         },
         'dev': {
         	'options': {
@@ -47,7 +76,7 @@ module.exports = function(grunt) {
 			            'appRoot': './'
 			          },
 			          'files': {
-			            './index.ejs': ['./styles/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+			            './index.html': ['./styles/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
 			          }
 		},
         'prod': {
@@ -58,25 +87,16 @@ module.exports = function(grunt) {
 			            'appRoot': './'
 			          },
 			          'files': {
-			            './index.ejs': ['compiled.css']
+			            './index.html': ['./styles/compiled.css']
 			          }
 		}
-    },
-    'watch': {
-      'less': {
-        'files': './**/*.less',
-        'tasks': ['less', 'cssmin'],
-        'options': {
-          'interrupt': true,
-        }
-      }
     }
   };
   
   grunt.initConfig(config);
   
-  var sharedTasks = ['less', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:defaultOptions'];
-  var serveTasks = ['sails-linker:prod', 'cssmin', 'watch'];
+  var sharedTasks = ['less','copy', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs'];
+  var serveTasks = ['cssmin', 'sails-linker:prod'];
   var allTasks = sharedTasks.concat(serveTasks);
   
   /* ########## INCORPORATING CUSTOM TASKS DEFINED IN CUSTOMGRUNT ########## */

@@ -11,7 +11,7 @@
   require('ngTouch');
   require('select2');
   require('uiSelect');
-  
+
   angular.module('views', 
 		  ['ui.bootstrap',
 		   'ui.router',
@@ -20,55 +20,9 @@
 		   'ngGrid', 
 		   'ngResource',
 		   'ui.select2',
-		   'conversation'])
-    .config(function($stateProvider, $locationProvider,$translateProvider) {
-    	
-      $translateProvider.preferredLanguage(defaultLocale);
-
-		$stateProvider
-				.state('main', {
-					abstract : true,
-					url : '',
-					templateUrl : '/main.ejs',
-					controller : 'mainController'
-				})
-    })
-    
-    .config(['$provide', function ($provide) {
-				$provide.decorator('$rootScope', ['$delegate', function ($delegate) {
-					Object.defineProperty($delegate.constructor.prototype, '$onRootScope', {
-						value: function (name, listener) {
-							var unsubscribe = $delegate.$on(name, listener);
-							this.$on('$destroy', unsubscribe);
-						},
-						enumerable: false
-					});
-		
-					return $delegate;
-				}]);
-			}])
-			
-
-			.constant('$eventsCommon', {
-				navPanel: {
-					toggleWidth: 'navPanel.toggle',
-					checkHeight: 'navPanel.height'
-				},
-				ngGrid:{
-					toggleWidth: 'navGrid.toggle'
-				}
-			})
-    
-    .controller('mainController',
-		function($rootScope, $scope, $state, $location, $http, $sessionStorage, $eventsCommon) {
-    	
-    		$scope.$storage = $sessionStorage;
-    	
-	    	window.onresize = function(){
-		    	$rootScope.$emit($eventsCommon.navPanel.checkHeight);
-		    	$rootScope.$emit($eventsCommon.ngGrid.toggleWidth);
-		    }				
-		}
-    );
+		   'checklist-model',
+		   'sharedModule',
+		   <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
+		   <% }}); %>]);
 
 })();

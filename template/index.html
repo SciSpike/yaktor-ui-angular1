@@ -1,0 +1,45 @@
+<!doctype html>
+<html ng-app="views">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>{{title | translate}}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width initial-scale=1, maximum-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" />
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <!--CSS-->
+    <!--CSS END-->
+</head>
+<body>
+  
+  <div class="wrapper">
+    <div class="uiViewOuter" ui-view autoscroll="false"></div>
+  </div>
+  
+  <script src="http://cdn.sockjs.org/sockjs-0.3.4.min.js"></script>
+  
+  <!--RESOURCES-->
+  <!--RESOURCES END-->
+  
+  <script>
+	  var qs = require('qs');
+	  var sessionId = "<%=sId%>";
+	  var defaultLocale = "<%=locale%>";
+	  var partialsBaseLocation = '/partials';
+	  var clientBaseLocation = '/clientConfig';
+  </script>
+  
+  <script src="./clientConfig/clientSetup.js"></script>
+  <script src="app.js"></script>
+  
+  <!--SCRIPTS-->
+  <!--SCRIPTS END-->
+  
+  <!--MODULES-->
+  <!--MODULES END-->
+  
+  <script src="appConfig.js"></script>
+  
+</body>
+</html>

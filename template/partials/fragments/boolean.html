@@ -1,0 +1,19 @@
+<div class='radio'>
+	<label>{{directiveData.ui.title | translate}}: </label>
+	<input 
+		type="radio" 
+		id="{{key}}TrueRadio"
+		name="{{key}}Radios"
+		value="true" 
+		ng-model="directiveData.answer"
+		ng-click="booleanChange(true)" />
+	<label for="{{key}}TrueRadio">{{'TRUE' | translate}}</label>
+	<input 
+		type="radio"
+		id="{{key}}FalseRadio"
+		name="{{key}}Radios"
+		value="false" 
+		ng-model="directiveData.answer"
+		ng-click="booleanChange(false)" />
+	<label for="{{key}}FalseRadio">{{'FALSE' | translate}}</label>
+</div>

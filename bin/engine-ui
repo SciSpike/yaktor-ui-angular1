@@ -22,7 +22,9 @@ argv.command('generate')
     var views = require('../lib/driver').crawlForViews(args.directory);
     var model = parse.fromViews(args.name, views);
       
-    require('../lib/json2angular').exec(model);
+    require('../lib/json2angular').exec(model, function(){
+    	process.exit(0);
+    });
   });
   
 argv.command('file <file>')
