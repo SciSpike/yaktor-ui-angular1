@@ -9,8 +9,9 @@ angular.module('views')
             },
             controller: function($scope, $filter, defaultSettings, $state, settingsInstances) {
               if($scope.directiveData.typeRef){
+                //CHECK WHAT THIS IS ???
                 if(!$scope.directiveData.endPoint){
-                  $scope.directiveData.endPoint = settingsInstances.getTyprRefsInstance('default');
+                  $scope.directiveData.endPoint = settingsInstances.getTypeRefsInstance('default');
                 }
                 typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef]).then(function(response){
                   $scope.directiveData.ui.data = response.results;
