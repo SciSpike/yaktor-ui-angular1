@@ -31,8 +31,8 @@
 			<button ng-switch-default ng-if="key != 'page'" class="btn btn-default filterBtn" ng-model="gridFilter[key]">{{key}}: {{value}}<span ng-click="removeFilter(key);" class="glyphicon glyphicon-remove-circle"></span></button>
 		</span>
 	</span>
-	<br /><br />
-	<button class="btn btn-default" ui-sref="main.<%- parentStateName%>.POST">{{'CREATE.NEW' | translate}}</button>
+	<br />
+	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
 	<br /><br />
 	<div ng-if="gridOptions.data.length > 0">
 		<div ng-if="pagingOptions.totalPages > 1" class="btn-group">
@@ -48,12 +48,9 @@
    <div ng-if="allData == 0" class="findView">
 		<h5>{{'NO.RESULTS' | translate}}</h5>
 	</div>
-	<br />
-	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
-	<br />
 </div>
 <div ng-if="allData > 0 && !grid" class="findView">
-	<br /><br />
+	<br />
 	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
 	<br /><br />
 	<div ng-repeat="row in gridOptions.data track by $index" class="panel panel-default">
@@ -64,7 +61,7 @@
 			{{row.description}}
 		</div>
 	</div>
-	<br />
-	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
-	<br />
 </div>
+<br />
+<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
+<br />
