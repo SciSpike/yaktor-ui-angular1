@@ -39,7 +39,7 @@ angular.module('<%- parentStateName %>')
 						  var id = id;
 						  <%- parentStateName %>Services.delete<%- parentStateName%>({}, id).then(function(response) {
 						    for(var i=0; i<$scope.gridOptions.data.length; i++){
-						      if($scope.gridOptions.data[i].id == id){
+						      if($scope.gridOptions.data[i]._id == id || $scope.gridOptions.data[i].id == id){
 						        $scope.gridOptions.data.splice(i, 1);
 						        if($scope.filtersImplemented){
 						          findData($scope.filtersImplemented);
