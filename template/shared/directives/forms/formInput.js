@@ -9,13 +9,24 @@ angular.module('views')
             },
             controller: function($scope, $filter, defaultSettings, $state, settingsInstances) {
               if($scope.directiveData.typeRef){
-                //CHECK WHAT THIS IS ???
                 if(!$scope.directiveData.endPoint){
                   $scope.directiveData.endPoint = settingsInstances.getTypeRefsInstance('default');
                 }
-                typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef]).then(function(response){
-                  $scope.directiveData.ui.data = response.results;
-                });
+                if($scope.directiveData.endPoint[$scope.directiveData.typeRef]){
+                  //NON-ASYNC
+                  typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef]).then(function(response){
+                    $scope.directiveData.ui.data = response.results;
+                  });
+                  //ASYNC
+                  /*$scope.getLocation = function(val) {
+                    typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef], val).then(function(response){
+                      return response.results;
+                    });
+                  };*/
+                }else{
+                  $scope.directiveData.ui.type = 'string';
+                }
+                
               }
               $scope.directiveData.ui.type = defaultSettings.forms.elementTypes[$scope.directiveData.type];
               if($scope.directiveData.type == 'geo' || $scope.key == 'useCurrentLocation'){
@@ -40,6 +51,9 @@ angular.module('views')
                 if(scope.key == 'useCurrentLocation'){
                   $rootScope.$emit('maps.useCurrent', {useCurrent: data});
                 }
+              }
+              scope.onSelect = function(item, model, label){
+                //scope.directiveData.answer = model._id;
               }
             }
         }

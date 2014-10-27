@@ -10,6 +10,7 @@ angular.module('views')
             'date': 'date',
             'toggle': 'toggle',
             'excMulti': 'radio',
+            'radio': 'radio',
             'boolean': 'boolean',
             'incMulti': 'checkbox',
             'geo': 'geo',
@@ -52,7 +53,7 @@ angular.module('views')
         return elementTypesInstances[instanceName];
       }
     }
-    var _getTyprRefsInstance = function(instanceName, settings){
+    var _getTypeRefsInstance = function(instanceName, settings){
       if(typrRefsInstances[instanceName]){
         var instance = mergeObjects(typrRefsInstances[instanceName], settings);
         return instance;
@@ -64,6 +65,6 @@ angular.module('views')
     }
     return{
       getElementTypesInstance: _getElementTypesInstance,
-      getTyprRefsInstance: _getTyprRefsInstance
+      getTypeRefsInstance: _getTypeRefsInstance
     }
   });

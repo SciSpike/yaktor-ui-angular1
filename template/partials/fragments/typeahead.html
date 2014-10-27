@@ -1,15 +1,17 @@
 <input type="text" 
-	ng-model="directiveData.answer" //_id
+	ng-model="directiveData.answer"
 	placeholder="{{directiveData.ui.title | translate}}"
-	typeahead="item for item in directiveData.ui.data | filter:$viewValue | limitTo:10" 
-	class="form-control" />
+	typeahead="item as item.title for item in directiveData.ui.data" 
+	class="form-control"
+	typeahead-on-select="onSelect($item, $model, $label)" />
 <br />
-
+{{directiveData.answer}}
 <!-- 
-ASYNCH
+ASYNC
 <input type="text" 
 	ng-model="directiveData.answer" 
 	placeholder="{{directiveData.ui.title | translate}}"
-	typeahead="item for item in directiveData.ui.data" 
+	typeahead="item for item in getLocation($viewValue)" 
 	typeahead-loading="loadingLocations" 
-	class="form-control" /> -->
+	class="form-control" />
+	<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i> -->
