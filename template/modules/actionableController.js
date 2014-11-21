@@ -36,9 +36,9 @@ angular.module('<%- moduleName %>')
           for(key in dataObject){
             if(dataObject[key]){
               if(dataObject[key].answer || dataObject[key].answer == ''){
-                /*if(dataObject[key].typeRef){
+                if(dataObject[key].typeRef){
                   dataObject[key].answer = dataObject[key].answer._id;
-                }*/
+                }
                 answersObject[key] = dataObject[key].answer;
               }else{
                 switch(dataObject[key].constructor.name.toLowerCase()) {

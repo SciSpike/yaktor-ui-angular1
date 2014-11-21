@@ -52,9 +52,6 @@ angular.module('views')
                   $rootScope.$emit('maps.useCurrent', {useCurrent: data});
                 }
               }
-              scope.onSelect = function(item, model, label){
-                //scope.directiveData.answer = model._id;
-              }
             }
         }
   });

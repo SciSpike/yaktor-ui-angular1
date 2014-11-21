@@ -15,7 +15,7 @@
     .provider('routesExtended', function() {
       return {
           routes: {
-             
+            'login.POST': 'loginPOSTExtended'
           },
           $get: function() {
             var routes = this.routes;
