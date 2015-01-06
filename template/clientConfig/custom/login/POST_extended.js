@@ -1,7 +1,7 @@
 angular.module('views')
   .controller('loginPOSTExtended',
-      ['$rootScope','$scope','$state','$stateParams','$location', 'loginServices',
-       function ($rootScope,$scope,$state,$stateParams,$location, loginServices) {
+      ['$rootScope','$scope','$state','$stateParams','$location', 'loginServices','$controller',
+       function ($rootScope,$scope,$state,$stateParams,$location, loginServices,$controller) {
         
           angular.extend(this, $controller('loginPOSTController', {$scope: $scope}));
           
@@ -44,7 +44,7 @@ angular.module('views')
             var data = returnAnswers($scope.directiveData, answers);
             data.grant_type = "password";
             data.client_id = "0";
-            loginServices.postlogin(data, id, ).then(function(response) {
+            loginServices.postlogin(data, id ).then(function(response) {
                       $scope.changeState('main.login.FIND', {id: 1});
                   });
           }
