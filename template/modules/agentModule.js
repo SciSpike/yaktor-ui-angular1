@@ -15,14 +15,14 @@ angular.module('<%- moduleName %>',
 				   .state('main.<%- moduleName %>',{
 						url:'/<%- moduleName %>',
 						templateUrl: function(){
-							return partialsBaseLocation + '/<%- moduleName %>/index.html'
+							return partialsBaseLocation + '/agents/<%- moduleName %>/index.html'
 						},
 						controller: routesExtendedProvider.routes.<%- moduleName %> || '<%- moduleName %>Controller' //HANDLES CONNECTION AND STATE TRANSTITIONS (WITH ABILITY TO CUSTOMIZE ???)
 					})
 					
 					.state('main.<%- moduleName %>.init',{ // TRANSITIONED TO IF NO INIT DATA IN PARENT
 						templateUrl: function(){
-							return partialsBaseLocation + '/<%- moduleName %>/init.html'
+							return partialsBaseLocation + '/agents/<%- moduleName %>/init.html'
 						},
 						controller: routesExtendedProvider.routes.<%- moduleName %>Init || '<%- moduleName %>initController'
 					})
@@ -32,7 +32,7 @@ angular.module('<%- moduleName %>',
 					.state('main.<%- moduleName %>.<%- stateName %>',{
 						params:['initData'],
 						templateUrl: function(){
-							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>.html'
+							return partialsBaseLocation + '/agents/<%- moduleName %>/<%- stateName %>.html'
 						},
 						controller: routesExtendedProvider.routes['<%- moduleName %>.<%- stateName %>'] || '<%- moduleName %><%- stateName %>Controller'
 					})
@@ -40,7 +40,7 @@ angular.module('<%- moduleName %>',
 					var viewName = view.subPath.replace('/', '');%>
 					.state('main.<%- moduleName %>.<%- stateName %>.<%- viewName%>',{
 						templateUrl: function(){
-							return partialsBaseLocation + '/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
+							return partialsBaseLocation + '/agents/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
 						},
 						controller: routesExtendedProvider.routes['<%- moduleName %>.<%- viewName %>'] || '<%- moduleName %><%- viewName %>Controller'
 					})<% });%><% });%>

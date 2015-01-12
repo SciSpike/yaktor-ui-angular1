@@ -37,7 +37,10 @@ angular.module('<%- moduleName %>')
             if(dataObject[key]){
               if(dataObject[key].answer){
                 if(dataObject[key].typeRef){
-                  dataObject[key].answer = dataObject[key].answer._id;
+                  if(dataObject[key].answer._id){
+                    //if .answer is an object, get the _id off it
+                    dataObject[key].answer = dataObject[key].answer._id;
+                  }
                 }
                 if(dataObject[key].answer != ''){
                   answersObject[key] = dataObject[key].answer;

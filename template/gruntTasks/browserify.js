@@ -132,7 +132,7 @@ module.exports = {
 		  		'./libs/clientConfig.js': ['./clientConfig/custom/**/*.js'],
 		  		'./libs/locale.js': ['./shared/locale/**/*.js', './modules/locale/**/*.js'], 
 		  		<% _.each(moduleNames.agents, function(moduleName, index){%>
-		  		'./libs/modules/<%- moduleName %>.js': ['./modules/<%- moduleName %>/<%- moduleName %>.js', './modules/<%- moduleName %>/controllers/**/*.js', './modules/<%- moduleName %>/directives/**/*.js', './modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+		  		'./libs/modules/<%- moduleName %>.js': ['./modules/agents/<%- moduleName %>/<%- moduleName %>.js', './modules/agents/<%- moduleName %>/controllers/**/*.js', './modules/agents/<%- moduleName %>/directives/**/*.js', './modules/agents/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
 		 		<% }}); %>
 		 		<% _.each(moduleNames.crud, function(moduleName, index){%>
 		  		'./libs/modules/<%- moduleName %>.js': ['./modules/crud/<%- moduleName %>/<%- moduleName %>.js', './modules/crud/<%- moduleName %>/controllers/**/*.js', './modules/crud/<%- moduleName %>/directives/**/*.js', './modules/crud/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,

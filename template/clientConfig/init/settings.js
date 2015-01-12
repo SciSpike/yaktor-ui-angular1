@@ -9,7 +9,6 @@
         }
       },
       'refLookup':{
-        
       }
     })
     .provider('routesExtended', function() {
