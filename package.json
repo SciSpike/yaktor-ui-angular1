@@ -1,7 +1,7 @@
 {
   "name": "engine-ui",
   "description": "Generate AngularJS applications based on a JSON application grammar",
-  "version": "4.0.5",
+  "version": "4.0.6",
   "homepage": "https://github.com/SciSpike/engine-ui",
   "repository": {
     "type": "git",
@@ -41,12 +41,12 @@
     "grunt": "0.4.5",
     "load-grunt-tasks": "0.6.0",
     "grunt-shell": "0.7.0",
-    "grunt-bump": "0.0.16",
+    "grunt-bump": "0.0.16"
   },
   "scripts": {
     "patch": "grunt release-patch",
     "minor": "grunt release-minor"
-  }
+  },
   "keywords": [
     "angularjs",
     "generator",
