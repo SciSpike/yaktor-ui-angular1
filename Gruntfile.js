@@ -34,7 +34,7 @@ module.exports = function(grunt) {
         command:"git pull"
       },
       "add-owner":{
-        command:["npm owner add",grunt.option("owner") , 'dsl-flow-gen',"--registry=http://npm-scispike.ddns.net"].join(' '),
+        command:["npm owner add",grunt.option("owner") , 'engine-ui',"--registry=http://npm-scispike.ddns.net"].join(' '),
       }
     }
   };
