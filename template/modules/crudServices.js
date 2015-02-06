@@ -1,6 +1,6 @@
 angular.module('<%- moduleName %>')
 
-  .factory('<%- moduleName %>Services', ['$q', '$timeout', 'RestService', function($q, $timeout, RestService){
+  .factory('<%- moduleName %>Services', ['$rootScope', '$q', '$timeout', '$eventsCommon', 'RestService', 'SocketService', function($rootScope, $q, $timeout, $eventsCommon, RestService, SocketService){
     <%//used for extracting objects from the spec
     var objectFindByKey = function(array, key, value) {
        for (var i = 0; i < array.length; i++) {
@@ -39,17 +39,17 @@ angular.module('<%- moduleName %>')
 
       //AGENT STUFFS
       <% _.each(agents, function(agent, index){
-          var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
-      var _initConversation = function(initData){
+      var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
+      var _init<%- newAgent.name%>Conversation = function(initData){
         var initData = initData;
         if(SocketService['init']){
-                SocketService['init']('<%- agent%>',initData, initData, function(err,stateName){
+                SocketService['init']('<%- newAgent.actions.url%>',initData, initData, function(err,stateName){
                   var nextState = stateName.replace('state:', '');
                   var emitData = {
                     data: initData,
                     nextState: nextState
                   }
-                  $rootScope.$emit($eventsCommon.conversations.<%- actions.url.replace('/', '')%>, emitData);
+                  $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
                 });
             } else {
                 SocketService.doAction('<%- newAgent.actions.url%>','init', initData, initData, function(err,data){
@@ -57,18 +57,17 @@ angular.module('<%- moduleName %>')
                 });
             }
       }
-      <%
-      _.each(newAgent.states, function(state, index){
+      <%_.each(newAgent.states, function(state, index){
         for(element in state.elements){
           var elementName = element.toLowerCase()%>
       var _on_<%- elementName%> = function(initData, data){
         var data = data;
         if(SocketService['<%- element%>']){
           SocketService['<%- element%>']('<%- state.url %>',data, data, function(err,stateName){
-             var nextState = stateName.replace('state:', '');
+             var currentState = stateName.replace('state:', '');
              var emitData = {
                       data: data,
-                      nextState: nextState
+                      currentState: currentState
                   }
              $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
           });
@@ -77,15 +76,16 @@ angular.module('<%- moduleName %>')
             //WHAT HAPPENS HERE
           });
         }
-      }
-        <%}%>
+      }<%}%>
       <%});%>
       <% }); %>
       return {
         <% for(element in actions.elements){
         var elementName = element.replace('_', '').toLowerCase();%>
         <%- elementName%><%- moduleName %>: _<%- elementName%><%- moduleName %>,<% }%>
-          <% _.each(agents, function(agent, index){var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
+          <% _.each(agents, function(agent, index){%>
+            <%var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
+          init<%- newAgent.name%>Conversation: _init<%- newAgent.name%>Conversation,
           <%_.each(newAgent.states, function(state, index){
             var elements = _.toArray(state.elements);
             _.each(elements, function(element, i){

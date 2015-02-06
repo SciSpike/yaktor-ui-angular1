@@ -1,8 +1,9 @@
 angular.module('<%- parentStateName %>')
   .controller('<%- parentStateName %><%- moduleName %>Controller',
-      ['$rootScope','$scope','$state','$stateParams','$location', '<%- parentStateName %>Services', '$timeout',
-       function ($rootScope,$scope,$state,$stateParams,$location, <%- parentStateName %>Services, $timeout) {
+      ['$rootScope','$scope','$state','$stateParams','$location', '$eventsCommon', '$timeout', '<%- parentStateName %>Services',
+       function ($rootScope,$scope,$state,$stateParams,$location, $eventsCommon, $timeout, <%- parentStateName %>Services) {
         
+        //AGENT STUFF
          <%//used for extracting objects from the spec
          var objectFindByKey = function(array, key, value) {
             for (var i = 0; i < array.length; i++) {
@@ -12,8 +13,7 @@ angular.module('<%- parentStateName %>')
             }
             return null;
           }%>
-        var id = $stateParams.id;
-        $scope.userId = id;
+      //array of key agents and their properties
         $scope.conversationAgents = [<% _.each(agents, function(agent, index){
           var agentName = agent.split('.').reverse().join("_of_");
           var newAgent = objectFindByKey(agentSpec, 'id', agent); %>{
@@ -25,7 +25,36 @@ angular.module('<%- parentStateName %>')
                   }<% if(index != newAgent.states.length-1){%>,<% }}});%>]
         }<% if(index != agents.length-1){%>,
        <%}}); %>];
+       
+       // setup listeners and inits
+       <% _.each(agents, function(agent, index){
+           var agentName = agent.split('.').reverse().join("_of_");
+           var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+        $scope.$onRootScope($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, function(event, data){
+          console.log('AGENT STATE DATA:');
+          console.log(JSON.stringify(data));
+          if(data.currentState){
+            $scope.currentState = data.currentState;
+          }
+        });
+      
+        $scope.init<%- newAgent.name%>Conversation = function(initData){
+          console.log('<%- agent%> INIT DATA:' + initData);
+          <%- parentStateName %>Services.init<%- newAgent.name%>Conversation(initData);
+        };
+      <% });%>
+        if($stateParams.id){
+          var initData = {_id: $stateParams.id};
+            <% _.each(agents, function(agent, index){
+              var agentName = agent.split('.').reverse().join("_of_");
+              var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
+          $scope.init<%- newAgent.name%>Conversation(initData);
+            <%});%>
+        }
         
+        //CRUD STUFF
+       var id = $stateParams.id;
+       $scope.userId = id;
         <% if(state.ui.title.replace('_', '').toLowerCase() == 'get'){%>
           $scope.actionButtons = [{
               state: 'PUT',
