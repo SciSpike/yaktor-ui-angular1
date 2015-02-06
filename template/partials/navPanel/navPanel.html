@@ -10,11 +10,4 @@
             </span>
         </a>
     </span>
-	<hr />
-	<span ng-repeat="nav in adminNavigation track by $index"
-		ng-class="{active: nav.title == activeState.name}"><a
-		ng-click="changeState(nav.link)" class="navContainer"><span class="navText">{{nav.title}}</span><span
-			class="{{nav.icon}}"></span></span></span>
 </div>
-
-<!-- ng-init="question.prompt = filterPrompt(question.prompt);" -->
