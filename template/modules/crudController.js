@@ -193,7 +193,11 @@ angular.module('<%- parentStateName %>')
                                    var element=elems[elem];
                                  %>
                                  {
+                                   <% if(element.type=="typeAhead"){%>
+                                   field: '<%- element.ui.title%>.title',
+                                   <%}else{%>
                                    field: '<%- elem%>',
+                                   <%}%>
                                    minWidth: 150,
                                    resizable: true,
                                    sortable: true,
