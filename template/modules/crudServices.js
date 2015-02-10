@@ -60,7 +60,7 @@ angular.module('<%- moduleName %>')
       <%_.each(newAgent.states, function(state, index){
         for(element in state.elements){
           var elementName = element.toLowerCase()%>
-      var _on_<%- elementName%> = function(initData, data){
+      var _on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%> = function(initData, data){
         var data = data;
         if(SocketService['<%- element%>']){
           SocketService['<%- element%>']('<%- state.url %>',data, data, function(err,stateName){
@@ -90,6 +90,6 @@ angular.module('<%- moduleName %>')
             var elements = _.toArray(state.elements);
             _.each(elements, function(element, i){
               var elementName = element.name.toLowerCase()%>
-          on_<%- elementName%>: _on_<%- elementName%><% if(i != elements.length-1){%>,<% }%><%});});});%>
+          on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%>: _on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%><% if(i != elements.length-1){%>,<% }%><%});});});%>
       }
   }]);

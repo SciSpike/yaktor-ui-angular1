@@ -44,11 +44,11 @@ angular.module('<%- parentStateName %>')
         };
       <% });%>
         if($stateParams.id){
-          var initData = {_id: $stateParams.id};
+          $scope.initData = {_id: $stateParams.id};
             <% _.each(agents, function(agent, index){
               var agentName = agent.split('.').reverse().join("_of_");
               var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
-          $scope.init<%- newAgent.name%>Conversation(initData);
+          $scope.init<%- newAgent.name%>Conversation($scope.initData);
             <%});%>
         }
         
@@ -346,13 +346,28 @@ angular.module('<%- parentStateName %>')
                  }
              }
              return answerObject
-          }
+          };
           $scope.submitForm = function(type){
             var data = returnAnswers($scope.directiveData, answers);
             data = cleanData(data);
             <%- parentStateName %>Services.<%- state.ui.title.toLowerCase()%><%- parentStateName%>(data, id).then(function(response) {
                        $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1});
                   });
-          }
+          };
+          //AGENT BUTTONS ACTIONS
+          <% _.each(agents, function(agent, index){
+            var agentName = agent.split('.').reverse().join("_of_");
+            var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+            <% _.each(newAgent.states, function(state, index){ %><%if (state.name != 'null') { %>
+              <% var actions = _.toArray(state.elements);%>
+              <% _.each(actions, function(action, i){%>
+            $scope.do<%- agentName%>_<%- state.name %>_<%- action.name%> = function(initData){
+              var data = returnAnswers($scope.directiveData, answers);
+              data = cleanData(data);
+              <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name%>($scope.initData, data);
+            };
+              <%});%>
+            <% }});%>
+         <%}); %>
         <%}%>
       }]);
