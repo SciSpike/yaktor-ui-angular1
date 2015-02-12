@@ -74,14 +74,16 @@
            }
            return null;
          }%>
-         <p>State: {{currentState}}</p>
+
          <% _.each(agents, function(agent, index){
            var agentName = agent.split('.').reverse().join("_of_");
            var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+           <p>Agent: <%- newAgent.name%></p>
+           <p>State: {{<%- newAgent.name%>CurrentState.state}}</p>
            <% _.each(newAgent.states, function(state, index){ %>
              <% var actions = _.toArray(state.elements);%>
              <% _.each(actions, function(action, i){%>
-          <button class="btn btn-default" ng-disabled="currentState!='<%-state.name%>'" ng-click="do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>();" ><%- action.name%></button>
+          <button class="btn btn-default" ng-disabled="<%- newAgent.name%>CurrentState.state!='<%-state.name%>'" ng-click="do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>();" ><%- action.name%></button>
              <%});%>
            <% });%>
         <%}); %>

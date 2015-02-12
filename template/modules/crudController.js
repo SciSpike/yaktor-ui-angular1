@@ -32,7 +32,9 @@ angular.module('<%- parentStateName %>')
            var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
         $scope.$onRootScope($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, function(event, data){
           if(data.currentState){
-            $scope.currentState = data.currentState;
+            $scope.<%- newAgent.name%>CurrentState = {
+              state: data.currentState
+            };
           }
           $scope.$apply();
         });
@@ -51,7 +53,7 @@ angular.module('<%- parentStateName %>')
             <% _.each(agents, function(agent, index){
               var agentName = agent.split('.').reverse().join("_of_");
               var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
-          $scope.init<%- newAgent.name%>Conversation($scope.initData);
+           $scope.init<%- newAgent.name%>Conversation($scope.initData);
             <%});%>
         };
         
@@ -296,7 +298,9 @@ angular.module('<%- parentStateName %>')
               }
               <%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
                 mergeAnswers($scope.directiveData, response);
-                initAgents();
+                <%if(state.ui.title.replace('_', '').toLowerCase() == 'get' || state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
+                  setTimeout(initAgents,500);
+                <%}%>
               });                 
           <%}%>
           var answers = {};

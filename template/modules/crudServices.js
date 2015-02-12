@@ -47,6 +47,7 @@ angular.module('<%- moduleName %>')
                   var currentState = stateName.replace('.state:', '');
                   var emitData = {
                            data: data,
+                           currentAgent: agent,
                            currentState: currentState
                        }
                    $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
@@ -67,6 +68,7 @@ angular.module('<%- moduleName %>')
              var currentState = stateName.replace('.state:', '');
              var emitData = {
                       data: data,
+                      currentAgent: newAgent.name,
                       currentState: currentState
                   }
              $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
