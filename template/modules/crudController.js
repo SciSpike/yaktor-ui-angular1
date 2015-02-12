@@ -31,12 +31,10 @@ angular.module('<%- parentStateName %>')
            var agentName = agent.split('.').reverse().join("_of_");
            var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
         $scope.$onRootScope($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, function(event, data){
-          console.log('AGENT STATE DATA:');
-          console.log(JSON.stringify(data));
           if(data.currentState){
             $scope.currentState = data.currentState;
-            $scope.$apply();
           }
+          $scope.$apply();
         });
       
         $scope.init<%- newAgent.name%>Conversation = function(initData){
@@ -315,7 +313,7 @@ angular.module('<%- parentStateName %>')
               if(dataObject[key]){
                 if(dataObject[key].answer){
                   if(dataObject[key].typeRef){
-                    dataObject[key].answer = dataObject[key].answer._id;
+                    dataObject[key].answer = dataObject[key].answer;
                   }
                   if(dataObject[key].answer != ''){
                     answersObject[key] = dataObject[key].answer;
@@ -373,10 +371,10 @@ angular.module('<%- parentStateName %>')
             <% _.each(newAgent.states, function(state, index){ %>
               <% var actions = _.toArray(state.elements);%>
               <% _.each(actions, function(action, i){%>
-            $scope.do<%- agentName%>_<%- state.name %>_<%- action.name%> = function(e){
+            $scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
               var data = returnAnswers($scope.directiveData, answers);
               data = cleanData(data);
-              <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name%>($scope.initData, data);
+              <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>($scope.initData, data);
             };
               <%});%>
             <% });%>

@@ -89,7 +89,9 @@ angular.module('<%- moduleName %>')
           <%_.each(newAgent.states, function(state, index){
             var elements = _.toArray(state.elements);
             _.each(elements, function(element, i){
-              var elementName = element.name.toLowerCase()%>
-          on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%>: _on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%><% if(i != elements.length-1){%>,<% }%><%});});});%>
+              var elementName = element.name.toLowerCase();%>
+              on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%>: _on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%>,
+              
+              <%});});});%>
       }
   }]);

@@ -12,6 +12,11 @@ angular.module('<%=appname%>')
         };
         
         $scope.mainNavigation = [
+          <% _.each(moduleNames.agents, function(moduleName, index) { %>
+          {
+            'title': '<%- moduleName %>',
+            'link': 'main.<%- moduleName %>'
+          },<%});%>
           <% _.each(moduleNames.crud, function(moduleName, index) { %>
           {
             'title': '<%- moduleName %>',
