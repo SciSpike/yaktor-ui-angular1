@@ -64,7 +64,7 @@ angular.module('<%- moduleName %>')
       var _on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%> = function(initData, data){
         var data = data;
         if(SocketService['<%- element%>']){
-          SocketService['<%- element%>']('<%- state.url %>',data, data, function(err,stateName){
+          SocketService['<%- element%>']('<%- state.url %>',initData, data, function(err,stateName){
              var currentState = stateName.replace('.state:', '');
              var emitData = {
                       data: data,
