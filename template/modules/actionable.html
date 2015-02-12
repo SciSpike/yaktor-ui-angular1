@@ -5,7 +5,7 @@
   var titleArray = moduleUrl.split('/');
   %>
   <h1 ng-if="!showTitle"><%- titleArray[0]%> <%- titleArray[1]%></h1>
-    <form name="actionableForm" ng-submit="submitForm('<%- state.ui.title.toLowerCase()%>')">
+      <form name="actionableForm" ng-submit="submitForm('<%- state.ui.title.toLowerCase()%>')">
         <alert ng-repeat="alert in alerts" type="alert.type" close="alerts.splice($index, 1);">
           <span>{{alert.error.message}}</span>
           <ul ng-if="alert.error.errors">
@@ -60,7 +60,8 @@
             createDirectives(state.components.elements, null);%>
             <span class="error" ng-show="actionableForm.input.$error.number">{{'INVALID.NUMBER' | translate}}</span>
             <br />
-        <button type="submit" class="btn btn-default" ng-disabled="!actionableForm.$valid">{{'SUBMIT'|translate}}</button>
+        <button type="submit" class="btn btn-default" ng-disabled="!actionableForm.$valid" ng-click="submitForm('<%- state.ui.title.toLowerCase()%>')">{{'SUBMIT'|translate}}</button>
+        <% if (agents.length > 0){%>
         <div class="actionsPanel">
           <%//used for extracting objects from the spec
           var objectFindByKey = function(array, key, value) {
@@ -75,16 +76,16 @@
            <% _.each(agents, function(agent, index){
              var agentName = agent.split('.').reverse().join("_of_");
              var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
-             <% _.each(newAgent.states, function(state, index){ %><%if (state.name != 'null') { %>
+             <% _.each(newAgent.states, function(state, index){ %>
                <% var actions = _.toArray(state.elements);%>
                <% _.each(actions, function(action, i){%>
-            <button class="btn btn-default" ng-disabled="currentState!='<%-state.name%>'" ng-click="do<%- agentName%>_<%- state.name %>_<%- action.name%>" ><%- action.name%></button>
+            <button class="btn btn-default" ng-disabled="currentState!='<%-state.name%>'" ng-click="do<%- agentName%>_<%- state.name %>_<%- action.name%>();" ><%- action.name%></button>
                <%});%>
-             <% }});%>
+             <% });%>
           <%}); %>
           
         </div>
+        <%}%>
         </div>
-      </form>
   </div>
 </div>

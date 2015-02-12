@@ -43,13 +43,13 @@ angular.module('<%- moduleName %>')
       var _init<%- newAgent.name%>Conversation = function(initData){
         var initData = initData;
         if(SocketService['init']){
-                SocketService['init']('<%- newAgent.actions.url%>',initData, initData, function(err,stateName){
-                  var nextState = stateName.replace('state:', '');
+                SocketService['init']('<%- newAgent.actions.url%>',initData, initData, function(err,stateName, data){
+                  var currentState = stateName.replace('.state:', '');
                   var emitData = {
-                    data: initData,
-                    nextState: nextState
-                  }
-                  $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
+                           data: data,
+                           currentState: currentState
+                       }
+                   $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
                 });
             } else {
                 SocketService.doAction('<%- newAgent.actions.url%>','init', initData, initData, function(err,data){
@@ -64,7 +64,7 @@ angular.module('<%- moduleName %>')
         var data = data;
         if(SocketService['<%- element%>']){
           SocketService['<%- element%>']('<%- state.url %>',data, data, function(err,stateName){
-             var currentState = stateName.replace('state:', '');
+             var currentState = stateName.replace('.state:', '');
              var emitData = {
                       data: data,
                       currentState: currentState

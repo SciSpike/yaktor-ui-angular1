@@ -19,10 +19,10 @@ angular.module('<%- parentStateName %>')
           var newAgent = objectFindByKey(agentSpec, 'id', agent); %>{
           id:'<%- agent %>',
           name:'<%- agentName %>',
-          states: [<% _.each(newAgent.states, function(state, index){ %><%if (state.name != 'null') { %>{
+          states: [<% _.each(newAgent.states, function(state, index){ %>{
                     name: '<%- state.name %>',<% var actions = _.toArray(state.elements);%>
                     actions: [<% _.each(actions, function(action, i){%>'<%- action.name %>'<% if(i != actions.length-1){%>,<%}%><%});%>]
-                  }<% if(index != newAgent.states.length-1){%>,<% }}});%>]
+                  }<% if(index != newAgent.states.length-1){%>,<% }});%>]
         }<% if(index != agents.length-1){%>,
        <%}}); %>];
        
@@ -35,6 +35,7 @@ angular.module('<%- parentStateName %>')
           console.log(JSON.stringify(data));
           if(data.currentState){
             $scope.currentState = data.currentState;
+            $scope.$apply();
           }
         });
       
@@ -43,14 +44,18 @@ angular.module('<%- parentStateName %>')
           <%- parentStateName %>Services.init<%- newAgent.name%>Conversation(initData);
         };
       <% });%>
-        if($stateParams.id){
-          $scope.initData = {_id: $stateParams.id};
+
+        //INIT AGENT
+        function initAgents(){
+          var data = returnAnswers($scope.directiveData, answers);
+          data._id = $scope.userId;
+          $scope.initData = cleanData(data);
             <% _.each(agents, function(agent, index){
               var agentName = agent.split('.').reverse().join("_of_");
               var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
           $scope.init<%- newAgent.name%>Conversation($scope.initData);
             <%});%>
-        }
+        };
         
         //CRUD STUFF
        var id = $stateParams.id;
@@ -293,6 +298,7 @@ angular.module('<%- parentStateName %>')
               }
               <%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
                 mergeAnswers($scope.directiveData, response);
+                initAgents();
               });                 
           <%}%>
           var answers = {};
@@ -358,20 +364,22 @@ angular.module('<%- parentStateName %>')
                        $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1});
                   });
           };
+          
+
           //AGENT BUTTONS ACTIONS
           <% _.each(agents, function(agent, index){
             var agentName = agent.split('.').reverse().join("_of_");
             var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
-            <% _.each(newAgent.states, function(state, index){ %><%if (state.name != 'null') { %>
+            <% _.each(newAgent.states, function(state, index){ %>
               <% var actions = _.toArray(state.elements);%>
               <% _.each(actions, function(action, i){%>
-            $scope.do<%- agentName%>_<%- state.name %>_<%- action.name%> = function(initData){
+            $scope.do<%- agentName%>_<%- state.name %>_<%- action.name%> = function(e){
               var data = returnAnswers($scope.directiveData, answers);
               data = cleanData(data);
               <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name%>($scope.initData, data);
             };
               <%});%>
-            <% }});%>
+            <% });%>
          <%}); %>
         <%}%>
       }]);
