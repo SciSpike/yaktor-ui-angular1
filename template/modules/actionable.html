@@ -61,6 +61,7 @@
             <span class="error" ng-show="actionableForm.input.$error.number">{{'INVALID.NUMBER' | translate}}</span>
             <br />
         <button type="submit" class="btn btn-default" ng-disabled="!actionableForm.$valid">{{'SUBMIT'|translate}}</button>
+        <button type="cancel" ng-click="cancelForm()" class="btn">{{'CANCEL'|translate}}</button>
         </div>
       </form>
       <% if (agents.length > 0){%>

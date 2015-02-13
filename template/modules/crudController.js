@@ -359,6 +359,9 @@ angular.module('<%- parentStateName %>')
              }
              return answerObject
           };
+          $scope.cancelForm = function(){
+            $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1});
+          }
           $scope.submitForm = function(type){
             var data = returnAnswers($scope.directiveData, answers);
             data = cleanData(data);
