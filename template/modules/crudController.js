@@ -1,7 +1,7 @@
 angular.module('<%- parentStateName %>')
   .controller('<%- parentStateName %><%- moduleName %>Controller',
-      ['$rootScope','$scope','$state','$stateParams','$location', '$eventsCommon', '$timeout', '<%- parentStateName %>Services',
-       function ($rootScope,$scope,$state,$stateParams,$location, $eventsCommon, $timeout, <%- parentStateName %>Services) {
+      ['$rootScope','$scope','$state','$stateParams','$modal','$location', '$eventsCommon', '$timeout', '<%- parentStateName %>Services',
+       function ($rootScope,$scope,$state,$stateParams,$modal,$location, $eventsCommon, $timeout, <%- parentStateName %>Services) {
         
         //AGENT STUFF
          <%//used for extracting objects from the spec
@@ -379,9 +379,18 @@ angular.module('<%- parentStateName %>')
               <% var actions = _.toArray(state.elements);%>
               <% _.each(actions, function(action, i){%>
             $scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
-              var data = returnAnswers($scope.directiveData, answers);
-              data = cleanData(data);
-              <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>($scope.initData, data);
+              var skope = $rootScope.$new();
+              skope["on_<%- action.name.toLowerCase()%>"]=function(data){
+                modalInstance.close();
+                data = cleanData(data);
+                <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>($scope.initData, data);
+              }
+              var modalInstance = $modal.open({
+                size:"lg",
+                templateUrl: 'partials/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html',
+                controller: '<%- agentName%><%- action.name%>Controller',
+                scope:skope
+              });
             };
               <%});%>
             <% });%>

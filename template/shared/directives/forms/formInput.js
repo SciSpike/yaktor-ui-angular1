@@ -42,7 +42,7 @@ angular.module('views')
             },
             link: function(scope, element, attrs){
               scope.getContentUrl = function() {
-                    return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type + '.html';
+                    return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type.toLowerCase() + '.html';
                }
               scope.addArrayItem = function(){
                 scope.directiveData.answer.push("");
