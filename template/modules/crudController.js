@@ -380,9 +380,12 @@ angular.module('<%- parentStateName %>')
               <% _.each(actions, function(action, i){%>
             $scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
               var skope = $rootScope.$new();
+              skope.abort = function(){
+                <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>($scope.initData, null);
+                modalInstance.dismiss();
+              };
               skope["on_<%- action.name.toLowerCase()%>"]=function(data){
                 modalInstance.close();
-                data = cleanData(data);
                 <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>($scope.initData, data);
               }
               var modalInstance = $modal.open({

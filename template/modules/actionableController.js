@@ -18,7 +18,9 @@ angular.module('<%- moduleName %>')
 			  createDirectives(directiveData, state.components.elements);%>
 			  
 			  $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
-			  
+			  if(!Object.keys($scope.directiveData).length && $scope.abort){
+			    $scope.abort();
+			  }
 			  $scope.getData = function(nestedArray){
 			    console.log(nestedArray);
 			  }
@@ -37,10 +39,7 @@ angular.module('<%- moduleName %>')
             if(dataObject[key]){
               if(dataObject[key].answer){
                 if(dataObject[key].typeRef){
-                  if(dataObject[key].answer._id){
-                    //if .answer is an object, get the _id off it
-                    dataObject[key].answer = dataObject[key].answer._id;
-                  }
+                  dataObject[key].answer = dataObject[key].answer;
                 }
                 if(dataObject[key].answer != ''){
                   answersObject[key] = dataObject[key].answer;
@@ -49,28 +48,28 @@ angular.module('<%- moduleName %>')
                 }
               }else{
                 switch(dataObject[key].constructor.name.toLowerCase()) {
-                case 'array':
-                  answersObject[key] = [];
-                  returnAnswers(dataObject[key], answersObject[key], answersObject, key);
-                  break;
-                case 'object':
-                  if(key != 'ui'){
-                    answersObject[key] = {};
+                  case 'array':
+                    answersObject[key] = [];
                     returnAnswers(dataObject[key], answersObject[key], answersObject, key);
-                  }
-                  break;
-                default:
-                  if(prevObject && prevObject[prevKey]){
-                    delete prevObject[prevKey];
-                  }
-                  break;
-              }
+                    break;
+                  case 'object':
+                    if(key != 'ui'){
+                      answersObject[key] = {};
+                      returnAnswers(dataObject[key], answersObject[key], answersObject, key);
+                    }
+                    break;
+                  default:
+                    if(prevObject && prevObject[prevKey]){
+                      delete prevObject[prevKey];
+                    }
+                    break;
+                }
               }
             }
           }
           return answers;
         }
-        function cleanData(answerObject){
+			  function cleanData(answerObject){
           for(key in answerObject){
               if(answerObject[key].constructor.name.toLowerCase() == 'object'){
                 if($.isEmptyObject(answerObject[key])){
