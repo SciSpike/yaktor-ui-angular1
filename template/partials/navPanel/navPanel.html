@@ -1,13 +1,9 @@
-<span class="dragHandle" ng-click="toggleNavPanel()"></span>
-<div id="logo"></div>
-<div class="navInner">
-	<span ng-repeat="nav in mainNavigation track by $index"
-		ng-class="{active: nav.title == activeState.name}">
-        <a ng-click="changeState(nav.link)" class="navContainer">
-            <span class="navText">
-                <span class="navAlert" ng-init="flagData = getFlag(nav.flag)" ng-show="flagData">{{flagData}}</span>
-                {{nav.title}}
-            </span>
-        </a>
-    </span>
-</div>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <ul class=" nav nav-pills text-capitalize" >
+    	<li role="presentation" class="text-capitalize" ng-repeat="nav in mainNavigation track by $index" ng-class="{active: nav.title == activeState.name}">
+        <a class="text-capitalize" ng-click="changeState(nav.link)">{{nav.title}}</a>
+      </li>
+    </ul>
+  </div>
+</nav>

@@ -14,12 +14,12 @@ angular.module('<%=appname%>')
         $scope.mainNavigation = [
           <% _.each(moduleNames.agents, function(moduleName, index) { %>
           {
-            'title': '<%- moduleName %>',
+            'title': '<%- moduleName.replace(/_/g, " ") %>',
             'link': 'main.<%- moduleName %>'
           },<%});%>
           <% _.each(moduleNames.crud, function(moduleName, index) { %>
           {
-            'title': '<%- moduleName %>',
+            'title': '<%- moduleName.replace(/_/g, " ") %>',
             'link': 'main.<%- moduleName %>.FIND'
           }<%if (index != moduleNames.crud.length - 1){%>,<%}});%>
         ];
