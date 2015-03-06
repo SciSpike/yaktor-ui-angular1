@@ -2,9 +2,10 @@
   "name": "views",
   "version": "0.0.1",
   "dependencies": {
-    "angular": "1.2.16",
+    "angular": "~1.3.13",
     "angular-resource": "1.2.1",
     "angular-translate": "2.0.1",
+    "angular-sanitize": "~1.3.13",
     "ngstorage": "0.3.0",
     "ng-grid": "2.0.11",
     "angular-touch": "1.2.1",
@@ -15,7 +16,7 @@
     "emitter": "component/emitter#1.1.2",
     "node-querystring": "0.6.6",
     "d3": "3.4.6",
-    "angular-ui-select2": "0.0.5",
+    "angular-ui-select": "~0.9.9",
     "viz.js": "https://github.com/mdaines/viz.js/releases/download/0.0.3/viz.js"
  },
   "resolutions": {

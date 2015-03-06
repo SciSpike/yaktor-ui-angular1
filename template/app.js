@@ -9,20 +9,22 @@
   require('uiBootstrap');
   require('ngGrid');
   require('ngTouch');
-  require('select2');
   require('uiSelect');
+  require('ngSanitize');
 
   angular.module('views', 
-		  ['ui.bootstrap',
-		   'ui.router',
-		   'pascalprecht.translate',
-		   'ngStorage',
-		   'ngGrid', 
-		   'ngResource',
-		   'ui.select2',
-		   'checklist-model',
-		   'sharedModule',
-		   <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
-		   <% }}); %>]);
+      ['ui.bootstrap',
+      'ui.router',
+      'pascalprecht.translate',
+      'ngStorage',
+      'ngGrid', 
+      'ngResource',
+      'ui.select',
+      'checklist-model',
+      'sharedModule',
+      'ngSanitize',
+       <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
+         <% }}); %>]);
+
 
 })();

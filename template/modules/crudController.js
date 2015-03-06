@@ -198,11 +198,16 @@ angular.module('<%- parentStateName %>')
                                    var element=elems[elem];
                                  %>
                                  {
-                                   <% if(element.type=="typeAhead"){%>
-                                   field: '<%- element.ui.title%>.title',
+                                 <% if(element.type=="typeAhead" || element.type=="select"){%>
+                                   <%if (element.ui.hasTitle){%>
+                                     field: '<%- element.ui.title%>.title',
                                    <%}else{%>
-                                   field: '<%- elem%>',
+                                     field: '<%- element.ui.title%>',
                                    <%}%>
+                                 <%}else{%>
+                                   field: '<%- elem%>',
+                                 <%}%>
+
                                    minWidth: 150,
                                    resizable: true,
                                    sortable: true,
@@ -276,6 +281,7 @@ angular.module('<%- parentStateName %>')
             }
           }
           createDirectives(directiveData, state.components.elements);%>
+
           $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
           <% if(state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
               function mergeAnswers(dataObject, answersObject){
@@ -360,13 +366,13 @@ angular.module('<%- parentStateName %>')
              return answerObject
           };
           $scope.cancelForm = function(){
-            $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1});
+            $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, null);
           }
           $scope.submitForm = function(type){
             var data = returnAnswers($scope.directiveData, answers);
             data = cleanData(data);
             <%- parentStateName %>Services.<%- state.ui.title.toLowerCase()%><%- parentStateName%>(data, id).then(function(response) {
-                       $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1});
+                       $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, response);
                   });
           };
           

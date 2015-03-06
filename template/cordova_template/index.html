@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link rel="stylesheet" type="text/css" href="compiled.css" />
+
+    <title>{{title | translate}}</title>
+
+</head>
+
+<body>
+
+  <div class="container wrapper">
+    <div class="headWrap">
+      <div class="scidHeader"></div>
+    </div>
+    <div class="container outerUiView" ui-view autoscroll="false"></div>
+  </div>  
+  <!--RESOURCES-->
+  <!--RESOURCES END-->
+  
+  <script>
+	  var qs = require('qs');
+	  var sessionId = "<%=sId%>";
+	  var defaultLocale = "<%=locale%>";
+	  var partialsBaseLocation = '/partials';
+	  var clientBaseLocation = '/clientConfig';
+  </script>
+  
+  <script src="clientConfig/clientSetup.js"></script>
+  <script src="app.js"></script>
+  <script src="cordova.js"></script>
+  <script src="js/index.js"></script>
+  
+  
+  <!--SCRIPTS-->
+  <!--SCRIPTS END-->
+  
+  <!--MODULES-->
+  <!--MODULES END-->
+  
+  <script src="appConfig.js"></script>
+  
+  <script type="text/javascript">
+    app.initialize();
+  </script>
+    
+</body>
+</html>

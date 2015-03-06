@@ -1,6 +1,8 @@
 angular.module('views')
 .config(function($stateProvider, $locationProvider, $translateProvider, routesExtendedProvider, htmlExtendedProvider) {
   $translateProvider.preferredLanguage(defaultLocale);
+  $urlRouterProvider.when('', '/home');
+  
   $stateProvider
     .state('main', {
       abstract : true,

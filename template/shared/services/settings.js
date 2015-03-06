@@ -15,7 +15,8 @@ angular.module('views')
             'incMulti': 'checkbox',
             'geo': 'geo',
             'array': 'array',
-            'typeAhead': 'typeAhead'
+            'typeAhead': 'typeAhead',
+            'select': 'select'
           }
         }
     };

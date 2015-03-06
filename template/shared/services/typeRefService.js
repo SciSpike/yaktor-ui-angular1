@@ -6,7 +6,7 @@ angular.module('views')
         }
         var response = $q.defer();
         $timeout(function(){
-          RestService['FIND'](typeRef, data,{},function(err,data){
+          RestService['FIND'](typeRef, data,null,function(err,data){
                   if(err){
                       console.log(err);
                   } else {

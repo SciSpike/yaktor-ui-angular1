@@ -17,10 +17,10 @@ var browserifyLibAlias = [
   './bower_components/angular-resource/angular-resource.js:angular.resource',
   './bower_components/angular-translate/angular-translate.js:angular.translate',
   './bower_components/angular-ui-router/release/angular-ui-router.js:uirouter',
+  './bower_components/angular-sanitize/angular-sanitize.min.js:ngSanitize',
   './bower_components/ngstorage/ngStorage.min.js:ngStorage',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
-  './bower_components/select2/select2.js:select2',
-  './bower_components/angular-ui-select2/src/select2.js:uiSelect',
+  './bower_components/angular-ui-select/dist/select.js:uiSelect',
   './bower_components/ng-grid/ng-grid-2.0.11.min.js:ngGrid'
  ];
 
@@ -31,11 +31,11 @@ var mainExternals = [
   './bower_components/angular/angular.js',
   './bower_components/angular-resource/angular-resource.js',
   './bower_components/angular-translate/angular-translate.js',
+  './bower_components/angular-sanitize/angular-sanitize.min.js',
   './bower_components/angular-ui-router/release/angular-ui-router.js',
   './bower_components/ngstorage/ngStorage.min.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-  './bower_components/select2/select2.js',
-  './bower_components/angular-ui-select2/src/select2.js',
+  './bower_components/angular-ui-select/dist/select.js',
   './bower_components/ng-grid/ng-grid-2.0.11.min.js'
 ];
 
@@ -79,6 +79,11 @@ module.exports = {
             exports: '$translate',
             depends: { jquery: '$', angular:'angular'}
           },
+          'ngSanitize' :{
+            path: './bower_components/angular-sanitize/angular-sanitize.js',
+            exports: 'ngSanitize',
+            depends: { jquery: '$', angular:'angular'}
+          },
           'uirouter': {
             path: './bower_components/angular-ui-router/release/angular-ui-router.js',
             exports: 'uirouter',
@@ -104,13 +109,8 @@ module.exports = {
             exports: 'uiBootstrap',
             depends: {jquery: '$', angular: 'angular'}
           },
-          'select2': {
-              path: './bower_components/select2/select2.js',
-              exports: 'select2',
-              depends: {jquery: '$', angular: 'angular'}
-          },
           'uiSelect': {
-              path: './bower_components/angular-ui-select2/src/select2.js',
+              path: './bower_components/angular-ui-select/dist/select.js',
               exports: 'uiSelect',
               depends: {jquery: '$', angular: 'angular'}
           },

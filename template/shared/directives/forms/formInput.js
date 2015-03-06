@@ -7,22 +7,56 @@ angular.module('views')
                 directiveData: '=',
                 key: '@'
             },
-            controller: function($scope, $filter, defaultSettings, $state, settingsInstances) {
+            controller: function($rootScope, $scope, $filter, $state, $modal, defaultSettings, settingsInstances) {
               if($scope.directiveData.typeRef){
                 if(!$scope.directiveData.endPoint){
                   $scope.directiveData.endPoint = settingsInstances.getTypeRefsInstance('default');
                 }
                 if($scope.directiveData.endPoint[$scope.directiveData.typeRef]){
+                  //set endpoint in case we need to call on it elsewhere
+                  $scope.directiveData.ui.endPoint = $scope.directiveData.endPoint[$scope.directiveData.typeRef];
                   //NON-ASYNC
-                  typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef]).then(function(response){
-                    $scope.directiveData.ui.data = response.results;
-                  });
+                  // typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef]).then(function(response){
+                  //   $scope.directiveData.ui.data = response.results;
+                  // });
                   //ASYNC
-                  /*$scope.getLocation = function(val) {
-                    typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef], val).then(function(response){
-                      return response.results;
+                  $scope.getLocation = function(val) {
+                    var data = {};
+                    data.title = "/"+val+".*/";
+                    typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef], data).then(function(response){
+                          $scope.directiveData.ui.data = response.results;
                     });
-                  };*/
+                  };
+ 
+                  $scope.createNew = function(){
+                    var objectRef = $scope.directiveData.ui.title.toLowerCase();
+                    var skope = $rootScope.$new();
+
+                    skope.abort = function(){
+                      modalInstance.dismiss();
+                    };
+
+                    skope.changeState = function(state, query, newItem){
+                      //ignore state and query here, this is just a a spoof to get what we need and avoid a goofy error
+                      if (newItem){
+                        typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef], {}).then(function(response){
+                              $scope.directiveData.ui.data = response.results;
+                              $scope.directiveData.answer = newItem;
+                              modalInstance.close();
+                        });
+                      }else{
+                        skope.abort();
+                      }
+                    }
+                    
+                    var modalInstance = $modal.open({
+                      size:"lg",
+                      templateUrl: 'partials/crud/'+objectRef+'/POST.html',
+                      controller: objectRef + 'POSTController',
+                      scope:skope
+                    });
+                    
+                  };
                 }else{
                   $scope.directiveData.ui.type = 'string';
                 }

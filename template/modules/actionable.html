@@ -65,7 +65,7 @@
         <button type="cancel" ng-click="cancelForm()" class="btn">{{'CANCEL'|translate}}</button>
         </div>
       </form>
-      <% if (agents.length > 0){%>
+      <% if (agents.length > 0 && (state.ui.title.replace('_', '').toLowerCase() == 'get' || state.ui.title.replace('_', '').toLowerCase() == 'put')) {%>
       <div class="actionsPanel">
         <%//used for extracting objects from the spec
         var objectFindByKey = function(array, key, value) {
