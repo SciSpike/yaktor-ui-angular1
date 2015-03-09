@@ -1,5 +1,5 @@
 angular.module('views')
-.config(function($stateProvider, $locationProvider, $translateProvider, routesExtendedProvider, htmlExtendedProvider) {
+.config(function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, routesExtendedProvider, htmlExtendedProvider) {
   $translateProvider.preferredLanguage(defaultLocale);
   $urlRouterProvider.when('', '/home');
   
