@@ -69,7 +69,7 @@ angular.module('<%- parentStateName %>')
             <%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
                   $scope.directiveData = response;
                  });
-          }
+          };
           findData({});
           $scope.testType = function(value){
             if(typeof value == 'string'){
@@ -86,6 +86,40 @@ angular.module('<%- parentStateName %>')
           }];
           $scope.grid = true;
           $scope.gridActions = {
+            //AGENT BUTTONS ACTIONS
+            <% _.each(agents, function(agent, index){
+              var agentName = agent.split('.').reverse().join("_of_");
+              var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+              init<%- newAgent.name%>Conversation: function(id){
+                console.log('<%- agent%> INIT DATA:' + initData);
+                var initData = {
+                  _id: id
+                };
+                <%- parentStateName %>Services.init<%- newAgent.name%>Conversation(initData);
+              },
+              <% _.each(newAgent.states, function(state, index){ %>
+                <% var actions = _.toArray(state.elements);%>
+                <% _.each(actions, function(action, i){%>
+              do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
+                var skope = $rootScope.$new();
+                var initData = {
+                  _id: id
+                };
+                skope.abort = function(){
+                  <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(initData, null);
+                  modalInstance.dismiss();
+                };
+                skope["on_<%- action.name.toLowerCase()%>"]=function(data){
+                  modalInstance.close();
+                  <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(initData, data);
+                };
+                var modalInstance = $modal.open({
+                  size:"lg",
+                  templateUrl: 'partials/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html',
+                  controller: '<%- agentName%><%- action.name%>Controller',
+                  scope:skope
+                });
+              },<%});%><% });%><%}); %>
             changeState: function(state, index){
               $scope.changeState(state,{id: index});
             },
@@ -104,6 +138,7 @@ angular.module('<%- parentStateName %>')
                 }
               });
             }
+            
           };
           function range(start, length){
             var pageArray = [];
@@ -112,7 +147,7 @@ angular.module('<%- parentStateName %>')
               start++;
             }
             return pageArray;
-          }
+          };
           $scope.gotoPage = function(page) {
             $scope.pagingOptions.currentPage = page;
             if(page-2 <= 1){
@@ -166,7 +201,7 @@ angular.module('<%- parentStateName %>')
               }
             }
             findData($scope.filtersImplemented);
-          } 
+          }; 
           $scope.removeFilter = function(child, parent, index){
             if(parent){
               delete $scope.gridFilter[parent][index][child];
@@ -178,7 +213,7 @@ angular.module('<%- parentStateName %>')
               $scope.numFilters--;
             }
             findData($scope.filtersImplemented);
-          }
+          };
           $scope.gridOptions = {
                 options: {
                     enablePinning: true,
@@ -218,6 +253,49 @@ angular.module('<%- parentStateName %>')
                                        "<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
                                  }, 
                                 <%});%>
+                                 <% if (agents.length > 0 && (state.ui.title.replace('_', '').toLowerCase() == 'find')) {
+                                   //used for extracting objects from the spec
+                                   var objectFindByKey = function(array, key, value) {
+                                      for (var i = 0; i < array.length; i++) {
+                                        if (array[i][key] == value) {
+                                          return array[i];
+                                        }
+                                      }
+                                      return null;
+                                    }%>
+                                    <% _.each(agents, function(agent, index){
+                                      var agentName = agent.split('.').reverse().join("_of_");
+                                      var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+                                      {
+                                   cellTemplate: "<div class='editCell'>{{<%- newAgent.name%>CurrentState.state}}</div>",
+                                   width: '150',
+                                   minWidth: 150,
+                                   resizable: false,
+                                   headerCellTemplate:"<div class='truncate'><%- newAgent.name%>: {{'STATES'|translate}}</div>" +
+                                       "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
+                                       "<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
+                                        
+                                    },
+                                    {
+                                    cellTemplate: "<div class='editCell'>"+
+                                       "<button class='btn btn-default btn-sm text-capitalize' ng-if='<%- newAgent.name%>CurrentState.state==null' ng-click='init<%- newAgent.name%>Conversation(row.getProperty(\"_id\"));' >{{'INIT'|translate}}</button>"+
+                                      <% _.each(newAgent.states, function(state, index){ %>
+                                        <% var actions = _.toArray(state.elements);%>
+                                        <% _.each(actions, function(action, i){%>
+                                     "<button class='btn btn-default btn-sm text-capitalize' ng-if='<%- newAgent.name%>CurrentState.state==\"<%-state.name%>\"' ng-click='do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(row.getProperty(\"_id\"));' ><%- action.name%></button>"+
+                                        <%});%>
+                                      <% });%>
+                                        "</div>",
+                                      width: '150',
+                                      minWidth: 150,
+                                      resizable: false,
+                                      headerCellTemplate:"<div class='truncate'><%- newAgent.name%>: {{'ACTIONS'|translate}}</div>" +
+                                       "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
+                                       "<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
+                                          
+                                        },
+                                   <%}); %>
+                                 <%}%>
                                 {
                                  <% var putState = 'main.' + parentStateName + '.PUT'; %>
                                  cellTemplate: "<div class='editCell'><a ng-click='gridOptions.actions.changeState(\"<%- putState%>\", row.getProperty(\"_id\"))'>{{'EDIT'|translate}}</a></div>",
@@ -237,13 +315,13 @@ angular.module('<%- parentStateName %>')
                                 
                     ]
                 }
-            }
+            };
             function findData(data){
             <%- parentStateName %>Services.find<%- parentStateName%>(data, $scope.pagingOptions.currentPage).then(function(response) {
                        $scope.gridOptions.data = response.results;
                        $scope.pagingOptions.totalServerItems = response.total;
                        if($scope.allData == -1){
-                        $scope.allData = response.total
+                         $scope.allData = response.total;
                        }
                        $scope.pagingOptions.totalPages = Math.ceil($scope.pagingOptions.totalServerItems / $scope.pagingOptions.pageSize);
                       if($scope.pagingOptions.totalPages < $scope.pagingOptions.pageNav){
