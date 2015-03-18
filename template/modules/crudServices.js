@@ -46,10 +46,11 @@ angular.module('<%- moduleName %>')
                 SocketService['init']('<%- newAgent.actions.url%>',initData, initData, function(err,stateName, data){
                   var currentState = stateName.replace('.state:', '');
                   var emitData = {
-                           data: data,
-                           currentAgent: agent,
-                           currentState: currentState
-                       }
+                        data: data,
+                        initData: initData,
+                        currentAgent: agent,
+                        currentState: currentState
+                      }
                    $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
                 });
             } else {
@@ -67,10 +68,11 @@ angular.module('<%- moduleName %>')
           SocketService['<%- element%>']('<%- state.url %>',initData, data, function(err,stateName){
              var currentState = stateName.replace('.state:', '');
              var emitData = {
-                      data: data,
-                      currentAgent: newAgent.name,
-                      currentState: currentState
-                  }
+                  data: data,
+                  initData: initData,
+                  currentAgent: newAgent.name,
+                  currentState: currentState
+                }
              $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
           });
         } else {

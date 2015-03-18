@@ -26,19 +26,25 @@ angular.module('<%- parentStateName %>')
         }<% if(index != agents.length-1){%>,
        <%}}); %>];
        
+       
        // setup listeners and inits
        <% _.each(agents, function(agent, index){
            var agentName = agent.split('.').reverse().join("_of_");
            var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
         $scope.$onRootScope($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, function(event, data){
+          <% if(state.ui.title.replace('_', '').toLowerCase() == 'find'){%>
+          $scope.<%- newAgent.name%>CurrentStates = ($scope.<%- newAgent.name%>CurrentStates || {});
           if(data.currentState){
-            $scope.<%- newAgent.name%>CurrentState = {
-              state: data.currentState
-            };
+            $scope.<%- newAgent.name%>CurrentStates[data.initData._id] = data.currentState;
           }
+          <%}else{%>
+          if(data.currentState){
+            $scope.<%- newAgent.name%>CurrentState = data.currentState;
+          }
+          <%}%>
           $scope.$apply();
         });
-      
+        
         $scope.init<%- newAgent.name%>Conversation = function(initData){
           console.log('<%- agent%> INIT DATA:' + initData);
           <%- parentStateName %>Services.init<%- newAgent.name%>Conversation(initData);
@@ -90,6 +96,15 @@ angular.module('<%- parentStateName %>')
             <% _.each(agents, function(agent, index){
               var agentName = agent.split('.').reverse().join("_of_");
               var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+              get<%- newAgent.name%>ConversationState: function(id){
+                console.log('<%- agent%> Get State For:' + id);
+                var currentState = null;
+                if ($scope.<%- newAgent.name%>CurrentStates){
+                  currentState = $scope.<%- newAgent.name%>CurrentStates[id];
+                }
+                return currentState;
+              },
+
               init<%- newAgent.name%>Conversation: function(id){
                 console.log('<%- agent%> INIT DATA:' + initData);
                 var initData = {
@@ -267,32 +282,28 @@ angular.module('<%- parentStateName %>')
                                       var agentName = agent.split('.').reverse().join("_of_");
                                       var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
                                       {
-                                   cellTemplate: "<div class='editCell'>{{<%- newAgent.name%>CurrentState.state}}</div>",
-                                   width: '150',
+                                   cellTemplate: "<div>{{gridOptions.actions.get<%- newAgent.name%>ConversationState(row.getProperty(\"_id\"));}}</div>",
                                    minWidth: 150,
                                    resizable: false,
-                                   headerCellTemplate:"<div class='truncate'><%- newAgent.name%>: {{'STATES'|translate}}</div>" +
+                                   headerCellTemplate:"<div><%- newAgent.name%>: {{'STATE'|translate}}</div>" +
                                        "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
                                        "<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
-                                        
                                     },
                                     {
-                                    cellTemplate: "<div class='editCell'>"+
-                                       "<button class='btn btn-default btn-sm text-capitalize' ng-if='<%- newAgent.name%>CurrentState.state==null' ng-click='init<%- newAgent.name%>Conversation(row.getProperty(\"_id\"));' >{{'INIT'|translate}}</button>"+
+                                    cellTemplate: "<div>"+
+                                       "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%- newAgent.name%>ConversationState(row.getProperty(\"_id\"))==null' ng-click='gridOptions.actions.init<%- newAgent.name%>Conversation(row.getProperty(\"_id\"));' >{{'INIT'|translate}}</button>"+
                                       <% _.each(newAgent.states, function(state, index){ %>
                                         <% var actions = _.toArray(state.elements);%>
                                         <% _.each(actions, function(action, i){%>
-                                     "<button class='btn btn-default btn-sm text-capitalize' ng-if='<%- newAgent.name%>CurrentState.state==\"<%-state.name%>\"' ng-click='do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(row.getProperty(\"_id\"));' ><%- action.name%></button>"+
+                                     "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%- newAgent.name%>ConversationState(row.getProperty(\"_id\"))==\"<%-state.name%>\"' ng-click='gridOptions.actions.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(row.getProperty(\"_id\"));' ><%- action.name%></button>"+
                                         <%});%>
                                       <% });%>
                                         "</div>",
-                                      width: '150',
                                       minWidth: 150,
                                       resizable: false,
-                                      headerCellTemplate:"<div class='truncate'><%- newAgent.name%>: {{'ACTIONS'|translate}}</div>" +
+                                      headerCellTemplate:"<div><%- newAgent.name%>: {{'ACTIONS'|translate}}</div>" +
                                        "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
                                        "<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
-                                          
                                         },
                                    <%}); %>
                                  <%}%>
@@ -328,8 +339,20 @@ angular.module('<%- parentStateName %>')
                         $scope.pagingOptions.pageNav = $scope.pagingOptions.totalPages;
                         $scope.pagingOptions.pageButtons = range($scope.pagingOptions.currentPage, $scope.pagingOptions.pageNav);
                       }
-                 });
-          }
+                       //Init agents for each row
+                           <% _.each(agents, function(agent, index){
+                             var agentName = agent.split('.').reverse().join("_of_");
+                             var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
+                             for(i=0; i < response.results.length; i++){
+                               var initData = {
+                                 _id: response.results[i]._id
+                               };
+                               $scope.init<%- newAgent.name%>Conversation(initData);
+                             }
+                           <%});%>
+                     });
+          };
+          
           findData({});
         <% }
 

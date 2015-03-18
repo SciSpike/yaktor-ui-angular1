@@ -1,4 +1,4 @@
-<div class="btn btn-default btn-small" ng-click="createNew();">Create New {{directiveData.ui.title}}</div>
+<div class="btn btn-default btn-small" ng-click="createNew();">Create New {{directiveData.ui.title | translate}}</div>
 <ui-select ng-model="directiveData.answer" theme="bootstrap" >
   <ui-select-match placeholder="{{directiveData.ui.title | translate}}">{{$select.selected.title}}</ui-select-match>
   <ui-select-choices repeat="item in directiveData.ui.data track by $index | filter: $select.search" refresh="getLocation($select.search)"

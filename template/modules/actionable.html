@@ -82,13 +82,13 @@
            var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
            <div class="well row">
               <div class="col-xs-4">
-               <p class="text-capitalize"><%- newAgent.name%> : {{<%- newAgent.name%>CurrentState.state}}</p>
+               <p class="text-capitalize"><%- newAgent.name%> : {{<%- newAgent.name%>CurrentState}}</p>
               </div>
               <div class="col-xs-8"><p>
            <% _.each(newAgent.states, function(state, index){ %>
              <% var actions = _.toArray(state.elements);%>
              <% _.each(actions, function(action, i){%>
-          <button class="btn btn-default btn-lg text-capitalize" ng-if="<%- newAgent.name%>CurrentState.state=='<%-state.name%>'" ng-click="do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>();" ><%- action.name%></button>
+          <button class="btn btn-default btn-lg text-capitalize" ng-if="<%- newAgent.name%>CurrentState=='<%-state.name%>'" ng-click="do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>();" ><%- action.name%></button>
              <%});%>
            <% });%></p></div></div>
         <%}); %>
