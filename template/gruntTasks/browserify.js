@@ -42,25 +42,25 @@ var mainExternals = [
 var mergedExternals = browserifyLibExternal.concat(mainExternals);
 
 module.exports = {
-	  build: {
-  		options: {
-  			alias: browserifyLibAlias,
-  			external: mainExternals,
-  			aliasMappings: [
+    build: {
+      options: {
+        alias: browserifyLibAlias,
+        external: mainExternals,
+        aliasMappings: [
           {
             cwd: '../public/api',
             src: ['*/*.js'],
             dest: '',
           },
         ]
-  		},
-  		src: [],
-  		dest: './libs/resources/build.js'
-	  },
-	  libs:{
+      },
+      src: [],
+      dest: './libs/resources/build.js'
+    },
+    libs:{
        options: {
         shim: {
-      	  jquery: {
+          jquery: {
             path: './bower_components/jquery/dist/jquery.min.js',
             exports: '$'
           },
@@ -123,27 +123,27 @@ module.exports = {
       },
       src: [],
       dest: './libs/resources/libs.js'
-	  },
-	  appDep: {
-		  	files: {
-		  		'./libs/resources/resources.js': ['bower_components/sockjs-client/dist/sockjs.js'],
-		  		'./libs/shared.js': ['./shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/services/**/*.js'],
-		  		'./clientConfig/clientSetup.js': ['./clientConfig/init/**/*.js'],
-		  		'./libs/clientConfig.js': ['./clientConfig/custom/**/*.js'],
-		  		'./libs/locale.js': ['./shared/locale/**/*.js', './modules/locale/**/*.js'], 
-		  		<% _.each(moduleNames.agents, function(moduleName, index){%>
-		  		'./libs/modules/<%- moduleName %>.js': ['./modules/agents/<%- moduleName %>/<%- moduleName %>.js', './modules/agents/<%- moduleName %>/controllers/**/*.js', './modules/agents/<%- moduleName %>/directives/**/*.js', './modules/agents/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
-		 		<% }}); %>
-		 		<% _.each(moduleNames.crud, function(moduleName, index){%>
-		  		'./libs/modules/<%- moduleName %>.js': ['./modules/crud/<%- moduleName %>/<%- moduleName %>.js', './modules/crud/<%- moduleName %>/controllers/**/*.js', './modules/crud/<%- moduleName %>/directives/**/*.js', './modules/crud/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
-		 		<% }}); %>
-		 		<% _.each(moduleNames.resources, function(moduleName, index){%>
+    },
+    appDep: {
+        files: {
+          './libs/resources/resources.js': ['bower_components/sockjs-client/dist/sockjs.js'],
+          './libs/shared.js': ['./shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/services/**/*.js'],
+          './clientConfig/clientSetup.js': ['./clientConfig/init/**/*.js'],
+          './libs/clientConfig.js': ['./clientConfig/custom/**/*.js'],
+          './libs/locale.js': ['./shared/locale/**/*.js', './modules/locale/**/*.js'], 
+          <% _.each(moduleNames.agents, function(moduleName, index){%>
+          './libs/modules/<%- moduleName %>.js': ['./modules/agents/<%- moduleName %>/<%- moduleName %>.js', './modules/agents/<%- moduleName %>/controllers/**/*.js', './modules/agents/<%- moduleName %>/directives/**/*.js', './modules/agents/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+         <% }}); %>
+         <% _.each(moduleNames.crud, function(moduleName, index){%>
+          './libs/modules/<%- moduleName %>.js': ['./modules/crud/<%- moduleName %>/<%- moduleName %>.js', './modules/crud/<%- moduleName %>/controllers/**/*.js', './modules/crud/<%- moduleName %>/directives/**/*.js', './modules/crud/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+         <% }}); %>
+         <% _.each(moduleNames.resources, function(moduleName, index){%>
         './libs/modules/<%- moduleName %>.js': ['./shared/modules/<%- moduleName %>/<%- moduleName %>.js', './shared/modules/<%- moduleName %>/controllers/**/*.js', './shared/modules/<%- moduleName %>/directives/**/*.js', './shared/modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
       <% }}); %>
-			},
-			options: {
-			  alias: browserifyLibAlias,
-			  external:mergedExternals
-			}
-	  }
+      },
+      options: {
+        alias: browserifyLibAlias,
+        external:mergedExternals
+      }
+    }
 };
