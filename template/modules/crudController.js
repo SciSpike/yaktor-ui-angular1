@@ -285,7 +285,7 @@ angular.module('<%- parentStateName %>')
                                    cellTemplate: "<div>{{gridOptions.actions.get<%- newAgent.name%>ConversationState(row.getProperty(\"_id\"));}}</div>",
                                    minWidth: 150,
                                    resizable: false,
-                                   headerCellTemplate:"<div><%- newAgent.name%>: {{'STATE'|translate}}</div>" +
+                                   headerCellTemplate:"<div>{{'STATE'|translate}}</div>" +
                                        "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
                                        "<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
                                     },
@@ -301,7 +301,7 @@ angular.module('<%- parentStateName %>')
                                         "</div>",
                                       minWidth: 150,
                                       resizable: false,
-                                      headerCellTemplate:"<div><%- newAgent.name%>: {{'ACTIONS'|translate}}</div>" +
+                                      headerCellTemplate:"<div>{{'ACTIONS'|translate}}</div>" +
                                        "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +
                                        "<div ng-show='col.resizable' class='ngHeaderGrip ng-scope' ng-click='col.gripClick($event)' ng-mousedown='col.gripOnMouseDown($event)'></div>"
                                         },
