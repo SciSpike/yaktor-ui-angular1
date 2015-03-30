@@ -25,7 +25,7 @@ module.exports = function(grunt) {
     'cssmin': {
       'combine': {
         'files': {
-          './styles/compiled.css': ['./styles/css/*.css', './bower_components/select2/select2.css', './bower_components/ng-grid/ng-grid.min.css']
+          './styles/compiled.css': ['./styles/css/*.css', './bower_components/angular-ui-select/dist/select.css', './bower_components/ng-grid/ng-grid.min.css']
         }
       }
     },

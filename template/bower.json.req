@@ -16,7 +16,7 @@
     "emitter": "component/emitter#1.1.2",
     "node-querystring": "0.6.6",
     "d3": "3.4.6",
-    "angular-ui-select": "~0.9.9",
+    "angular-ui-select": "~0",
     "viz.js": "https://github.com/mdaines/viz.js/releases/download/0.0.3/viz.js"
  },
   "resolutions": {
