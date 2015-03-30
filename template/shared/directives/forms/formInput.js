@@ -16,9 +16,9 @@ angular.module('views')
                   //set endpoint in case we need to call on it elsewhere
                   $scope.directiveData.ui.endPoint = $scope.directiveData.endPoint[$scope.directiveData.typeRef];
                   //NON-ASYNC
-                  // typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef]).then(function(response){
-                  //   $scope.directiveData.ui.data = response.results;
-                  // });
+                  typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef]).then(function(response){
+                    $scope.directiveData.ui.data = response.results;
+                  });
                   //ASYNC
                   $scope.getLocation = function(val) {
                     var data = {};
