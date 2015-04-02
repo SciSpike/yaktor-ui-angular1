@@ -78,8 +78,12 @@ angular.module('views')
             },
             link: function(scope, element, attrs){
               scope.getContentUrl = function() {
-                console.log(scope.directiveData.ui.type.toLowerCase());
-                return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type.toLowerCase() + '.html';
+                if (scope.directiveData.ui.type) {
+                  console.log(scope.directiveData.ui.type.toLowerCase());
+                  return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type.toLowerCase() + '.html';
+                } else {
+                  return "";
+                }
                }
               scope.addArrayItem = function(){
                 scope.directiveData.answer.push("");
