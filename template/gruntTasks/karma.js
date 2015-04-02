@@ -1,7 +1,7 @@
 module.exports = {
-	unit: {
-		configFile: './test/karma-unit.conf.js',
-		autoWatch: false,
-		singleRun: true
-	}
+  unit: {
+    configFile: './test/karma-unit.conf.js',
+    autoWatch: false,
+    singleRun: true
+  }
 }

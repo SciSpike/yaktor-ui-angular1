@@ -51,14 +51,43 @@
 </div>
 <div ng-if="allData > 0 && !grid" class="findView">
 	<br />
+	<%- parentStateName%>
+	<%- moduleName%>
 	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
 	<br /><br />
 	<div ng-repeat="row in gridOptions.data track by $index" class="panel panel-default">
 		<div class="panel-heading">
-		  <h3 class="panel-title">{{row.name}} <small>- {{row.whenTeeOff}}</small></h3>
+		  <h3 class="panel-title">{{row.title}}</h3>
 		</div>
 		<div class="panel-body">
-			{{row.description}}
+			<p>{{row.description}}</p>
+			<br />
+			<label>{{'STATE'|translate}}:</label>
+			<% var objectFindByKey = function(array, key, value) {
+                for (var i = 0; i < array.length; i++) {
+                  if (array[i][key] == value) {
+                    return array[i];
+                  }
+                }
+                return null;
+              }
+			_.each(agents, function(agent, index){
+				var agentName = agent.split('.').reverse().join("_of_");
+				var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+				<span ng-bind="gridActions.get<%- newAgent.name%>ConversationState(row._id);">
+					{{convState}}
+				</span>
+				<br /><br />
+				<div>
+            		<button class='btn btn-default btn-sm text-capitalize' ng-if='gridActions.get<%- newAgent.name%>ConversationState(row._id)==null' ng-click='gridActions.init<%- newAgent.name%>Conversation(row._id);' >{{'INIT'|translate}}</button>
+            		<% _.each(newAgent.states, function(state, index){ %>
+            			<% var actions = _.toArray(state.elements); %>
+            			<% _.each(actions, function(action, i){%>
+             				<button class='btn btn-default btn-sm text-capitalize' ng-if='gridActions.get<%- newAgent.name%>ConversationState(row._id)=="<%-state.name%>"' ng-click='gridActions.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(row._id);' ><%- action.name%></button>
+             			<%});%>
+             		<% });%>
+             	</div>
+           <% });%>
 		</div>
 	</div>
 </div>

@@ -1,3 +1,13 @@
+//AGENT STUFF
+ <%//used for extracting objects from the spec
+ var objectFindByKey = function(array, key, value) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i][key] == value) {
+        return array[i];
+      }
+    }
+    return null;
+  }%>
 angular.module('<%=appname%>')
   .directive('navPanel', function($compile) {
     return {
@@ -17,10 +27,19 @@ angular.module('<%=appname%>')
             'title': '<%- moduleName.replace(/_/g, " ") %>',
             'link': 'main.<%- moduleName %>'
           },<%});%>
-          <% _.each(moduleNames.crud, function(moduleName, index) { %>
+          <% _.each(moduleNames.crud, function(moduleName, index) {
+            var method = ".FIND";
+              var module = objectFindByKey(fullSpec.modules.crud, "name", moduleName);
+              if (module.actions.elements["FIND"]) {
+                method = ".FIND";
+              // }else if module.actions.elements["POST"]) {
+                // method = ".POST";
+              } else {
+                method = ".POST";
+              }%>
           {
             'title': '<%- moduleName.replace(/_/g, " ") %>',
-            'link': 'main.<%- moduleName %>.FIND'
+            'link': 'main.<%- moduleName %><%- method%>'
           }<%if (index != moduleNames.crud.length - 1){%>,<%}});%>
         ];
       },

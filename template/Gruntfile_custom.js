@@ -1,9 +1,9 @@
 module.exports = {
-		'browserify':{
-			  'appDep': {
-					'files': {
-						
-					}
-			  }
-		}
+    'browserify':{
+        'appDep': {
+          'files': {
+            
+          }
+        }
+    }
 };
