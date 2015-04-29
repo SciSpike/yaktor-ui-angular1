@@ -9,19 +9,20 @@
     return null;
   }%>
 angular.module('<%=appname%>')
-  .directive('navPanel', function($compile) {
+  .directive('navPanel', function($compile, navPanelCustom) {
     return {
       restrict: 'C',
       templateUrl : function($node, tattrs) {
           return partialsBaseLocation + "/navPanel/navPanel.html"
         },
-      controller: function($scope) {
+      controller: function($scope, navPanelCustom) {
         this.togglePanel = function() {
           $('.navPanel').toggleClass('panelOpen');
           $('.navPanel').toggleClass('panelClosed');
         };
         
-        $scope.mainNavigation = [
+        //standardNav is built by engine-ui
+        var standardNav = [
           <% _.each(moduleNames.agents, function(moduleName, index) { %>
           {
             'title': '<%- moduleName.replace(/_/g, " ") %>',
@@ -42,6 +43,8 @@ angular.module('<%=appname%>')
             'link': 'main.<%- moduleName %><%- method%>'
           }<%if (index != moduleNames.crud.length - 1){%>,<%}});%>
         ];
+
+        $scope.mainNavigation = navPanelCustom.navs['main'] || standardNav; 
       },
       link: function(scope, element, attrs, scidFooterController, $translate, $filter) {
       

@@ -1,35 +1,46 @@
 (function() {
   'use strict';
   require('angular');
-  angular.module('sharedModule', []) 
+  angular.module('sharedModule', [])
     .constant('clientConstants', {
-      "forms":{
+      "forms": {
         "elementTypes": {
-          
+
         }
       },
-      'refLookup':{
-        
+      'refLookup': {
+
       }
     })
     .provider('routesExtended', function() {
       return {
-          routes: {
-            'login.POST': 'loginPOSTExtended'
-          },
-          $get: function() {
-            var routes = this.routes;
-          }
+        routes: {
+          'login.POST': 'loginPOSTExtended'
+        },
+        $get: function() {
+          var routes = this.routes;
+        }
       }
     })
     .provider('htmlExtended', function() {
       return {
-          views: {
-             
-          },
-          $get: function() {
-            var views = this.views;
-          }
+        views: {
+
+        },
+        $get: function() {
+          var views = this.views;
+        }
       }
     });
+
+    .factory('navPanelCustom', function() {
+      var _navs = {
+        'main': null
+      };
+
+      return {
+        navs: _navs
+      }
+    });
+
 })();
