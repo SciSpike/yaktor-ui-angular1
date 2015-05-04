@@ -67,8 +67,9 @@ angular.module('<%- moduleName %>')
               }
             }
           }
-          return answers;
+          return answersObject;
         }
+        
         function cleanData(answerObject){
           for(key in answerObject){
               if(answerObject[key].constructor.name.toLowerCase() == 'object'){

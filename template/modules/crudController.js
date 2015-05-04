@@ -1,7 +1,7 @@
 angular.module('<%- parentStateName %>')
   .controller('<%- parentStateName %><%- moduleName %>Controller',
-      ['$rootScope','$scope','$state','$stateParams','$modal','$location', '$eventsCommon', '$timeout', '<%- parentStateName %>Services',
-       function ($rootScope,$scope,$state,$stateParams,$modal,$location, $eventsCommon, $timeout, <%- parentStateName %>Services) {
+      ['$rootScope','$scope','$state','$stateParams','$modal','$location', '$eventsCommon', '$timeout', 'FormService', '<%- parentStateName %>Services',
+       function ($rootScope,$scope,$state,$stateParams,$modal,$location, $eventsCommon, $timeout, FormService, <%- parentStateName %>Services) {
         
         //AGENT STUFF
          <%//used for extracting objects from the spec
@@ -411,67 +411,14 @@ angular.module('<%- parentStateName %>')
               });                 
           <%}%>
           var answers = {};
-          function returnAnswers(dataObject, answersObject, prevObject, prevKey){
-            switch(dataObject.constructor.name.toLowerCase()) {
-              case 'array':
-                for(var i=0; i<dataObject.length; i++){
-                  answersObject[i] = {};
-                  returnAnswers(dataObject[i], answersObject[i], answersObject, key);
-                }
-                break;
-            }
-            for(key in dataObject){
-              if(dataObject[key]){
-                if(dataObject[key].answer){
-                  if(dataObject[key].typeRef){
-                    dataObject[key].answer = dataObject[key].answer;
-                  }
-                  if(dataObject[key].answer != ''){
-                    answersObject[key] = dataObject[key].answer;
-                  }else{
-                    delete answersObject[key]; 
-                  }
-                }else{
-                  switch(dataObject[key].constructor.name.toLowerCase()) {
-                    case 'array':
-                      answersObject[key] = [];
-                      returnAnswers(dataObject[key], answersObject[key], answersObject, key);
-                      break;
-                    case 'object':
-                      if(key != 'ui'){
-                        answersObject[key] = {};
-                        returnAnswers(dataObject[key], answersObject[key], answersObject, key);
-                      }
-                      break;
-                    default:
-                      if(prevObject && prevObject[prevKey]){
-                        delete prevObject[prevKey];
-                      }
-                      break;
-                  }
-                }
-              }
-            }
-            return answers;
-          }
-          function cleanData(answerObject){
-             for(key in answerObject){
-                 if(answerObject[key].constructor.name.toLowerCase() == 'object'){
-                   if($.isEmptyObject(answerObject[key])){
-                     delete answerObject[key]; 
-                   }else{
-                     cleanData(answerObject[key]);
-                   }
-                 }
-             }
-             return answerObject
-          };
+          
+
           $scope.cancelForm = function(){
             $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, null);
           }
           $scope.submitForm = function(type){
-            var data = returnAnswers($scope.directiveData, answers);
-            data = cleanData(data);
+            var data = FormService.returnAnswers($scope.directiveData, answers);
+            data = FormService.cleanData(data);
             <%- parentStateName %>Services.<%- state.ui.title.toLowerCase()%><%- parentStateName%>(data, id).then(function(response) {
                        $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, response);
                   });
