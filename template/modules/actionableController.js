@@ -1,7 +1,7 @@
 angular.module('<%- moduleName %>')
   .controller('<%- moduleName %><%- state.name %>Controller',
-      ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService',
-       function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService) {
+      ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService', 'FormService',
+       function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService, FormService) {
         <%var directiveData = {};
         var createDirectives = function(dataObject, elements){
           for(element in elements){
@@ -17,6 +17,12 @@ angular.module('<%- moduleName %>')
         <%}
         createDirectives(directiveData, state.components.elements);%>
         
+        //add $stateParams check/use here?
+        if ($stateParams.convInitData){
+          
+        }
+        //
+        
         $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
         if(!Object.keys($scope.directiveData).length && $scope.abort){
           $scope.abort();
@@ -26,72 +32,17 @@ angular.module('<%- moduleName %>')
         }
         
         var answers = {};
-        function returnAnswers(dataObject, answersObject, prevObject, prevKey){
-          switch(dataObject.constructor.name.toLowerCase()) {
-            case 'array':
-              for(var i=0; i<dataObject.length; i++){
-                answersObject[i] = {};
-                returnAnswers(dataObject[i], answersObject[i], answersObject, key);
-              }
-              break;
-          }
-          for(key in dataObject){
-            if(dataObject[key]){
-              if(dataObject[key].answer){
-                if(dataObject[key].typeRef){
-                  dataObject[key].answer = dataObject[key].answer;
-                }
-                if(dataObject[key].answer != ''){
-                  answersObject[key] = dataObject[key].answer;
-                }else{
-                  delete answersObject[key]; 
-                }
-              }else{
-                switch(dataObject[key].constructor.name.toLowerCase()) {
-                  case 'array':
-                    answersObject[key] = [];
-                    returnAnswers(dataObject[key], answersObject[key], answersObject, key);
-                    break;
-                  case 'object':
-                    if(key != 'ui'){
-                      answersObject[key] = {};
-                      returnAnswers(dataObject[key], answersObject[key], answersObject, key);
-                    }
-                    break;
-                  default:
-                    if(prevObject && prevObject[prevKey]){
-                      delete prevObject[prevKey];
-                    }
-                    break;
-                }
-              }
-            }
-          }
-          return answersObject;
-        }
         
-        function cleanData(answerObject){
-          for(key in answerObject){
-              if(answerObject[key].constructor.name.toLowerCase() == 'object'){
-                if($.isEmptyObject(answerObject[key])){
-                  delete answerObject[key]; 
-                }else{
-                  cleanData(answerObject[key]);
-                }
-              }
-          }
-          return answerObject
-       }
-$scope.submitForm = function(type){
-  var data = returnAnswers($scope.directiveData, answers);
-  data = cleanData(data);
-  type = type.replace('_', '').toLowerCase();
-  if(type == 'init'){
-    $scope.init<%- moduleName %>Conversation(data);
-  }else{
-    var conversation = 'on_' + type.replace(/\./g,'');
-    console.log(conversation);
-    $scope[conversation](data);
-  }
-}      
+      $scope.submitForm = function(type){
+        var data = FormService.returnAnswers($scope.directiveData, answers);
+        data = FormService.cleanData(data);
+        type = type.replace('_', '').toLowerCase();
+        if(type == 'init'){
+          $scope.init<%- moduleName %>Conversation(data);
+        }else{
+          var conversation = 'on_' + type.replace(/\./g,'');
+          console.log(conversation);
+          $scope[conversation](data);
+        }
+      }      
 }]);

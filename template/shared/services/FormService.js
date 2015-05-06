@@ -7,7 +7,7 @@ angular.module('views')
           case 'array':
             for (var i = 0; i < dataObject.length; i++) {
               answersObject[i] = {};
-              returnAnswers(dataObject[i], answersObject[i], answersObject, key);
+              _returnAnswers(dataObject[i], answersObject[i], answersObject, key);
             }
             break;
         }
@@ -26,12 +26,12 @@ angular.module('views')
               switch (dataObject[key].constructor.name.toLowerCase()) {
                 case 'array':
                   answersObject[key] = [];
-                  returnAnswers(dataObject[key], answersObject[key], answersObject, key);
+                  _returnAnswers(dataObject[key], answersObject[key], answersObject, key);
                   break;
                 case 'object':
                   if (key != 'ui') {
                     answersObject[key] = {};
-                    returnAnswers(dataObject[key], answersObject[key], answersObject, key);
+                    _returnAnswers(dataObject[key], answersObject[key], answersObject, key);
                   }
                   break;
                 default:
@@ -51,7 +51,7 @@ angular.module('views')
             if ($.isEmptyObject(answerObject[key])) {
               delete answerObject[key];
             } else {
-              cleanData(answerObject[key]);
+              _cleanData(answerObject[key]);
             }
           }
         }

@@ -53,9 +53,9 @@ angular.module('<%- parentStateName %>')
 
         //INIT AGENT
         function initAgents(){
-          var data = returnAnswers($scope.directiveData, answers);
+          var data = FormService.returnAnswers($scope.directiveData, answers);
           data._id = $scope.userId;
-          $scope.initData = cleanData(data);
+          $scope.initData = FormService.cleanData(data);
             <% _.each(agents, function(agent, index){
               var agentName = agent.split('.').reverse().join("_of_");
               var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
