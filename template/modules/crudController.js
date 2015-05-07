@@ -13,7 +13,24 @@ angular.module('<%- parentStateName %>')
             }
             return null;
           }%>
-     
+          var showAgentActionView = function(initData, listener, service, serviceMethod, agentPartial, agentController) {
+            var tempScope = $rootScope.$new();
+            tempScope.abort = function() {
+              modalInstance.dismiss();
+            };
+            tempScope[listener] = function(data) {
+              modalInstance.close();
+              service[serviceMethod](initData, data)
+
+            }
+            var modalInstance = $modal.open({
+              size: "lg",
+              templateUrl: agentPartial,
+              controller: agentController,
+              scope: tempScope
+            });
+          };
+               
       //array of key agents and their properties
         $scope.conversationAgents = [<% _.each(agents, function(agent, index){
           var agentName = agent.split('.').reverse().join("_of_");
@@ -119,7 +136,7 @@ angular.module('<%- parentStateName %>')
               do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
                 if ($scope.grid){
                   var initData = {_id: id};
-                  FormService.showAgentActionView(initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
+                  showAgentActionView(initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
                 }else{
                   //this means we're in list view so we can to change state
                 }
@@ -423,7 +440,7 @@ angular.module('<%- parentStateName %>')
             $scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
               //for the moment, we keep the modal. 
               //but we'll ultimatley change this to change state
-              FormService.showAgentActionView($scope.initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
+              showAgentActionView($scope.initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
             };
               <%});%>
             <% });%>
