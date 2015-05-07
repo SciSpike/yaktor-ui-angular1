@@ -1,6 +1,6 @@
 angular.module('views')
-  .factory('FormService', ['$q',
-    function($q) {
+  .factory('FormService', ['$rootScope', '$q', '$modal',
+    function($rootScope, $q, $modal) {
 
       var _returnAnswers = function(dataObject, answersObject, prevObject, prevKey) {
         switch (dataObject.constructor.name.toLowerCase()) {
@@ -58,10 +58,29 @@ angular.module('views')
         return answerObject
       };
 
-
+      var _showAgentActionView = function(initData, listener, service, serviceMethod, agentPartial, agentController){
+       var tempScope = $rootScope.$new();
+       tempScope.abort = function(){
+         modalInstance.dismiss();
+       };
+       tempScope[listener]=function(data){
+         modalInstance.close();
+         service[serviceMethod](initData, data)
+         
+       }
+       var modalInstance = $modal.open({
+         size:"lg",
+         templateUrl: agentPartial,
+         controller:  agentController,
+         scope:tempScope
+       });
+     };
+     
+     
       return {
         returnAnswers: _returnAnswers,
-        cleanData: _cleanData
+        cleanData: _cleanData,
+        showAgentActionView: _showAgentActionView
       }
     }
   ])

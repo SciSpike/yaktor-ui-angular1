@@ -7,6 +7,7 @@
 	<span ng-show="showFilters">{{'HIDE.FILTER.OPTIONS' | translate}}</span>
 </a>
 <br /><br />
+<!--this will run IF there is data AND we specified grid view -->
 <div ng-if="allData > 0 && grid" class="findView">
 	<div class="filters well" ng-show="showFilters">
 		<span ng-repeat="(key, value) in gridHeaders">
@@ -49,6 +50,7 @@
 		<h5>{{'NO.RESULTS' | translate}}</h5>
 	</div>
 </div>
+<!--this is for NOT grid view BUT there needs to be data-->
 <div ng-if="allData > 0 && !grid" class="findView">
 	<br />
 	<%- parentStateName%>

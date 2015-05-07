@@ -13,6 +13,7 @@ angular.module('<%- parentStateName %>')
             }
             return null;
           }%>
+     
       //array of key agents and their properties
         $scope.conversationAgents = [<% _.each(agents, function(agent, index){
           var agentName = agent.split('.').reverse().join("_of_");
@@ -116,24 +117,12 @@ angular.module('<%- parentStateName %>')
                 <% var actions = _.toArray(state.elements);%>
                 <% _.each(actions, function(action, i){%>
               do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
-                var skope = $rootScope.$new();
-                var initData = {
-                  _id: id
-                };
-                skope.abort = function(){
-                  <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(initData, null);
-                  modalInstance.dismiss();
-                };
-                skope["on_<%- action.name.toLowerCase()%>"]=function(data){
-                  modalInstance.close();
-                  <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(initData, data);
-                };
-                var modalInstance = $modal.open({
-                  size:"lg",
-                  templateUrl: 'partials/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html',
-                  controller: '<%- agentName%><%- action.name%>Controller',
-                  scope:skope
-                });
+                if ($scope.grid){
+                  var initData = {_id: id};
+                  FormService.showAgentActionView(initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
+                }else{
+                  //this means we're in list view so we can to change state
+                }
               },<%});%><% });%><%}); %>
             changeState: function(state, index){
               $scope.changeState(state,{id: index});
@@ -153,7 +142,6 @@ angular.module('<%- parentStateName %>')
                 }
               });
             }
-            
           };
           function range(start, length){
             var pageArray = [];
@@ -433,21 +421,9 @@ angular.module('<%- parentStateName %>')
               <% var actions = _.toArray(state.elements);%>
               <% _.each(actions, function(action, i){%>
             $scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
-              var skope = $rootScope.$new();
-              skope.abort = function(){
-                <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>($scope.initData, null);
-                modalInstance.dismiss();
-              };
-              skope["on_<%- action.name.toLowerCase()%>"]=function(data){
-                modalInstance.close();
-                <%- parentStateName %>Services.on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>($scope.initData, data);
-              }
-              var modalInstance = $modal.open({
-                size:"lg",
-                templateUrl: 'partials/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html',
-                controller: '<%- agentName%><%- action.name%>Controller',
-                scope:skope
-              });
+              //for the moment, we keep the modal. 
+              //but we'll ultimatley change this to change state
+              FormService.showAgentActionView($scope.initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
             };
               <%});%>
             <% });%>
