@@ -8,7 +8,6 @@
     "cookie": "0.1.0",
     "cordova": "3.5.0-0.2.6",
     "emitter-component": "1.1.1",
-    "engine-src": "2.2.1",
     "grunt-cli": "0.1.13",
     "grunt": "~0.4.2",
     "load-grunt-tasks": "~0.4.0",

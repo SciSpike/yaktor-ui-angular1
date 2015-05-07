@@ -31,7 +31,7 @@
           var views = this.views;
         }
       }
-    });
+    })
 
     .factory('navPanelCustom', function() {
       var _navs = {
