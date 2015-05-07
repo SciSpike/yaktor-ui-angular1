@@ -6,9 +6,12 @@ angular.module('<%- moduleName %>')
       if(SocketService['init']){
               SocketService['init']('<%- actions.url%>',initData, initData, function(err,stateName){
                 var nextState = stateName.replace('state:', '');
+                var currentState = stateName.replace('.state:', '');
+
                 var emitData = {
                   data: initData,
-                  nextState: nextState
+                  nextState: nextState,
+                  currentState: currentState
                 }
                 $rootScope.$emit($eventsCommon.conversations.<%- actions.url.replace('/', '')%>, emitData);
               });

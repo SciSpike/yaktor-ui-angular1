@@ -1,15 +1,24 @@
+<%//used for extracting objects from the spec
+var objectFindByKey = function(array, key, value) {
+   for (var i = 0; i < array.length; i++) {
+     if (array[i][key] == value) {
+       return array[i];
+     }
+   }
+   return null;
+ }%>
 angular.module('<%- moduleName %>')
 
-  .factory('<%- moduleName %>Services', ['$rootScope', '$q', '$timeout', '$eventsCommon', 'RestService', 'SocketService', function($rootScope, $q, $timeout, $eventsCommon, RestService, SocketService){
-    <%//used for extracting objects from the spec
-    var objectFindByKey = function(array, key, value) {
-       for (var i = 0; i < array.length; i++) {
-         if (array[i][key] == value) {
-           return array[i];
-         }
-       }
-       return null;
-     }%>
+  .factory('<%- moduleName %>Services', [
+    '$rootScope', 
+    '$q', 
+    '$timeout', 
+    '$eventsCommon', 
+    'RestService', 
+    'SocketService',<% _.each(agents, function(agent, index){%>
+    '<%=objectFindByKey(agentSpec, 'id', agent).name%>Services',<% }); %>
+     function($rootScope, $q, $timeout, $eventsCommon, RestService, SocketService<% _.each(agents, function(agent, index){%>
+       ,<%=objectFindByKey(agentSpec, 'id', agent).name%>Services<% }); %>){
     //CRUD STUFFS
     <% for(element in actions.elements){
     var elementName = element.toLowerCase();%>
@@ -37,65 +46,17 @@ angular.module('<%- moduleName %>')
       }
       <% }%>
 
-      //AGENT STUFFS
-      <% _.each(agents, function(agent, index){
-      var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
-      var _init<%- newAgent.name%>Conversation = function(initData){
-        var initData = initData;
-        if(SocketService['init']){
-                SocketService['init']('<%- newAgent.actions.url%>',initData, initData, function(err,stateName, data){
-                  var currentState = stateName.replace('.state:', '');
-                  var emitData = {
-                        data: data,
-                        initData: initData,
-                        currentAgent: agent,
-                        currentState: currentState
-                      }
-                   $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
-                });
-            } else {
-                SocketService.doAction('<%- newAgent.actions.url%>','init', initData, initData, function(err,data){
-                  //WHAT HAPPENS HERE AND DOES THIS EVER GET CALLED?????
-                });
-            }
-      }
-      <%_.each(newAgent.states, function(state, index){
-        for(element in state.elements){
-          var elementName = element.toLowerCase()%>
-      var _on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%> = function(initData, data){
-        var data = data;
-        if(SocketService['<%- element%>']){
-          SocketService['<%- element%>']('<%- state.url %>',initData, data, function(err,stateName){
-             var currentState = stateName.replace('.state:', '');
-             var emitData = {
-                  data: data,
-                  initData: initData,
-                  currentAgent: newAgent.name,
-                  currentState: currentState
-                }
-             $rootScope.$emit($eventsCommon.conversations.<%- newAgent.actions.url.replace('/', '')%>, emitData);
-          });
-        } else {
-          SocketService.doAction('<%- newAgent.actions.url%>', '<%- element%>', initData, data, function(err,data){
-            //WHAT HAPPENS HERE
-          });
-        }
-      }<%}%>
-      <%});%>
-      <% }); %>
       return {
         <% for(element in actions.elements){
         var elementName = element.replace('_', '').toLowerCase();%>
         <%- elementName%><%- moduleName %>: _<%- elementName%><%- moduleName %>,<% }%>
           <% _.each(agents, function(agent, index){%>
             <%var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
-          init<%- newAgent.name%>Conversation: _init<%- newAgent.name%>Conversation,
+          init<%- newAgent.name%>Conversation: <%= newAgent.name%>Services.initConversation,
           <%_.each(newAgent.states, function(state, index){
             var elements = _.toArray(state.elements);
             _.each(elements, function(element, i){
               var elementName = element.name.toLowerCase();%>
-              on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%>: _on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%>,
-              
-              <%});});});%>
+          on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%>: <%= newAgent.name%>Services._on_<%- elementName%>,<%});});});%>
       }
   }]);

@@ -1,3 +1,4 @@
+
 angular.module('<%- moduleName %>', 
       ['ui.bootstrap',
       'ui.router',

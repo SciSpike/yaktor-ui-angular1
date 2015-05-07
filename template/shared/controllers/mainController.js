@@ -5,15 +5,30 @@ angular.module('views')
         
         $scope.$on('$stateNotFound', function(event, unfoundState, fromState, fromParams){
           event.preventDefault();
+          
           $scope.changeState('main.home');
         });
         
+        $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+            // event.preventDefault();
+            console.log("***********STATE SUCCESS TO**************     ", toState);
+
+            if(toParams.fromCrud){
+              window.fromCrud = fromState.name;
+              console.log("***********STATE SUCCESS FROM**************     ", fromState);
+            }
+            
+            // transitionTo() promise will be rejected with
+            // a 'transition prevented' error
+        });
+
         $scope.changeState = function(state, data){
           if(!data){
             data = {};
           }
             $state.go(state,data,{location:true}).then(function(){});
         };
+        
         
         var agents = {
           <% _.each(moduleNames.agents, function(agentName, index){%>'<%- agentName %>': '/<%- agentName %>'<% if(index != moduleNames.agents.length-1){%>,

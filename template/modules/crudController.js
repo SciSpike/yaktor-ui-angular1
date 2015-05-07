@@ -2,6 +2,7 @@ angular.module('<%- parentStateName %>')
   .controller('<%- parentStateName %><%- moduleName %>Controller',
       ['$rootScope','$scope','$state','$stateParams','$modal','$location', '$eventsCommon', '$timeout', 'FormService', '<%- parentStateName %>Services',
        function ($rootScope,$scope,$state,$stateParams,$modal,$location, $eventsCommon, $timeout, FormService, <%- parentStateName %>Services) {
+         window.fromCrud = false;
         
         //AGENT STUFF
          <%//used for extracting objects from the spec
@@ -13,23 +14,24 @@ angular.module('<%- parentStateName %>')
             }
             return null;
           }%>
-          var showAgentActionView = function(initData, listener, service, serviceMethod, agentPartial, agentController) {
-            var tempScope = $rootScope.$new();
-            tempScope.abort = function() {
-              modalInstance.dismiss();
-            };
-            tempScope[listener] = function(data) {
-              modalInstance.close();
-              service[serviceMethod](initData, data)
-
-            }
-            var modalInstance = $modal.open({
-              size: "lg",
-              templateUrl: agentPartial,
-              controller: agentController,
-              scope: tempScope
-            });
-          };
+          // var showAgentActionView = function(initData, listener, service, serviceMethod, agentPartial, agentController) {
+//             var tempScope = $rootScope.$new();
+//             var modalInstance = null;
+//             tempScope.abort = function() {
+//               modalInstance.dismiss();
+//             };
+//             tempScope[listener] = function(data) {
+//               modalInstance.close();
+//               service[serviceMethod](initData, data)
+//
+//             }
+//             modalInstance = $modal.open({
+//               size: "lg",
+//               templateUrl: agentPartial,
+//               controller: agentController,
+//               scope: tempScope
+//             });
+//           };
                
       //array of key agents and their properties
         $scope.conversationAgents = [<% _.each(agents, function(agent, index){
@@ -53,7 +55,7 @@ angular.module('<%- parentStateName %>')
           <% if(state.ui.title.replace('_', '').toLowerCase() == 'find'){%>
           $scope.<%- newAgent.name%>CurrentStates = ($scope.<%- newAgent.name%>CurrentStates || {});
           if(data.currentState){
-            $scope.<%- newAgent.name%>CurrentStates[data.initData._id] = data.currentState;
+            $scope.<%- newAgent.name%>CurrentStates[data.data._id] = data.currentState;
           }
           <%}else{%>
           if(data.currentState){
@@ -115,7 +117,7 @@ angular.module('<%- parentStateName %>')
               var agentName = agent.split('.').reverse().join("_of_");
               var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
               get<%- newAgent.name%>ConversationState: function(id){
-                console.log('<%- agent%> Get State For:' + id);
+                // console.log('<%- agent%> Get State For:' + id);
                 var currentState = null;
                 if ($scope.<%- newAgent.name%>CurrentStates){
                   currentState = $scope.<%- newAgent.name%>CurrentStates[id];
@@ -124,7 +126,7 @@ angular.module('<%- parentStateName %>')
               },
 
               init<%- newAgent.name%>Conversation: function(id){
-                console.log('<%- agent%> INIT DATA:' + initData);
+                // console.log('<%- agent%> INIT DATA:' + initData);
                 var initData = {
                   _id: id
                 };
@@ -134,12 +136,13 @@ angular.module('<%- parentStateName %>')
                 <% var actions = _.toArray(state.elements);%>
                 <% _.each(actions, function(action, i){%>
               do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
-                if ($scope.grid){
-                  var initData = {_id: id};
-                  showAgentActionView(initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
-                }else{
+                var initData = {_id: id};
+                // if ($scope.grid){
+                //   showAgentActionView(initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
+                // }else{
                   //this means we're in list view so we can to change state
-                }
+                  $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: id, fromCrud: true});
+                // }
               },<%});%><% });%><%}); %>
             changeState: function(state, index){
               $scope.changeState(state,{id: index});

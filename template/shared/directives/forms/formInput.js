@@ -79,7 +79,7 @@ angular.module('views')
             link: function(scope, element, attrs){
               scope.getContentUrl = function() {
                 if (scope.directiveData.ui.type) {
-                  console.log(scope.directiveData.ui.type.toLowerCase());
+                  // console.log(scope.directiveData.ui.type.toLowerCase());
                   return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type.toLowerCase() + '.html';
                 } else {
                   return "";

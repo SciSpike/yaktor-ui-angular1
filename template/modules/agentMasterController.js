@@ -13,20 +13,26 @@ angular.module('<%- moduleName %>')
           }
           
           $scope.$onRootScope($eventsCommon.conversations.<%- actions.url.replace('/', '')%>, function(event, data){
-            if(data.nextState){
+            if(window.fromCrud){
+              $scope.changeState(window.fromCrud);
+            }
+            if(data.nextState && !window.fromCrud){
                 $scope.changeState('main.<%- moduleName %>' + data.nextState, {initData:JSON.stringify(data.data)});
             }
             });
+            
           
           if($stateParams.initData){
-              var initData = JSON.parse($stateParams.initData);
-              initConversation(initData);
+            var initData = null;
+            if($stateParams.initData._id){
+              initData = JSON.parse($stateParams.initData);
+              init<%- moduleName %>Conversation(initData);
+            }
           }else{
             $state.go('main.<%- moduleName %>.init',{},{location:true});
           }
           
           $scope.init<%- moduleName %>Conversation = function(initData){
-            console.log(initData);
             init<%- moduleName %>Conversation(initData);
           }
         

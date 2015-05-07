@@ -14,7 +14,7 @@ angular.module('<%- moduleName %>',
          $translateProvider.preferredLanguage(defaultLocale);
          $stateProvider
            .state('main.<%- moduleName %>',{
-            url:'/<%- moduleName %>',
+            url:'/<%- moduleName %>/:initData',
             templateUrl: function(){
               return partialsBaseLocation + '/agents/<%- moduleName %>/index.html'
             },
@@ -31,7 +31,7 @@ angular.module('<%- moduleName %>',
             var stateName = state.name;
           %>
           .state('main.<%- moduleName %>.<%- stateName %>',{
-            params:['initData'],
+            params:['initData','fromCrud'],
             templateUrl: function(){
               return partialsBaseLocation + '/agents/<%- moduleName %>/<%- stateName %>.html'
             },

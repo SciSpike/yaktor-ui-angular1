@@ -15,7 +15,15 @@ angular.module('<%- moduleName %>')
         var elementName = element.toLowerCase()%>
         $scope.on_<%- elementName%> = function(data){
           var data = data;
-          <%- moduleName %>Services.on_<%- elementName%>(JSON.parse($stateParams.initData), data);
+          var initData = null;
+          if($stateParams.initData._id){
+            initData = JSON.parse($stateParams.initData);
+          }else{
+            initData = {
+              _id:$stateParams.initData
+            };
+          }
+          <%- moduleName %>Services.on_<%- elementName%>(initData, data);
         }
         <%}%>
 }]);

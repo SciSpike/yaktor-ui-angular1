@@ -17,18 +17,13 @@ angular.module('<%- moduleName %>')
         <%}
         createDirectives(directiveData, state.components.elements);%>
         
-        //add $stateParams check/use here?
-        if ($stateParams.convInitData){
-          
-        }
-        //
-        
+
         $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
         if(!Object.keys($scope.directiveData).length && $scope.abort){
           $scope.abort();
         }
         $scope.getData = function(nestedArray){
-          console.log(nestedArray);
+          // console.log(nestedArray);
         }
         
         var answers = {};
@@ -41,7 +36,7 @@ angular.module('<%- moduleName %>')
           $scope.init<%- moduleName %>Conversation(data);
         }else{
           var conversation = 'on_' + type.replace(/\./g,'');
-          console.log(conversation);
+          // console.log(conversation);
           $scope[conversation](data);
         }
       }      
