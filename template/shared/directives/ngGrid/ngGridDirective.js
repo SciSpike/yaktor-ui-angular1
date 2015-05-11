@@ -28,6 +28,7 @@ angular.module('<%=appname%>')
         var defaultOptions = {
           data: 'myData',
           enablePinning: true,
+          enableHighlighting: true,
           plugins: [$scope.gridLayoutPlugin],
           columnDefs: columnDefs
         };
