@@ -18,10 +18,10 @@ angular.module('views')
                     //create an initial data element for create new, be sure to always concat results to this.
                     var initialData = [{
                         _id: -1,
-                        title: $scope.directiveData.ui.title,
+                        title: "Create New " + $scope.directiveData.ui.title,
                         description: null,
                         action: 'createNew',
-                        groupBy: "Create New"
+                        groupBy: ""
                     }];
                     $scope.directiveData.ui.data = initialData.concat(data);
                   };
