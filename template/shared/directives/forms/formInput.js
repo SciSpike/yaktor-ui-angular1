@@ -8,30 +8,48 @@ angular.module('views')
                 key: '@'
             },
             controller: function($rootScope, $scope, $filter, $state, $modal, $translate, defaultSettings, settingsInstances) {
+
               if($scope.directiveData.typeRef){
                 if(!$scope.directiveData.endPoint){
                   $scope.directiveData.endPoint = settingsInstances.getTypeRefsInstance('default');
                 }
                 if($scope.directiveData.endPoint[$scope.directiveData.typeRef]){
+                  var setTypeRefData = function(data){
+                    //create an initial data element for create new, be sure to always concat results to this.
+                    var initialData = [{
+                        _id: -1,
+                        title: $scope.directiveData.ui.title,
+                        description: null,
+                        action: 'createNew',
+                        groupBy: "Create New"
+                    }];
+                    $scope.directiveData.ui.data = initialData.concat(data);
+                  };
                   //set endpoint in case we need to call on it elsewhere
                   $scope.directiveData.ui.endPoint = $scope.directiveData.endPoint[$scope.directiveData.typeRef];
                   //NON-ASYNC
                   typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef]).then(function(response){
-                    $scope.directiveData.ui.data = response.results;
+                    setTypeRefData(response.results);
                   });
+
                   //ASYNC
                   $scope.getLocation = function(val) {
+                    //add an initial data element for create new
                     var data = {};
                     data.title = "/"+val+".*/";
                     typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef], data).then(function(response){
-                          $scope.directiveData.ui.data = response.results;
+                        setTypeRefData(response.results);
                     });
                   };
- 
+
+                  $scope.checkSelection = function(item, model){
+                    if(item.action){
+                      $scope[item.action]();
+                    }
+                  };
+                
                   $scope.createNew = function(){
-                    var objectRef = "";
-                    $translate($scope.directiveData.ui.title).then(function(translated){
-                      objectRef = translated.toLowerCase();
+                    var objectRef = $scope.directiveData.ui.title;
                       var skope = $rootScope.$new();
 
                       skope.abort = function(){
@@ -42,22 +60,21 @@ angular.module('views')
                         //ignore state and query here, this is just a a spoof to get what we need and avoid a goofy error
                         if (newItem){
                           typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef], {}).then(function(response){
-                                $scope.directiveData.ui.data = response.results;
-                                $scope.directiveData.answer = newItem;
-                                modalInstance.close();
+                            setTypeRefData(response.results);
+                            $scope.directiveData.answer = newItem;
+                            modalInstance.close();
                           });
                         }else{
                           skope.abort();
                         }
                       }
-                    
+                  
                       var modalInstance = $modal.open({
                         size:"lg",
                         templateUrl: 'partials/crud/'+objectRef+'/POST.html',
                         controller: objectRef + 'POSTController',
                         scope:skope
                       });
-                    });
                   };
                 }else{
                   $scope.directiveData.ui.type = 'string';

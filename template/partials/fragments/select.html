@@ -1,11 +1,9 @@
-<div class="btn btn-default btn-small" ng-click="createNew();">Create New {{directiveData.ui.title | translate}}</div>
-<br /><br />
 <div ng-if="directiveData.ui.data">
-	<ui-select ng-model="directiveData.answer" theme="bootstrap" >
-	  <ui-select-match placeholder="{{directiveData.ui.title | translate}}">{{$select.selected.title}}</ui-select-match>
-	  <ui-select-choices repeat="item in directiveData.ui.data track by $index | filter: $select.search" refresh="getLocation($select.search)" refresh-delay="0">
-	  	<div ng-if="!item.isTag" ng-bind-html="item.title + item.isTag | highlight: $select.search"></div>
-	  </ui-select-choices>
-	</ui-select>
+  <ui-select ng-model="directiveData.answer" theme="bootstrap" on-select="checkSelection($item, $model);">
+    <ui-select-match placeholder="{{directiveData.ui.title | translate}}">{{$select.selected.title}}</ui-select-match>
+    <ui-select-choices group-by="'groupBy'" repeat="item in directiveData.ui.data track by $index | filter: $select.search" refresh="getLocation($select.search)" refresh-delay="0">
+      <div ng-if="!item.isTag" ng-bind-html="item.title + item.isTag | highlight: $select.search"></div>
+    </ui-select-choices>
+  </ui-select>
 </div>
 <br />
