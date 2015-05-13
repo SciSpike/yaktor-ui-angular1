@@ -1,7 +1,7 @@
 angular.module('<%- parentStateName %>')
   .controller('<%- parentStateName %><%- moduleName %>Controller',
-      ['$rootScope','$scope','$state','$stateParams','$modal','$location', '$eventsCommon', '$timeout', 'FormService', '<%- parentStateName %>Services',
-       function ($rootScope,$scope,$state,$stateParams,$modal,$location, $eventsCommon, $timeout, FormService, <%- parentStateName %>Services) {
+      ['$rootScope','$scope','$state','$stateParams','$modal','$location', '$eventsCommon', '$timeout', '$translate',  'FormService', '<%- parentStateName %>Services',
+       function ($rootScope,$scope,$state,$stateParams,$modal,$location, $eventsCommon, $timeout, $translate, FormService, <%- parentStateName %>Services) {
          window.fromCrud = false;
         
         //AGENT STUFF
@@ -269,7 +269,7 @@ angular.module('<%- parentStateName %>')
                                    minWidth: 150,
                                    resizable: true,
                                    sortable: true,
-                                   headerCellTemplate:"<div class='truncate'>{{'_<%-element.ui.title.replace(/\s/g, '.').toUpperCase()%>'|translate}}</div>" +
+                                   headerCellTemplate:"<div class='truncate'>{{'<%-element.ui.title%>'|translate}}</div>" +
                                       "<div class='ngSortButtonDown ng-hide' ng-show='col.showSortButtonDown()'></div>" +
                                       "<div class='ngSortButtonUp ng-hide' ng-show='col.showSortButtonUp()'></div>" +
                                        "<div ng-class='{ ngPinnedIcon: col.pinned, ngUnPinnedIcon: !col.pinned }' ng-click='togglePin(col)' ng-show='col.pinnable' class='ngPinnedIcon'></div>" +

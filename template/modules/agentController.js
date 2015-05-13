@@ -6,11 +6,7 @@ angular.module('<%- moduleName %>')
         $scope.changeState = function(view){
           $state.go($state.current.name + '.' + view, {}, {location:true});
         }
-        
-        if(!$stateParams.initData){
-          $state.go('main.<%- moduleName %>.init',{},{location:true});
-          }
-        
+
         <% for(element in state.elements){
         var elementName = element.toLowerCase()%>
         $scope.on_<%- elementName%> = function(data){
