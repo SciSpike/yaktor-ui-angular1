@@ -3,18 +3,43 @@ angular.module('<%- moduleName %>')
       ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService', 'FormService',
        function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService, FormService) {
         <%var directiveData = {};
-        var createDirectives = function(dataObject, elements){
-          for(element in elements){
-            if(elements[element].components){
-              dataObject[element] = {};
-              createDirectives(dataObject[element], elements[element].components.elements);
-            }else{
-              var elementData = elements[element];
-              dataObject[element] = elementData;
-              dataObject[element]['answer'] = '';
-            }  
-          }%>
-        <%}
+        // var createDirectives = function(dataObject, elements){
+//           for(element in elements){
+//             if(elements[element].components){
+//               dataObject[element] = {};
+//               createDirectives(dataObject[element], elements[element].components.elements);
+//             }else{
+//               var elementData = elements[element];
+//               dataObject[element] = elementData;
+//               dataObject[element]['answer'] = '';
+//             }
+//           }
+//         }
+          var createDirectives = function(dataObject, elements){
+            for(element in elements){
+              console.log(JSON.stringify(elements));
+              
+              if(elements[element].type == 'array'){
+                if(elements[element].components){
+                  for(el in elements[element].components.elements){
+                    elements[element].components.elements[el].answer = '';
+                  }
+                  dataObject[element] = [elements[element].components.elements];
+                }else{
+                  dataObject[element] = elements[element];
+                  dataObject[element].answer = new Array(1);
+                }
+              }else{
+                if(!elements[element].components){
+                  dataObject[element] = elements[element];
+                  dataObject[element].answer = '';
+                }else{
+                  dataObject[element] = {};
+                  createDirectives(dataObject[element], elements[element].components.elements);
+                }
+              }
+            }
+          }
         createDirectives(directiveData, state.components.elements);%>
         
 
