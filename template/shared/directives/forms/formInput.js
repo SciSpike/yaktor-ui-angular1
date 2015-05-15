@@ -52,7 +52,7 @@ angular.module('views')
                     };
                 
                     $scope.createNew = function(){
-                      var objectRef = translatedTitle;
+                      var objectRef = translatedTitle.toLowerCase();
                         var skope = $rootScope.$new();
 
                         skope.abort = function(){
