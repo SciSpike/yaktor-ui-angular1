@@ -21,7 +21,7 @@ var browserifyLibAlias = [
   './bower_components/ngstorage/ngStorage.min.js:ngStorage',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
   './bower_components/angular-ui-select/dist/select.js:uiSelect',
-  './bower_components/ng-grid/ng-grid-2.0.11.min.js:ngGrid'
+  './bower_components/ng-grid/ng-grid-2.0.14.min.js:ngGrid'
  ];
 
 var mainExternals = [
@@ -36,7 +36,7 @@ var mainExternals = [
   './bower_components/ngstorage/ngStorage.min.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/angular-ui-select/dist/select.js',
-  './bower_components/ng-grid/ng-grid-2.0.11.min.js'
+  './bower_components/ng-grid/ng-grid-2.0.14.min.js'
 ];
 
 var mergedExternals = browserifyLibExternal.concat(mainExternals);
@@ -115,7 +115,7 @@ module.exports = {
               depends: {jquery: '$', angular: 'angular'}
           },
           'ngGrid': {
-              path: './bower_components/ng-grid/ng-grid-2.0.11.min.js',
+              path: './bower_components/ng-grid/ng-grid-2.0.14.min.js',
               exports: 'ngGrid',
               depends: {jquery: '$', angular: 'angular'}
           }
