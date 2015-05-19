@@ -1,7 +1,7 @@
 angular.module('<%- parentStateName %>')
   .controller('<%- parentStateName %><%- moduleName %>Controller',
-      ['$rootScope','$scope','$state','$stateParams','$modal','$location', '$eventsCommon', '$timeout', '$translate',  'FormService', '<%- parentStateName %>Services',
-       function ($rootScope,$scope,$state,$stateParams,$modal,$location, $eventsCommon, $timeout, $translate, FormService, <%- parentStateName %>Services) {
+      ['$rootScope','$scope','$state','$stateParams', '$location', '$eventsCommon', '$timeout', '$translate',  'FormService', '<%- parentStateName %>Services',
+       function ($rootScope,$scope,$state,$stateParams, $location, $eventsCommon, $timeout, $translate, FormService, <%- parentStateName %>Services) {
          window.fromCrud = false;
         
         //AGENT STUFF
@@ -14,24 +14,6 @@ angular.module('<%- parentStateName %>')
             }
             return null;
           }%>
-          // var showAgentActionView = function(initData, listener, service, serviceMethod, agentPartial, agentController) {
-//             var tempScope = $rootScope.$new();
-//             var modalInstance = null;
-//             tempScope.abort = function() {
-//               modalInstance.dismiss();
-//             };
-//             tempScope[listener] = function(data) {
-//               modalInstance.close();
-//               service[serviceMethod](initData, data)
-//
-//             }
-//             modalInstance = $modal.open({
-//               size: "lg",
-//               templateUrl: agentPartial,
-//               controller: agentController,
-//               scope: tempScope
-//             });
-//           };
                
       //array of key agents and their properties
         $scope.conversationAgents = [<% _.each(agents, function(agent, index){
@@ -137,12 +119,7 @@ angular.module('<%- parentStateName %>')
                 <% _.each(actions, function(action, i){%>
               do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
                 var initData = {_id: id};
-                // if ($scope.grid){
-                //   showAgentActionView(initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
-                // }else{
-                  //this means we're in list view so we can to change state
                   $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: id, fromCrud: true});
-                // }
               },<%});%><% });%><%}); %>
             changeState: function(state, index){
               $scope.changeState(state,{id: index});
@@ -427,7 +404,7 @@ angular.module('<%- parentStateName %>')
           $scope.submitForm = function(type){
             var data = FormService.returnAnswers($scope.directiveData, answers);
             data = FormService.cleanData(data);
-            <%- parentStateName %>Services.<%- state.ui.title.toLowerCase()%><%- parentStateName%>(data, id).then(function(response) {
+            <%- parentStateName %>Services.<%- state.ui.title.toLowerCase().replace('_', '')%><%- parentStateName%>(data, id).then(function(response) {
                        $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, response);
                   });
           };
@@ -443,7 +420,7 @@ angular.module('<%- parentStateName %>')
             $scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
               //for the moment, we keep the modal. 
               //but we'll ultimatley change this to change state
-              showAgentActionView($scope.initData,'on_<%- action.name.toLowerCase()%>',<%- parentStateName %>Services,'on_<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>',partialsBaseLocation + '/agents/<%- agentName%>/<%- state.name %>/<%- action.name%>.html', '<%- agentName%><%- action.name%>Controller')
+              $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: $stateParams.id, fromCrud: true});
             };
               <%});%>
             <% });%>
