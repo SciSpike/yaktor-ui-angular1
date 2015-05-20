@@ -4,3 +4,5 @@ node_modules
 .settings
 example/**/
 server/
+/views/node_modules
+/views/bower_components

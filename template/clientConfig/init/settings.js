@@ -19,6 +19,7 @@
         },
         $get: function() {
           var routes = this.routes;
+		  return routes;
         }
       }
     })
@@ -29,6 +30,7 @@
         },
         $get: function() {
           var views = this.views;
+		  return views;
         }
       }
     })

@@ -9,12 +9,15 @@
     return null;
   }%>
 angular.module('<%=appname%>')
-  .directive('navPanel', function($compile, navPanelCustom) {
+  .directive('navPanel', function(htmlExtended, navPanelCustom) {
     return {
       restrict: 'C',
-      templateUrl : function($node, tattrs) {
-          return partialsBaseLocation + "/navPanel/navPanel.html"
-        },
+      templateUrl : function() {
+			  if(htmlExtended['header.navPanel']){
+				  return htmlExtended['header.navPanel'];
+			  }
+			  return partialsBaseLocation + "/navPanel/navPanel.html"
+            },
       controller: function($scope, navPanelCustom) {
         this.togglePanel = function() {
           $('.navPanel').toggleClass('panelOpen');

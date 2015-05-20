@@ -116,6 +116,39 @@ module.exports = function(grunt) {
         }
       }
     },
+	  'watch': {
+		  'options': {
+			  'livereload': true
+		  },
+		  'less': {
+			  'files': './**/*.less',
+			  'tasks': ['less', 'cssmin', 'autoprefixer'],
+			  'options': {
+				  'interrupt': true
+			  }
+		  }
+	  },
+	  'autoprefixer': {
+		  'options': {
+			  // Task-specific options go here.
+		  },
+		  'single_file': {
+			  'options': {
+				  // Target-specific options go here.
+			  },
+			  'src': './styles/compiled.css',
+			  'dest': './styles/compiled-prefix.css'
+		  },
+		  'sourcemap': {
+			  'options': {
+				  'map': true,
+				  //'annotation': 'main.css.map'
+			  },
+
+			  'src': './styles/compiled.css',
+			  'dest': './styles/compiled-prefix.css' // -> dest/css/file.css, sourcemap is inlined
+		  }
+	  },
     'shell': {
       'cordova-create': {
         'command': ['sleep 1', 'mkdir cordova-app', 'cd cordova-app', '$(npm bin)/cordova create '+ appName + ' com.fed.'+ appName + '  '+ appName].join("&&"),
@@ -131,7 +164,7 @@ module.exports = function(grunt) {
   grunt.initConfig(config);
 
   var sharedTasks = ['less', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs'];
-  var serveTasks = ['cssmin', 'sails-linker:prod'];
+  var serveTasks = ['cssmin', 'autoprefixer', 'sails-linker:prod'];
   var cordovaCopy = ['copy:cordova-js','copy:cordova-css','copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs'];
   
   var allTasks = sharedTasks.concat(serveTasks);
@@ -188,7 +221,7 @@ module.exports = function(grunt) {
     }
   }
 
-  grunt.registerTask('default', allTasks);
+  grunt.registerTask('default', allTasks.concat(['watch']));
   grunt.registerTask('dev', sharedTasks.concat(['sails-linker:dev', 'watch']));
   grunt.registerTask('cordova', cordovaCopy);
 
