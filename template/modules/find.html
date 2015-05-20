@@ -1,8 +1,8 @@
-<div class='viewChange' ng-click="grid = !grid">	
+<div ng-if="allData > 0" class='viewChange' ng-click="grid = !grid">
 	<span ng-show="grid" class="glyphicon glyphicon-th-list"></span>
 	<span ng-show="!grid" class="glyphicon glyphicon-th"></span>
 </div>
-<a ng-click="showFilters = !showFilters">
+<a ng-if="allData > 0" ng-click="showFilters = !showFilters">
 	<span ng-show="!showFilters">{{'SHOW.FILTER.OPTIONS' | translate}}</span>
 	<span ng-show="showFilters">{{'HIDE.FILTER.OPTIONS' | translate}}</span>
 </a>
