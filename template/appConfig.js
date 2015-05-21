@@ -6,7 +6,6 @@ angular.module('views')
   $stateProvider
     .state('main', {
       abstract : true,
-      url : '',
       templateUrl : function(){
         if(htmlExtendedProvider.views['main.index']){
           return htmlExtendedProvider.views['main.index'];

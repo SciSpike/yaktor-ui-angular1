@@ -17,7 +17,7 @@ angular.module('<%- moduleName %>')
 //         }
           var createDirectives = function(dataObject, elements){
             for(element in elements){
-              console.log(JSON.stringify(elements));
+              // console.log(JSON.stringify(elements));
               
               if(elements[element].type == 'array'){
                 if(elements[element].components){

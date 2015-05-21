@@ -13,8 +13,11 @@ angular.module('views')
             // event.preventDefault();
             console.log("***********STATE SUCCESS TO**************     ", toState);
 
-            if(toParams.fromCrud){
-              window.fromCrud = fromState.name;
+            if($rootScope.fromCrud){
+              // $rootScope.returnToCrud = fromState.name;
+              if (fromParams){
+                // $rootScope.fromParams = fromParams;
+              }
               console.log("***********STATE SUCCESS FROM**************     ", fromState);
             }
             

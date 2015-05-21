@@ -31,7 +31,7 @@ angular.module('<%- moduleName %>',
             var stateName = state.name;
           %>
           .state('main.<%- moduleName %>.<%- stateName %>',{
-            params:['initData','fromCrud'],
+            ownParams:['initData'],
             templateUrl: function(){
               return partialsBaseLocation + '/agents/<%- moduleName %>/<%- stateName %>.html'
             },

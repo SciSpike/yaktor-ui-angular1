@@ -12,25 +12,33 @@ angular.module('<%- moduleName %>')
             <%- moduleName %>Services.initConversation(initData);
           }
           
-          $scope.$onRootScope($eventsCommon.conversations.<%- actions.url.replace('/', '')%>, function(event, data){
-            if(window.fromCrud){
-              $scope.changeState(window.fromCrud);
+          $scope.$onRootScope($eventsCommon.conversations.<%- actions.url.replace('/', '')%>, function(event, eventData){
+            var init = null;
+            if($rootScope.fromCrud){
+              $scope.changeState($rootScope.returnToCrud, $rootScope.returnToParams);
             }
-            if(data.nextState && !window.fromCrud){
-                $scope.changeState('main.<%- moduleName %>' + data.nextState, {initData:JSON.stringify(data.data)});
+            if(eventData.nextState && !$rootScope.fromCrud){
+              if (eventData.data._id){
+                init= eventData.data._id;
+              }else{
+                init = eventData.data;
+              }
+                $scope.changeState('main.<%- moduleName %>' + eventData.nextState, {initData: init});
             }
             });
             
-          
-          if($stateParams.initData){
+          if($stateParams.initData && $state.current.name == 'main.<%- moduleName %>'){
             var initData = null;
             if($stateParams.initData._id){
               initData = JSON.parse($stateParams.initData);
               init<%- moduleName %>Conversation(initData);
             }
-          }else{
-            $state.go('main.<%- moduleName %>.init',{},{location:true});
           }
+          
+          if(!$stateParams.initData && $state.current.name == 'main.<%- moduleName %>'){
+              $state.go('main.<%- moduleName %>.init',{},{location:true});
+          }
+          
           
           $scope.init<%- moduleName %>Conversation = function(initData){
             init<%- moduleName %>Conversation(initData);

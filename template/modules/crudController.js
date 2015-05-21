@@ -2,8 +2,14 @@ angular.module('<%- parentStateName %>')
   .controller('<%- parentStateName %><%- moduleName %>Controller',
       ['$rootScope','$scope','$state','$stateParams', '$location', '$eventsCommon', '$timeout', '$translate',  'FormService', '<%- parentStateName %>Services',
        function ($rootScope,$scope,$state,$stateParams, $location, $eventsCommon, $timeout, $translate, FormService, <%- parentStateName %>Services) {
-         window.fromCrud = false;
-        
+          $rootScope.fromCrud = false;
+          $rootScope.returnToCrud = $state.current.name;
+          if ($stateParams){
+            $rootScope.returnToParams = $stateParams;
+          }else{
+            $rootScope.returnToParams = {};
+          }
+          
         //AGENT STUFF
          <%//used for extracting objects from the spec
          var objectFindByKey = function(array, key, value) {
@@ -119,7 +125,8 @@ angular.module('<%- parentStateName %>')
                 <% _.each(actions, function(action, i){%>
               do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
                 var initData = {_id: id};
-                  $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: id, fromCrud: true});
+                $rootScope.fromCrud = true;
+                  $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: id});
               },<%});%><% });%><%}); %>
             changeState: function(state, index){
               $scope.changeState(state,{id: index});
@@ -420,7 +427,8 @@ angular.module('<%- parentStateName %>')
             $scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
               //for the moment, we keep the modal. 
               //but we'll ultimatley change this to change state
-              $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: $stateParams.id, fromCrud: true});
+              $rootScope.fromCrud = true;
+              $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: $stateParams.id});
             };
               <%});%>
             <% });%>
