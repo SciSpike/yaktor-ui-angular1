@@ -11,7 +11,7 @@ angular.module('<%- parentStateName %>')
           }else{
             $rootScope.setReturnToParams({});
           }
-          
+          <% if (agents.lenth> 0){%>
         //AGENT STUFF
          <%//used for extracting objects from the spec
          var objectFindByKey = function(array, key, value) {
@@ -22,7 +22,6 @@ angular.module('<%- parentStateName %>')
             }
             return null;
           }%>
-               
       //array of key agents and their properties
         $scope.conversationAgents = [<% _.each(agents, function(agent, index){
           var agentName = agent.split('.').reverse().join("_of_");
@@ -35,7 +34,6 @@ angular.module('<%- parentStateName %>')
                   }<% if(index != newAgent.states.length-1){%>,<% }});%>]
         }<% if(index != agents.length-1){%>,
        <%}}); %>];
-       
        
        // setup listeners and inits
        <% _.each(agents, function(agent, index){
@@ -60,7 +58,6 @@ angular.module('<%- parentStateName %>')
           <%- parentStateName %>Services.init<%- newAgent.name%>Conversation(initData);
         };
       <% });%>
-
         //INIT AGENT
         function initAgents(){
           var data = FormService.returnAnswers($scope.directiveData, answers);
@@ -72,7 +69,7 @@ angular.module('<%- parentStateName %>')
            $scope.init<%- newAgent.name%>Conversation($scope.initData);
             <%});%>
         };
-        
+        <%}%>
         //CRUD STUFF
        var id = $stateParams.id;
        $scope.userId = id;
@@ -92,10 +89,8 @@ angular.module('<%- parentStateName %>')
               return true;
             }
             return false;
-          }
-        <% }%>
-        
-        <% if(state.ui.title.replace('_', '').toLowerCase() == 'find'){%>
+          }<% }%>
+          <% if(state.ui.title.replace('_', '').toLowerCase() == 'find'){%>
           $scope.actionButtons = [{
             state: 'POST',
             title: 'CREATE.NEW'
@@ -114,7 +109,6 @@ angular.module('<%- parentStateName %>')
                 }
                 return currentState;
               },
-
               init<%- newAgent.name%>Conversation: function(id){
                 // console.log('<%- agent%> INIT DATA:' + initData);
                 var initData = {
@@ -346,10 +340,8 @@ angular.module('<%- parentStateName %>')
                            <%});%>
                      });
           };
-          
           findData({});
         <% }
-
         if(state.ui.title.replace('_', '').toLowerCase() == 'post' || state.ui.title.replace('_', '').toLowerCase() == 'put'){
           var directiveData = {};
           var createDirectives = function(dataObject, elements){
@@ -376,7 +368,6 @@ angular.module('<%- parentStateName %>')
             }
           }
           createDirectives(directiveData, state.components.elements);%>
-
           $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
           <% if(state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
               function mergeAnswers(dataObject, answersObject){
@@ -402,11 +393,9 @@ angular.module('<%- parentStateName %>')
                 <%if(state.ui.title.replace('_', '').toLowerCase() == 'get' || state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
                   setTimeout(initAgents,500);
                 <%}%>
-              });                 
+              });
           <%}%>
           var answers = {};
-          
-
           $scope.cancelForm = function(){
             $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, null);
           }
@@ -417,8 +406,7 @@ angular.module('<%- parentStateName %>')
                        $scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, response);
                   });
           };
-          
-
+        <% if (agents.lenth> 0){%>
           //AGENT BUTTONS ACTIONS
           <% _.each(agents, function(agent, index){
             var agentName = agent.split('.').reverse().join("_of_");
@@ -436,4 +424,5 @@ angular.module('<%- parentStateName %>')
             <% });%>
          <%}); %>
         <%}%>
-      }]);
+      <%}%>
+}]);
