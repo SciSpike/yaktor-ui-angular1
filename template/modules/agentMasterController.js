@@ -14,10 +14,10 @@ angular.module('<%- moduleName %>')
           
           $scope.$onRootScope($eventsCommon.conversations.<%- actions.url.replace('/', '')%>, function(event, eventData){
             var init = null;
-            if($rootScope.fromCrud){
-              $scope.changeState($rootScope.returnToCrud, $rootScope.returnToParams);
+            if($rootScope.getFromCrud()){
+              $scope.changeState($rootScope.getReturnToCrud(), $rootScope.getReturnToParams());
             }
-            if(eventData.nextState && !$rootScope.fromCrud){
+            if(eventData.nextState && !$rootScope.getFromCrud()){
               if (eventData.data._id){
                 init= eventData.data._id;
               }else{

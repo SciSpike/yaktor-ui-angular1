@@ -55,6 +55,39 @@ angular.module('views')
  }]);
 }]) 
 
+.config(['$provide',
+  function($provide) {
+    $provide.decorator('$rootScope', function($delegate) {
+      $delegate._fromCrud = false;
+      $delegate._returnToCrud;
+      $delegate._returnToParams;
+      
+      $delegate.getFromCrud = function(){
+        return $delegate._fromCrud;
+      };
+      $delegate.setFromCrud = function(val){
+        $delegate._fromCrud = val;
+      };
+      
+      $delegate.getReturnToCrud = function(){
+        return $delegate._returnToCrud;
+      };
+      $delegate.setReturnToCrud = function(val){
+        $delegate._returnToCrud = val;
+      };
+
+      $delegate.getReturnToParams = function(){
+        return $delegate._returnToParams;
+      };
+      $delegate.setReturnToParams = function(val){
+        $delegate._returnToParams = val;
+      };
+      
+      return $delegate;
+    });
+  }
+])
+
 .constant('$eventsCommon', {
  ngGrid:{
    toggleWidth: 'navGrid.toggle'

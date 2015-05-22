@@ -2,12 +2,14 @@ angular.module('<%- parentStateName %>')
   .controller('<%- parentStateName %><%- moduleName %>Controller',
       ['$rootScope','$scope','$state','$stateParams', '$location', '$eventsCommon', '$timeout', '$translate',  'FormService', '<%- parentStateName %>Services',
        function ($rootScope,$scope,$state,$stateParams, $location, $eventsCommon, $timeout, $translate, FormService, <%- parentStateName %>Services) {
-          $rootScope.fromCrud = false;
-          $rootScope.returnToCrud = $state.current.name;
+          
+          //set ourselves up to be able to return here if we leap over to an agent
+          $rootScope.setFromCrud(false);
+          $rootScope.setReturnToCrud($state.current.name);
           if ($stateParams){
-            $rootScope.returnToParams = $stateParams;
+            $rootScope.setReturnToParams($stateParams);
           }else{
-            $rootScope.returnToParams = {};
+            $rootScope.setReturnToParams({});
           }
           
         //AGENT STUFF
@@ -125,7 +127,7 @@ angular.module('<%- parentStateName %>')
                 <% _.each(actions, function(action, i){%>
               do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
                 var initData = {_id: id};
-                $rootScope.fromCrud = true;
+                $rootScope.setFromCrud(true);
                   $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: id});
               },<%});%><% });%><%}); %>
             changeState: function(state, index){
@@ -427,7 +429,7 @@ angular.module('<%- parentStateName %>')
             $scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
               //for the moment, we keep the modal. 
               //but we'll ultimatley change this to change state
-              $rootScope.fromCrud = true;
+              $rootScope.setFromCrud(true);
               $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: $stateParams.id});
             };
               <%});%>
