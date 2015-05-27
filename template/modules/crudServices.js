@@ -32,13 +32,11 @@ angular.module('<%- moduleName %>')
         RestService['<%- element%>']('<%- actions.url%>', null,id,function(err,data){
         <%}else{%>
         RestService['<%- element%>']('<%- actions.url%>', data,id,function(err,data){
-        <%}%>
-                if(err){
-                    console.log(err)
-                    //$scope.alerts.push(err);
+        <%}%>  if(err){
+                  console.log(err)
+                  response.reject(err);
                 } else {
                  response.resolve(data);
-                 //$scope.data['<%- element%>']=data;
                 }
           });
       });
