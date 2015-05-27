@@ -48,6 +48,10 @@ angular.module('<%=appname%>')
         ];
 
         $scope.mainNavigation = navPanelCustom.navs['main'] || standardNav; 
+      //optional custom functions
+        $scope.logout = navPanelCustom.logout;
+        $scope.account = navPanelCustom.account;
+        
       },
       link: function(scope, element, attrs, scidFooterController, $translate, $filter) {
       
