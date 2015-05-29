@@ -1,15 +1,15 @@
-<div ng-if="allData > 0" class='viewChange' ng-click="grid = !grid">
-	<span ng-show="grid" class="glyphicon glyphicon-th-list"></span>
-	<span ng-show="!grid" class="glyphicon glyphicon-th"></span>
+<div ng-if="allData > 0" class='viewChange' ng-click="grid.enabled = !grid.enabled">
+	<span ng-show="grid.enabled" class="glyphicon glyphicon-th-list"></span>
+	<span ng-show="!grid.enabled" class="glyphicon glyphicon-th"></span>
 </div>
-<a ng-if="allData > 0" ng-click="showFilters = !showFilters">
-	<span ng-show="!showFilters">{{'SHOW.FILTER.OPTIONS' | translate}}</span>
-	<span ng-show="showFilters">{{'HIDE.FILTER.OPTIONS' | translate}}</span>
+<a ng-if="allData > 0 && grid.enabled" ng-click="grid.showFilters = !grid.showFilters">
+	<span ng-show="!grid.showFilters">{{'SHOW.FILTER.OPTIONS' | translate}}</span>
+	<span ng-show="grid.showFilters">{{'HIDE.FILTER.OPTIONS' | translate}}</span>
 </a>
 <br /><br />
 <!--this will run IF there is data AND we specified grid view -->
-<div ng-if="allData > 0 && grid" class="findView">
-	<div class="filters well" ng-show="showFilters">
+<div ng-if="allData > 0 && grid.enabled" class="findView">
+	<div class="filters well" ng-show="grid.showFilters">
 		<span ng-repeat="(key, value) in gridHeaders">
 			<span ng-switch="value.type">
 				<div ng-switch-when="array" ng-init="gridFilter[key] = []; gridFilter[key][0] = {}" class="form-group">
@@ -21,7 +21,7 @@
 		<br />
 		<button type="button" class="btn btn-default" ng-click="filterGrid()">{{'FILTER.GRID' | translate}}</button>
 	</div>
-	<label ng-if="numFilters > 0">{{'FILTERS' | translate}}: </label>
+	<label ng-if="grid.numFilters > 0">{{'FILTERS' | translate}}: </label>
 	<span ng-repeat="(key, value) in filtersImplemented">
 		<span ng-switch="gridHeaders[key].type">
 			<span ng-switch-when='array' class="form-group">
@@ -50,21 +50,28 @@
 		<h5>{{'NO.RESULTS' | translate}}</h5>
 	</div>
 </div>
+
+
+
+
+
 <!--this is for NOT grid view BUT there needs to be data-->
-<div ng-if="allData > 0 && !grid" class="findView">
+<div ng-if="allData > 0 && !grid.enabled" class="findView">
 	<br />
-	<%- parentStateName%>
-	<%- moduleName%>
 	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
 	<br /><br />
+
 	<div ng-repeat="row in gridOptions.data track by $index" class="panel panel-default">
 		<div class="panel-heading">
-		  <h3 class="panel-title">{{row.title}}</h3>
+		  <h3 class="panel-title"><%- parentStateName%></h3>
 		</div>
 		<div class="panel-body">
-			<p>{{row.description}}</p>
+			<p ng-repeat="(key, value) in row"><span ng-if="key != '__t' && key != '_id'">{{key}}: {{value}}</span></p>
+			
 			<br />
-			<label>{{'STATE'|translate}}:</label>
+			<% if (agents.lenth> 0){%>
+				<label>{{'STATE'|translate}}:</label>
+			<% } %>
 			<% var objectFindByKey = function(array, key, value) {
                 for (var i = 0; i < array.length; i++) {
                   if (array[i][key] == value) {

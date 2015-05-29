@@ -95,7 +95,11 @@ angular.module('<%- parentStateName %>')
             state: 'POST',
             title: 'CREATE.NEW'
           }];
-          $scope.grid = true;
+          $scope.grid = {
+        		  enabled: true,
+        		  showFilters: false,
+        		  numFilters: 0
+          }
           $scope.gridActions = {
             //AGENT BUTTONS ACTIONS
             <% _.each(agents, function(agent, index){
@@ -172,9 +176,9 @@ angular.module('<%- parentStateName %>')
           $scope.allData = -1;
           $scope.gridHeaders = <%= JSON.stringify(state.components.elements)%>;
           $scope.gridFilter = {};
-          $scope.numFilters = 0;
+
           $scope.filterGrid = function(){
-            $scope.numFilters = 0;
+            $scope.grid.numFilters = 0;
             $scope.filtersImplemented = angular.copy($scope.gridFilter);
             for(item in $scope.filtersImplemented){
               var itemType = $scope.filtersImplemented[item].constructor.name.toLowerCase();
@@ -184,7 +188,7 @@ angular.module('<%- parentStateName %>')
                   for(key in $scope.filtersImplemented[item][i]){
                     if($scope.gridFilter[item][i][key] != '' && $scope.gridFilter[item][i][key] != null){
                       arrayEmpty = false;
-                      $scope.numFilters++;
+                      $scope.grid.numFilters++;
                     }else{
                       delete $scope.gridFilter[item][i][key];
                       delete $scope.filtersImplemented[item][i][key];
@@ -196,7 +200,7 @@ angular.module('<%- parentStateName %>')
                 }
               }else{
                 if($scope.gridFilter[item] != '' && $scope.gridFilter[item] != null){
-                  $scope.numFilters++;
+                  $scope.grid.numFilters++;
                 }else{
                   delete $scope.gridFilter[item];
                   delete $scope.filtersImplemented[item];
@@ -209,11 +213,11 @@ angular.module('<%- parentStateName %>')
             if(parent){
               delete $scope.gridFilter[parent][index][child];
               delete $scope.filtersImplemented[parent][index][child];
-              $scope.numFilters--;
+              $scope.grid.numFilters--;
             }else{
               delete $scope.gridFilter[child];
               delete $scope.filtersImplemented[child];
-              $scope.numFilters--;
+              $scope.grid.numFilters--;
             }
             findData($scope.filtersImplemented);
           };
