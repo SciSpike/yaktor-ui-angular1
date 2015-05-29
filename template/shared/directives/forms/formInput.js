@@ -109,6 +109,9 @@ angular.module('views')
               scope.addArrayItem = function(){
                 scope.directiveData.answer.push("");
               }
+              scope.removeArrayItem = function(index){
+                scope.directiveData.answer.splice(index, 1);
+              }
               scope.booleanChange = function(data){
                 if(scope.key == 'useCurrentLocation'){
                   $rootScope.$emit('maps.useCurrent', {useCurrent: data});

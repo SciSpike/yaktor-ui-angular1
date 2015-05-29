@@ -370,29 +370,10 @@ angular.module('<%- parentStateName %>')
           createDirectives(directiveData, state.components.elements);%>
           $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
           <% if(state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
-              function mergeAnswers(dataObject, answersObject){
-                switch(dataObject.constructor.name.toLowerCase()) {
-                  case 'array':
-                    for(var i=0; i<dataObject.length; i++){
-                      mergeAnswers(dataObject[i], answersObject[i]);
-                    }
-                    break;
-                }
-                for(key in dataObject){
-                  if(dataObject[key]){
-                    if(dataObject[key].answer || dataObject[key].answer == ''){
-                      dataObject[key].answer = answersObject[key];
-                    }else{
-                      mergeAnswers(dataObject[key], answersObject[key]);
-                    }
-                  }
-                }
-              }
               <%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
-                mergeAnswers($scope.directiveData, response);
+                FormService.mergeAnswers($scope.directiveData, response);
                 <%if(state.ui.title.replace('_', '').toLowerCase() == 'get' || state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
-                  setTimeout(initAgents,500);
-                <%}%>
+                  <% if (agents.lenth> 0){%>setTimeout(initAgents,500);<%}%><%}%>
               });
           <%}%>
           var answers = {};

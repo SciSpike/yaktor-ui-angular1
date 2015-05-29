@@ -57,10 +57,28 @@ angular.module('views')
         }
         return answerObject
       };
-
+      var _mergeAnswers = function(dataObject, answersObject){
+        switch(dataObject.constructor.name.toLowerCase()) {
+          case 'array':
+            for(var i=0; i<dataObject.length; i++){
+              mergeAnswers(dataObject[i], answersObject[i]);
+            }
+            break;
+        }
+        for(key in dataObject){
+          if(dataObject[key]){
+            if(dataObject[key].answer || dataObject[key].answer == ''){
+              dataObject[key].answer = answersObject[key];
+            }else{
+              mergeAnswers(dataObject[key], answersObject[key]);
+            }
+          }
+        }
+      };
       return {
         returnAnswers: _returnAnswers,
-        cleanData: _cleanData
+        cleanData: _cleanData,
+        mergeAnswers: _mergeAnswers
       }
     }
   ]);
