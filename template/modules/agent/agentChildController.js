@@ -3,21 +3,9 @@ angular.module('<%- moduleName %>')
       ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService', 'FormService',
        function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService, FormService) {
         <%var directiveData = {};
-        // var createDirectives = function(dataObject, elements){
-//           for(element in elements){
-//             if(elements[element].components){
-//               dataObject[element] = {};
-//               createDirectives(dataObject[element], elements[element].components.elements);
-//             }else{
-//               var elementData = elements[element];
-//               dataObject[element] = elementData;
-//               dataObject[element]['answer'] = '';
-//             }
-//           }
-//         }
+
           var createDirectives = function(dataObject, elements){
             for(element in elements){
-              // console.log(JSON.stringify(elements));
               
               if(elements[element].type == 'array'){
                 if(elements[element].components){
@@ -46,9 +34,6 @@ angular.module('<%- moduleName %>')
         $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
         if(!Object.keys($scope.directiveData).length && $scope.abort){
           $scope.abort();
-        }
-        $scope.getData = function(nestedArray){
-          // console.log(nestedArray);
         }
         
         var answers = {};
