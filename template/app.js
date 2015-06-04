@@ -22,6 +22,7 @@
       'ui.select',
       'checklist-model',
       'sharedModule',
+      'utilities',
       'ngSanitize',
        <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
          <% }}); %>]);

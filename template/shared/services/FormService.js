@@ -61,7 +61,7 @@ angular.module('views')
         switch(dataObject.constructor.name.toLowerCase()) {
           case 'array':
             for(var i=0; i<dataObject.length; i++){
-              mergeAnswers(dataObject[i], answersObject[i]);
+              _mergeAnswers(dataObject[i], answersObject[i]);
             }
             break;
         }
@@ -70,7 +70,10 @@ angular.module('views')
             if(dataObject[key].answer || dataObject[key].answer == ''){
               dataObject[key].answer = answersObject[key];
             }else{
-              mergeAnswers(dataObject[key], answersObject[key]);
+            	console.log(key);
+            	console.log(dataObject);
+            	console.log(answersObject);
+              _mergeAnswers(dataObject[key], answersObject[key]);
             }
           }
         }

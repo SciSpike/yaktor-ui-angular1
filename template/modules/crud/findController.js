@@ -45,9 +45,9 @@ $scope.gridActions = {
 						if($scope.gridOptions.data[i]._id == id){
 							$scope.gridOptions.data.splice(i, 1);
 							if($scope.filtersImplemented){
-								findData($scope.filtersImplemented);
+								$scope.findData($scope.filtersImplemented);
 							}else{
-								findData({});
+								$scope.findData({});
 							}
 						}
 					}
@@ -70,7 +70,7 @@ $scope.gotoPage = function(page) {
 		page = $scope.pagingOptions.totalPages;
 	}
 	$scope.pagingOptions['pageButtons'] = range(page-2, $scope.pagingOptions.pageNav);
-	findData({});
+	$scope.findData({});
 };
 $scope.pagingOptions = {
 		pageButtons: [1, 2, 3, 4, 5],
@@ -114,7 +114,7 @@ $scope.filterGrid = function(){
 			}
 		}
 	}
-	findData($scope.filtersImplemented);
+	$scope.findData($scope.filtersImplemented);
 }; 
 $scope.removeFilter = function(child, parent, index){
 	if(parent){
@@ -126,7 +126,7 @@ $scope.removeFilter = function(child, parent, index){
 		delete $scope.filtersImplemented[child];
 		$scope.grid.numFilters--;
 	}
-	findData($scope.filtersImplemented);
+	$scope.findData($scope.filtersImplemented);
 };
 $scope.gridOptions = {
 		options: {
@@ -226,7 +226,7 @@ $scope.gridOptions = {
 			            			 ]
 		}
 };
-function findData(data){
+$scope.findData = function(data){
 	<%- parentStateName %>Services.find<%- parentStateName%>(data, $scope.pagingOptions.currentPage).then(function(response) {
 		$scope.gridOptions.data = response.results;
 		$scope.pagingOptions.totalServerItems = response.total;
@@ -251,4 +251,4 @@ function findData(data){
 			<%});%>
 	});
 };
-findData({});
+$scope.findData({});
