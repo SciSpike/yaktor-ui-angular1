@@ -6,3 +6,4 @@ example/**/
 server/
 /views/node_modules
 /views/bower_components
+npm-debug.log
