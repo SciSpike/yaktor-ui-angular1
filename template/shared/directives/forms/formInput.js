@@ -95,16 +95,17 @@ angular.module('views')
 					$rootScope.$emit('maps.useCurrent', {useCurrent: data});
 				}
 			}
-			scope.checkSelection = function(item, model){
+			scope.checkSelection = function(item, model, index){
 				if(item.action && endPointData[typeRef].canPost){
-					scope[item.action]();
+					scope[item.action](index);
 				}
 			};
 
-			scope.createNew = function(){
+			scope.createNew = function(index){
 				
 				var partialString = scope.objectRef,
-					skope = $rootScope.$new();
+					skope = $rootScope.$new(),
+					arrayIndex = index;
 				
 				scope.$parent.actionableForm.$invalid = true;
 				
@@ -119,7 +120,11 @@ angular.module('views')
 					if (newItem){
 						typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef], {}).then(function(response){
 							setTypeRefData(response.results);
-							scope.directiveData.answer = newItem;
+							if(arrayIndex && arrayIndex != null){
+								scope.directiveData.answer[arrayIndex] = newItem;
+							}else{
+								scope.directiveData.answer = newItem;
+							}
 							modalInstance.close();
 						});
 					}else{
