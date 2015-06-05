@@ -34,7 +34,17 @@
         }
       }
     })
-
+    .provider('partialLookup', function() {
+      return {
+        partials: {
+        	roles: 'role'
+        },
+        $get: function() {
+          var partials = this.partials;
+		  return partials;
+        }
+      }
+    })
     .factory('navPanelCustom', function() {
       var _navs = {
         'main': null
