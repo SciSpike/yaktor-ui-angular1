@@ -1,3 +1,4 @@
+
 <%
 var directiveData = {};
 var createDirectives = function(dataObject, elements){
@@ -33,7 +34,7 @@ $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
 	FormService.mergeAnswers($scope.directiveData, response);
 	console.log('done');
 	<%if(state.ui.title.replace('_', '').toLowerCase() == 'get' || state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
-	<% if (agents.lenth> 0){%>setTimeout(initAgents,500);<%}%><%}%>
+	<% if (agents.length> 0){%>setTimeout(initAgents,500);<%}%><%}%>
 });
 <%}%>
 var answers = {};
@@ -47,7 +48,7 @@ $scope.submitForm = function(type){
 		$scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, response);
 	});
 };
-<% if (agents.lenth> 0){%>
+<% if (agents.length>0){%>
 //AGENT BUTTONS ACTIONS
 <% _.each(agents, function(agent, index){
 	var agentName = agent.split('.').reverse().join("_of_");

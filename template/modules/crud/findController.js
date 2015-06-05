@@ -1,3 +1,5 @@
+
+
 $scope.actionButtons = [{
 	state: 'POST',
 	title: 'CREATE.NEW'
@@ -8,33 +10,40 @@ $scope.grid = {
 		numFilters: 0
 }
 $scope.gridActions = {
-		//AGENT BUTTONS ACTIONS
-		<% _.each(agents, function(agent, index){
-			var agentName = agent.split('.').reverse().join("_of_");
-			var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
-			get<%- newAgent.name%>ConversationState: function(id){
-				// console.log('<%- agent%> Get State For:' + id);
-				var currentState = null;
-				if ($scope.<%- newAgent.name%>CurrentStates){
-					currentState = $scope.<%- newAgent.name%>CurrentStates[id];
-				}
-				return currentState;
-			},
-			init<%- newAgent.name%>Conversation: function(id){
-				// console.log('<%- agent%> INIT DATA:' + initData);
-				var initData = {
-						_id: id
-				};
-				<%- parentStateName %>Services.init<%- newAgent.name%>Conversation(initData);
-			},
-			<% _.each(newAgent.states, function(state, index){ %>
-			<% var actions = _.toArray(state.elements);%>
-			<% _.each(actions, function(action, i){%>
-			do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
-				var initData = {_id: id};
-				$rootScope.setFromCrud(true);
-				$state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: id});
-			},<%});%><% });%><%}); %>
+  
+  
+  
+
+	//AGENT BUTTONS ACTIONS
+	<% _.each(agents, function(agent, index){
+		var agentName = agent.split('.').reverse().join("_of_");
+		var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+		get<%- newAgent.name%>ConversationState: function(id){
+			// console.log('<%- agent%> Get State For:' + id);
+			var currentState = null;
+			if ($scope.<%- newAgent.name%>CurrentStates){
+				currentState = $scope.<%- newAgent.name%>CurrentStates[id];
+			}
+			return currentState;
+		},
+		init<%- newAgent.name%>Conversation: function(id){
+			// console.log('<%- agent%> INIT DATA:' + initData);
+			var initData = {
+					_id: id
+			};
+			<%- parentStateName %>Services.init<%- newAgent.name%>Conversation(initData);
+		},
+		<% _.each(newAgent.states, function(state, index){ %>
+		<% var actions = _.toArray(state.elements);%>
+		<% _.each(actions, function(action, i){%>
+		do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
+			var initData = {_id: id};
+			$rootScope.setFromCrud(true);
+			$state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: id});
+		},<%});%><% });%><%}); %>
+    
+      
+      
 			changeState: function(state, index){
 				$scope.changeState(state,{id: index});
 			},
