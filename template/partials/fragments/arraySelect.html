@@ -1,0 +1,19 @@
+<div class='well'>
+	<h5>{{directiveData.ui.title | translate}}: </h5>
+	<div ng-if="directiveData.answer.length > 0">
+		<div ng-repeat="answer in directiveData.answer track by $index">
+		<ui-select class="arrayInput" ng-model='directiveData.answer[$index]' theme="bootstrap" on-select="checkSelection($item, $model, $index);">
+	    	<ui-select-match placeholder="{{directiveData.ui.title | translate}}">{{$select.selected.title || $select.selected}}</ui-select-match>
+	    		<ui-select-choices group-by="'groupBy'" repeat="item in directiveData.ui.data track by $index | filter: $select.search" refresh="getLocation($select.search)" refresh-delay="0">
+	      		<div ng-if="!item.isTag && item.title" ng-bind-html="item.title + item.isTag | highlight: $select.search"></div>
+	      		<div ng-if="!item.isTag && !item.title" ng-bind-html="item + item.isTag | highlight: $select.search"></div>
+	    	</ui-select-choices>
+	  </ui-select>
+	    <span class="glyphicon glyphicon-minus-sign" ng-click="removeArrayItem($index)"></span></input>
+	  </div>
+  </div>
+	<br />
+	<span class="glyphicon glyphicon-plus-sign" ng-click="addArrayItem()"></span>
+	<br />
+</div>
+<br />

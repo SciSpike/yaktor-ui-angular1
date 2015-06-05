@@ -77,8 +77,9 @@ angular.module('views')
 				typeRef = scope.directiveData.typeRef;
 			
 			scope.getContentUrl = function() {
+				console.log(scope.directiveData.ui.type);
 				if (scope.directiveData.ui.type) {
-					// console.log(scope.directiveData.ui.type.toLowerCase());
+					console.log(scope.directiveData.ui.type.toLowerCase());
 					return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type.toLowerCase() + '.html';
 				} else {
 					return "";
