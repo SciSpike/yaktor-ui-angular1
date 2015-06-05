@@ -30,8 +30,8 @@ $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
 
 <% if(state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
 <%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
-	console.log($scope.directiveData);
-	//FormService.mergeAnswers($scope.directiveData, response);
+	FormService.mergeAnswers($scope.directiveData, response);
+	console.log('done');
 	<%if(state.ui.title.replace('_', '').toLowerCase() == 'get' || state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
 	<% if (agents.lenth> 0){%>setTimeout(initAgents,500);<%}%><%}%>
 });
