@@ -121,7 +121,7 @@ angular.module('views')
 						typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef], {}).then(function(response){
 							setTypeRefData(response.results);
 							if(arrayIndex && arrayIndex != null){
-								scope.directiveData.answer[arrayIndex] = newItem;
+								scope.directiveData.answer[arrayIndex] = newItem.title; //DON'T KNOW IF THIS WORKS
 							}else{
 								scope.directiveData.answer = newItem;
 							}
