@@ -90,7 +90,7 @@ module.exports = function(grunt) {
         },
         'files': {
           './index.html': ['./libs/modules/*.js'],
-          './cordova_template/index.html': ['./libs/modules/*.js'],
+          './cordova_template/index.html': ['./libs/modules/*.js']
         }
       },
       'dev': {
@@ -126,7 +126,42 @@ module.exports = function(grunt) {
 			  'options': {
 				  'interrupt': true
 			  }
-		  }
+		  },
+			'resources':{
+				'files': [
+					'bower_components/sockjs-client/dist/sockjs.js',
+					'./shared/modules/utilities/**/*.js',
+					'./shared/controllers/**/*.js',
+					'./shared/directives/**/*.js',
+					'./shared/services/**/*.js',
+					'./clientConfig/init/**/*.js',
+					'./clientConfig/custom/**/*.js',
+					'./shared/locale/**/*.js',
+					'./modules/locale/**/*.js'
+				],
+				'tasks': ['browserify:appDep', 'sails-linker:libs'],
+				'options': {
+					'interrupt': true
+				}
+			},
+			<% _.each(moduleNames.agents, function(moduleName, index){%>
+				'<%- moduleName %>/':{
+					'files': './modules/agents/<%- moduleName %>/**/*.js',
+					'tasks': ['browserify:appDep', 'sails-linker:libs'],
+					'options': {
+						'interrupt': true
+					}
+				},
+			<% });%>
+			<% _.each(moduleNames.crud, function(moduleName, index){%>
+				'<%- moduleName %>/':{
+					'files': './modules/crud/<%- moduleName %>/**/*.js',
+					'tasks': ['browserify:appDep', 'sails-linker:libs'],
+					'options': {
+						'interrupt': true
+					}
+				},
+			<% });%>
 	  },
 	  'autoprefixer': {
 		  'options': {
