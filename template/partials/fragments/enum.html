@@ -1,7 +1,9 @@
 <select
 	class='form-control input-sm'
 	ng-model='directiveData.answer'
-	ng-options="option for option in directiveData.ui.options">
+	ng-options="option for option in directiveData.ui.options"
+    ng-required="directiveData.required"
+    ng-pattern="directiveData.ui.pattern">
 	<option class="placeHolderText" value="">{{directiveData.ui.title | translate}}</option>
 </select>
 <br />

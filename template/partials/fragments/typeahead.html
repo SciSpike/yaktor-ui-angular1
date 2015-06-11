@@ -2,7 +2,9 @@
 	ng-model="directiveData.answer"
 	placeholder="{{directiveData.ui.title | translate}}"
 	typeahead="item as item.title for item in directiveData.ui.data" 
-	class="form-control" />
+	class="form-control"
+    ng-required="directiveData.required"
+    ng-pattern="directiveData.ui.pattern" />
 <br />
 <!-- 
 ASYNC
