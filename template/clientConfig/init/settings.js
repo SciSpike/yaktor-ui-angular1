@@ -10,6 +10,11 @@
       },
       'refLookup': {
 
+      },
+      'grid':{
+    	  'enabled': true,
+    	  'showFilters': false,
+    	  'numFilters': 0
       }
     })
     .provider('routesExtended', function() {

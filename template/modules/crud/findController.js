@@ -4,15 +4,8 @@ $scope.actionButtons = [{
 	state: 'POST',
 	title: 'CREATE.NEW'
 }];
-$scope.grid = {
-		enabled: true,
-		showFilters: false,
-		numFilters: 0
-}
+$scope.grid = clientConstants.grid;
 $scope.gridActions = {
-  
-  
-  
 
 	//AGENT BUTTONS ACTIONS
 	<% _.each(agents, function(agent, index){
