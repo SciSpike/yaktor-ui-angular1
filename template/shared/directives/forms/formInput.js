@@ -9,6 +9,17 @@ angular.module('views')
 		},
 		controller: function($rootScope, $scope, $translate, defaultSettings, settingsInstances) {
 
+      var addTitles = function(data){
+        if (data){
+          for(i=0;i<data.length;i++){
+            if (!data[i].title && data[i].name){
+              data[i].title = data[i].name;
+            }
+          }
+        }
+        
+        return data;
+      };
 			if($scope.directiveData.typeRef){
 				if(!$scope.directiveData.endPoint){
 					$scope.directiveData.endPoint = settingsInstances.getTypeRefsInstance('default');
@@ -31,7 +42,7 @@ angular.module('views')
 									action: 'createNew',
 									groupBy: ""
 								}];
-								$scope.directiveData.ui.data = initialData.concat(data);
+								$scope.directiveData.ui.data = initialData.concat(addTitles(data));
 							}else{
 								$scope.directiveData.ui.data = data;
 							}
