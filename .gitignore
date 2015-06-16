@@ -4,6 +4,15 @@ node_modules
 .settings
 example/**/
 server/
-/views/node_modules
-/views/bower_components
+views/bower_components/
+views/node_modules/
+/views/*.*
+/views/**/*.*
+!/views/ClientConfig/**/*.*
+!/views/shared/**/*.*
+!/views/fonts/**/*.*
+!/views/**/*_extended.js
+!/views/**/*_extended.html
+!/views/bower.json
+!/views/package.json
 npm-debug.log
