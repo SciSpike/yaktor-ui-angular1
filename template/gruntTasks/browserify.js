@@ -21,7 +21,8 @@ var browserifyLibAlias = [
   './bower_components/ngstorage/ngStorage.min.js:ngStorage',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
   './bower_components/angular-ui-select/dist/select.js:uiSelect',
-  './bower_components/ng-grid/ng-grid-2.0.14.min.js:ngGrid'
+  './bower_components/ng-grid/ng-grid-2.0.14.min.js:ngGrid',
+  './bower_components/angular-recaptcha/release/angular-recaptcha.js:vcRecaptcha'
  ];
 
 var mainExternals = [
@@ -36,7 +37,8 @@ var mainExternals = [
   './bower_components/ngstorage/ngStorage.min.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/angular-ui-select/dist/select.js',
-  './bower_components/ng-grid/ng-grid-2.0.14.min.js'
+  './bower_components/ng-grid/ng-grid-2.0.14.min.js',
+  './bower_components/angular-recaptcha/release/angular-recaptcha.js'
 ];
 
 var mergedExternals = browserifyLibExternal.concat(mainExternals);
@@ -94,11 +96,6 @@ module.exports = {
             exports: 'ngStorage',
             depends: {jquery: '$', angular:'angular'}
           },
-          'ngGrid': {
-            path: './bower_components/ng-grid/build/ng-grid.debug.js',
-            exports: 'ngGrid',
-            depends: { jquery: '$' }
-          },
           'ngTouch': {
             path: './bower_components/angular-touch/angular-touch.min.js',
             exports: 'ngTouch',
@@ -118,6 +115,11 @@ module.exports = {
               path: './bower_components/ng-grid/ng-grid-2.0.14.min.js',
               exports: 'ngGrid',
               depends: {jquery: '$', angular: 'angular'}
+          },
+          'vcRecaptcha': {
+            path: './bower_components/angular-recaptcha/release/angular-recaptcha.js',
+            exports: 'vcRecaptcha',
+            depends: {jquery: '$', angular: 'angular'}
           }
         }
       },

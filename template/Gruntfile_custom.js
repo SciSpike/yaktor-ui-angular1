@@ -5,5 +5,20 @@ module.exports = {
             
           }
         }
+    },
+  'copy': {
+    'custom': {
+
     }
+  },
+  'sails-linker': {
+    'custom': {
+
+    }
+  },
+  'tags': {
+    'buildScripts': {
+
+    }
+  }
 };

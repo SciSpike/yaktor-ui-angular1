@@ -11,6 +11,7 @@
   require('ngTouch');
   require('uiSelect');
   require('ngSanitize');
+  require('vcRecaptcha');
 
   angular.module('views', 
       ['ui.bootstrap',

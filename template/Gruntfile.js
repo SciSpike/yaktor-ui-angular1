@@ -198,10 +198,10 @@ module.exports = function(grunt) {
 
   grunt.initConfig(config);
 
-  var sharedTasks = ['less', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs'];
+  var sharedTasks = ['less', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom'];
   var serveTasks = ['cssmin', 'autoprefixer', 'sails-linker:prod'];
   var cordovaCopy = ['copy:cordova-js','copy:cordova-css','copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs'];
-  
+
   var allTasks = sharedTasks.concat(serveTasks);
 
   /* ########## INCORPORATING CUSTOM TASKS DEFINED IN CUSTOMGRUNT ########## */
@@ -226,35 +226,36 @@ module.exports = function(grunt) {
   }
 
 
-  for (var key in customGrunt) {
-    for (var prop in customGrunt[key]) {
+for (var key in customGrunt) {
 
-      var obj = {};
-      obj[prop] = customGrunt[key][prop];
+  for (var prop in customGrunt[key]) {
 
-      if (grunt.config.data[key]) {
-        if (grunt.config.data[key][prop]) {
-          grunt.config.data[key][prop] = MergeRecursive(grunt.config.data[key][prop], obj[prop]);
-        } else {
-          grunt.config.data[key][prop] = obj[prop];
-        }
+    var obj = {};
+    obj[prop] = customGrunt[key][prop];
+
+    if (grunt.config.data[key]) {
+      if (grunt.config.data[key][prop]) {
+        grunt.config.data[key][prop] = MergeRecursive(grunt.config.data[key][prop], obj[prop]);
       } else {
-        if (key == 'unitTest' || key == 'e2eTest') {
-          grunt.extendConfig(obj);
-          var customTasks = sharedTasks.concat([prop]);
-          grunt.registerTask(key, customTasks);
+        grunt.config.data[key][prop] = obj[prop];
+      }
+    } else {
+      if (key == 'unitTest' || key == 'e2eTest') {
+        grunt.extendConfig(obj);
+        var customTasks = sharedTasks.concat([prop]);
+        grunt.registerTask(key, customTasks);
+      } else {
+        grunt.config.data[key] = {};
+        grunt.config.data[key][prop] = obj[prop];
+        if (key == 'copy' || key == 'shell') {
+          sharedTasks.unshift(key);
         } else {
-          grunt.config.data[key] = {};
-          grunt.config.data[key][prop] = obj[prop];
-          if (key == 'copy' || key == 'shell') {
-            sharedTasks.unshift(key);
-          } else {
-            sharedTasks.push(key);
-          }
+          sharedTasks.push(key);
         }
       }
     }
   }
+}
 
   grunt.registerTask('default', allTasks.concat(['watch']));
   grunt.registerTask('dev', sharedTasks.concat(['sails-linker:dev', 'watch']));

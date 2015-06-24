@@ -1,4 +1,4 @@
-<input type="text" 
+<!-- <input type="text"
 	ng-model="directiveData.answer"
 	placeholder="{{directiveData.ui.title | translate}}"
 	typeahead="item as item.title for item in directiveData.ui.data" 
@@ -6,12 +6,12 @@
     ng-required="directiveData.required"
     ng-pattern="directiveData.ui.pattern" />
 <br />
-<!-- 
-ASYNC
-<input type="text" 
-	ng-model="directiveData.answer" 
-	placeholder="{{directiveData.ui.title | translate}}"
-	typeahead="item for item in getLocation($viewValue)" 
-	typeahead-loading="loadingLocations" 
-	class="form-control" />
-	<i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i> -->
+
+ASYNC -->
+<input type="text"
+	   ng-model="directiveData.answer"
+	   placeholder="{{directiveData.ui.title | translate}}"
+	   typeahead="item for item in getData($viewValue)"
+	   typeahead-loading="loadingData"
+	   class="form-control" />
+<i ng-show="loadingData" class="glyphicon glyphicon-refresh"></i>
