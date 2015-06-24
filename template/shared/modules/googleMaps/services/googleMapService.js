@@ -1,7 +1,10 @@
 angular.module('googleMaps')
-  .factory('googleMapService', ['$q', '$timeout', function($q, $timeout){
+  .factory('googleMapService', ['$q', '$http', function($q, $http){
       
       var _getAddressCoords = function(address){
+
+        //return $http.jsonp('https://maps.googleapis.com/maps/api/geocode/json?address=7350+Oakstone+Drive,+Dallas,+TX&key=AIzaSyAxtErMIuqo7cr6h0PH8_ni9SlAnXEDmTo');
+
         var pos = $q.defer();
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({ 'address': address}, function (results, status) {

@@ -58,10 +58,13 @@ angular.module('googleMaps')
 			var testAddress = $.trim(address);
 			var regex = new RegExp(",", "g");
 			if(testAddress.replace(regex, '') != ''){
-				googleMapService.getAddressCoords(address).then(function(response){
-					$scope.addressCoords = response;
-					$scope.mapDataReady = true;
-				});
+				googleMapService.getAddressCoords(address)
+					.then(function(response){
+						$scope.addressCoords = response;
+						$scope.mapDataReady = true;
+					}, function(err){
+						console.log(err);
+					});
 			}
 		}
 
