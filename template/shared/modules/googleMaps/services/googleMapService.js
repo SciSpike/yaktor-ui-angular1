@@ -4,7 +4,7 @@ angular.module('googleMaps')
       var _getAddressCoords = function(address){
         var pos = $q.defer();
         var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ 'address': address }, function (results, status) {
+        geocoder.geocode({ 'address': address}, function (results, status) {
           if(status == 'ZERO_RESULTS'){
             pos.reject();
           }
