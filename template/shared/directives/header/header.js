@@ -1,5 +1,5 @@
 angular.module('views')
-  .directive('engineUiHeader', function(htmlExtended) {
+  .directive('engineUiHeader', ['htmlExtended', 'routesExtended', function(htmlExtended, routesExtended) {
       return{
           restrict: 'C',
           transclude: true,
@@ -9,6 +9,6 @@ angular.module('views')
 			  }
 			  return partialsBaseLocation + "/header/headerBlock.html"
             },
-          controller: "headerCtrl"
+          controller: routesExtended['header.index'] || "headerCtrl"
       }
-  });
+  }]);
