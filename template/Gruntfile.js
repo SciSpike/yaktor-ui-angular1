@@ -32,7 +32,10 @@ module.exports = function(grunt) {
     'copy': {
       'grid': {
         'src': ['./bower_components/angular-ui-grid/ui-grid.eot','./bower_components/angular-ui-grid/ui-grid.svg', './bower_components/angular-ui-grid/ui-grid.ttf', './bower_components/angular-ui-grid/ui-grid.woff'],
-        'dest': './styles/'
+        'dest': './styles/',
+        'filter': 'isFile',
+        'flatten': true,
+        'expand': true
       },
       'viz': {
         'files': {
