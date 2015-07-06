@@ -41,7 +41,7 @@
 			<button type="button" class="btn btn-default" ng-repeat="page in pagingOptions.pageButtons" ng-click="gotoPage(page)">{{page}}</button>
 			<button type="button" class="btn btn-default" ng-click="gotoPage(pagingOptions.totalPages)">{{'LAST.PAGE' | translate}}</button>
 		</div>
-	   <div class="ngGridDirective" grid-data='gridOptions.data' grid-options='gridOptions.options'></div>
+	   <div class="uiGridDirective" grid-data='gridOptions.data' grid-options='gridOptions.options'></div>
    </div>
    <div ng-if="gridOptions.data.length == 0">
    		<h5>{{'NO.FILTER.RESULTS' | translate}}</h5>
