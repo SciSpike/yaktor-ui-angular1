@@ -38,11 +38,13 @@ var app = {
     console.log("bootstrap the angular");
     try {
       angular.bootstrap(document, ["views"]);
-      // console.log(Weemo);
     } catch (e) {
       console.log(e);
       console.log(e.stack);
     }
 
-  }
+  },
+  
+  isCordova: true
+  
 };

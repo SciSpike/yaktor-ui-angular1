@@ -15,6 +15,9 @@
     	  'enabled': true,
     	  'showFilters': false,
     	  'numFilters': 0
+      },
+      'servers':{
+        'main': 'http://localhost:3000'
       }
     })
     .provider('routesExtended', function() {

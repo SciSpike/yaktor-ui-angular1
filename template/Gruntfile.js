@@ -193,14 +193,31 @@ module.exports = function(grunt) {
       }
     },
     'shell': {
-      'cordova-create': {
-        'command': ['sleep 1', 'mkdir cordova-app', 'cd cordova-app', '$(npm bin)/cordova create ' + appName + ' com.fed.' + appName + '  ' + appName].join("&&"),
-        'help': "creates cordova app"
+      'install-packages': {
+        'command': ['npm install', '$(npm bin)/bower install --verbose'].join('&&'),
+        'help': "Runs npm install and bower install"
       },
-      'cordova-deploy': {
+      'cordova-create': {
+        'command': ['sleep 1', 'mkdir cordova-app', 'cd cordova-app', '$(npm bin)/cordova create ' + appName + ' com.fed.' + appName + '  ' + appName, '$(npm bin)/cordova platforms add android', '$(npm bin)/cordova platforms add ios'].join("&&"),
+        'help': "creates cordova app, adds android and iOs platforms"
+      },
+      'cordova-deploy-android': {
         'command': ['sleep 1', 'cd cordova-app/' + appName, '$(npm bin)/cordova run android'].join('&&'),
-        'help': "Deploys already built project to the device/emulator"
+        'help': "Deploys already built project to the android device/emulator"
+      },
+      'cordova-deploy-ios': {
+        'command': ['sleep 1', 'cd cordova-app/' + appName, '$(npm bin)/cordova run ios'].join('&&'),
+        'help': "Deploys already built project to the ios device/emulator"
+      },
+      'clean-android': {
+        'command': ['$(npm bin)/cordova platforms rm android', 'sleep 1', '$(npm bin)/cordova platforms add android'].join('&&'),
+        'help': "Reinstalls android platform.  Fire the hooks that removes and reinstalls plugins.  NOTE: This WILL destroy android app configs."
+      }, 
+      'clean-ios': {
+        'command': ['$(npm bin)/cordova platforms rm ios', 'sleep 1', '$(npm bin)/cordova platforms add ios'].join('&&'),
+        'help': "Reinstalls ios platform.  Fires the hooks that removes and reinstalls plugins.  NOTE: This WILL destroy ios project settings."
       }
+      
     }
   };
 
@@ -208,8 +225,10 @@ module.exports = function(grunt) {
 
   var sharedTasks = ['less', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom'];
   var serveTasks = ['cssmin', 'autoprefixer', 'sails-linker:prod'];
-  var cordovaCopy = ['copy:cordova-js', 'copy:cordova-css', 'copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs'];
-
+  var cordovaPrep = ['shell:install-packages', 'less', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom', 'copy:cordova-js', 'copy:cordova-css', 'copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs'];
+  var cordovaAndroid = ['shell:cordova-deploy-android'];
+  var cordovaiOS = ['shell:cordova-deploy-ios'];
+  
   var allTasks = sharedTasks.concat(serveTasks);
 
   /* ########## INCORPORATING CUSTOM TASKS DEFINED IN CUSTOMGRUNT ########## */
@@ -264,9 +283,45 @@ module.exports = function(grunt) {
       }
     }
   }
+  
+  for (var task in config.shell) {
+    grunt.registerTask(task, 'shell:' + task);
+  }
+
+  var getHelpText = function(task) {
+    return config.shell[task].help || "";
+  };
 
   grunt.registerTask('default', allTasks.concat(['watch']));
   grunt.registerTask('dev', sharedTasks.concat(['sails-linker:dev', 'watch']));
-  grunt.registerTask('cordova', cordovaCopy);
+  grunt.registerTask('android', cordovaPrep.concat(cordovaAndroid));
+  grunt.registerTask('ios', cordovaPrep.concat(cordovaiOS));
+  grunt.registerTask('help', 'List available tasks', function(x){
+    var Table = require('cli-table');
+    var taskTable = new Table({
+      chars: { 'top': '' , 'top-mid': '' , 'top-left': '' , 'top-right': ''
+             , 'bottom': '' , 'bottom-mid': '' , 'bottom-left': '' , 'bottom-right': ''
+             , 'left': '' , 'left-mid': '' , 'mid': '' , 'mid-mid': ''
+             , 'right': '' , 'right-mid': '' , 'middle': ' ' },
+      style: { 'padding-left': 0, 'padding-right': 0 }
+    });
+
+    var tasks = ['default', 'dev'];
+    taskTable.push(
+      ['dev', 'Builds with sails-linker:dev and a watch'],
+      ['default', 'standard build with a watch'],
+      ['android', 'installs npm and bower, compiles Front End, deploys to android device/emulator.'],
+      ['ios', 'installs npm and bower, compiles Front End, deploys to iOS device/emulator.']
+    );
+    for (var task in config.shell) {
+      tasks.push(task);
+      taskTable.push([task, getHelpText(task)]);
+    }
+
+    console.log("Useage:");
+    console.log("\t"+ tasks.join(",") + "\n\r");
+    console.log("Description:");
+    console.log(taskTable.toString());
+  });
 
 };

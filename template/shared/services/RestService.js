@@ -6,6 +6,7 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
   var service = {};
   
   service.POST = function(endpoint, data,notUsed,cb) {
+    serverLocation.getMainServer().then(function(serverLocation){
     $http.post(serverLocation + endpoint, data)
       .success(function(data, status, headers, config) {
         cb(null,data);
@@ -14,15 +15,18 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
         console.log("ERROR:", data, status, headers, config);
         cb(data);
       });
+    });
   }
   service.FINDBYID = function(endpoint,notUsed, id,cb) {
-    $http.get(serverLocation + endpoint+"/"+id)
-    .success(function(data, status, headers, config) {
-      cb(null,data, status, headers, config);
-    })
-    .error(function(data, status, headers, config) {
-      console.log("ERROR:", data, status, headers, config);
-      cb(data);
+    serverLocation.getMainServer().then(function(serverLocation){
+      $http.get(serverLocation + endpoint+"/"+id)
+      .success(function(data, status, headers, config) {
+        cb(null,data, status, headers, config);
+      })
+      .error(function(data, status, headers, config) {
+        console.log("ERROR:", data, status, headers, config);
+        cb(data);
+      });
     });
   }
   service.GET = function(endpoint,notUsed, id,cb) {
@@ -30,35 +34,41 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
   }
   
   service.FIND = function(endpoint, data,page,cb) {
-    data.page=page;
-    $http.get(serverLocation + endpoint+"?"+qs.stringify(data))
-    .success(function(data, status, headers, config) {
-      cb(null,data, status, headers, config);
-    })
-    .error(function(data, status, headers, config) {
-      console.log("ERROR:", data, status, headers, config);
-      cb(data);
+    serverLocation.getMainServer().then(function(serverLocation){
+      data.page=page;
+      $http.get(serverLocation + endpoint+"?"+qs.stringify(data))
+      .success(function(data, status, headers, config) {
+        cb(null,data, status, headers, config);
+      })
+      .error(function(data, status, headers, config) {
+        console.log("ERROR:", data, status, headers, config);
+        cb(data);
+      });
     });
   }
 
   service.PUT = function(endpoint, data, id,cb) {
-    $http.put(serverLocation + endpoint+"/"+id, data)
-    .success(function(data, status, headers, config) {
-      cb(null,data, status, headers, config);
-    })
-    .error(function(data, status, headers, config) {
-      console.log("ERROR:", data, status, headers, config);
-      cb(data);
+    serverLocation.getMainServer().then(function(serverLocation){
+      $http.put(serverLocation + endpoint+"/"+id, data)
+      .success(function(data, status, headers, config) {
+        cb(null,data, status, headers, config);
+      })
+      .error(function(data, status, headers, config) {
+        console.log("ERROR:", data, status, headers, config);
+        cb(data);
+      });
     });
   }
   service.DELETE = function(endpoint, notUsed,id,cb) {
-    $http.delete(serverLocation + endpoint+"/"+id)
-    .success(function(data, status, headers, config) {
-      cb(null,data, status, headers, config);
-    })
-    .error(function(data, status, headers, config) {
-      console.log("ERROR:", data, status, headers, config);
-      cb(data);
+    serverLocation.getMainServer().then(function(serverLocation){
+      $http.delete(serverLocation + endpoint+"/"+id)
+      .success(function(data, status, headers, config) {
+        cb(null,data, status, headers, config);
+      })
+      .error(function(data, status, headers, config) {
+        console.log("ERROR:", data, status, headers, config);
+        cb(data);
+      });
     });
   }
   service.getRefData = function(URL,attr){

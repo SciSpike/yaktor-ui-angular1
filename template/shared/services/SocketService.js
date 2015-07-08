@@ -15,36 +15,38 @@ angular.module('<%=appname%>').service('SocketService', function ($rootScope, $s
   // }
   var inited={};
   service.init=function(sUrl,initData,data,cb){
-    inited[sUrl]=inited[sUrl]||{};
-    //Connect api short circuits if already connected
-    require('socketApi').connectWithPrefix(serverLocation,sessionId, function(cb){
-    var token = null;
-    try {
-      token = $sessionStorage.careToken.access_token;
-    } catch(e){
-      console.log(e);
-    }
-    
-    cb(null,token);
-  },true,function(){
-      var ws = require(sUrl.replace(".","/").substr(1));
-      if(!inited[sUrl][data._id]){
-        inited[sUrl][data._id]=true;
-        for(var onV in ws.socket.on){
-          (function(on){
-            if(/state:.*/.test(on)){
-              ws.socket.on[on](
-                  sessionId,initData,function(data){
-                    console.log("Going to: %s", on);
-                    cb(null,"."+on,data);
-                  }
-              )
-            }
-          })(onV);
-        }
+    serverLocation.getMainServer().then(function(serverLocation){
+      inited[sUrl]=inited[sUrl]||{};
+      //Connect api short circuits if already connected
+      require('socketApi').connectWithPrefix(serverLocation,sessionId, function(cb){
+      var token = null;
+      try {
+        token = $sessionStorage.careToken.access_token;
+      } catch(e){
+        console.log(e);
       }
-      ws.socket.emit.init(sessionId,initData);
-    })
+    
+      cb(null,token);
+    },true,function(){
+        var ws = require(sUrl.replace(".","/").substr(1));
+        if(!inited[sUrl][data._id]){
+          inited[sUrl][data._id]=true;
+          for(var onV in ws.socket.on){
+            (function(on){
+              if(/state:.*/.test(on)){
+                ws.socket.on[on](
+                    sessionId,initData,function(data){
+                      console.log("Going to: %s", on);
+                      cb(null,"."+on,data);
+                    }
+                )
+              }
+            })(onV);
+          }
+        }
+        ws.socket.emit.init(sessionId,initData);
+      })
+    });
   }
   service.doAction=function(sUrl,action,initData,data,cb){
     require(sUrl.replace(/:state.*/,"").replace(".","/").substr(1)).socket.emit[action](sessionId,initData,data||{},cb);
