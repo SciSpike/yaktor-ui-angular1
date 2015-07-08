@@ -1,0 +1,14 @@
+<!-- Using infinite scroll and cell nav: -->
+<div ng-if="gridOptions.enableInfiniteScroll"
+  class="grid"
+  ui-grid-infinite-scroll
+  ui-grid-resize-columns
+  ui-grid="gridOptions">
+</div>
+
+<!-- Using only infinite scroll: -->
+<div ng-if="!gridOptions.enableInfiniteScroll"
+  class="grid"
+  ui-grid-resize-columns
+  ui-grid="gridOptions">
+</div>

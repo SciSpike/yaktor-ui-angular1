@@ -9,6 +9,7 @@
   require('uiBootstrap');
   require('ngGrid');
   require('ngTouch');
+  require('uiGrid');
   require('uiSelect');
   require('ngSanitize');
   require('vcRecaptcha');
@@ -20,6 +21,9 @@
       'ngStorage',
       'ngGrid', 
       'ngResource',
+      'ui.grid',
+      'ui.grid.resizeColumns',
+      'ui.grid.infiniteScroll',
       'ui.select',
       'checklist-model',
       'sharedModule',

@@ -22,6 +22,7 @@ var browserifyLibAlias = [
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
   './bower_components/angular-ui-select/dist/select.js:uiSelect',
   './bower_components/ng-grid/ng-grid-2.0.14.min.js:ngGrid',
+  './bower_components/angular-ui-grid/ui-grid.min.js:uiGrid',
   './bower_components/angular-recaptcha/release/angular-recaptcha.js:vcRecaptcha'
  ];
 
@@ -38,6 +39,7 @@ var mainExternals = [
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/angular-ui-select/dist/select.js',
   './bower_components/ng-grid/ng-grid-2.0.14.min.js',
+  './bower_components/angular-ui-grid/ui-grid.min.js',
   './bower_components/angular-recaptcha/release/angular-recaptcha.js'
 ];
 
@@ -120,6 +122,11 @@ module.exports = {
             path: './bower_components/angular-recaptcha/release/angular-recaptcha.js',
             exports: 'vcRecaptcha',
             depends: {jquery: '$', angular: 'angular'}
+          },
+          'uiGrid': {
+            path: './bower_components/angular-ui-grid/ui-grid.min.js',
+            exports: 'uiGrid',
+            depends: {angular: 'angular'}
           }
         }
       },

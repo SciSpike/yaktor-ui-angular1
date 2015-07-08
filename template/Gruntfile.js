@@ -11,7 +11,7 @@ module.exports = function(grunt) {
   var config, customGrunt;
   var basePath = grunt.option('basePath') || "./";
   var appName = require("../package.json").name;
-  var cordovaAppRoot = 'cordova-app/'+ appName + '/www/';
+  var cordovaAppRoot = 'cordova-app/' + appName + '/www/';
 
   customGrunt = require("./Gruntfile_custom.js");
 
@@ -25,11 +25,18 @@ module.exports = function(grunt) {
     'cssmin': {
       'combine': {
         'files': {
-          './styles/compiled.css': ['./styles/css/*.css', './bower_components/angular-ui-select/dist/select.css', './bower_components/ng-grid/ng-grid.min.css']
+          './styles/compiled.css': ['./styles/css/*.css', './bower_components/angular-ui-select/dist/select.css', './bower_components/ng-grid/ng-grid.min.css', './bower_components/angular-ui-grid/ui-grid.min.css']
         }
       }
     },
     'copy': {
+      'grid': {
+        'src': ['./bower_components/angular-ui-grid/ui-grid.eot','./bower_components/angular-ui-grid/ui-grid.svg', './bower_components/angular-ui-grid/ui-grid.ttf', './bower_components/angular-ui-grid/ui-grid.woff'],
+        'dest': './styles/',
+        'filter': 'isFile',
+        'flatten': true,
+        'expand': true
+      },
       'viz': {
         'files': {
           'libs/resources/viz.js': "./bower_components/viz.js/index.js"
@@ -38,23 +45,23 @@ module.exports = function(grunt) {
       'cordova-index': {
         'src': './cordova_template/index.html',
         'dest': cordovaAppRoot + 'index.html'
-        },
+      },
       'cordova-indexjs': {
         'src': './cordova_template/js/index.js',
         'dest': cordovaAppRoot + 'js/index.js'
       },
       'cordova-js': {
-        'src': ['libs/**/*.js','./clientConfig/**', './app.js', './appConfig.js'],
+        'src': ['libs/**/*.js', './clientConfig/**', './app.js', './appConfig.js'],
         'dest': cordovaAppRoot
-        },
+      },
       'cordova-css': {
         'src': './styles/compiled.css',
         'dest': cordovaAppRoot + 'compiled.css'
-        },
+      },
       'cordova-partials': {
         'src': 'partials/**/*.html',
         'dest': cordovaAppRoot
-        }
+      }
     },
     'sails-linker': {
       'resources': {
@@ -116,81 +123,82 @@ module.exports = function(grunt) {
         }
       }
     },
-	  'watch': {
-		  'options': {
-			  'livereload': true
-		  },
-		  'less': {
-			  'files': './**/*.less',
-			  'tasks': ['less', 'cssmin', 'autoprefixer'],
-			  'options': {
-				  'interrupt': true
-			  }
-		  },
-			'resources':{
-				'files': [
-					'bower_components/sockjs-client/dist/sockjs.js',
-					'./shared/modules/utilities/**/*.js',
-					'./shared/controllers/**/*.js',
-					'./shared/directives/**/*.js',
-					'./shared/services/**/*.js',
-					'./clientConfig/init/**/*.js',
-					'./clientConfig/custom/**/*.js',
-					'./shared/locale/**/*.js',
-					'./modules/locale/**/*.js'
-				],
-				'tasks': ['browserify:appDep', 'sails-linker:libs'],
-				'options': {
-					'interrupt': true
-				}
-			},
-			<% _.each(moduleNames.agents, function(moduleName, index){%>
-				'<%- moduleName %>/':{
-					'files': './modules/agents/<%- moduleName %>/**/*.js',
-					'tasks': ['browserify:appDep', 'sails-linker:libs'],
-					'options': {
-						'interrupt': true
-					}
-				},
-			<% });%>
-			<% _.each(moduleNames.crud, function(moduleName, index){%>
-				'<%- moduleName %>/':{
-					'files': './modules/crud/<%- moduleName %>/**/*.js',
-					'tasks': ['browserify:appDep', 'sails-linker:libs'],
-					'options': {
-						'interrupt': true
-					}
-				},
-			<% });%>
-	  },
-	  'autoprefixer': {
-		  'options': {
-			  // Task-specific options go here.
-		  },
-		  'single_file': {
-			  'options': {
-				  // Target-specific options go here.
-			  },
-			  'src': './styles/compiled.css',
-			  'dest': './styles/compiled-prefix.css'
-		  },
-		  'sourcemap': {
-			  'options': {
-				  'map': true,
-				  //'annotation': 'main.css.map'
-			  },
+    'watch': {
+      'options': {
+        'livereload': true
+      },
+      'less': {
+        'files': './**/*.less',
+        'tasks': ['less', 'cssmin', 'autoprefixer'],
+        'options': {
+          'interrupt': true
+        }
+      },
+      'resources': {
+        'files': [
+          'bower_components/sockjs-client/dist/sockjs.js',
+          './shared/modules/utilities/**/*.js',
+          './shared/controllers/**/*.js',
+          './shared/directives/**/*.js',
+          './shared/services/**/*.js',
+          './clientConfig/init/**/*.js',
+          './clientConfig/custom/**/*.js',
+          './shared/locale/**/*.js',
+          './modules/locale/**/*.js'
+        ],
+        'tasks': ['browserify:appDep', 'sails-linker:libs'],
+        'options': {
+          'interrupt': true
+        }
+      },
+      <% _.each(moduleNames.agents, function(moduleName, index) { %>
+          '<%- moduleName %>/': {
+            'files': './modules/agents/<%- moduleName %>/**/*.js',
+            'tasks': ['browserify:appDep', 'sails-linker:libs'],
+            'options': {
+              'interrupt': true
+            }
+        },
+        <%
+      }); %> <% _.each(moduleNames.crud, function(moduleName, index) { %>
+          '<%- moduleName %>/': {
+            'files': './modules/crud/<%- moduleName %>/**/*.js',
+            'tasks': ['browserify:appDep', 'sails-linker:libs'],
+            'options': {
+              'interrupt': true
+            }
+        },
+        <%
+      }); %>
+    },
+    'autoprefixer': {
+      'options': {
+        // Task-specific options go here.
+      },
+      'single_file': {
+        'options': {
+          // Target-specific options go here.
+        },
+        'src': './styles/compiled.css',
+        'dest': './styles/compiled-prefix.css'
+      },
+      'sourcemap': {
+        'options': {
+          'map': true,
+          //'annotation': 'main.css.map'
+        },
 
-			  'src': './styles/compiled.css',
-			  'dest': './styles/compiled-prefix.css' // -> dest/css/file.css, sourcemap is inlined
-		  }
-	  },
+        'src': './styles/compiled.css',
+        'dest': './styles/compiled-prefix.css' // -> dest/css/file.css, sourcemap is inlined
+      }
+    },
     'shell': {
       'cordova-create': {
-        'command': ['sleep 1', 'mkdir cordova-app', 'cd cordova-app', '$(npm bin)/cordova create '+ appName + ' com.fed.'+ appName + '  '+ appName].join("&&"),
+        'command': ['sleep 1', 'mkdir cordova-app', 'cd cordova-app', '$(npm bin)/cordova create ' + appName + ' com.fed.' + appName + '  ' + appName].join("&&"),
         'help': "creates cordova app"
       },
       'cordova-deploy': {
-        'command': ['sleep 1', 'cd cordova-app/'+appName,'$(npm bin)/cordova run android'].join('&&'),
+        'command': ['sleep 1', 'cd cordova-app/' + appName, '$(npm bin)/cordova run android'].join('&&'),
         'help': "Deploys already built project to the device/emulator"
       }
     }
@@ -198,9 +206,9 @@ module.exports = function(grunt) {
 
   grunt.initConfig(config);
 
-  var sharedTasks = ['less', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom'];
+  var sharedTasks = ['less', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom'];
   var serveTasks = ['cssmin', 'autoprefixer', 'sails-linker:prod'];
-  var cordovaCopy = ['copy:cordova-js','copy:cordova-css','copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs'];
+  var cordovaCopy = ['copy:cordova-js', 'copy:cordova-css', 'copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs'];
 
   var allTasks = sharedTasks.concat(serveTasks);
 
@@ -226,36 +234,36 @@ module.exports = function(grunt) {
   }
 
 
-for (var key in customGrunt) {
+  for (var key in customGrunt) {
 
-  for (var prop in customGrunt[key]) {
+    for (var prop in customGrunt[key]) {
 
-    var obj = {};
-    obj[prop] = customGrunt[key][prop];
+      var obj = {};
+      obj[prop] = customGrunt[key][prop];
 
-    if (grunt.config.data[key]) {
-      if (grunt.config.data[key][prop]) {
-        grunt.config.data[key][prop] = MergeRecursive(grunt.config.data[key][prop], obj[prop]);
-      } else {
-        grunt.config.data[key][prop] = obj[prop];
-      }
-    } else {
-      if (key == 'unitTest' || key == 'e2eTest') {
-        grunt.extendConfig(obj);
-        var customTasks = sharedTasks.concat([prop]);
-        grunt.registerTask(key, customTasks);
-      } else {
-        grunt.config.data[key] = {};
-        grunt.config.data[key][prop] = obj[prop];
-        if (key == 'copy' || key == 'shell') {
-          sharedTasks.unshift(key);
+      if (grunt.config.data[key]) {
+        if (grunt.config.data[key][prop]) {
+          grunt.config.data[key][prop] = MergeRecursive(grunt.config.data[key][prop], obj[prop]);
         } else {
-          sharedTasks.push(key);
+          grunt.config.data[key][prop] = obj[prop];
+        }
+      } else {
+        if (key == 'unitTest' || key == 'e2eTest') {
+          grunt.extendConfig(obj);
+          var customTasks = sharedTasks.concat([prop]);
+          grunt.registerTask(key, customTasks);
+        } else {
+          grunt.config.data[key] = {};
+          grunt.config.data[key][prop] = obj[prop];
+          if (key == 'copy' || key == 'shell') {
+            sharedTasks.unshift(key);
+          } else {
+            sharedTasks.push(key);
+          }
         }
       }
     }
   }
-}
 
   grunt.registerTask('default', allTasks.concat(['watch']));
   grunt.registerTask('dev', sharedTasks.concat(['sails-linker:dev', 'watch']));
