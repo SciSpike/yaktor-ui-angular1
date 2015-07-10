@@ -21,7 +21,7 @@ $scope.columnDefs = [ <%
                 field: '<%- element.ui.title%>',
               <%
             } %> <%
-          } else if (element.type == "date"){ %>
+          } else if (element.type.toLowerCase() == "date"){ %>
               field: '<%- elem%>',
               type: Date,
               cellFilter: "date : 'MMM d, y'",
@@ -233,7 +233,9 @@ $scope.gridOptions = {
   data: [],
   options: {
     actions: $scope.gridActions,
-    columnDefs: $scope.columnDefs
+    columnDefs: $scope.columnDefs,
+    enableExpandable: false,
+    enableInfiniteScroll: false
   }
 };
 $scope.findData = function(data){
