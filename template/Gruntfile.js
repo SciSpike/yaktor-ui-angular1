@@ -129,7 +129,7 @@ module.exports = function(grunt) {
       },
       'less': {
         'files': './**/*.less',
-        'tasks': ['less', 'cssmin', 'autoprefixer'],
+        'tasks': ['less:common', 'cssmin', 'autoprefixer'],
         'options': {
           'interrupt': true
         }
@@ -223,9 +223,9 @@ module.exports = function(grunt) {
 
   grunt.initConfig(config);
 
-  var sharedTasks = ['less', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom'];
+  var sharedTasks = ['less:common', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom'];
   var serveTasks = ['cssmin', 'autoprefixer', 'sails-linker:prod'];
-  var cordovaPrep = ['shell:install-packages', 'less', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom', 'copy:cordova-js', 'copy:cordova-css', 'copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs'];
+  var cordovaPrep = ['shell:install-packages', 'less:cordova', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom', 'cssmin', 'copy:cordova-js', 'copy:cordova-css', 'copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs'];
   var cordovaAndroid = ['shell:cordova-deploy-android'];
   var cordovaiOS = ['shell:cordova-deploy-ios'];
   
