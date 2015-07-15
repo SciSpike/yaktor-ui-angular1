@@ -5,7 +5,8 @@ angular.module('views')
 		template: '<div ng-include="getContentUrl()"></div>',
 		scope: {
 			directiveData: '=',
-			key: '@'
+			key: '@',
+      required: '@'
 		},
 		controller: function($rootScope, $scope, $translate, defaultSettings, settingsInstances) {
 
@@ -20,6 +21,12 @@ angular.module('views')
         
         return data;
       };
+      
+      //allow front end to force required
+      if ($scope.required){
+        $scope.directiveData.required = true;
+      }
+      
 			if($scope.directiveData.typeRef){
 				if(!$scope.directiveData.endPoint){
 					$scope.directiveData.endPoint = settingsInstances.getTypeRefsInstance('default');
