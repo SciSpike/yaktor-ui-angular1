@@ -47,7 +47,7 @@
         <entry file="file://$PROJECT_DIR$/template/clientConfig/themes/defaultTheme/engineUIForms.less">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.38414633">
-              <caret line="21" column="64" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+              <caret line="21" column="33" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -1012,7 +1012,7 @@
     <entry file="file://$PROJECT_DIR$/template/clientConfig/themes/defaultTheme/engineUIForms.less">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.38414633">
-          <caret line="21" column="64" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
+          <caret line="21" column="33" selection-start-line="21" selection-start-column="1" selection-end-line="21" selection-end-column="1" />
           <folding />
         </state>
       </provider>
