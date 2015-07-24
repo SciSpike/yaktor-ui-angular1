@@ -9,6 +9,7 @@
 
 ASYNC -->
 <input type="text"
+      name="{{directiveData.ui.title | translate}}"
 	   ng-model="directiveData.answer"
 	   placeholder="{{directiveData.ui.title | translate}}"
 	   typeahead="item for item in getData($viewValue)"
