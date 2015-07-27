@@ -48,7 +48,7 @@ $scope.columnDefs = [ <%
         } %> <% _.each(agents, function(agent, index) {
           var agentName = agent.split('.').reverse().join("_of_");
           var newAgent = objectFindByKey(agentSpec, 'id', agent); %> {
-            cellTemplate: "<div>{{grid.appScope.gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity.id);}}</div>",
+            cellTemplate: "<div>{{grid.appScope.gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity);}}</div>",
             minWidth: 150,
             enableColumnResizing: true,
             enableHiding: false,
@@ -56,9 +56,9 @@ $scope.columnDefs = [ <%
             displayName: $filter('translate')('STATE'),
             name: 'agent-state'
           }, {
-            cellTemplate: "<div>" + "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity.id)==null' ng-click='grid.appScope.gridOptions.actions.init<%- newAgent.name%>Conversation(row.entity.id);' >{{'INIT'|translate}}</button>" + <% _.each(newAgent.states, function(state, index) { %> <%
+            cellTemplate: "<div>" + "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity)==null' ng-click='grid.appScope.gridOptions.actions.init<%- newAgent.name%>Conversation(row.entity);' >{{'INIT'|translate}}</button>" + <% _.each(newAgent.states, function(state, index) { %> <%
               var actions = _.toArray(state.elements); %> <% _.each(actions, function(action, i) { %>
-                  "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity.id)==\"<%-state.name%>\"' ng-click='grid.appScope.gridOptions.actions.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(row.entity.id);' ><%- action.name%></button>" + <%
+                  "<button class='btn btn-default btn-sm text-capitalize' ng-if='grid.appScope.gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity)==\"<%-state.name%>\"' ng-click='grid.appScope.gridOptions.actions.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(row.entity);' ><%- action.name%></button>" + <%
               }); %> <%
             }); %>
               "</div>",
@@ -72,7 +72,7 @@ $scope.columnDefs = [ <%
         }); %> <%
       } %> { <%
         var putState = 'main.' + parentStateName + '.PUT'; %>
-          cellTemplate: "<div class='editCell'><a ng-click='grid.appScope.gridOptions.actions.changeState(\"<%- putState%>\", row.entity.id)'>{{'EDIT'|translate}}</a></div>",
+          cellTemplate: "<div class='editCell '><a ng-click='grid.appScope.gridOptions.actions.changeState(\"<%- putState%>\", row.entity)'>{{'EDIT'|translate}}</a></div>",
         width: '75',
         minWidth: 75,
         enableColumnResizing: true,
@@ -82,7 +82,7 @@ $scope.columnDefs = [ <%
         name: 'edit'
       }, { <%
         var deleteState = 'main.' + parentStateName + '.DELETE'; %>
-          cellTemplate: "<div class='editCell'><button class='btn btn-default btn-sm' ng-click='confirmDelete = !confirmDelete' ng-show='!confirmDelete'>{{'DELETE'|translate}}</button><button class='btn btn-default btn-sm' ng-click='confirmDelete = !confirmDelete' ng-show='confirmDelete'>{{'CANCEL.DELETE'|translate}}</button>&nbsp;<button class='btn btn-default btn-sm' ng-click='grid.appScope.gridOptions.actions.deleteItem(row.entity.id)' ng-show='confirmDelete'>{{'CONFIRM.DELETE'|translate}}</button></div>",
+          cellTemplate: "<div class='editCell'><button class='btn btn-default btn-sm' ng-click='confirmDelete = !confirmDelete' ng-show='!confirmDelete'>{{'DELETE'|translate}}</button><button class='btn btn-default btn-sm' ng-click='confirmDelete = !confirmDelete' ng-show='confirmDelete'>{{'CANCEL.DELETE'|translate}}</button>&nbsp;<button class='btn btn-default btn-sm' ng-click='grid.appScope.gridOptions.actions.deleteItem(row.entity)' ng-show='confirmDelete'>{{'CONFIRM.DELETE'|translate}}</button></div>",
         width: '150',
         minWidth: 150,
         enableColumnResizing: false,
@@ -108,23 +108,27 @@ $scope.gridActions = {
   <% _.each(agents, function(agent, index) {
     var agentName = agent.split('.').reverse().join("_of_");
     var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
-      get<%-newAgent.name%>ConversationState: function(id) {
+      get<%-newAgent.name%>ConversationState: function(entity) {
         // console.log('<%- agent%> Get State For:' + id);
+        var id = $scope.gridOptions.getRowIdentity(entity);
         var currentState = null;
         if ($scope. <% -newAgent.name %> CurrentStates) {
           currentState = $scope. <% -newAgent.name %> CurrentStates[id];
         }
         return currentState;
     },
-    init<%-newAgent.name%>Conversation: function(id) {
+    init<%-newAgent.name%>Conversation: function(entity) {
       // console.log('<%- agent%> INIT DATA:' + initData);
+      var id = $scope.gridOptions.getRowIdentity(entity);
+      
       var initData = {
         _id: id
       }; <%-parentStateName%>Services.init<% -newAgent.name%>Conversation(initData);
     },
     <% _.each(newAgent.states, function(state, index) { %> <%
       var actions = _.toArray(state.elements); %> <% _.each(actions, function(action, i) { %>
-        do <%-agentName %>_<% -state.name %>_<% -action.name.toLowerCase()%> : function(id) {
+        do <%-agentName %>_<% -state.name %>_<% -action.name.toLowerCase()%> : function(entity) {
+          var id = $scope.gridOptions.getRowIdentity(entity);
           var initData = {
             _id: id
           };
@@ -140,13 +144,15 @@ $scope.gridActions = {
 
 
 
-  changeState: function(state, index) {
+  changeState: function(state, entity) {
+    index = $scope.gridOptions.getRowIdentity(entity);
+    
     $scope.changeState(state, {
       id: index
     });
   },
-  deleteItem: function(id) {
-    var id = id; 
+  deleteItem: function(entity) {    
+    var id = $scope.gridOptions.getRowIdentity(entity);
     <%-parentStateName%>Services.delete<%-parentStateName%>({}, id).then(function(response) {
       for (var i = 0; i < $scope.gridOptions.data.length; i++) {
         if ($scope.gridOptions.data[i]._id == id) {
@@ -238,8 +244,14 @@ $scope.gridOptions = {
     enableInfiniteScroll: false
   }
 };
-$scope.gridOptions.getRowIdentity = function(row) {
-   return row.entity.id;
+$scope.gridOptions.getRowIdentity = function(entity) {
+  if (entity.id){
+    return entity.id;
+  } else if (entity._id){
+    return entity._id;
+  } else {
+    return null;
+  }
  };
  
 $scope.findData = function(data){
