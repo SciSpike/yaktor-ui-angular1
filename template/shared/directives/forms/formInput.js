@@ -28,6 +28,8 @@ angular.module('views')
             } else {
               $scope.directiveData.ui.placeholder = translatedTitle;
             }
+          }).catch(function(error){
+            $scope.directiveData.ui.placeholder = translatedTitle;
           });
         };
 
