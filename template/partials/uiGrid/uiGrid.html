@@ -1,29 +1,33 @@
 <!-- Using infinite scroll and cell nav: -->
 <div ng-if="gridOptions.enableInfiniteScroll && gridOptions.enableExpandable"
-  class="grid"
-  ui-grid-infinite-scroll
-  ui-grid-resize-columns
-  ui-grid-expandable
-  ui-grid="gridOptions">
+     class="grid"
+     ui-grid-pinning
+     ui-grid-infinite-scroll
+     ui-grid-resize-columns
+     ui-grid-expandable
+     ui-grid="gridOptions">
 </div>
 
 <div ng-if="gridOptions.enableInfiniteScroll && !gridOptions.enableExpandable"
-  class="grid"
-  ui-grid-infinite-scroll
-  ui-grid-resize-columns
-  ui-grid="gridOptions">
+     class="grid"
+     ui-grid-pinning
+     ui-grid-infinite-scroll
+     ui-grid-resize-columns
+     ui-grid="gridOptions">
 </div>
 <!-- Using only infinite scroll: -->
 <div ng-if="!gridOptions.enableInfiniteScroll  && gridOptions.enableExpandable"
-  class="grid"
-  ui-grid-resize-columns
-  ui-grid-expandable
-  ui-grid="gridOptions">
+     class="grid"
+     ui-grid-pinning
+     ui-grid-resize-columns
+     ui-grid-expandable
+     ui-grid="gridOptions">
 </div>
 
 <div ng-if="!gridOptions.enableInfiniteScroll  && !gridOptions.enableExpandable"
-  class="grid"
-  ui-grid-resize-columns
-  ui-grid="gridOptions">
+     class="grid"
+     ui-grid-pinning
+     ui-grid-resize-columns
+     ui-grid="gridOptions">
 </div>
 
