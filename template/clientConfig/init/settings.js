@@ -3,10 +3,13 @@
   require('angular');
   angular.module('sharedModule', [])
     .constant('clientConstants', {
-      "forms": {
+      'forms': {
         "elementTypes": {
 
-        }
+        },
+        'showOptionalLabels': false,
+        'showPatternExplanations': false
+        
       },
       'refLookup': {
 

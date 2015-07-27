@@ -11,7 +11,7 @@ ASYNC -->
 <input type="text"
       name="{{directiveData.ui.title | translate}}"
 	   ng-model="directiveData.answer"
-	   placeholder="{{directiveData.ui.title | translate}}"
+	   placeholder="{{directiveData.ui.placeholder}}"
 	   typeahead="item for item in getData($viewValue)"
 	   typeahead-loading="loadingData"
 	   class="form-control" />
