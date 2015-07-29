@@ -1,5 +1,5 @@
 $scope.pagingOptions = {
-  pageSize: 15,
+  pageSize: 20,
   currentPage: 0,
   lastPage: 1,
   sort: {
@@ -221,7 +221,7 @@ $scope.filterGrid = function() {
       }
     }
   }
-  $scope.findData($scope.filtersImplemented);
+  $scope.findData($scope.filtersImplemented, true);
 };
 $scope.removeFilter = function(child, parent, index) {
   if (parent) {
@@ -233,7 +233,7 @@ $scope.removeFilter = function(child, parent, index) {
     delete $scope.filtersImplemented[child];
     $scope.grid.numFilters--;
   }
-  $scope.findData($scope.filtersImplemented);
+  $scope.findData($scope.filtersImplemented, true);
 };
 $scope.gridOptions = {
   data: [],
@@ -241,7 +241,16 @@ $scope.gridOptions = {
     actions: $scope.gridActions,
     columnDefs: $scope.columnDefs,
     enableExpandable: false,
-    enableInfiniteScroll: false
+    enableInfiniteScroll: true,
+    infiniteScrollRowsFromEnd: 10,
+    infiniteScrollUp: true,
+    infiniteScrollDown: true,
+    onRegisterApi: function(gridApi){
+        gridApi.infiniteScroll.on.needLoadMoreData($scope, $scope.findData);
+        gridApi.infiniteScroll.on.needLoadMoreDataTop($scope, $scope.findData);
+
+        $scope.gridApi = gridApi;
+      }
   }
 };
 $scope.gridOptions.getRowIdentity = function(entity) {
@@ -254,18 +263,37 @@ $scope.gridOptions.getRowIdentity = function(entity) {
   }
  };
  
-$scope.findData = function(data){
+ 
+$scope.findData = function(filters, reset){
+  var data = angular.copy(filters) || {};
+  if (reset){
+    $scope.pagingOptions.currentPage = 0;
+    $scope.gridOptions.data = [];
+  }
+  if($scope.pagingOptions.pageSize){
+    data.pageSize = $scope.pagingOptions.pageSize;
+  }
 	<%-parentStateName %>Services.find<%-parentStateName%>(data, $scope.pagingOptions.currentPage).then(function(response) {
-		$scope.gridOptions.data = response.results;
 		$scope.pagingOptions.totalServerItems = response.total;
-		if($scope.allData == -1){
+		$scope.pagingOptions.currentPage++;
+    if($scope.allData == -1){
 			$scope.allData = response.total;
 		}
-		$scope.pagingOptions.totalPages = Math.ceil($scope.pagingOptions.totalServerItems / $scope.pagingOptions.pageSize);
+		$scope.pagingOptions.totalPages = response.maxPage;
 		if($scope.pagingOptions.totalPages < $scope.pagingOptions.pageNav){
 			$scope.pagingOptions.pageNav = $scope.pagingOptions.totalPages;
-			$scope.pagingOptions.pageButtons = range($scope.pagingOptions.currentPage, $scope.pagingOptions.pageNav);
 		}
+    
+    if($scope.gridOptions.options.enableInfiniteScroll && $scope.gridApi && $scope.gridApi.infiniteScroll){
+      $scope.gridApi.infiniteScroll.saveScrollPercentage();
+      
+  		$scope.gridOptions.data = $scope.gridOptions.data.concat(response.results);
+      $scope.gridApi.infiniteScroll.dataLoaded(false, $scope.pagingOptions.currentPage <= $scope.pagingOptions.totalPages);
+    }else{
+  		$scope.gridOptions.data = response.results;
+    }
+
+
 		//Init agents for each row
 		<% _.each(agents, function(agent, index){
 			var agentName = agent.split('.').reverse().join("_of_");

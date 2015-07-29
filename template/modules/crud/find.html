@@ -36,11 +36,6 @@
 	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
 	<br /><br />
 	<div ng-if="gridOptions.data.length > 0">
-		<div ng-if="pagingOptions.totalPages > 1" class="btn-group">
-			<button type="button" class="btn btn-default" ng-click="gotoPage(1)">{{'FIRST.PAGE' | translate}}</button>
-			<button type="button" class="btn btn-default" ng-repeat="page in pagingOptions.pageButtons" ng-click="gotoPage(page)">{{page}}</button>
-			<button type="button" class="btn btn-default" ng-click="gotoPage(pagingOptions.totalPages)">{{'LAST.PAGE' | translate}}</button>
-		</div>
 	   <div class="uiGridDirective" grid-data='gridOptions.data' grid-options='gridOptions.options'></div>
    </div>
    <div ng-if="gridOptions.data.length == 0">
