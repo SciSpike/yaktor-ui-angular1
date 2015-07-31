@@ -310,7 +310,7 @@ module.exports = function(grunt) {
     return config.shell[task].help || "";
   };
 
-  grunt.registerTask('default', allTasks.concat(['watch']));
+  grunt.registerTask('default', allTasks);
   grunt.registerTask('dev', sharedTasks.concat(['sails-linker:dev', 'watch']));
   grunt.registerTask('android-deploy', cordovaPrep.concat(cordovaDeployAndroid));
   grunt.registerTask('ios-deploy', cordovaPrep.concat(cordovaDeployiOS));
@@ -329,8 +329,8 @@ module.exports = function(grunt) {
 
     var tasks = ['default', 'dev'];
     taskTable.push(
+      ['default', 'standard build'],
       ['dev', 'Builds with sails-linker:dev and a watch'],
-      ['default', 'standard build with a watch'],
       ['android-prep', 'installs npm and bower, compiles Front End ready to deploying with IDE of choice.'],
       ['ios-prep', 'installs npm and bower, compiles Front End ready to deploying with Xcode.'],
       ['android-deploy', 'installs npm and bower, compiles Front End, deploys to android device/emulator.'],
