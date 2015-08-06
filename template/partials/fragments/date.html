@@ -1,4 +1,4 @@
-<div class='input-group'>
+<div class='input-group' ng-click="directiveData.opened = !directiveData.opened">
   <input
   	placeholder="{{directiveData.ui.placeholder}}"
     name="{{directiveData.name}}"
@@ -6,12 +6,13 @@
   	class='form-control input-sm'
   	ng-class='directiveData.ui.class'
   	ng-model='directiveData.answer'
+	is-open='directiveData.opened'
   	datepicker-popup='dd-MMMM-yyyy'
   	show-weeks='false'
   	show-button-bar='false'
     ng-required="directiveData.required"
     ng-pattern="directiveData.ui.pattern" />
   </input>
-  <span class='input-group-btn calendarIcon'><button class='btn btn-default btn-sm'><i class='glyphicon glyphicon-calendar'></i></button></span>
+  <span class='input-group-btn calendarIcon'><button class='btn btn-default btn-sm' ng-click="open($event)"><i class='glyphicon glyphicon-calendar'></i></button></span>
 </div>
 <br />

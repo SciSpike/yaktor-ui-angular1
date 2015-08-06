@@ -102,6 +102,10 @@ angular.module('views')
             }
           });
         }
+        $scope.open = function(){
+          $scope.directiveData.opened = !$scope.directiveData.opened;
+          $scope.directiveData = $scope.directiveData;
+        }
       },
       link: function(scope, element, attrs) {
 
