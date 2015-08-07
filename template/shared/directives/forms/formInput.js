@@ -102,6 +102,12 @@ angular.module('views')
             }
           });
         }
+        $scope.open = function(){
+          $timeout(function(){
+            $scope.directiveData.opened = !$scope.directiveData.opened;
+            $scope.directiveData = $scope.directiveData;
+          });
+        }
       },
       link: function(scope, element, attrs) {
 
