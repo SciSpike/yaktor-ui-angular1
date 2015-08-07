@@ -206,31 +206,31 @@ module.exports = function(grunt) {
         'help': "Runs npm install and bower install"
       },
       'cordova-create': {
-        'command': ['sleep 1', 'mkdir cordova-app', 'cd cordova-app', '$(npm bin)/cordova create ' + appName + ' com.fed.' + appName + '  ' + appName, 'cd ' + appName, '$(npm bin)/cordova platforms add android', '$(npm bin)/cordova platforms add ios'].join("&&"),
+        'command': ['sleep 1', 'mkdir cordova-app', 'cd cordova-app', 'cordova create ' + appName + ' com.fed.' + appName + '  ' + appName, 'cd ' + appName, 'cordova platforms add android', 'cordova platforms add ios'].join("&&"),
         'help': "creates cordova app, adds android and iOs platforms"
       },
       'cordova-deploy-android': {
-        'command': ['sleep 1', 'cd ./cordova-app/' + appName, '$(npm bin)/cordova run android'].join('&&'),
+        'command': ['sleep 1', 'cd ./cordova-app/' + appName, 'cordova run android'].join('&&'),
         'help': "Deploys already built project to the android device/emulator"
       },
       'cordova-prepare-android': {
-        'command': ['sleep 1', 'cd ./cordova-app/' + appName, '$(npm bin)/cordova prepare android'].join('&&'),
+        'command': ['sleep 1', 'cd ./cordova-app/' + appName, 'cordova prepare android'].join('&&'),
         'help': "Deploys already built project to the android device/emulator"
       },
       'cordova-deploy-ios': {
-        'command': ['sleep 1', 'cd ./cordova-app/' + appName, '$(npm bin)/cordova run ios'].join('&&'),
+        'command': ['sleep 1', 'cd ./cordova-app/' + appName, 'cordova run ios'].join('&&'),
         'help': "Deploys already built project to the ios device/emulator"
       },
       'cordova-prepare-ios': {
-        'command': ['sleep 1', 'cd ./cordova-app/' + appName, '$(npm bin)/cordova prepare ios'].join('&&'),
+        'command': ['sleep 1', 'cd ./cordova-app/' + appName, 'cordova prepare ios'].join('&&'),
         'help': "Deploys already built project to the ios device/emulator"
       },
       'clean-android': {
-        'command': ['sleep 1', 'cd cordova-app/' + appName,'$(npm bin)/cordova platforms rm android', 'sleep 1', '$(npm bin)/cordova platforms add android'].join('&&'),
+        'command': ['sleep 1', 'cd cordova-app/' + appName,'cordova platforms rm android', 'sleep 1', 'cordova platforms add android'].join('&&'),
         'help': "Reinstalls android platform.  Fire the hooks that removes and reinstalls plugins.  NOTE: This WILL destroy android app configs."
       }, 
       'clean-ios': {
-        'command': ['sleep 1', 'cd cordova-app/' + appName,'$(npm bin)/cordova platforms rm ios', 'sleep 1', '$(npm bin)/cordova platforms add ios'].join('&&'),
+        'command': ['sleep 1', 'cd cordova-app/' + appName,'cordova platforms rm ios', 'sleep 1', 'cordova platforms add ios'].join('&&'),
         'help': "Reinstalls ios platform.  Fires the hooks that removes and reinstalls plugins.  NOTE: This WILL destroy ios project settings."
       }
       
