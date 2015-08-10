@@ -206,31 +206,31 @@ module.exports = function(grunt) {
         'help': "Runs npm install and bower install"
       },
       'cordova-create': {
-        'command': ['sleep 1', 'mkdir cordova-app', 'cd cordova-app', '$(npm bin)/cordova create ' + appName + ' com.fed.' + appName + '  ' + appName, 'cd ' + appName, '$(npm bin)/cordova platforms add android', '$(npm bin)/cordova platforms add ios'].join("&&"),
+        'command': ['sleep 1', 'mkdir cordova-app', 'cd cordova-app', 'cordova create ' + appName + ' com.fed.' + appName + '  ' + appName, 'cd ' + appName, 'cordova platforms add android', 'cordova platforms add ios'].join("&&"),
         'help': "creates cordova app, adds android and iOs platforms"
       },
       'cordova-deploy-android': {
-        'command': ['sleep 1', 'cd ./cordova-app/' + appName, '$(npm bin)/cordova run android'].join('&&'),
+        'command': ['sleep 1', 'cd ./cordova-app/' + appName, 'cordova run android'].join('&&'),
         'help': "Deploys already built project to the android device/emulator"
       },
       'cordova-prepare-android': {
-        'command': ['sleep 1', 'cd ./cordova-app/' + appName, '$(npm bin)/cordova prepare android'].join('&&'),
+        'command': ['sleep 1', 'cd ./cordova-app/' + appName, 'cordova prepare android'].join('&&'),
         'help': "Deploys already built project to the android device/emulator"
       },
       'cordova-deploy-ios': {
-        'command': ['sleep 1', 'cd ./cordova-app/' + appName, '$(npm bin)/cordova run ios'].join('&&'),
+        'command': ['sleep 1', 'cd ./cordova-app/' + appName, 'cordova run ios'].join('&&'),
         'help': "Deploys already built project to the ios device/emulator"
       },
       'cordova-prepare-ios': {
-        'command': ['sleep 1', 'cd ./cordova-app/' + appName, '$(npm bin)/cordova prepare ios'].join('&&'),
+        'command': ['sleep 1', 'cd ./cordova-app/' + appName, 'cordova prepare ios'].join('&&'),
         'help': "Deploys already built project to the ios device/emulator"
       },
       'clean-android': {
-        'command': ['sleep 1', 'cd cordova-app/' + appName,'$(npm bin)/cordova platforms rm android', 'sleep 1', '$(npm bin)/cordova platforms add android'].join('&&'),
+        'command': ['sleep 1', 'cd cordova-app/' + appName,'cordova platforms rm android', 'sleep 1', 'cordova platforms add android'].join('&&'),
         'help': "Reinstalls android platform.  Fire the hooks that removes and reinstalls plugins.  NOTE: This WILL destroy android app configs."
       }, 
       'clean-ios': {
-        'command': ['sleep 1', 'cd cordova-app/' + appName,'$(npm bin)/cordova platforms rm ios', 'sleep 1', '$(npm bin)/cordova platforms add ios'].join('&&'),
+        'command': ['sleep 1', 'cd cordova-app/' + appName,'cordova platforms rm ios', 'sleep 1', 'cordova platforms add ios'].join('&&'),
         'help': "Reinstalls ios platform.  Fires the hooks that removes and reinstalls plugins.  NOTE: This WILL destroy ios project settings."
       }
       
@@ -310,7 +310,7 @@ module.exports = function(grunt) {
     return config.shell[task].help || "";
   };
 
-  grunt.registerTask('default', allTasks.concat(['watch']));
+  grunt.registerTask('default', allTasks);
   grunt.registerTask('dev', sharedTasks.concat(['sails-linker:dev', 'watch']));
   grunt.registerTask('android-deploy', cordovaPrep.concat(cordovaDeployAndroid));
   grunt.registerTask('ios-deploy', cordovaPrep.concat(cordovaDeployiOS));
@@ -329,8 +329,8 @@ module.exports = function(grunt) {
 
     var tasks = ['default', 'dev'];
     taskTable.push(
+      ['default', 'standard build'],
       ['dev', 'Builds with sails-linker:dev and a watch'],
-      ['default', 'standard build with a watch'],
       ['android-prep', 'installs npm and bower, compiles Front End ready to deploying with IDE of choice.'],
       ['ios-prep', 'installs npm and bower, compiles Front End ready to deploying with Xcode.'],
       ['android-deploy', 'installs npm and bower, compiles Front End, deploys to android device/emulator.'],

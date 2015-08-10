@@ -12,7 +12,20 @@ var getTrue = function(val){
   return true;
 }
 
-
+argv.command('create')
+  .description("re/build the ui")
+  .option("-n, --name [name]","the name which lots of stuff will expect to be views","views")
+  .option("-d, --directory [directory]","the name which lots of stuff will expect to be views","public/")
+  .action(function(args) {
+    // Create a UI model from SciSpike views and pass to json2angular.
+    var views = require('../lib/driver').crawlForViews(args.directory);
+    var model = parse.fromViews(args.name, views);
+      
+    require('../lib/json2angular').create(model, function(){
+    	process.exit(0);
+    });
+  });
+  
 argv.command('generate')
   .description("re/build the ui")
   .option("-n, --name [name]","the name which lots of stuff will expect to be views","views")

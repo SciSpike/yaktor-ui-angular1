@@ -103,8 +103,15 @@ angular.module('views')
           });
         }
         $scope.open = function(){
+<<<<<<< HEAD
           $scope.directiveData.opened = !$scope.directiveData.opened;
           $scope.directiveData = $scope.directiveData;
+=======
+          $timeout(function(){
+            $scope.directiveData.opened = !$scope.directiveData.opened;
+            $scope.directiveData = $scope.directiveData;
+          });
+>>>>>>> 84e2f199086c4098fba06479288bcc098d9af16d
         }
       },
       link: function(scope, element, attrs) {

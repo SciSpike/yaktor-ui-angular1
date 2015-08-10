@@ -6,7 +6,6 @@
     "cli-table": "^0.3.1",
     "commander": "2.0.0",
     "cookie": "0.1.0",
-    "cordova": "3.5.0-0.2.6",
     "emitter-component": "1.1.1",
     "grunt": "~0.4.2",
     "grunt-autoprefixer": "^3.0.0",
