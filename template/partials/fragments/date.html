@@ -1,21 +1,20 @@
 <div class='input-group' ng-click="directiveData.opened = !directiveData.opened">
-  <input
-    placeholder="{{directiveData.ui.placeholder}}"
-    name="{{directiveData.name}}"
-    type='text'
-    class='form-control input-sm'
-    ng-class='directiveData.ui.class'
-    ng-model='directiveData.answer'
-    datepicker-popup='dd-MMMM-yyyy'
-    min-date="directiveData.minDate"
-    max-date="directiveData.maxDate"
-    datepicker-append-to-body='true'
-    is-open='directiveData.opened'
-    show-weeks='false'
-    show-button-bar='false'
-    ng-required="directiveData.required"
-    ng-pattern="directiveData.ui.pattern" />
-  </input>
-  <span class='input-group-btn calendarIcon'><button class='btn btn-default btn-sm' ng-click="open($event)"><i class='glyphicon glyphicon-calendar'></i></button></span>
+    <input
+            placeholder="{{directiveData.ui.placeholder}}"
+            name="{{directiveData.name}}"
+            type='text'
+            class='form-control input-sm'
+            ng-class='directiveData.ui.class'
+            ng-model='directiveData.answer'
+            datepicker-popup='dd-MMMM-yyyy'
+            min-date="directiveData.minDate"
+            max-date="directiveData.maxDate"
+            datepicker-append-to-body='true'
+            is-open='directiveData.opened'
+            show-weeks='false'
+            show-button-bar='false'
+            ng-required="directiveData.required"
+            ng-pattern="directiveData.ui.pattern" />
+    </input>
+    <span class='input-group-btn calendarIcon'><button class='btn btn-default btn-sm' ng-click="open($event)"><i class='glyphicon glyphicon-calendar'></i></button></span>
 </div>
-<br />
