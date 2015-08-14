@@ -108,6 +108,10 @@ angular.module('views')
             $scope.directiveData = $scope.directiveData;
           });
         }
+        
+        $scope.valueChanged = function(key, value){
+          $rootScope.$emit('inputValueChanged', {key: key, value: value});
+        }
       },
       link: function(scope, element, attrs) {
 
