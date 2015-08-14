@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="97bae2f6-4f9c-48af-a807-7d0ee90e9c85" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/partials/fragments/date.html" afterPath="$PROJECT_DIR$/template/partials/fragments/date.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/shared/directives/forms/formInput.js" afterPath="$PROJECT_DIR$/template/shared/directives/forms/formInput.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="engine-ui.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -28,8 +26,8 @@
       <file leaf-file-name="date.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/template/partials/fragments/date.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29780564">
-              <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.12565444">
+              <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -99,8 +97,8 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="991" />
-    <option name="y" value="237" />
+    <option name="x" value="980" />
+    <option name="y" value="212" />
     <option name="width" value="1529" />
     <option name="height" value="1099" />
   </component>
@@ -130,7 +128,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -629,6 +626,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -692,7 +690,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="991" y="237" width="1529" height="1099" extended-state="0" />
+    <frame x="980" y="212" width="1529" height="1099" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt " active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -1069,18 +1067,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/shared/directives/forms/formInput.js">
+    <entry file="file://$PROJECT_DIR$/template/partials/fragments/date.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="136" column="54" selection-start-line="136" selection-start-column="54" selection-end-line="136" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.12565444">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/partials/fragments/date.html">
+    <entry file="file://$PROJECT_DIR$/template/shared/directives/forms/formInput.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29780564">
-          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="136" column="54" selection-start-line="136" selection-start-column="54" selection-end-line="136" selection-end-column="54" />
           <folding />
         </state>
       </provider>
