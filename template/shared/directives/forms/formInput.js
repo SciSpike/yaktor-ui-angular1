@@ -52,6 +52,7 @@ angular.module('views')
             //this $translate can probably be removed pending some testing
             // $translate($scope.directiveData.ui.title).then(function (translatedTitle) {
 
+            $scope.translatedTitle = $translate.instant($scope.directiveData.ui.title);
             $scope.objectRef = $scope.translatedTitle.toLowerCase();
             var setTypeRefData = function(data) {
               if (endPointData[typeRef].canPost) {
