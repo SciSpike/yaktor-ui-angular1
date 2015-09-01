@@ -236,7 +236,6 @@ $scope.removeFilter = function(child, parent, index) {
   $scope.findData($scope.filtersImplemented, true);
 };
 $scope.gridOptions = {
-  data: [],
   options: {
     actions: $scope.gridActions,
     columnDefs: $scope.columnDefs,
