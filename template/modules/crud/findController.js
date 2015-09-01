@@ -127,7 +127,7 @@ $scope.gridActions = {
     },
     <% _.each(newAgent.states, function(state, index) { %> <%
       var actions = _.toArray(state.elements); %> <% _.each(actions, function(action, i) { %>
-        do <%-agentName %>_<% -state.name %>_<% -action.name.toLowerCase()%> : function(entity) {
+        do<%- agentName %>_<%- state.name %>_<%- action.name.toLowerCase()%> : function(entity) {
           var id = $scope.gridOptions.getRowIdentity(entity);
           var initData = {
             _id: id
