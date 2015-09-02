@@ -29,7 +29,7 @@ angular.module('<%- moduleName %>',
             var stateName = key;
           %>
           .state('main.<%- moduleName %>.<%- stateName %>',{
-            <% if(stateName == 'FIND' || stateName == 'POST'){ %>url:'/<%- stateName %>?view',<%}else{%>url:'/<%- stateName %>/:id',<%}%>
+            <% if(stateName == 'FIND' || stateName == 'POST'){ %>url:'/<%- stateName %>?view&userDetails',<%}else{%>url:'/<%- stateName %>/:id',<%}%>
             templateUrl: function(){
               if(htmlExtendedProvider.views['<%- moduleName %>.<%- stateName %>']){
                 return htmlExtendedProvider.views['<%- moduleName %>.<%- stateName %>'];
