@@ -1,4 +1,4 @@
-<div class='well'>
+<div>
 	<h5>{{directiveData.ui.placeholder}}: </h5>
 	<div ng-if="directiveData.answer.length > 0">
 		<div ng-repeat="answer in directiveData.answer track by $index">
@@ -12,8 +12,5 @@
 	    <span class="glyphicon glyphicon-minus-sign" ng-click="removeArrayItem($index)"></span></input>
 	  </div>
   </div>
-	<br />
 	<span class="glyphicon glyphicon-plus-sign" ng-click="addArrayItem()"></span>
-	<br />
 </div>
-<br />
