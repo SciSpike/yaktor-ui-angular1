@@ -68,7 +68,11 @@ angular.module('views')
         for(key in dataObject){
           if(dataObject[key]){
             if(dataObject[key].answer || dataObject[key].answer == ''){
-              dataObject[key].answer = answersObject[key];
+              if(answersObject && answersObject[key]) {
+                dataObject[key].answer = answersObject[key];
+              }else{
+                dataObject[key].answer = '';
+              }
             }else{
             	console.log(key);
             	console.log(dataObject);
