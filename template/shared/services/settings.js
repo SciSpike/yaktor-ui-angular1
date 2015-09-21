@@ -15,7 +15,7 @@ angular.module('views')
 					'incMulti': 'checkbox',
 					'geo': 'geo',
 					'array': 'array',
-					'arraySelect': 'arraySelect',
+					'arrayselect': 'arrayselect',
 					'typeAhead': 'typeAhead',
 					'select': 'select'
 				}
