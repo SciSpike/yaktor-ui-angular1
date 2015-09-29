@@ -28,13 +28,13 @@ module.exports = function(grunt) {
     },
     shell: {
       "publish":{
-        command:"npm publish --registry=http://npmscispike.com",
+        command:"npm publish --registry=http://npm.scispike.com",
       },
       "pull":{
         command:"git pull"
       },
       "add-owner":{
-        command:["npm owner add",grunt.option("owner") , 'engine-ui',"--registry=http://npmscispike.com"].join(' '),
+        command:["npm owner add",grunt.option("owner") , 'engine-ui',"--registry=http://npm.scispike.com"].join(' '),
       }
     }
   };
