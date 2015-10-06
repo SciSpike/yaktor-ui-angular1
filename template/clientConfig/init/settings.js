@@ -14,6 +14,9 @@
       'refLookup': {
 
       },
+      'security':{
+        'useAuth': false
+      },
       'grid':{
     	  'enabled': true,
     	  'showFilters': false,
