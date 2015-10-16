@@ -21,22 +21,20 @@ angular.module('views')
                 delete answersObject[key];
               }
             } else {
-              switch (dataObject[key].constructor.name.toLowerCase()) {
-                case 'array':
-                  answersObject[key] = [];
-                  _returnAnswers(dataObject[key], answersObject[key], answersObject, key);
-                  break;
-                case 'object':
+              
+              
+              if(Array.isArray(dataObject[key])){
+                answersObject[key] = [];
+                _returnAnswers(dataObject[key], answersObject[key], answersObject, key);
+              }else if(angular.isObject(dataObject[key])){
                   if (key != 'ui') {
                     answersObject[key] = {};
                     _returnAnswers(dataObject[key], answersObject[key], answersObject, key);
                   }
-                  break;
-                default:
-                  if (prevObject && prevObject[prevKey]) {
-                    delete prevObject[prevKey];
-                  }
-                  break;
+              }else{
+                if (prevObject && prevObject[prevKey]) {
+                  delete prevObject[prevKey];
+                }
               }
             }
           }
@@ -45,7 +43,7 @@ angular.module('views')
       };
       var _cleanData = function(answerObject) {
         for (key in answerObject) {
-          if (answerObject[key].constructor.name.toLowerCase() == 'object') {
+          if (angular.isObject(answerObject[key])) {
             if ($.isEmptyObject(answerObject[key])) {
               delete answerObject[key];
             } else {
@@ -56,13 +54,12 @@ angular.module('views')
         return answerObject
       };
       var _mergeAnswers = function(dataObject, answersObject){
-        switch(dataObject.constructor.name.toLowerCase()) {
-          case 'array':
-            for(var i=0; i<dataObject.length; i++){
-              _mergeAnswers(dataObject[i], answersObject[i]);
-            }
-            break;
+        if(Array.isArray(dataObject)){
+          for(var i=0; i<dataObject.length; i++){
+            _mergeAnswers(dataObject[i], answersObject[i]);
+          }
         }
+        
         for(key in dataObject){
           if(dataObject[key]){
             if(dataObject[key].answer || dataObject[key].answer == ''){
