@@ -56,7 +56,7 @@ angular.module("views")
         return response || $q.when(response);
       },
       responseError: function(rejection) {
-        if (clientConstants.security.useAuth){
+        if (clientConstants.security && clientConstants.security.useAuth){
           if (rejection.status === 401 && !/\/auth\/token/.test(rejection.config.url)) {
             return AuthService.isAuthenticated(true).then(function(authenticated) {
               if (authenticated) {
