@@ -3,13 +3,11 @@ angular.module('views')
     function($rootScope, $q, $modal) {
 
       var _returnAnswers = function(dataObject, answersObject, prevObject, prevKey) {
-        switch (dataObject.constructor.name.toLowerCase()) {
-          case 'array':
-            for (var i = 0; i < dataObject.length; i++) {
-              answersObject[i] = {};
-              _returnAnswers(dataObject[i], answersObject[i], answersObject, key);
-            }
-            break;
+        if(Array.isArray(dataObject)){
+          for (var i = 0; i < dataObject.length; i++) {
+            answersObject[i] = {};
+            _returnAnswers(dataObject[i], answersObject[i], answersObject, key);
+          }
         }
         for (key in dataObject) {
           if (dataObject[key]) {
