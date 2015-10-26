@@ -1,6 +1,6 @@
 $scope.pagingOptions = {
   pageSize: 20,
-  currentPage: 0,
+  currentPage: 1,
   lastPage: 1,
   sort: {
     order: '',
@@ -266,7 +266,7 @@ $scope.gridOptions.getRowIdentity = function(entity) {
 $scope.findData = function(filters, reset){
   var data = angular.copy(filters) || {};
   if (reset){
-    $scope.pagingOptions.currentPage = 0;
+    $scope.pagingOptions.currentPage = 1;
     $scope.gridOptions.data = [];
   }
   if($scope.pagingOptions.pageSize){
