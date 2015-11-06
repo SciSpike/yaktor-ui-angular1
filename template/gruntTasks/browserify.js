@@ -48,6 +48,9 @@ var mergedExternals = browserifyLibExternal.concat(mainExternals);
 module.exports = {
     build: {
       options: {
+        transform: [
+          "uglifyify"
+        ],
         alias: browserifyLibAlias,
         external: mainExternals,
         aliasMappings: [
@@ -62,76 +65,79 @@ module.exports = {
       dest: './libs/resources/build.js'
     },
     libs:{
-       options: {
-        shim: {
-          jquery: {
-            path: './bower_components/jquery/dist/jquery.min.js',
-            exports: '$'
-          },
-          angular: {
-            path: './bower_components/angular/angular.js',
-            exports: 'angular',
-            depends: { jquery: '$' }
-          },
-          'angular.resource' :{
-            path: './bower_components/angular-resource/angular-resource.js',
-            exports: '$resource',
-            depends: { jquery: '$', angular:'angular'}
-          },
-          'angular.translate' :{
-            path: './bower_components/angular-translate/angular-translate.js',
-            exports: '$translate',
-            depends: { jquery: '$', angular:'angular'}
-          },
-          'ngSanitize' :{
-            path: './bower_components/angular-sanitize/angular-sanitize.js',
-            exports: 'ngSanitize',
-            depends: { jquery: '$', angular:'angular'}
-          },
-          'uirouter': {
-            path: './bower_components/angular-ui-router/release/angular-ui-router.js',
-            exports: 'uirouter',
-            depends: {jquery: '$', angular:'angular'}
-          },
-          'ngStorage': {
-            path: './bower_components/ngstorage/ngStorage.min.js',
-            exports: 'ngStorage',
-            depends: {jquery: '$', angular:'angular'}
-          },
-          'ngTouch': {
-            path: './bower_components/angular-touch/angular-touch.min.js',
-            exports: 'ngTouch',
-            depends: {jquery: '$', angular: 'angular'}
-          },
-          'uiBootstrap': {
-            path: './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
-            exports: 'uiBootstrap',
-            depends: {jquery: '$', angular: 'angular'}
-          },
-          'uiSelect': {
-              path: './bower_components/angular-ui-select/dist/select.js',
-              exports: 'uiSelect',
+        options: {
+          transform: [
+            "uglifyify"
+          ],
+          shim: {
+            jquery: {
+              path: './bower_components/jquery/dist/jquery.min.js',
+              exports: '$'
+            },
+            angular: {
+              path: './bower_components/angular/angular.js',
+              exports: 'angular',
+              depends: { jquery: '$' }
+            },
+            'angular.resource' :{
+              path: './bower_components/angular-resource/angular-resource.js',
+              exports: '$resource',
+              depends: { jquery: '$', angular:'angular'}
+            },
+            'angular.translate' :{
+              path: './bower_components/angular-translate/angular-translate.js',
+              exports: '$translate',
+              depends: { jquery: '$', angular:'angular'}
+            },
+            'ngSanitize' :{
+              path: './bower_components/angular-sanitize/angular-sanitize.js',
+              exports: 'ngSanitize',
+              depends: { jquery: '$', angular:'angular'}
+            },
+            'uirouter': {
+              path: './bower_components/angular-ui-router/release/angular-ui-router.js',
+              exports: 'uirouter',
+              depends: {jquery: '$', angular:'angular'}
+            },
+            'ngStorage': {
+              path: './bower_components/ngstorage/ngStorage.min.js',
+              exports: 'ngStorage',
+              depends: {jquery: '$', angular:'angular'}
+            },
+            'ngTouch': {
+              path: './bower_components/angular-touch/angular-touch.min.js',
+              exports: 'ngTouch',
               depends: {jquery: '$', angular: 'angular'}
-          },
-          'ngGrid': {
-              path: './bower_components/ng-grid/ng-grid-2.0.14.min.js',
-              exports: 'ngGrid',
+            },
+            'uiBootstrap': {
+              path: './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+              exports: 'uiBootstrap',
               depends: {jquery: '$', angular: 'angular'}
-          },
-          'vcRecaptcha': {
-            path: './bower_components/angular-recaptcha/release/angular-recaptcha.js',
-            exports: 'vcRecaptcha',
-            depends: {jquery: '$', angular: 'angular'}
-          },
-          'uiGrid': {
-            path: './bower_components/angular-ui-grid/ui-grid.min.js',
-            exports: 'uiGrid',
-            depends: {angular: 'angular'}
+            },
+            'uiSelect': {
+                path: './bower_components/angular-ui-select/dist/select.js',
+                exports: 'uiSelect',
+                depends: {jquery: '$', angular: 'angular'}
+            },
+            'ngGrid': {
+                path: './bower_components/ng-grid/ng-grid-2.0.14.min.js',
+                exports: 'ngGrid',
+                depends: {jquery: '$', angular: 'angular'}
+            },
+            'vcRecaptcha': {
+              path: './bower_components/angular-recaptcha/release/angular-recaptcha.js',
+              exports: 'vcRecaptcha',
+              depends: {jquery: '$', angular: 'angular'}
+            },
+            'uiGrid': {
+              path: './bower_components/angular-ui-grid/ui-grid.min.js',
+              exports: 'uiGrid',
+              depends: {angular: 'angular'}
+            }
           }
-        }
-      },
-      src: [],
-      dest: './libs/resources/libs.js'
+        },
+        src: [],
+        dest: './libs/resources/libs.js'
     },
     appDep: {
         files: {
