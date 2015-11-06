@@ -92,20 +92,8 @@ module.exports = function(grunt) {
           'appRoot': './'
         },
         'files': {
-          './index.html': ['./libs/*.js', './libs/vendor.min.js'],
-          './cordova_template/index.html': ['./libs/*.js', './libs/vendor.min.js']
-        }
-      },
-      'modules': {
-        'options': {
-          'startTag': '<!--MODULES-->',
-          'endTag': '<!--MODULES END-->',
-          'fileTmpl': '<script src="%s"></script>',
-          'appRoot': './'
-        },
-        'files': {
-          './index.html': ['./libs/modules.min.js'],
-          './cordova_template/index.html': ['./libs/modules.min.js']
+          './index.html': ['./libs/*.js'],
+          './cordova_template/index.html': ['./libs/*.js']
         }
       },
       'dev': {
@@ -251,9 +239,9 @@ module.exports = function(grunt) {
 
   grunt.initConfig(config);
 
-  var sharedTasks = ['clean', 'less:common', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'uglify', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom'];
+  var sharedTasks = ['clean', 'less:common', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'uglify', 'sails-linker:resources', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom'];
   var serveTasks = ['cssmin', 'autoprefixer', 'sails-linker:prod'];
-  var cordovaPrep = ['shell:install-packages', 'clean','less:cordova', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:modules', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom', 'cssmin', 'copy:cordova-js', 'copy:cordova-css', 'copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs', 'copy:cordova-fonts'];
+  var cordovaPrep = ['shell:install-packages', 'clean','less:cordova', 'copy:grid', 'copy:viz', 'browserify:build', 'browserify:appDep', 'browserify:libs', 'sails-linker:resources', 'sails-linker:libs', 'copy:custom', 'sails-linker:custom', 'cssmin', 'copy:cordova-js', 'copy:cordova-css', 'copy:cordova-partials', 'copy:cordova-index', 'copy:cordova-indexjs', 'copy:cordova-fonts'];
   var cordovaDeployAndroid = ['shell:cordova-deploy-android'];
   var cordovaDeployiOS = ['shell:cordova-deploy-ios'];
   var cordovaPrepAndroid = ['shell:cordova-prepare-android'];
