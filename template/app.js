@@ -25,6 +25,7 @@
       'ui.grid.resizeColumns',
       'ui.grid.infiniteScroll',
       'ui.grid.expandable',
+      'ui.grid.exporter',
       'ui.grid.selection', 
       'ui.grid.pinning',
       'ui.select',

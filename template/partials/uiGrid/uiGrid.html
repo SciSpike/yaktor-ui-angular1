@@ -1,15 +1,26 @@
 <!-- Using infinite scroll and cell nav: -->
-<div ng-if="gridOptions.enableInfiniteScroll && gridOptions.enableExpandable"
+<div ng-if="gridOptions.enableInfiniteScroll && gridOptions.enableExpandable && gridOptions.enableExporter"
      class="grid"
      ui-grid-pinning
      ui-grid-infinite-scroll
      ui-grid-resize-columns
      ui-grid-expandable
      ui-grid-selection
+     ui-grid-exporter
      ui-grid="gridOptions">
 </div>
 
-<div ng-if="gridOptions.enableInfiniteScroll && !gridOptions.enableExpandable"
+<div ng-if="gridOptions.enableInfiniteScroll && !gridOptions.enableExpandable && gridOptions.enableExporter"
+     class="grid"
+     ui-grid-pinning
+     ui-grid-infinite-scroll
+     ui-grid-resize-columns
+     ui-grid-selection
+     ui-grid-exporter
+     ui-grid="gridOptions">
+</div>
+
+<div ng-if="gridOptions.enableInfiniteScroll && !gridOptions.enableExpandable && !gridOptions.enableExporter"
      class="grid"
      ui-grid-pinning
      ui-grid-infinite-scroll
@@ -17,17 +28,29 @@
      ui-grid-selection
      ui-grid="gridOptions">
 </div>
-<!-- Using only infinite scroll: -->
-<div ng-if="!gridOptions.enableInfiniteScroll  && gridOptions.enableExpandable"
+
+
+<!-- Using no infinite scroll: -->
+<div ng-if="!gridOptions.enableInfiniteScroll  && gridOptions.enableExpandable && gridOptions.enableExporter"
      class="grid"
      ui-grid-pinning
      ui-grid-resize-columns
      ui-grid-expandable
      ui-grid-selection
+     ui-grid-exporter
      ui-grid="gridOptions">
 </div>
 
-<div ng-if="!gridOptions.enableInfiniteScroll  && !gridOptions.enableExpandable"
+<div ng-if="!gridOptions.enableInfiniteScroll  && !gridOptions.enableExpandable && gridOptions.enableExporter"
+     class="grid"
+     ui-grid-pinning
+     ui-grid-resize-columns
+     ui-grid-selection
+     ui-grid-exporter
+     ui-grid="gridOptions">
+</div>
+
+<div ng-if="!gridOptions.enableInfiniteScroll  && !gridOptions.enableExpandable && !gridOptions.enableExporter"
      class="grid"
      ui-grid-pinning
      ui-grid-resize-columns

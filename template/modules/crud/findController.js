@@ -240,6 +240,7 @@ $scope.gridOptions = {
     actions: $scope.gridActions,
     columnDefs: $scope.columnDefs,
     enableExpandable: false,
+    enableGridMenu: true,
     enableInfiniteScroll: true,
     infiniteScrollRowsFromEnd: 10,
     infiniteScrollUp: true,

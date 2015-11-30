@@ -32,7 +32,9 @@ angular.module('views')
         data: 'myData',
         enableInfiniteScroll: false,
         columnDefs: colDefs,
-        enableCellNav: false
+        enableCellNav: false,
+        enableGridMenu: true,
+        enableExporter: true
       };
 
       function MergeRecursive(obj1, obj2) {
