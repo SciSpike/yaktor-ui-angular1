@@ -54,6 +54,10 @@ angular.module('views')
    });
    return $delegate;
  }]);
+    $provide.decorator('taOptions', ['taRegisterTool', '$delegate', function(taRegisterTool, taOptions) {
+      taOptions.forceTextAngularSanitize = false;
+      return taOptions;
+    }]);
 }]) 
 
 .config(['$provide',

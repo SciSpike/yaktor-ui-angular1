@@ -23,7 +23,9 @@ var browserifyLibAlias = [
   './bower_components/angular-ui-select/dist/select.js:uiSelect',
   './bower_components/ng-grid/ng-grid-2.0.14.min.js:ngGrid',
   './bower_components/angular-ui-grid/ui-grid.min.js:uiGrid',
-  './bower_components/angular-recaptcha/release/angular-recaptcha.js:vcRecaptcha'
+  './bower_components/angular-recaptcha/release/angular-recaptcha.js:vcRecaptcha',
+  './node_modules/textangular/dist/textAngular-rangy.min.js:rangy',
+  './node_modules/textangular/dist/textAngular.min.js:textAngular'
  ];
 
 var mainExternals = [
@@ -40,7 +42,9 @@ var mainExternals = [
   './bower_components/angular-ui-select/dist/select.js',
   './bower_components/ng-grid/ng-grid-2.0.14.min.js',
   './bower_components/angular-ui-grid/ui-grid.min.js',
-  './bower_components/angular-recaptcha/release/angular-recaptcha.js'
+  './bower_components/angular-recaptcha/release/angular-recaptcha.js',
+  './node_modules/textangular/dist/textAngular-rangy.min.js',
+  './node_modules/textangular/dist/textAngular.min.js'
 ];
 
 var mergedExternals = browserifyLibExternal.concat(mainExternals);
@@ -132,6 +136,16 @@ module.exports = {
             'uiGrid': {
               path: './bower_components/angular-ui-grid/ui-grid.min.js',
               exports: 'uiGrid',
+              depends: {angular: 'angular'}
+            },
+            'rangy': {
+              path: './node_modules/textangular/dist/textAngular-rangy.min.js',
+              exports: 'rangy',
+              depends: {angular: 'angular'}
+            },
+            'textAngular': {
+              path: './node_modules/textangular/dist/textAngular.min.js',
+              exports: 'textAngular',
               depends: {angular: 'angular'}
             }
           }

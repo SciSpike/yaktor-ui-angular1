@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  
+
   require('angular');
   require('uirouter');
   require('angular.resource');
@@ -13,27 +13,30 @@
   require('uiSelect');
   require('ngSanitize');
   require('vcRecaptcha');
+  require('rangy');
+  require('textAngular');
 
-  angular.module('views', 
-      ['ui.bootstrap',
+  angular.module('views',
+    ['ui.bootstrap',
       'ui.router',
       'pascalprecht.translate',
       'ngStorage',
-      'ngGrid', 
+      'ngGrid',
       'ngResource',
       'ui.grid',
       'ui.grid.resizeColumns',
       'ui.grid.infiniteScroll',
       'ui.grid.expandable',
-      'ui.grid.selection', 
+      'ui.grid.selection',
       'ui.grid.pinning',
       'ui.select',
       'checklist-model',
       'sharedModule',
       'utilities',
       'ngSanitize',
-       <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
-         <% }}); %>]);
+      'textAngular',
+    <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
+    <% }}); %>]);
 
 
 })();

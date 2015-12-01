@@ -29,7 +29,8 @@
     "load-grunt-tasks": "~0.4.0",
     "node-uuid": "1.4.1",
     "request": "2.29.0",
-    "uglifyify": "~1.2.3"
+    "uglifyify": "~1.2.3",
+    "textangular": "^1.4.6"
   },
   "scripts": {
     "grunt": "grunt"
