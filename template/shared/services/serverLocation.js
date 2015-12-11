@@ -15,7 +15,7 @@ angular.module('<%=appname%>')
     var _getMainServer = function(){
       var defer = $q.defer();
       var isLocal = _isServerLocal();
-      var server = window.location.origin;
+      var server = window.location.protocol + "//" + window.location.host;
       
       if (isLocal) {
         defer.resolve(server);

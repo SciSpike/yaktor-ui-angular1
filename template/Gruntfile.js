@@ -119,13 +119,13 @@ module.exports = function(grunt) {
         }
       }
     },
-    uglify: {
-      options: {
-        mangle: false,
-        sourceMap: true
+    'uglify': {
+      'options': {
+        'mangle': false,
+        'sourceMap': true
       },
-      my_target: {
-        files: {
+      'my_target': {
+        'files': {
           'libs/modules.min.js': ['./libs/modules/*.js'],
           'libs/vendor.min.js': ['./libs/vendor/*.js']
         }
