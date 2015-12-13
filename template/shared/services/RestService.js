@@ -6,8 +6,8 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
   var service = {};
   
   service.POST = function(endpoint, data,notUsed,cb) {
-    serverLocation.getMainServer().then(function(serverLocation){
-    $http.post(serverLocation + endpoint, data)
+    serverLocation.getMainServer().then(function(url){
+    $http.post(url + endpoint, data)
       .success(function(data, status, headers, config) {
         cb(null,data);
       })
@@ -18,8 +18,8 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
     });
   }
   service.FINDBYID = function(endpoint,notUsed, id,cb) {
-    serverLocation.getMainServer().then(function(serverLocation){
-      $http.get(serverLocation + endpoint+"/"+id)
+    serverLocation.getMainServer().then(function(url){
+      $http.get(url + endpoint+"/"+id)
       .success(function(data, status, headers, config) {
         cb(null,data, status, headers, config);
       })
@@ -34,9 +34,9 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
   }
   
   service.FIND = function(endpoint, data,page,cb) {
-    serverLocation.getMainServer().then(function(serverLocation){
+    serverLocation.getMainServer().then(function(url){
       data.page=page;
-      $http.get(serverLocation + endpoint+"?"+qs.stringify(data))
+      $http.get(url + endpoint+"?"+qs.stringify(data))
       .success(function(data, status, headers, config) {
         cb(null,data, status, headers, config);
       })
@@ -48,8 +48,8 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
   }
 
   service.PUT = function(endpoint, data, id,cb) {
-    serverLocation.getMainServer().then(function(serverLocation){
-      $http.put(serverLocation + endpoint+"/"+id, data)
+    serverLocation.getMainServer().then(function(url){
+      $http.put(url + endpoint+"/"+id, data)
       .success(function(data, status, headers, config) {
         cb(null,data, status, headers, config);
       })
@@ -60,8 +60,8 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
     });
   }
   service.DELETE = function(endpoint, notUsed,id,cb) {
-    serverLocation.getMainServer().then(function(serverLocation){
-      $http.delete(serverLocation + endpoint+"/"+id)
+    serverLocation.getMainServer().then(function(url){
+      $http.delete(url + endpoint+"/"+id)
       .success(function(data, status, headers, config) {
         cb(null,data, status, headers, config);
       })
