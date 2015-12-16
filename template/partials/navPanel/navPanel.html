@@ -1,9 +1,0 @@
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <ul class=" nav nav-pills text-capitalize" >
-    	<li role="presentation" class="text-capitalize" ng-repeat="nav in mainNavigation track by $index" ng-class="{active: nav.title == activeState.name}">
-        <a class="text-capitalize" ng-click="changeState(nav.link)">{{nav.title}}</a>
-      </li>
-    </ul>
-  </div>
-</nav>

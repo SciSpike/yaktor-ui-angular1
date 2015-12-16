@@ -32,12 +32,12 @@
       'ui.grid.pinning',
       'ui.select',
       'checklist-model',
-      'sharedModule',
+      'clientConfig',
       'utilities',
       'ngSanitize',
       'textAngular',
-    <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
-    <% }}); %>]);
+      <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
+      <% }}); %>]);
 
 
 })();

@@ -1,0 +1,13 @@
+<div class="navPanel"></div>
+<ul>
+    <li ng-if="!auth.access_token"><a ui-sref="main.login.POST" class="glyphicon glyphicon-log-in"><span class="inlineTranslate" translate>{{'LOGIN' | translate}}</span></a>
+    </li>
+    <div ng-if="auth.access_token">
+        <li><a ng-click="logout()" class="glyphicon glyphicon-log-out"><span class="inlineTranslate" translate>{{'LOGOUT' | translate}}</span></a>
+        </li>
+        <li><a ng-click="account()" class="glyphicon glyphicon-cog"><span class="inlineTranslate" translate>{{'ACCOUNT' | translate}}</span></a>
+        </li>
+    </div>
+</ul>
+<br class="clearfix" />
+<div ng-transclude></div>

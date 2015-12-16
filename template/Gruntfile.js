@@ -52,7 +52,7 @@ module.exports = function(grunt) {
         'dest': cordovaAppRoot + 'js/index.js'
       },
       'cordova-js': {
-        'src': ['libs/**/*.js', './clientConfig/**', './app.js', './appConfig.js'],
+        'src': ['libs/**/*.js', './client/**', './app.js', './appConfig.js'],
         'dest': cordovaAppRoot
       },
       'cordova-css': {
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
         'dest': cordovaAppRoot + 'compiled.css'
       },
       'cordova-partials': {
-        'src': 'partials/**/*.html',
+        'src': 'generated/partials/**/*.html',
         'dest': cordovaAppRoot
       },
       'cordova-fonts': {
@@ -145,14 +145,12 @@ module.exports = function(grunt) {
       'resources': {
         'files': [
           'bower_components/sockjs-client/dist/sockjs.js',
-          './shared/modules/utilities/**/*.js',
-          './shared/controllers/**/*.js',
-          './shared/directives/**/*.js',
-          './shared/services/**/*.js',
-          './clientConfig/init/**/*.js',
-          './clientConfig/custom/**/*.js',
-          './shared/locale/**/*.js',
-          './modules/locale/**/*.js'
+          './generated/modules/utilities/**/*.js',
+          './generated/*.js',
+          './generated/directives/**/*.js',
+          './generated/services/**/*.js',
+          './client/**/*.js',
+          './generated/locale/**/*.js'
         ],
         'tasks': ['browserify:appDep', 'sails-linker:libs'],
         'options': {
@@ -161,7 +159,7 @@ module.exports = function(grunt) {
       },
       <% _.each(moduleNames.agents, function(moduleName, index) { %>
           '<%- moduleName %>/': {
-            'files': './modules/agents/<%- moduleName %>/**/*.js',
+            'files': './generated/agents/<%- moduleName %>/**/*.js',
             'tasks': ['browserify:appDep', 'sails-linker:libs'],
             'options': {
               'interrupt': true
@@ -170,7 +168,7 @@ module.exports = function(grunt) {
         <%
       }); %> <% _.each(moduleNames.crud, function(moduleName, index) { %>
           '<%- moduleName %>/': {
-            'files': './modules/crud/<%- moduleName %>/**/*.js',
+            'files': './generated/crud/<%- moduleName %>/**/*.js',
             'tasks': ['browserify:appDep', 'sails-linker:libs'],
             'options': {
               'interrupt': true

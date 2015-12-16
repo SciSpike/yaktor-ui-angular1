@@ -1,5 +1,5 @@
 angular.module('views')
-.config(function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, routesExtendedProvider, htmlExtendedProvider) {
+.config(['$stateProvider', '$locationProvider', '$translateProvider', '$urlRouterProvider', 'htmlExtendedProvider', 'routesExtendedProvider', function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, htmlExtendedProvider, routesExtendedProvider) {
   $translateProvider.preferredLanguage(defaultLocale);
   $translateProvider.useSanitizeValueStrategy('sanitize');
   $urlRouterProvider.when('', '/home');
@@ -18,12 +18,12 @@ angular.module('views')
    .state('main.home',{
      url: '/home',
      templateUrl: function(){
-       return clientBaseLocation + '/custom/homePage/home.html';
+       return clientBaseLocation + '/homePage/home.html';
      },
      controller: routesExtendedProvider.routes['home.index'] || 'homeController'
    });
    
-})
+}])
 
 .provider('localization', function LocalizationProvider() {
  return {

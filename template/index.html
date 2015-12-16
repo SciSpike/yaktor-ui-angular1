@@ -26,11 +26,10 @@
 	  var qs = require('qs');
     var sessionId = "<%=sId%>";
 	  var defaultLocale = "<%=locale%>";
-	  var partialsBaseLocation = 'partials';
-	  var clientBaseLocation = 'clientConfig';
+	  var partialsBaseLocation = 'generated/partials';
+	  var clientBaseLocation = 'client';
   </script>
-  
-  <script src="clientConfig/clientSetup.js"></script>
+
   <script src="app.js"></script>
   
   <!--SCRIPTS-->
@@ -41,9 +40,9 @@
   
   <!--MODULES-->
   <!--MODULES END-->
-  
-  <script src="appConfig.js"></script>
+
   <div id="googleMapsAPI"></div>
+  <script src="appConfig.js"></script>
   
 </body>
 </html>
