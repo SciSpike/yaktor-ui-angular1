@@ -49,27 +49,26 @@ NAV BAR
   display: inline-block;
   text-align: center;
 }
-.navbar-collapse {
-  max-height: 400px;
-  position: relative;
-  width: 100%;
-  background-color: #428bca;
-}
 .navbar-inverse {
   border: none;
   background: #428bca;
 }
 .navbar-inverse .navbar-nav>li>a, .navbar-inverse .navbar-text {
   color:#FFF;
+  border: 1px #ccc solid;
+  margin: 5px;
 }
 .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
   border: none;
 }
-@media (max-width: 768px) {
-  .navbar-nav>li {
-	display: block;
-  }
-  .navbar-collapse {
-	position: absolute;
-  }
+.navbarCollapse {
+  position: absolute;
+  left: 0;
+}
+.navbar-toggle {
+  display: block !important;
+  float: left;
+}
+.expandedMenu {
+  padding-bottom: 20px;
 }

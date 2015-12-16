@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="97bae2f6-4f9c-48af-a807-7d0ee90e9c85" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/client/themes/defaultTheme/base.less" afterPath="$PROJECT_DIR$/template/client/themes/defaultTheme/base.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/client/themes/defaultTheme/bootstrapOverwrite.less" afterPath="$PROJECT_DIR$/template/client/themes/defaultTheme/bootstrapOverwrite.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/generated/partials/header/headerBlock.html" afterPath="$PROJECT_DIR$/template/generated/partials/header/headerBlock.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template/generated/partials/navPanel/navPanel.html" afterPath="$PROJECT_DIR$/template/generated/partials/navPanel/navPanel.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="engine-ui.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,8 +30,8 @@
       <file leaf-file-name="headerBlock.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/generated/partials/header/headerBlock.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.125">
-              <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="28" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -36,8 +40,28 @@
       <file leaf-file-name="navPanel.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/template/generated/partials/navPanel/navPanel.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.625">
-              <caret line="17" column="186" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+            <state vertical-scroll-proportion="-6.875">
+              <caret line="11" column="28" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bower.json.req" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/bower.json.req">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="base.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/template/client/themes/defaultTheme/base.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="23" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -46,8 +70,8 @@
       <file leaf-file-name="bootstrapOverwrite.less" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/template/client/themes/defaultTheme/bootstrapOverwrite.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6610338">
-              <caret line="52" column="1" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="20" />
+            <state vertical-scroll-proportion="0.9552684">
+              <caret line="73" column="39" selection-start-line="73" selection-start-column="1" selection-end-line="73" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -110,11 +134,11 @@
         <option value="$PROJECT_DIR$/template/generated/services/RestService.js" />
         <option value="$PROJECT_DIR$/template/generated/crud/crudServices.js" />
         <option value="$PROJECT_DIR$/template/generated/partials/shared/main.html" />
-        <option value="$PROJECT_DIR$/template/generated/partials/header/headerBlock.html" />
         <option value="$PROJECT_DIR$/template/generated/crud/crudController.js" />
         <option value="$PROJECT_DIR$/template/generated/crud/findController.js" />
-        <option value="$PROJECT_DIR$/template/client/themes/defaultTheme/base.less" />
         <option value="$PROJECT_DIR$/template/client/themes/defaultTheme/variables.less" />
+        <option value="$PROJECT_DIR$/template/generated/partials/header/headerBlock.html" />
+        <option value="$PROJECT_DIR$/template/client/themes/defaultTheme/base.less" />
         <option value="$PROJECT_DIR$/template/generated/partials/navPanel/navPanel.html" />
         <option value="$PROJECT_DIR$/template/client/themes/defaultTheme/bootstrapOverwrite.less" />
       </list>
@@ -140,7 +164,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="547" />
     <option name="y" value="177" />
-    <option name="width" value="1727" />
+    <option name="width" value="1782" />
     <option name="height" value="1177" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -539,7 +563,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="547" y="177" width="1727" height="1177" extended-state="0" />
+    <frame x="547" y="177" width="1782" height="1177" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Grunt " active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -548,7 +572,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.36682028" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18229777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1766042" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
@@ -580,13 +604,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/template/bower.json.req">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37202382">
-          <caret line="25" column="1" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -932,14 +949,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/template/client/themes/defaultTheme/base.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.538462">
-          <caret line="60" column="33" selection-start-line="60" selection-start-column="1" selection-end-line="60" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/template/client/themes/defaultTheme/variables.less">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-17.960785">
@@ -950,24 +959,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/template/generated/partials/header/headerBlock.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.125">
-          <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="28" selection-start-line="0" selection-start-column="28" selection-end-line="0" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/bower.json.req">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/template/client/themes/defaultTheme/base.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="23" selection-start-line="0" selection-start-column="12" selection-end-line="0" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/template/generated/partials/navPanel/navPanel.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.625">
-          <caret line="17" column="186" selection-start-line="17" selection-start-column="6" selection-end-line="17" selection-end-column="6" />
+        <state vertical-scroll-proportion="-6.875">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="16" selection-end-line="11" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/template/client/themes/defaultTheme/bootstrapOverwrite.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6610338">
-          <caret line="52" column="1" selection-start-line="52" selection-start-column="1" selection-end-line="52" selection-end-column="20" />
+        <state vertical-scroll-proportion="0.9552684">
+          <caret line="73" column="39" selection-start-line="73" selection-start-column="1" selection-end-line="73" selection-end-column="1" />
           <folding />
         </state>
       </provider>
