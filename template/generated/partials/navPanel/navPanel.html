@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse" id="navPanel">
       <ul class="nav navbar-nav">
     	<li role="presentation" class="text-capitalize" ng-repeat="nav in mainNavigation track by $index" ng-class="{active: nav.title == activeState.name}">
-        <a class="text-capitalize" data-toggle="collapse" data-target="#navPanel" ng-click="changeState(nav.link)">{{nav.title}}</a>
+        <a class="text-capitalize" ng-click="changeState(nav.link)">{{nav.title}}</a>
       </li>
     </ul>
 </nav>
