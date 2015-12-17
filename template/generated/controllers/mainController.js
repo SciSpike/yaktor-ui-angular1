@@ -17,12 +17,37 @@ angular.module('views')
         }).then(function() {});
       };
 
+      $scope.objectFindByKey = function(array, key, value) {
+        for (var i = 0; i < array.length; i++) {
+          if (array[i][key] == value) {
+            return array[i];
+          }
+        }
+        return null;
+      };
+            
       var agents = { <% _.each(moduleNames.agents, function(agentName, index) { %> '<%- agentName %>': '/<%- agentName %>' <%
           if (index != moduleNames.agents.length - 1) { %> , <%
           }
         }); %>
       }
 
+      $scope.MergeRecursive = function(obj1, obj2) {
+        for (var p in obj2) {
+          try {
+            if ( obj2[p].constructor==Object ) {
+              obj1[p] = MergeRecursive(obj1[p], obj2[p]);
+            } else {
+              obj1[p] = obj2[p];
+            }
+          } catch(e) {
+            obj1[p] = obj2[p];
+          }
+        }
+        return obj1;
+      };
+      
+      
       $scope.activeAgent = null;
 
       for (agent in agents) {
