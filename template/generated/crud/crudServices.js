@@ -50,7 +50,7 @@ angular.module('<%- moduleName %>')
               field: '<%- elem%>', <% } %>minWidth: 150, enableColumnResizing: true, enableHiding: false, enableSorting: true, displayName: $filter('translate')('<%-element.ui.title%>')
             }, <%
           }); %> <%
-          if (agents.length > 0 && (state.ui.title.replace('_', '').toLowerCase() == 'find')) {
+          if (agents.length > 0 && (state && state.ui && state.ui.title.replace('_', '').toLowerCase() == 'find')) {
             //used for extracting objects from the spec
             var objectFindByKey = function(array, key, value) {
                 for (var i = 0; i < array.length; i++) {
