@@ -32,7 +32,7 @@
           };
           
 <% if (agents.length){%>
-  $scope.MergeRecursive($scope.gridActions, $scope.gridAgentActions);
+        $scope.gridActions = $scope.MergeRecursive($scope.gridActions, $scope.gridAgentActions);
 <%}%>          
           
           $scope.allData = -1;
