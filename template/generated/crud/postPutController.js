@@ -1,4 +1,7 @@
-
+<% if (agents.length){%>
+  angular.extend(this, $controller('<%- parentStateName%>AgentController', {$scope: $scope}));
+<%}%>
+  
 <%
 var directiveData = {};
 var createDirectives = function(dataObject, elements){
@@ -49,20 +52,5 @@ $scope.submitForm = function(type){
 	});
 };
 <% if (agents.length>0){%>
-//AGENT BUTTONS ACTIONS
-<% _.each(agents, function(agent, index){
-	var agentName = agent.split('.').reverse().join("_of_");
-	var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
-	<% _.each(newAgent.states, function(state, index){ %>
-	<% var actions = _.toArray(state.elements);%>
-	<% _.each(actions, function(action, i){%>
-	$scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
-		// for the moment, we keep the modal.
-		// but we'll ultimatley change this to change state
-		$rootScope.setFromCrud(true);
-		$state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: $stateParams.id});
-	};
-	<%});%>
-	<% });%>
-	<%}); %>
+//TODO: AGENT BUTTONS ACTIONS
 <%}%>

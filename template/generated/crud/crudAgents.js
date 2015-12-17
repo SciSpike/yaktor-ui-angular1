@@ -1,4 +1,7 @@
-<% var objectFindByKey = function(array, key, value) {
+//AGENT STUFF
+
+<%//used for extracting objects from the spec
+	         var objectFindByKey = function(array, key, value) {
 	            for (var i = 0; i < array.length; i++) {
 	              if (array[i][key] == value) {
 	                return array[i];
@@ -6,6 +9,7 @@
 	            }
 	            return null;
 	          }%>
+//array of key agents and their properties
 	        $scope.conversationAgents = [<% _.each(agents, function(agent, index){
 	          var agentName = agent.split('.').reverse().join("_of_");
 	          var newAgent = objectFindByKey(agentSpec, 'id', agent); %>{
@@ -17,6 +21,8 @@
 	                  }<% if(index != newAgent.states.length-1){%>,<% }});%>]
 	        }<% if(index != agents.length-1){%>,
 	       <%}}); %>];
+	       
+// setup listeners and inits
 	       <% _.each(agents, function(agent, index){
 	           var agentName = agent.split('.').reverse().join("_of_");
 	           var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
@@ -38,7 +44,8 @@
 	          <%- parentStateName %>Services.init<%- newAgent.name%>Conversation(initData);
 	        };
 	      <% });%>
-	        function initAgents(){
+//INIT AGENT
+	        $scope.initAgents = function(){
 	          var data = FormService.returnAnswers($scope.directiveData, answers);
 	          data._id = $scope.userId;
 	          $scope.initData = FormService.cleanData(data);
@@ -48,3 +55,75 @@
              $scope.init<%- newAgent.name%>Conversation($scope.initData);
 	            <%});%>
 	        };
+          
+//Grid actions
+          $scope.gridAgentActions = {
+            <% _.each(agents, function(agent, index) {
+              var agentName = agent.split('.').reverse().join("_of_");
+              var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+                get<%-newAgent.name%>ConversationState: function(entity) {
+                  // console.log('<%- agent%> Get State For:' + id);
+                  var id = $scope.gridOptions.getRowIdentity(entity);
+                  var currentState = null;
+                  if ($scope. <% -newAgent.name %> CurrentStates) {
+                    currentState = $scope. <% -newAgent.name %> CurrentStates[id];
+                  }
+                  return currentState;
+              },
+              init<%-newAgent.name%>Conversation: function(entity) {
+                // console.log('<%- agent%> INIT DATA:' + initData);
+                var id = $scope.gridOptions.getRowIdentity(entity);
+
+                var initData = {
+                  _id: id
+                }; <%-parentStateName%>Services.init<% -newAgent.name%>Conversation(initData);
+              },
+              <% _.each(newAgent.states, function(state, index) { %> <%
+                var actions = _.toArray(state.elements); %> <% _.each(actions, function(action, i) { %>
+                  do<%- agentName %>_<%- state.name %>_<%- action.name.toLowerCase()%> : function(entity) {
+                    var id = $scope.gridOptions.getRowIdentity(entity);
+                    var initData = {
+                      _id: id
+                    };
+                    $rootScope.setFromCrud(true);
+                    $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {
+                      initData: id
+                    });
+                  },
+                  <%
+                }); %> <%
+              }); %> <%
+            }); %>
+          }
+
+//FIND result inits
+    //TODO: this is a catch dump.  turn this into a $scope function that findData can call passing in the _id.
+<% _.each(agents, function(agent, index){
+  var agentName = agent.split('.').reverse().join("_of_");
+  var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
+  for(i=0; i < response.data.results.length; i++){
+    var initData = {
+        _id: response.data.results[i]._id
+    };
+    $scope.init<%-newAgent.name%>Conversation(initData);
+  }
+  <%});%>
+  
+//POSTPUT button actions
+  <% _.each(agents, function(agent, index){
+  	var agentName = agent.split('.').reverse().join("_of_");
+  	var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
+  	<% _.each(newAgent.states, function(state, index){ %>
+  	<% var actions = _.toArray(state.elements);%>
+  	<% _.each(actions, function(action, i){%>
+  	$scope.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%> = function(e){
+  		// for the moment, we keep the modal.
+  		// but we'll ultimatley change this to change state
+  		$rootScope.setFromCrud(true);
+  		$state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: $stateParams.id});
+  	};
+  	<%});%>
+  	<% });%>
+  	<%}); %>
+  
+          

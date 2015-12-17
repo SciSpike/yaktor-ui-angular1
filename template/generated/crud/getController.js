@@ -1,3 +1,7 @@
+<% if (agents.length){%>
+  angular.extend(this, $controller('<%- parentStateName%>AgentController', {$scope: $scope}));
+<%}%>
+
 
 $scope.actionButtons = [{
 	state: 'PUT',
@@ -15,3 +19,4 @@ $scope.testType = function(value){
 	}
 	return false;
 }
+

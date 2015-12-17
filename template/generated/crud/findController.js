@@ -1,3 +1,7 @@
+<% if (agents.length){%>
+  angular.extend(this, $controller('<%- parentStateName%>AgentController', {$scope: $scope}));
+<%}%>
+
           $scope.pagingOptions = {
             pageSize: 20, currentPage: 1, lastPage: 1, sort: {order: '', field: '', search: ''}
           };
@@ -7,42 +11,7 @@
             title: 'CREATE.NEW'
           }];
           $scope.grid = clientConstants.grid;
-          $scope.gridActions = {<% _.each(agents, function(agent, index) {
-              var agentName = agent.split('.').reverse().join("_of_");
-              var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
-                get<%-newAgent.name%>ConversationState: function(entity) {
-                  // console.log('<%- agent%> Get State For:' + id);
-                  var id = $scope.gridOptions.getRowIdentity(entity);
-                  var currentState = null;
-                  if ($scope. <% -newAgent.name %> CurrentStates) {
-                    currentState = $scope. <% -newAgent.name %> CurrentStates[id];
-                  }
-                  return currentState;
-              },
-              init<%-newAgent.name%>Conversation: function(entity) {
-                // console.log('<%- agent%> INIT DATA:' + initData);
-                var id = $scope.gridOptions.getRowIdentity(entity);
-
-                var initData = {
-                  _id: id
-                }; <%-parentStateName%>Services.init<% -newAgent.name%>Conversation(initData);
-              },
-              <% _.each(newAgent.states, function(state, index) { %> <%
-                var actions = _.toArray(state.elements); %> <% _.each(actions, function(action, i) { %>
-                  do<%- agentName %>_<%- state.name %>_<%- action.name.toLowerCase()%> : function(entity) {
-                    var id = $scope.gridOptions.getRowIdentity(entity);
-                    var initData = {
-                      _id: id
-                    };
-                    $rootScope.setFromCrud(true);
-                    $state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {
-                      initData: id
-                    });
-                  },
-                  <%
-                }); %> <%
-              }); %> <%
-            }); %>
+          $scope.gridActions = {
             changeState: function(state, entity) {
               index = $scope.gridOptions.getRowIdentity(entity);
               $scope.changeState(state, {
@@ -61,6 +30,11 @@
               });
             }
           };
+          
+<% if (agents.length){%>
+  $scope.MergeRecursive($scope.gridActions, $scope.gridAgentActions);
+<%}%>          
+          
           $scope.allData = -1;
           $scope.gridHeaders = <%-parentStateName%>Services.gridHeaders;
           $scope.gridOptions = {
@@ -109,16 +83,9 @@
                 }else{
                   $scope.gridOptions.data = response.data.results;
                 }
-                <% _.each(agents, function(agent, index){
-                  var agentName = agent.split('.').reverse().join("_of_");
-                  var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
-                  for(i=0; i < response.data.results.length; i++){
-                    var initData = {
-                        _id: response.data.results[i]._id
-                    };
-                    $scope.init<%-newAgent.name%>Conversation(initData);
-                  }
-                  <%});%>
+                <% if (agents.length){%>
+                  //TODO: init agent for each record.
+                <%}%>  
               })
               .catch(function(error){
                 console.log(error);
