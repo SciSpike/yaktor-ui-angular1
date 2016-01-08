@@ -189,10 +189,3 @@ module.exports = {
       }
     }
 };
-      },
-      options: {
-        alias: browserifyLibAlias,
-        external:mergedExternals
-      }
-    }
-};
