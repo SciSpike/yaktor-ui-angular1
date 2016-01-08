@@ -154,7 +154,7 @@ module.exports = {
               depends: {angular: 'angular'}
             },
             'moment': {
-              path: './bower_components/moment/min/moment.min.js',
+              path: './bower_components/moment/moment.js',
               exports: 'moment',
               depends: {}
             },
