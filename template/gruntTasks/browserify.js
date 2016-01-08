@@ -171,16 +171,18 @@ module.exports = {
     appDep: {
         files: {
           './libs/resources/resources.js': ['bower_components/sockjs-client/dist/sockjs.js'],
-          './libs/shared.js': ['./generated/modules/utilities/**/*.js', './generated/controllers/**/*.js', './generated/directives/**/*.js', './generated/services/**/*.js', './generated/filters/**/*.js', './generated/locale/**/*.js'],
-          './libs/client.js': ['./client/**/*.js'],
+          './libs/shared.js': ['./shared/modules/utilities/**/*.js', './shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/services/**/*.js', './shared/filters/**/*.js'],
+          './clientConfig/clientSetup.js': ['./clientConfig/init/**/*.js'],
+          './libs/clientConfig.js': ['./clientConfig/custom/**/*.js'],
+          './libs/locale.js': ['./shared/locale/**/*.js', './modules/locale/**/*.js'], 
           <% _.each(moduleNames.agents, function(moduleName, index){%>
-          './libs/modules/<%- moduleName %>.js': ['./generated/agents/<%- moduleName %>/<%- moduleName %>.js', './generated/agents/<%- moduleName %>/controllers/**/*.js', './generated/agents/<%- moduleName %>/directives/**/*.js', './generated/agents/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+          './libs/modules/<%- moduleName %>.js': ['./modules/agents/<%- moduleName %>/<%- moduleName %>.js', './modules/agents/<%- moduleName %>/controllers/**/*.js', './modules/agents/<%- moduleName %>/directives/**/*.js', './modules/agents/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
          <% _.each(moduleNames.crud, function(moduleName, index){%>
-          './libs/modules/<%- moduleName %>.js': ['./generated/crud/<%- moduleName %>/<%- moduleName %>.js', './generated/crud/<%- moduleName %>/controllers/**/*.js', './generated/crud/<%- moduleName %>/directives/**/*.js', './generated/crud/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+          './libs/modules/<%- moduleName %>.js': ['./modules/crud/<%- moduleName %>/<%- moduleName %>.js', './modules/crud/<%- moduleName %>/controllers/**/*.js', './modules/crud/<%- moduleName %>/directives/**/*.js', './modules/crud/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
          <% _.each(moduleNames.resources, function(moduleName, index){%>
-        './libs/modules/<%- moduleName %>.js': ['./generated/modules/<%- moduleName %>/<%- moduleName %>.js', './generated/modules/<%- moduleName %>/controllers/**/*.js', './generated/modules/<%- moduleName %>/directives/**/*.js', './generated/modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+        './libs/modules/<%- moduleName %>.js': ['./shared/modules/<%- moduleName %>/<%- moduleName %>.js', './shared/modules/<%- moduleName %>/controllers/**/*.js', './shared/modules/<%- moduleName %>/directives/**/*.js', './shared/modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
       <% }}); %>
       },
       options: {
