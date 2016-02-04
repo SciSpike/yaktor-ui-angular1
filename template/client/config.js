@@ -3,6 +3,8 @@
   require('angular');
   angular.module('clientConfig', [])
     .constant('clientConstants', {
+      'partialsBaseLocation': 'generated/partials',
+      'clientBaseLocation': 'clientConfig',
       'forms': {
         "elementTypes": {
 
