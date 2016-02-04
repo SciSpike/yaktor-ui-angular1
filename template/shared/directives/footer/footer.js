@@ -1,10 +1,10 @@
 angular.module('views')
-  .directive('engineUIFooter', function($compile) {
+  .directive('engineUIFooter', function($compile, clientConstants) {
       return{
           restrict: 'C',
           transclude: true,
           templateUrl : function($node, tattrs) {
-              return partialsBaseLocation + "/footer/footerBlock.html"
+              return clientConstants.partialsBaseLocation + "/footer/footerBlock.html"
             },
           controller: function() {
             

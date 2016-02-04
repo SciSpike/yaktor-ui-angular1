@@ -1,9 +1,9 @@
 angular.module('<%=appname%>')
-  .directive('ngGridDirective', function($rootScope, $eventsCommon, $timeout) {
+  .directive('ngGridDirective', function($rootScope, $eventsCommon, $timeout, clientConstants) {
     return {
       restrict: 'C',
       templateUrl: function($node, tattrs) {
-        return partialsBaseLocation + "/ngGrid/ngGrid.html"
+        return clientConstants.partialsBaseLocation + "/ngGrid/ngGrid.html"
       },
       scope: {
         gridData: '=',

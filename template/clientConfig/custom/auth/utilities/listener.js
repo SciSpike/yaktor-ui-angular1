@@ -65,7 +65,7 @@ angular.module("views")
     
     if (!$rootScope.sessionCancelled) {
       $rootScope.warning = $modal.open({
-        templateUrl: partialsBaseLocation + "/modals/warning-dialog.html",
+        templateUrl: clientConstants.partialsBaseLocation + "/modals/warning-dialog.html",
         windowClass: 'modal-danger',
         resolve: {
           doAction: function() {

@@ -1,5 +1,5 @@
 angular.module('views')
-  .directive('engineUiFormInput', function($rootScope, $eventsCommon, $timeout, $q, typeRefService, partialLookup, $modal) {
+  .directive('engineUiFormInput', function($rootScope, $eventsCommon, $timeout, $q, typeRefService, partialLookup, $modal, clientConstants) {
     return {
       restrict: 'C',
       template: '<div ng-include="getContentUrl()"></div>',
@@ -117,7 +117,7 @@ angular.module('views')
 
         scope.getContentUrl = function() {
           if (scope.directiveData.ui.type) {
-            return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type.toLowerCase() + '.html';
+            return clientConstants.partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type.toLowerCase() + '.html';
           } else {
             return "";
           }

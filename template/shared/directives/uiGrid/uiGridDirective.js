@@ -1,9 +1,9 @@
 angular.module('views')
 
-.directive('uiGridDirective', function($eventsCommon, $timeout) {
+.directive('uiGridDirective', function($eventsCommon, $timeout, clientConstants) {
   return {
     restrict: 'C',
-    templateUrl: partialsBaseLocation + '/uiGrid/uiGrid.html',
+    templateUrl: clientConstants.partialsBaseLocation + '/uiGrid/uiGrid.html',
     scope: {
       gridData: '=',
       gridOptions: '='

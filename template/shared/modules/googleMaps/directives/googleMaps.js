@@ -1,10 +1,10 @@
 angular.module('googleMaps')
-  .directive('mapsDirective', ['$rootScope', 'routesExtended', function($rootScope, routesExtended) {
+  .directive('mapsDirective', ['$rootScope', 'routesExtended', function($rootScope, routesExtended, clientConstants) {
     return{
             restrict: 'C',
             transclude: true,
             templateUrl : function($node, tattrs) {
-              return partialsBaseLocation + "/googleMap/googleMap.html"
+              return clientConstants.partialsBaseLocation + "/googleMap/googleMap.html"
             },
             scope:{
               directiveData: '='
