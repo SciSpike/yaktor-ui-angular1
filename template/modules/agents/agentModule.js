@@ -11,7 +11,7 @@ angular.module('<%- moduleName %>',
       'ngSanitize'])
        
        .config(function($stateProvider, $locationProvider,$translateProvider,routesExtendedProvider, clientConstants) {
-         $translateProvider.preferredLanguage(defaultLocale);
+         $translateProvider.preferredLanguage(clientConstants.defaultLocale);
          $stateProvider
            .state('main.<%- moduleName %>',{
             url:'/<%- moduleName %>/:initData',

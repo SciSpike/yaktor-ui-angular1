@@ -1,6 +1,6 @@
 angular.module('views')
 .config(function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, routesExtendedProvider, htmlExtendedProvider, clientConstants) {
-  $translateProvider.preferredLanguage(defaultLocale);
+  $translateProvider.preferredLanguage(clientConstants.defaultLocale);
   $translateProvider.useSanitizeValueStrategy('sanitize');
   $urlRouterProvider.when('', '/home');
   

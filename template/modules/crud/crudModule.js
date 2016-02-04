@@ -13,7 +13,7 @@ angular.module('<%- moduleName %>',
 ])
        
        .config(function($stateProvider, $locationProvider,$translateProvider,routesExtendedProvider, htmlExtendedProvider, clientConstants) {
-         $translateProvider.preferredLanguage(defaultLocale);
+         $translateProvider.preferredLanguage(clientConstants.defaultLocale);
          $stateProvider
            .state('main.<%- moduleName %>',{
                url:'/<%- moduleName.replace("_s_","/").replace("_d_",".") %>',
