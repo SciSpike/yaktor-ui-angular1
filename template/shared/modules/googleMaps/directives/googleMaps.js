@@ -1,5 +1,5 @@
 angular.module('googleMaps')
-  .directive('mapsDirective', ['$rootScope', function($rootScope) {
+  .directive('mapsDirective', ['$rootScope', 'routesExtended', function($rootScope, routesExtended) {
     return{
             restrict: 'C',
             transclude: true,
@@ -9,7 +9,7 @@ angular.module('googleMaps')
             scope:{
               directiveData: '='
             },
-            controller: 'googleMapsCtrlExtended' || 'googleMapsCtrl',
+            controller: routesExtended.routes['googleMaps.index'] || 'googleMapsCtrl',
             link: function(scope, element, attrs){
               
               function setMap(pos, lat, lng){

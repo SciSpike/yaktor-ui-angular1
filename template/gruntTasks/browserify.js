@@ -156,7 +156,7 @@ module.exports = {
     appDep: {
         files: {
           './libs/resources/resources.js': ['bower_components/sockjs-client/dist/sockjs.js'],
-          './libs/shared.js': ['./generated/modules/utilities/**/*.js', './generated/controllers/**/*.js', './generated/directives/**/*.js', './generated/services/**/*.js', './generated/filters/**/*.js', './generated/locale/**/*.js'],
+          './libs/shared.js': ['./shared/modules/utilities/**/*.js', './shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/services/**/*.js', './shared/filters/**/*.js', './shared/locale/**/*.js'],
           './libs/client.js': ['./client/**/*.js'],
           <% _.each(moduleNames.agents, function(moduleName, index){%>
           './libs/modules/<%- moduleName %>.js': ['./generated/agents/<%- moduleName %>/<%- moduleName %>.js', './generated/agents/<%- moduleName %>/controllers/**/*.js', './generated/agents/<%- moduleName %>/directives/**/*.js', './generated/agents/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
