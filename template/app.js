@@ -15,6 +15,7 @@
   require('vcRecaptcha');
   require('rangy');
   require('textAngular');
+  require("ngAnimate");
 
   angular.module('views',
     ['ui.bootstrap',
@@ -43,6 +44,7 @@
       'utilities',
       'ngSanitize',
       'textAngular',
+      'ngAnimate',
     <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
     <% }}); %>]);
 

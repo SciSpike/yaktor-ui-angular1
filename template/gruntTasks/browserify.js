@@ -14,6 +14,7 @@ var browserifyLibAlias = [
   './bower_components/ng-grid/build/ng-grid.debug.js:ngGrid',
   './bower_components/angular-touch/angular-touch.min.js:ngTouch',
   './bower_components/angular/angular.js:angular',
+  './node_modules/angular-animate/angular-animate.js:ngAnimate',
   './bower_components/angular-resource/angular-resource.js:angular.resource',
   './bower_components/angular-translate/angular-translate.js:angular.translate',
   './bower_components/angular-ui-router/release/angular-ui-router.js:uirouter',
@@ -36,6 +37,7 @@ var mainExternals = [
   './bower_components/ng-grid/build/ng-grid.debug.js',
   './bower_components/angular-touch/angular-touch.min.js',
   './bower_components/angular/angular.js',
+  './node_modules/angular-animate/index.js',
   './bower_components/angular-resource/angular-resource.js',
   './bower_components/angular-translate/angular-translate.js',
   './bower_components/angular-sanitize/angular-sanitize.min.js',
@@ -87,6 +89,11 @@ module.exports = {
               path: './bower_components/angular/angular.js',
               exports: 'angular',
               depends: { jquery: '$' }
+            },
+            'ngAnimate' :{
+              path: './node_modules/angular-animate/index.js',
+              exports: 'ngAnimate',
+              depends: { jquery: '$', angular:'angular'}
             },
             'angular.resource' :{
               path: './bower_components/angular-resource/angular-resource.js',
