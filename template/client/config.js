@@ -5,6 +5,7 @@
     .constant('clientConstants', {
       'partialsBaseLocation': 'generated/partials',
       'clientBaseLocation': 'clientConfig',
+      'defaultLocale': "en_US",
       'forms': {
         "elementTypes": {
 

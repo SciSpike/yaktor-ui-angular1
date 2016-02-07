@@ -1,6 +1,6 @@
 angular.module('views')
-.config(['$stateProvider', '$locationProvider', '$translateProvider', '$urlRouterProvider', 'htmlExtendedProvider', 'routesExtendedProvider', function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, htmlExtendedProvider, routesExtendedProvider) {
-  $translateProvider.preferredLanguage(defaultLocale);
+.config(['$stateProvider', '$locationProvider', '$translateProvider', '$urlRouterProvider', 'htmlExtendedProvider', 'routesExtendedProvider', function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, htmlExtendedProvider, routesExtendedProvider, clientConstants) {
+  $translateProvider.preferredLanguage(clientConstants.defaultLocale);
   $translateProvider.useSanitizeValueStrategy('sanitize');
   $urlRouterProvider.when('', '/home');
   
@@ -11,14 +11,14 @@ angular.module('views')
         if(htmlExtendedProvider.views['main.index']){
           return htmlExtendedProvider.views['main.index'];
         }
-        return partialsBaseLocation + '/shared/main.html';
+        return clientConstants.partialsBaseLocation + '/shared/main.html';
       },
       controller : routesExtendedProvider.routes['main.index'] || 'mainController'
     })
    .state('main.home',{
      url: '/home',
      templateUrl: function(){
-       return clientBaseLocation + '/homePage/home.html';
+       return clientConstants.clientBaseLocation + '/homePage/home.html';
      },
      controller: routesExtendedProvider.routes['home.index'] || 'homeController'
    });

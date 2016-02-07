@@ -10,20 +10,20 @@ angular.module('<%- moduleName %>',
     'clientConfig',
     'ngSanitize'])
 
-  .config(function($stateProvider, $locationProvider,$translateProvider,routesExtendedProvider) {
-    $translateProvider.preferredLanguage(defaultLocale);
+  .config(function($stateProvider, $locationProvider,$translateProvider,routesExtendedProvider, clientConstants) {
+    $translateProvider.preferredLanguage(clientConstants.defaultLocale);
     $stateProvider
       .state('main.<%- moduleName %>',{
         url:'/<%- moduleName %>/:initData',
         templateUrl: function(){
-          return partialsBaseLocation + '/agents/<%- moduleName %>/index.html'
+          return clientConstants.partialsBaseLocation + '/agents/<%- moduleName %>/index.html'
         },
         controller: routesExtendedProvider.routes.<%- moduleName %> || '<%- moduleName %>Controller' //HANDLES CONNECTION AND STATE TRANSTITIONS (WITH ABILITY TO CUSTOMIZE ???)
       })
 
       .state('main.<%- moduleName %>.init',{ // TRANSITIONED TO IF NO INIT DATA IN PARENT
         templateUrl: function(){
-          return partialsBaseLocation + '/agents/<%- moduleName %>/init.html'
+          return clientConstants.partialsBaseLocation + '/agents/<%- moduleName %>/init.html'
         },
         controller: routesExtendedProvider.routes.<%- moduleName %>Init || '<%- moduleName %>initController'
       })
@@ -33,7 +33,7 @@ angular.module('<%- moduleName %>',
       .state('main.<%- moduleName %>.<%- stateName %>',{
         ownParams:['initData'],
         templateUrl: function(){
-          return partialsBaseLocation + '/agents/<%- moduleName %>/<%- stateName %>.html'
+          return clientConstants.partialsBaseLocation + '/agents/<%- moduleName %>/<%- stateName %>.html'
         },
         controller: routesExtendedProvider.routes['<%- moduleName %>.<%- stateName %>'] || '<%- moduleName %><%- stateName %>Controller'
       })
@@ -41,7 +41,7 @@ angular.module('<%- moduleName %>',
         var viewName = view.subPath.replace('/', '');%>
         .state('main.<%- moduleName %>.<%- stateName %>.<%- viewName%>',{
           templateUrl: function(){
-            return partialsBaseLocation + '/agents/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
+            return clientConstants.partialsBaseLocation + '/agents/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
           },
           controller: routesExtendedProvider.routes['<%- moduleName %>.<%- viewName %>'] || '<%- moduleName %><%- viewName %>Controller'
         })<% });%><% });%>

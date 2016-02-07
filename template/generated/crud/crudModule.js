@@ -11,8 +11,8 @@ angular.module('<%- moduleName %>',
     'ngSanitize'
   ])
 
-  .config(function($stateProvider, $locationProvider,$translateProvider,routesExtendedProvider, htmlExtendedProvider) {
-    $translateProvider.preferredLanguage(defaultLocale);
+  .config(function($stateProvider, $locationProvider,$translateProvider,routesExtendedProvider, htmlExtendedProvider, clientConstants) {
+    $translateProvider.preferredLanguage(clientConstants.defaultLocale);
     $stateProvider
       .state('main.<%- moduleName %>',{
         url:'/<%- moduleName.replace("_s_","/").replace("_d_",".") %>',
@@ -20,7 +20,7 @@ angular.module('<%- moduleName %>',
           if(htmlExtendedProvider.views['<%- moduleName %>.index']){
             return htmlExtendedProvider.views['<%- moduleName %>.index'];
           }
-          return partialsBaseLocation + '/crud/<%- moduleName %>/index.html'
+          return clientConstants.partialsBaseLocation + '/crud/<%- moduleName %>/index.html'
         },
         controller: routesExtendedProvider.routes.<%- moduleName %> || '<%- moduleName %>Controller'
       })
@@ -33,7 +33,7 @@ angular.module('<%- moduleName %>',
         if(htmlExtendedProvider.views['<%- moduleName %>.<%- stateName %>']){
           return htmlExtendedProvider.views['<%- moduleName %>.<%- stateName %>'];
         }
-        return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>.html'
+        return clientConstants.partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>.html'
       },
       controller: routesExtendedProvider.routes['<%- moduleName %>.<%- stateName %>'] || '<%- moduleName %><%- stateName %>Controller'
     })
@@ -44,7 +44,7 @@ angular.module('<%- moduleName %>',
           if(htmlExtendedProvider.views['<%- moduleName %>.<%- stateName %>.<%- viewName %>']){
             return htmlExtendedProvider.views['<%- moduleName %>.<%- stateName %>.<%- viewName %>'];
           }
-          return partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
+          return clientConstants.partialsBaseLocation + '/crud/<%- moduleName %>/<%- stateName %>/<%- viewName %>.html'
         },
         controller: routesExtendedProvider.routes['<%- moduleName %>.<%- viewName %>'] || '<%- moduleName %><%- viewName %>Controller'
       })<% });%><% });%>
