@@ -117,7 +117,7 @@ angular.module('views')
 
         scope.getContentUrl = function() {
           if (scope.directiveData.ui.type) {
-            return partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type.toLowerCase() + '.html';
+            return clientConstants.partialsBaseLocation + '/fragments/' + scope.directiveData.ui.type.toLowerCase() + '.html';
           } else {
             return "";
           }
@@ -174,7 +174,7 @@ angular.module('views')
 
           var modalInstance = $modal.open({
             size: "lg",
-            templateUrl: 'partials/crud/' + partialString + '/POST.html',
+            templateUrl: clientConstants.partialsBaseLocation + '/partials/crud/' + partialString + '/POST.html',
             controller: partialString + 'POSTController',
             scope: skope
           });

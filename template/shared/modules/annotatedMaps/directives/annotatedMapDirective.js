@@ -1,10 +1,10 @@
 angular.module('annotatedMaps')
-	.directive('annotatedMapsDirective', function() {
+	.directive('annotatedMapsDirective', function(clientConstants) {
 		return{
 			restrict: 'C',
 			transclude: true,
 			templateUrl : function() {
-				return partialsBaseLocation + "/annotatedMaps/annotatedMaps.html"
+				return clientConstants.partialsBaseLocation + "/annotatedMaps/annotatedMaps.html"
 			},
 			controller: 'annotatedMapsCtrl'
 		}

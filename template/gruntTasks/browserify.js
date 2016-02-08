@@ -34,7 +34,7 @@ var mainExternals = [
   './bower_components/ng-grid/build/ng-grid.debug.js',
   './bower_components/angular-touch/angular-touch.min.js',
   './bower_components/angular/angular.js',
-  './node_modules/angular-animate/index.js',
+  './node_modules/angular-animate/angular-animate.js',
   './bower_components/angular-resource/angular-resource.js',
   './bower_components/angular-translate/angular-translate.js',
   './bower_components/angular-sanitize/angular-sanitize.min.js',
@@ -86,7 +86,7 @@ module.exports = {
               depends: { jquery: '$' }
             },
             'ngAnimate' :{
-              path: './node_modules/angular-animate/index.js',
+              path: './node_modules/angular-animate/angular-animate.js',
               exports: 'ngAnimate',
               depends: { jquery: '$', angular:'angular'}
             },
@@ -163,18 +163,23 @@ module.exports = {
     appDep: {
         files: {
           './libs/resources/resources.js': ['bower_components/sockjs-client/dist/sockjs.js'],
-          './libs/shared.js': ['./shared/modules/**/*.js', './shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/services/**/*.js', './shared/filters/**/*.js', './shared/locale/**/*.js'],
-          './libs/client.js': ['./client/config.js', './client/controllers/**/*.js', './client/locale/**/*.js'],
-          './libs/modules/modules_extended.js': ['./client/modules/**/*.js'],
+          './libs/clientSetup.js': ['./client/config.js', 'setup.json'],
+          './libs/client.js': ['./client/homePage/**/*.js', './client/controllers/**/*.js', './client/locale/**/*.js', './client/homePage/**/*.js', './client/services/**/*.js', './client/directives/**/*.js', './client/filters/**/*.js'],
+          './libs/modules_extended.js': ['./client/modules/**/*.js'],
+          './libs/services.js': ['./generated/services/**/*.js'],
+          './libs/controllers.js': ['./generated/controllers/**/*.js'],
+          './libs/directives.js': ['./generated/directives/**/*.js'],
+          './libs/locale.js': ['./generated/locale/**/*.js'],
+          './libs/utilities.js': ['./generated/utitilies/**/*.js'],
           <% _.each(moduleNames.agents, function(moduleName, index){%>
-          './libs/modules/<%- moduleName %>.js': ['./generated/agents/<%- moduleName %>/<%- moduleName %>.js', './generated/agents/<%- moduleName %>/controllers/**/*.js', './generated/agents/<%- moduleName %>/directives/**/*.js', './generated/agents/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+          './libs/modules/<%- moduleName %>.js': ['./generated/agents/<%- moduleName %>/<%- moduleName %>.js', './generated/agents/<%- moduleName %>/controllers/**/*.js', './generated/agents/<%- moduleName %>/directives/**/*.js', './generated/agents/<%- moduleName %>/services/**/*.js', './generated/agents/<%- moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
-         <% _.each(moduleNames.crud, function(moduleName, index){%>
-          './libs/modules/<%- moduleName %>.js': ['./generated/crud/**/*.js']<% if(index != moduleNames.length-1){%>,
+          <% _.each(moduleNames.crud, function(moduleName, index){%>
+          './libs/modules/<%- moduleName %>.js': ['./generated/crud/<%- moduleName %>/<%- moduleName %>.js', './generated/crud/<%- moduleName %>/controllers/**/*.js', './generated/crud/<%- moduleName %>/directives/**/*.js', './generated/crud/<%- moduleName %>/services/**/*.js', './generated/crud/<%- moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
-         <% _.each(moduleNames.resources, function(moduleName, index){%>
-        './libs/modules/<%- moduleName %>.js': ['./generated/modules/<%- moduleName %>/<%- moduleName %>.js', './generated/modules/<%- moduleName %>/controllers/**/*.js', './generated/modules/<%- moduleName %>/directives/**/*.js', './generated/modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
-      <% }}); %>
+          <% _.each(moduleNames.resources, function(moduleName, index){%>
+          './libs/modules/<%- moduleName %>.js': ['./shared/modules/<%- moduleName %>/<%- moduleName %>.js', './shared/modules/<%- moduleName %>/controllers/**/*.js', './shared/modules/<%- moduleName %>/directives/**/*.js', './shared/modules/<%- moduleName %>/services/**/*.js', './shared/modules/<%- moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
+         <% }}); %>
       },
       options: {
         alias: browserifyLibAlias,

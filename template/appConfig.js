@@ -1,5 +1,5 @@
 angular.module('views')
-.config(['$stateProvider', '$locationProvider', '$translateProvider', '$urlRouterProvider', 'htmlExtendedProvider', 'routesExtendedProvider', function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, htmlExtendedProvider, routesExtendedProvider, clientConstants) {
+.config(['$stateProvider', '$locationProvider', '$translateProvider', '$urlRouterProvider', 'htmlExtendedProvider', 'routesExtendedProvider', 'clientConstants', function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, htmlExtendedProvider, routesExtendedProvider, clientConstants) {
   $translateProvider.preferredLanguage(clientConstants.defaultLocale);
   $translateProvider.useSanitizeValueStrategy('sanitize');
   $urlRouterProvider.when('', '/home');

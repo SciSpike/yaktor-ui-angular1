@@ -1,5 +1,5 @@
 angular.module('views')
-  .directive('engineUiHeader', ['routesExtended', 'htmlExtended', function(routesExtended, htmlExtended) {
+  .directive('engineUiHeader', ['routesExtended', 'htmlExtended', 'clientConstants', function(routesExtended, htmlExtended, clientConstants) {
       return{
           restrict: 'C',
           transclude: true,
@@ -7,7 +7,7 @@ angular.module('views')
             if(htmlExtended['header.index']){
               return htmlExtended['header.index'];
             }
-            return partialsBaseLocation + "/header/headerBlock.html"
+            return clientConstants.partialsBaseLocation + "/header/headerBlock.html"
           },
           controller: routesExtended['header.index'] || "headerCtrl"
       }
