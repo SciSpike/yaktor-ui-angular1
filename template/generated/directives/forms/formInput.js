@@ -1,5 +1,5 @@
 angular.module('views')
-  .directive('engineUiFormInput', function($rootScope, $eventsCommon, $timeout, $q, typeRefService, partialLookup, $modal) {
+  .directive('engineUiFormInput', function($rootScope, $eventsCommon, $timeout, $q, typeRefService, partialLookup, $modal, clientConstants) {
     return {
       restrict: 'C',
       template: '<div ng-include="getContentUrl()"></div>',
