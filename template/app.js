@@ -34,7 +34,6 @@
       'ui.select',
       'checklist-model',
       'clientConfig',
-      'utilities',
       'ngSanitize',
       'textAngular',
       'ngAnimate',

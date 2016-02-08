@@ -1,4 +1,4 @@
-angular.module('utilities', [])
+angular.module('views', [])
 	.factory('modifyData', function(){
 		
 		var regex = new RegExp("^[_]");

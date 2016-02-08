@@ -164,12 +164,13 @@ module.exports = {
         files: {
           './libs/resources/resources.js': ['bower_components/sockjs-client/dist/sockjs.js'],
           './libs/shared.js': ['./shared/modules/**/*.js', './shared/controllers/**/*.js', './shared/directives/**/*.js', './shared/services/**/*.js', './shared/filters/**/*.js', './shared/locale/**/*.js'],
-          './libs/client.js': ['./client/**/*.js'],
+          './libs/client.js': ['./client/config.js', './client/controllers/**/*.js', './client/locale/**/*.js'],
+          './libs/modules/modules_extended.js': ['./client/modules/**/*.js'],
           <% _.each(moduleNames.agents, function(moduleName, index){%>
           './libs/modules/<%- moduleName %>.js': ['./generated/agents/<%- moduleName %>/<%- moduleName %>.js', './generated/agents/<%- moduleName %>/controllers/**/*.js', './generated/agents/<%- moduleName %>/directives/**/*.js', './generated/agents/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
          <% _.each(moduleNames.crud, function(moduleName, index){%>
-          './libs/modules/<%- moduleName %>.js': ['./generated/crud/<%- moduleName %>/<%- moduleName %>.js', './generated/crud/<%- moduleName %>/controllers/**/*.js', './generated/crud/<%- moduleName %>/directives/**/*.js', './generated/crud/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
+          './libs/modules/<%- moduleName %>.js': ['./generated/crud/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
          <% _.each(moduleNames.resources, function(moduleName, index){%>
         './libs/modules/<%- moduleName %>.js': ['./generated/modules/<%- moduleName %>/<%- moduleName %>.js', './generated/modules/<%- moduleName %>/controllers/**/*.js', './generated/modules/<%- moduleName %>/directives/**/*.js', './generated/modules/<%- moduleName %>/services/**/*.js']<% if(index != moduleNames.length-1){%>,
