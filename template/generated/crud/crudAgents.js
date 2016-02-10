@@ -97,17 +97,21 @@
           }
 
 //FIND result inits
-    //TODO: this is a catch dump.  turn this into a $scope function that findData can call passing in the _id.
-<% _.each(agents, function(agent, index){
-  var agentName = agent.split('.').reverse().join("_of_");
-  var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
-  for(i=0; i < response.data.results.length; i++){
-    var initData = {
-        _id: response.data.results[i]._id
-    };
-    $scope.init<%-newAgent.name%>Conversation(initData);
+    //$scope function that findData can call passing in the response.data.results array.
+$scope.listInitAgents = function(list){
+  if (list && list.length){
+    for(i=0; i < list.length; i++){
+      var initData = {
+          _id: list[i]._id
+      };
+  <% _.each(agents, function(agent, index){
+    var agentName = agent.split('.').reverse().join("_of_");
+    var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
+      $scope.init<%-newAgent.name%>Conversation(initData);
+    <%});%>
+    }
   }
-  <%});%>
+};
   
 //POSTPUT button actions
   <% _.each(agents, function(agent, index){

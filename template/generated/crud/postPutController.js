@@ -51,6 +51,3 @@ $scope.submitForm = function(type){
 		$scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, response.data);
 	});
 };
-<% if (agents.length>0){%>
-//TODO: AGENT BUTTONS ACTIONS
-<%}%>

@@ -84,7 +84,7 @@
                   $scope.gridOptions.data = response.data.results;
                 }
                 <% if (agents.length){%>
-                  //TODO: init agent for each record.
+                  $scope.listInitAgents(resonse.data.results);
                 <%}%>  
               })
               .catch(function(error){
