@@ -45,8 +45,7 @@
 	        };
 	      <% });%>
 //INIT AGENT
-	        $scope.initAgents = function(){
-	          var data = FormService.returnAnswers($scope.directiveData, answers);
+	        $scope.initAgents = function(data){
 	          data._id = $scope.userId;
 	          $scope.initData = FormService.cleanData(data);
 	            <% _.each(agents, function(agent, index){

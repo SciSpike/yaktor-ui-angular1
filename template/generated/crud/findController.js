@@ -84,7 +84,7 @@
                   $scope.gridOptions.data = response.data.results;
                 }
                 <% if (agents.length){%>
-                  $scope.listInitAgents(resonse.data.results);
+                  $scope.listInitAgents(response.data.results);
                 <%}%>  
               })
               .catch(function(error){

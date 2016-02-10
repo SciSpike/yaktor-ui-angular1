@@ -37,7 +37,11 @@ $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
 	FormService.mergeAnswers($scope.directiveData, response.data);
 	console.log('done');
 	<%if(state.ui.title.replace('_', '').toLowerCase() == 'get' || state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
-	<% if (agents.length> 0){%>setTimeout(initAgents,500);<%}%><%}%>
+    var data = FormService.returnAnswers($scope.directiveData, answers);
+    
+  <% if (agents.length> 0){%>setTimeout(function(){
+    $scope.initAgents(data);
+  },500);<%}%><%}%>
 });
 <%}%>
 var answers = {};

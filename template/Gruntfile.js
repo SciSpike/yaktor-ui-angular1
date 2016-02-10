@@ -122,7 +122,8 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         mangle: false,
-        sourceMap: true
+        sourceMap: true,
+        beautify: true,
       },
       my_target: {
         files: {
