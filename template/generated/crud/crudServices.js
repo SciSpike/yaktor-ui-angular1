@@ -20,7 +20,7 @@ angular.module('<%- moduleName %>')
           var data = data || {};
           return $q.when(RestService['FIND']('<%- actions.url%>', data));
         <% } else if (element == 'GET') {%>
-          return $q.when(RestService['FINDBYID']('<%- actions.url%>', null, id));
+          return $q.when(RestService['FINDBYID']('<%- actions.url%>', id));
         <% } else if (element == 'DELETE') {%>
           return $q.when(RestService['<%- element%>']('<%- actions.url%>', null, id));
         <% } else if (element == 'POST') {%>
