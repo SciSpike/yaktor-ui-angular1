@@ -50,16 +50,8 @@ angular.module('<%- moduleName %>')
               field: '<%- elem%>', <% } %>minWidth: 150, enableColumnResizing: true, enableHiding: false, enableSorting: true, displayName: $filter('translate')('<%-element.ui.title%>')
             }, <%
           }); %> <%
-          if (agents.length > 0 && (state && state.ui && state.ui.title.replace('_', '').toLowerCase() == 'find')) {
-            //used for extracting objects from the spec
-            var objectFindByKey = function(array, key, value) {
-                for (var i = 0; i < array.length; i++) {
-                  if (array[i][key] == value) {
-                    return array[i];
-                  }
-                }
-                return null;
-              } %> <% _.each(agents, function(agent, index) {
+          if (agents.length > 0 ) {
+             %> <% _.each(agents, function(agent, index) {
                 var agentName = agent.split('.').reverse().join("_of_");
                 var newAgent = objectFindByKey(agentSpec, 'id', agent); %> {
                   cellTemplate: "<div>{{grid.appScope.gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity);}}</div>",

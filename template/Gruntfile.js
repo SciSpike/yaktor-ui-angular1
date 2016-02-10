@@ -145,7 +145,7 @@ module.exports = function(grunt) {
       },
       'resources': {
         'files': [
-          'bower_components/sockjs-client/dist/sockjs.js',
+          './bower_components/sockjs-client/dist/sockjs.js',
           './generated/*.js',
           './generated/directives/**/*.js',
           './generated/services/**/*.js',
