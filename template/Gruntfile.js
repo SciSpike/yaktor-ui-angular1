@@ -148,7 +148,6 @@ module.exports = function(grunt) {
           './generated/*.js',
           './generated/directives/**/*.js',
           './generated/services/**/*.js',
-          './generated/utilities/**/*.js',
           './client/**/*.js',
           './generated/locale/**/*.js'
         ],

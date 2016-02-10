@@ -170,7 +170,6 @@ module.exports = {
           './libs/controllers.js': ['./generated/controllers/**/*.js'],
           './libs/directives.js': ['./generated/directives/**/*.js'],
           './libs/locale.js': ['./generated/locale/**/*.js'],
-          './libs/utilities.js': ['./generated/utitilies/**/*.js'],
           <% _.each(moduleNames.agents, function(moduleName, index){%>
           './libs/modules/<%- moduleName %>.js': ['./generated/agents/<%- moduleName %>/<%- moduleName %>.js', './generated/agents/<%- moduleName %>/controllers/**/*.js', './generated/agents/<%- moduleName %>/directives/**/*.js', './generated/agents/<%- moduleName %>/services/**/*.js', './generated/agents/<%- moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
