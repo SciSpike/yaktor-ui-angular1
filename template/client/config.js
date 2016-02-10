@@ -4,7 +4,7 @@
   angular.module('clientConfig', [])
     .constant('clientConstants', {
       'partialsBaseLocation': 'generated/partials',
-      'clientBaseLocation': 'clientConfig',
+      'clientBaseLocation': 'client',
       'defaultLocale': "en_US",
       'forms': {
         "elementTypes": {
