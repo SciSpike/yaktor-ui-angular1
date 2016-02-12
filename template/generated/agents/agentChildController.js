@@ -1,5 +1,5 @@
-angular.module('<%- moduleName %>')
-  .controller('<%- moduleName %><%- state.name %>Controller',
+angular.module('<%=moduleName %>')
+  .controller('<%=moduleName %><%=state.name %>Controller',
       ['$rootScope','$scope','$state','$stateParams','$location', 'RestService', 'SocketService', 'FormService',
        function ($rootScope,$scope,$state,$stateParams,$location, RestService, SocketService, FormService) {
         <%var directiveData = {};
@@ -43,7 +43,7 @@ angular.module('<%- moduleName %>')
         data = FormService.cleanData(data);
         type = type.replace('_', '').toLowerCase();
         if(type == 'init'){
-          $scope.init<%- moduleName %>Conversation(data);
+          $scope.init<%=moduleName %>Conversation(data);
         }else{
           var conversation = 'on_' + type.replace(/\./g,'');
           // console.log(conversation);

@@ -158,8 +158,8 @@ module.exports = function(grunt) {
         }
       },
       <% _.each(moduleNames.agents, function(moduleName, index) { %>
-          '<%- moduleName %>/': {
-            'files': './generated/agents/<%- moduleName %>/**/*.js',
+          '<%=moduleName %>/': {
+            'files': './generated/agents/<%=moduleName %>/**/*.js',
             'tasks': ['browserify:appDep', 'sails-linker:libs'],
             'options': {
               'interrupt': true
@@ -167,8 +167,8 @@ module.exports = function(grunt) {
         },
         <%
       }); %> <% _.each(moduleNames.crud, function(moduleName, index) { %>
-          '<%- moduleName %>/': {
-            'files': './generated/crud/<%- moduleName %>/**/*.js',
+          '<%=moduleName %>/': {
+            'files': './generated/crud/<%=moduleName %>/**/*.js',
             'tasks': ['browserify:appDep', 'sails-linker:libs'],
             'options': {
               'interrupt': true

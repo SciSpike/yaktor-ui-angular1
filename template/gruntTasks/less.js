@@ -13,7 +13,7 @@ module.exports = {
     },
     files: [{
               expand: true,
-              cwd: './client/themes/<%- theme%>/',
+              cwd: './client/themes/<%=theme%>/',
               src: ['index.less'],
               dest: './styles/css/',
               ext: '.css'
@@ -33,7 +33,7 @@ module.exports = {
       },
       files: [{
                 expand: true,
-                cwd: './client/themes/<%- theme%>/',
+                cwd: './client/themes/<%=theme%>/',
                 src: ['index_cordova.less'],
                 dest: './styles/css/',
                 ext: '.css'

@@ -28,8 +28,8 @@ angular.module('<%=appname%>')
         var standardNav = [
           <% _.each(moduleNames.agents, function(moduleName, index) { %>
           {
-            'title': '<%- moduleName.replace(/_/g, " ") %>',
-            'link': 'main.<%- moduleName %>'
+            'title': '<%=moduleName.replace(/_/g, " ") %>',
+            'link': 'main.<%=moduleName %>'
           },<%});%>
           <% _.each(moduleNames.crud, function(moduleName, index) {
             var method = ".FIND";
@@ -42,8 +42,8 @@ angular.module('<%=appname%>')
                 method = ".POST";
               }%>
           {
-            'title': '<%- moduleName.replace(/_/g, " ") %>',
-            'link': 'main.<%- moduleName %><%- method%>'
+            'title': '<%=moduleName.replace(/_/g, " ") %>',
+            'link': 'main.<%=moduleName %><%=method%>'
           }<%if (index != moduleNames.crud.length - 1){%>,<%}});%>
         ];
 

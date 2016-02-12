@@ -1,15 +1,15 @@
 <div class="pageHeader">
-    <h2>{{ '<%- parentStateName%><%- moduleName%>' | translate }}</h2>
+    <h2>{{ '<%=parentStateName%><%=moduleName%>' | translate }}</h2>
 </div>
-<div class="<%- moduleName.toLowerCase() %>_<%- parentStateName%>_<%- state.name %>">
+<div class="<%=moduleName.toLowerCase() %>_<%=parentStateName%>_<%=state.name %>">
   <%
   var regex = new RegExp('/', "g");
   var titleArray = moduleUrl.split('/');
   %>
-<h1 ng-if="!showTitle"><%- titleArray[0]%> <%- titleArray[1]%></h1>
-  <div title="{{'<%- state.ui.title%>' | translate}}">
+<h1 ng-if="!showTitle"><%=titleArray[0]%> <%=titleArray[1]%></h1>
+  <div title="{{'<%=state.ui.title%>' | translate}}">
 
-      <form name="actionableForm" ng-submit="submitForm('<%- state.ui.title.toLowerCase()%>')">
+      <form name="actionableForm" ng-submit="submitForm('<%=state.ui.title.toLowerCase()%>')">
         <alert ng-repeat="alert in alerts" type="alert.type" close="alerts.splice($index, 1);">
           <span>{{alert.error.message}}</span>
           <ul ng-if="alert.error.errors">
@@ -18,9 +18,9 @@
         </alert>
         <div class='well'>
             <% if(state.proto && state.proto.match(/http:/)) { %>
-              <h3>{{'<%- state.title%>'|translate}}</h3>
+              <h3>{{'<%=state.title%>'|translate}}</h3>
             <% } else { %>
-              <h3>{{'<%- state.ui.title%>'|translate}}</h3>
+              <h3>{{'<%=state.ui.title%>'|translate}}</h3>
             <% } %>
             <%
             var nestedArray = [];
@@ -43,12 +43,12 @@
                 
                 if(element.components){%>
                   <div class='well'>
-                    <h3>{{'<%- element.ui.title%>'|translate}}</h3>
+                    <h3>{{'<%=element.ui.title%>'|translate}}</h3>
                   <%if(element.type == 'array'){%>
-                    <div ng-repeat="item in directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>'] track by $index">
+                    <div ng-repeat="item in directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%=nestedArray[i]%>']<%}%>['<%=key%>'] track by $index">
                       <div ng-if="item.ui" class="engineUiFormInput" directive-data="item"></div>
                       <div ng-if="!item.ui">
-                        <div ng-repeat="(innerKey, innerValue) in item" class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%- nestedArray[i]%> <%}%><%- key%>" key="<%- key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>'][$parent.$index][innerKey]"></div>
+                        <div ng-repeat="(innerKey, innerValue) in item" class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%=nestedArray[i]%> <%}%><%=key%>" key="<%=key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%=nestedArray[i]%>']<%}%>['<%=key%>'][$parent.$index][innerKey]"></div>
                       </div>
                       </div>
                   <%}else{
@@ -57,7 +57,7 @@
                   <%}%>  
                   </div>
                 <%}else{%>
-                  <div class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%- nestedArray[i]%> <%}%><%- key%>" key="<%- key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%- nestedArray[i]%>']<%}%>['<%- key%>']"></div>  
+                  <div class="engineUiFormInput <% for(var i=0; i<nestedArray.length; i++){%><%=nestedArray[i]%> <%}%><%=key%>" key="<%=key%>" directive-data="directiveData<% for(var i=0; i<nestedArray.length; i++){%>['<%=nestedArray[i]%>']<%}%>['<%=key%>']"></div>  
                 <%}
               })
             }
@@ -85,13 +85,13 @@
            var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
            <div class="well row">
               <div class="col-xs-4">
-               <p class="text-capitalize"><%- newAgent.name%> : {{<%- newAgent.name%>CurrentState}}</p>
+               <p class="text-capitalize"><%=newAgent.name%> : {{<%=newAgent.name%>CurrentState}}</p>
               </div>
               <div class="col-xs-8"><p>
            <% _.each(newAgent.states, function(state, index){ %>
              <% var actions = _.toArray(state.elements);%>
              <% _.each(actions, function(action, i){%>
-          <button class="btn btn-default btn-lg text-capitalize" ng-if="<%- newAgent.name%>CurrentState=='<%-state.name%>'" ng-click="do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>();" ><%- action.name%></button>
+          <button class="btn btn-default btn-lg text-capitalize" ng-if="<%=newAgent.name%>CurrentState=='<%-state.name%>'" ng-click="do<%=agentName%>_<%=state.name %>_<%=action.name.toLowerCase()%>();" ><%=action.name%></button>
              <%});%>
            <% });%></p></div></div>
         <%}); %>

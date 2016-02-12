@@ -11,28 +11,28 @@ $scope.gridActions = {
 	<% _.each(agents, function(agent, index){
 		var agentName = agent.split('.').reverse().join("_of_");
 		var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
-		get<%- newAgent.name%>ConversationState: function(id){
-			// console.log('<%- agent%> Get State For:' + id);
+		get<%=newAgent.name%>ConversationState: function(id){
+			// console.log('<%=agent%> Get State For:' + id);
 			var currentState = null;
-			if ($scope.<%- newAgent.name%>CurrentStates){
-				currentState = $scope.<%- newAgent.name%>CurrentStates[id];
+			if ($scope.<%=newAgent.name%>CurrentStates){
+				currentState = $scope.<%=newAgent.name%>CurrentStates[id];
 			}
 			return currentState;
 		},
-		init<%- newAgent.name%>Conversation: function(id){
-			// console.log('<%- agent%> INIT DATA:' + initData);
+		init<%=newAgent.name%>Conversation: function(id){
+			// console.log('<%=agent%> INIT DATA:' + initData);
 			var initData = {
 					_id: id
 			};
-			<%- parentStateName %>Services.init<%- newAgent.name%>Conversation(initData);
+			<%=parentStateName %>Services.init<%=newAgent.name%>Conversation(initData);
 		},
 		<% _.each(newAgent.states, function(state, index){ %>
 		<% var actions = _.toArray(state.elements);%>
 		<% _.each(actions, function(action, i){%>
-		do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>: function(id){
+		do<%=agentName%>_<%=state.name %>_<%=action.name.toLowerCase()%>: function(id){
 			var initData = {_id: id};
 			$rootScope.setFromCrud(true);
-			$state.go('main.<%- agentName %>.<%- state.name %>.<%- action.name%>', {initData: id});
+			$state.go('main.<%=agentName %>.<%=state.name %>.<%=action.name%>', {initData: id});
 		},<%});%><% });%><%}); %>
     
       
@@ -42,7 +42,7 @@ $scope.gridActions = {
 			},
 			deleteItem: function(id){
 				var id = id;
-				<%- parentStateName %>Services.delete<%- parentStateName%>({}, id).then(function(response) {
+				<%=parentStateName %>Services.delete<%=parentStateName%>({}, id).then(function(response) {
 					for(var i=0; i<$scope.gridOptions.data.length; i++){
 						if($scope.gridOptions.data[i]._id == id){
 							$scope.gridOptions.data.splice(i, 1);
@@ -151,12 +151,12 @@ $scope.gridOptions = {
 			            	 {
 			            		 <% if(element.type=="typeAhead" || element.type=="select"){%>
 			            		 <%if (element.ui.hasTitle){%>
-			            		 field: '<%- element.ui.title%>.title',
+			            		 field: '<%=element.ui.title%>.title',
 			            		 <%}else{%>
-			            		 field: '<%- element.ui.title%>',
+			            		 field: '<%=element.ui.title%>',
 			            		 <%}%>
 			            		 <%}else{%>
-			            		 field: '<%- elem%>',
+			            		 field: '<%=elem%>',
 			            		 <%}%>
 
 			            		 minWidth: 150,
@@ -183,7 +183,7 @@ $scope.gridOptions = {
 			            			 var agentName = agent.split('.').reverse().join("_of_");
 			            			 var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
 			            			 {
-			            				 cellTemplate: "<div>{{gridOptions.actions.get<%- newAgent.name%>ConversationState(row.getProperty(\"_id\"));}}</div>",
+			            				 cellTemplate: "<div>{{gridOptions.actions.get<%=newAgent.name%>ConversationState(row.getProperty(\"_id\"));}}</div>",
 			            				 minWidth: 150,
 			            				 resizable: false,
 			            				 headerCellTemplate:"<div>{{'STATE'|translate}}</div>" +
@@ -192,11 +192,11 @@ $scope.gridOptions = {
 			            			 },
 			            			 {
 			            				 cellTemplate: "<div>"+
-			            				 "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%- newAgent.name%>ConversationState(row.getProperty(\"_id\"))==null' ng-click='gridOptions.actions.init<%- newAgent.name%>Conversation(row.getProperty(\"_id\"));' >{{'INIT'|translate}}</button>"+
+			            				 "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%=newAgent.name%>ConversationState(row.getProperty(\"_id\"))==null' ng-click='gridOptions.actions.init<%=newAgent.name%>Conversation(row.getProperty(\"_id\"));' >{{'INIT'|translate}}</button>"+
 			            				 <% _.each(newAgent.states, function(state, index){ %>
 			            				 <% var actions = _.toArray(state.elements);%>
 			            				 <% _.each(actions, function(action, i){%>
-			            				 "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%- newAgent.name%>ConversationState(row.getProperty(\"_id\"))==\"<%-state.name%>\"' ng-click='gridOptions.actions.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(row.getProperty(\"_id\"));' ><%- action.name%></button>"+
+			            				 "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%=newAgent.name%>ConversationState(row.getProperty(\"_id\"))==\"<%-state.name%>\"' ng-click='gridOptions.actions.do<%=agentName%>_<%=state.name %>_<%=action.name.toLowerCase()%>(row.getProperty(\"_id\"));' ><%=action.name%></button>"+
 			            				 <%});%>
 			            				 <% });%>
 			            				 "</div>",
@@ -210,7 +210,7 @@ $scope.gridOptions = {
 			            			 <%}%>
 			            			 {
 			            				 <% var putState = 'main.' + parentStateName + '.PUT'; %>
-			            				 cellTemplate: "<div class='editCell'><a ng-click='gridOptions.actions.changeState(\"<%- putState%>\", row.getProperty(\"_id\"))'>{{'EDIT'|translate}}</a></div>",
+			            				 cellTemplate: "<div class='editCell'><a ng-click='gridOptions.actions.changeState(\"<%=putState%>\", row.getProperty(\"_id\"))'>{{'EDIT'|translate}}</a></div>",
 			            				 width: '75',
 			            				 minWidth: 75,
 			            				 resizable: false,
@@ -229,7 +229,7 @@ $scope.gridOptions = {
 		}
 };
 $scope.findData = function(data){
-	<%- parentStateName %>Services.find<%- parentStateName%>(data, $scope.pagingOptions.currentPage).then(function(response) {
+	<%=parentStateName %>Services.find<%=parentStateName%>(data, $scope.pagingOptions.currentPage).then(function(response) {
 		$scope.gridOptions.data = response.results;
 		$scope.pagingOptions.totalServerItems = response.total;
 		if($scope.allData == -1){
@@ -248,7 +248,7 @@ $scope.findData = function(data){
 				var initData = {
 						_id: response.results[i]._id
 				};
-				$scope.init<%- newAgent.name%>Conversation(initData);
+				$scope.init<%=newAgent.name%>Conversation(initData);
 			}
 			<%});%>
 	});

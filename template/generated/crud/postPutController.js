@@ -1,5 +1,5 @@
 <% if (agents.length){%>
-  angular.extend(this, $controller('<%- parentStateName%>AgentController', {$scope: $scope}));
+  angular.extend(this, $controller('<%=parentStateName%>AgentController', {$scope: $scope}));
 <%}%>
   
 <%
@@ -33,7 +33,7 @@ createDirectives(directiveData, state.components.elements);
 $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
 
 <% if(state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
-<%- parentStateName %>Services.get<%- parentStateName%>({}, id).then(function(response) {
+<%=parentStateName %>Services.get<%=parentStateName%>({}, id).then(function(response) {
 	FormService.mergeAnswers($scope.directiveData, response.data);
 	console.log('done');
 	<%if(state.ui.title.replace('_', '').toLowerCase() == 'get' || state.ui.title.replace('_', '').toLowerCase() == 'put'){%>
@@ -46,12 +46,12 @@ $scope.directiveData = <%= JSON.stringify(directiveData,null,2)%>;
 <%}%>
 var answers = {};
 $scope.cancelForm = function(){
-	$scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, null);
+	$scope.changeState('main.<%=parentStateName %>.FIND', {id: 1}, null);
 }
 $scope.submitForm = function(type){
 	var data = FormService.returnAnswers($scope.directiveData, answers);
 	data = FormService.cleanData(data);
-	<%- parentStateName %>Services.<%- state.ui.title.toLowerCase().replace('_', '')%><%- parentStateName%>(data, id).then(function(response) {
-		$scope.changeState('main.<%- parentStateName %>.FIND', {id: 1}, response.data);
+	<%=parentStateName %>Services.<%=state.ui.title.toLowerCase().replace('_', '')%><%=parentStateName%>(data, id).then(function(response) {
+		$scope.changeState('main.<%=parentStateName %>.FIND', {id: 1}, response.data);
 	});
 };

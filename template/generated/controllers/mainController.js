@@ -26,7 +26,7 @@ angular.module('views')
         return null;
       };
             
-      var agents = { <% _.each(moduleNames.agents, function(agentName, index) { %> '<%- agentName %>': '/<%- agentName %>' <%
+      var agents = { <% _.each(moduleNames.agents, function(agentName, index) { %> '<%=agentName %>': '/<%=agentName %>' <%
           if (index != moduleNames.agents.length - 1) { %> , <%
           }
         }); %>

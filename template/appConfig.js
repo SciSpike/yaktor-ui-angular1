@@ -101,8 +101,8 @@ angular.module('views')
    for(agent in agents){
      var elements = agents[agent].elements;
    %>
-   <%- agents[agent].name%>:{<% for(element in elements){%>
-       <%- _.last(elements[element].actions.url.replace('/', '').split('.'))%>: "conversations.<%- elements[element].actions.url.replace('/', '')%>",
+   <%=agents[agent].name%>:{<% for(element in elements){%>
+       <%=_.last(elements[element].actions.url.replace('/', '').split('.'))%>: "conversations.<%=elements[element].actions.url.replace('/', '')%>",
      <%}%>
    },
    <%}}

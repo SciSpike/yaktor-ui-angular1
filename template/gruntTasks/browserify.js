@@ -171,13 +171,13 @@ module.exports = {
           './libs/directives.js': ['./generated/directives/**/*.js'],
           './libs/locale.js': ['./generated/locale/**/*.js'],
           <% _.each(moduleNames.agents, function(moduleName, index){%>
-          './libs/modules/<%- moduleName %>.js': ['./generated/agents/<%- moduleName %>/<%- moduleName %>.js', './generated/agents/<%- moduleName %>/controllers/**/*.js', './generated/agents/<%- moduleName %>/directives/**/*.js', './generated/agents/<%- moduleName %>/services/**/*.js', './generated/agents/<%- moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
+          './libs/modules/<%=moduleName %>.js': ['./generated/agents/<%=moduleName %>/<%=moduleName %>.js', './generated/agents/<%=moduleName %>/controllers/**/*.js', './generated/agents/<%=moduleName %>/directives/**/*.js', './generated/agents/<%=moduleName %>/services/**/*.js', './generated/agents/<%=moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
           <% _.each(moduleNames.crud, function(moduleName, index){%>
-          './libs/modules/<%- moduleName %>.js': ['./generated/crud/<%- moduleName %>/<%- moduleName %>.js', './generated/crud/<%- moduleName %>/controllers/**/*.js', './generated/crud/<%- moduleName %>/directives/**/*.js', './generated/crud/<%- moduleName %>/services/**/*.js', './generated/crud/<%- moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
+          './libs/modules/<%=moduleName %>.js': ['./generated/crud/<%=moduleName %>/<%=moduleName %>.js', './generated/crud/<%=moduleName %>/controllers/**/*.js', './generated/crud/<%=moduleName %>/directives/**/*.js', './generated/crud/<%=moduleName %>/services/**/*.js', './generated/crud/<%=moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
           <% _.each(moduleNames.resources, function(moduleName, index){%>
-          './libs/modules/<%- moduleName %>.js': ['./shared/modules/<%- moduleName %>/<%- moduleName %>.js', './shared/modules/<%- moduleName %>/controllers/**/*.js', './shared/modules/<%- moduleName %>/directives/**/*.js', './shared/modules/<%- moduleName %>/services/**/*.js', './shared/modules/<%- moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
+          './libs/modules/<%=moduleName %>.js': ['./shared/modules/<%=moduleName %>/<%=moduleName %>.js', './shared/modules/<%=moduleName %>/controllers/**/*.js', './shared/modules/<%=moduleName %>/directives/**/*.js', './shared/modules/<%=moduleName %>/services/**/*.js', './shared/modules/<%=moduleName %>/locale/**/*.js']<% if(index != moduleNames.length-1){%>,
          <% }}); %>
       },
       options: {

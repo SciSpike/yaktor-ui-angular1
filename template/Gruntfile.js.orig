@@ -10,7 +10,7 @@ module.exports = function(grunt) {
   
   var config, customGrunt;
   var basePath = grunt.option('basePath') || "./";
-  var appName = '<%- appname %>';
+  var appName = '<%=appname %>';
   
  customGrunt = require("./Gruntfile_custom.js");
   
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
     },
     'shell': {
         'cordova-create': {
-          'command': ['$(npm bin)/cordova create <%- appname%>-app com.fed.<%-appname%>-app  <%- appname%> --verbose'],
+          'command': ['$(npm bin)/cordova create <%=appname%>-app com.fed.<%-appname%>-app  <%=appname%> --verbose'],
           'help': "creates cordova app"
         },
         'cordova-copy': {
