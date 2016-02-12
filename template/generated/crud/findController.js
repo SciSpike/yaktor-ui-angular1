@@ -1,11 +1,11 @@
 <% if (agents.length){%>
-  angular.extend(this, $controller('<%- parentStateName%>AgentController', {$scope: $scope}));
+  angular.extend(this, $controller('<%=parentStateName%>AgentController', {$scope: $scope}));
 <%}%>
 
           $scope.pagingOptions = {
             pageSize: 20, currentPage: 1, lastPage: 1, sort: {order: '', field: '', search: ''}
           };
-          $scope.columnDefs = <%-parentStateName%>Services.columnDefs;
+          $scope.columnDefs = <%=parentStateName%>Services.columnDefs;
           $scope.actionButtons = [{
             state: 'POST',
             title: 'CREATE.NEW'
@@ -20,7 +20,7 @@
             },
             deleteItem: function(entity) {
               var id = $scope.gridOptions.getRowIdentity(entity);
-              <%-parentStateName%>Services.delete<%-parentStateName%>({}, id).then(function(response) {
+              <%=parentStateName%>Services.delete<%=parentStateName%>({}, id).then(function(response) {
                 for (var i = 0; i < $scope.gridOptions.data.length; i++) {
                   if ($scope.gridOptions.data[i]._id == id) {
                     $scope.gridOptions.data.splice(i, 1);
@@ -36,7 +36,7 @@
 <%}%>          
           
           $scope.allData = -1;
-          $scope.gridHeaders = <%-parentStateName%>Services.gridHeaders;
+          $scope.gridHeaders = <%=parentStateName%>Services.gridHeaders;
           $scope.gridOptions = {
             options: {
               actions: $scope.gridActions, columnDefs: $scope.columnDefs, enableExpandable: false, enableGridMenu: true, enableInfiniteScroll: true, infiniteScrollRowsFromEnd: 10, infiniteScrollUp: true, infiniteScrollDown: true,
@@ -65,7 +65,7 @@
             if($scope.pagingOptions.pageSize){
               data.pageSize = $scope.pagingOptions.pageSize;
             }
-            <%-parentStateName %>Services.find<%-parentStateName%>(data, $scope.pagingOptions.currentPage)
+            <%=parentStateName%>Services.find<%=parentStateName%>(data, $scope.pagingOptions.currentPage)
               .then(function(response) {
                 $scope.pagingOptions.totalServerItems = response.data.total;
                 $scope.pagingOptions.totalPages = response.data.maxPage;

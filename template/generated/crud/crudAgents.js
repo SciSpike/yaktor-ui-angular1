@@ -27,17 +27,13 @@
 	           var agentName = agent.split('.').reverse().join("_of_");
 	           var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
 	        $scope.$onRootScope($eventsCommon.conversations.<%=newAgent.actions.url.replace('/', '')%>, function(event, data){
-	          <% if(state.ui.title.replace('_', '').toLowerCase() == 'find'){%>
 	          $scope.<%=newAgent.name%>CurrentStates = ($scope.<%=newAgent.name%>CurrentStates || {});
 	          if(data.currentState){
-	            $scope.<%=newAgent.name%>CurrentStates[data.data._id] = data.currentState;
+	            $timeout(function(){
+                $scope.<%=newAgent.name%>CurrentStates[data.data._id] = data.currentState;
+  	            $scope.<%=newAgent.name%>CurrentState = data.currentState;
+	            });
 	          }
-	          <%}else{%>
-	          if(data.currentState){
-	            $scope.<%=newAgent.name%>CurrentState = data.currentState;
-	          }
-	          <%}%>
-	          $scope.$apply();
 	        });
 	        
 	        $scope.init<%=newAgent.name%>Conversation = function(initData){
@@ -65,7 +61,7 @@
                   var id = $scope.gridOptions.getRowIdentity(entity);
                   var currentState = null;
                   if ($scope.<%=newAgent.name%>CurrentStates) {
-                    currentState = $scope.<% =newAgent.name%>CurrentStates[id];
+                    currentState = $scope.<%=newAgent.name%>CurrentStates[id];
                   }
                   return currentState;
               },

@@ -37,7 +37,7 @@
       'ngSanitize',
       'textAngular',
       'ngAnimate',
-      <% _.each(moduleNames, function(moduleName, index){%>'<%- moduleName %>'<% if(index != moduleNames.length-1){%>,
+      <% _.each(moduleNames, function(moduleName, index){%>'<%=moduleName%>'<% if(index != moduleNames.length-1){%>,
       <% }}); %>]);
 
 

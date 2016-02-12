@@ -7,27 +7,26 @@ var objectFindByKey = function(array, key, value) {
    }
    return null;
  }%>
-angular.module('<%- moduleName %>')
+angular.module('<%=moduleName %>')
 
-  .factory('<%- moduleName %>Services', ['$rootScope', '$q', '$filter', '$timeout', '$eventsCommon', 'RestService', 'SocketService',<% _.each(agents, function(agent, index){%>
-    '<%=objectFindByKey(agentSpec, 'id', agent).name%>Services',<% }); %> function($rootScope, $q, $filter, $timeout, $eventsCommon, RestService, SocketService<% _.each(agents, function(agent, index){%>
+  .factory('<%=moduleName %>Services', ['$rootScope', '$q', '$filter', '$timeout', '$eventsCommon', 'RestService', 'SocketService', <% _.each(agents, function(agent, index){%>'<%=objectFindByKey(agentSpec, 'id', agent).name%>Services',<% });%> function($rootScope, $q, $filter, $timeout, $eventsCommon, RestService, SocketService<% _.each(agents, function(agent, index){%>
        ,<%=objectFindByKey(agentSpec, 'id', agent).name%>Services<% }); %>){
     //CRUD STUFFS
     <% for(element in actions.elements){
     var elementName = element.toLowerCase();%>
-      var _<%- elementName%><%- moduleName %> = function(data, id) {
+      var _<%=elementName%><%=moduleName %> = function(data, id) {
         <% if (element == 'FIND') {%>
           var data = data || {};
-          return $q.when(RestService['FIND']('<%- actions.url%>', data));
+          return $q.when(RestService['FIND']('<%=actions.url%>', data));
         <% } else if (element == 'GET') {%>
-          return $q.when(RestService['FINDBYID']('<%- actions.url%>', id));
+          return $q.when(RestService['FINDBYID']('<%=actions.url%>', id));
         <% } else if (element == 'DELETE') {%>
-          return $q.when(RestService['<%- element%>']('<%- actions.url%>', null, id));
+          return $q.when(RestService['<%=element%>']('<%=actions.url%>', null, id));
         <% } else if (element == 'POST') {%>
           var data = data;
-          return $q.when(RestService['<%- element%>']('<%- actions.url%>', data));
+          return $q.when(RestService['<%=element%>']('<%=actions.url%>', data));
         <% } else if (element == 'PUT') {%>
-          return $q.when(RestService['<%- element%>']('<%- actions.url%>', data, id));
+          return $q.when(RestService['<%=element%>']('<%=actions.url%>', data, id));
         <% }%>
       }
     <% if (element == 'FIND') {%>
@@ -37,30 +36,29 @@ angular.module('<%- moduleName %>')
             var element = elems[elem]; %> { <%
               if (element.type == "typeAhead" || element.type == "select") { %> <%
                 if (element.ui.hasTitle) { %>
-              field: '<%- element.ui.title%>.title',
+              field: '<%=element.ui.title%>.title',
                 <%
                 } else { %>
-              field: '<%- element.ui.title%>',
+              field: '<%=element.ui.title%>',
                 <%
                 } %> <%
               } else if (element.type.toLowerCase() == "date"){ %>
-              field: '<%- elem%>',type: Date, cellFilter: "date : 'MMM d, y'",
+              field: '<%=elem%>',type: Date, cellFilter: "date : 'MMM d, y'",
               <%
               } else { %>
-              field: '<%- elem%>', <% } %>minWidth: 150, enableColumnResizing: true, enableHiding: false, enableSorting: true, displayName: $filter('translate')('<%-element.ui.title%>')
+              field: '<%=elem%>', <% } %>minWidth: 150, enableColumnResizing: true, enableHiding: false, enableSorting: true, displayName: $filter('translate')('<%-element.ui.title%>')
             }, <%
           }); %> <%
           if (agents.length > 0 ) {
              %> <% _.each(agents, function(agent, index) {
                 var agentName = agent.split('.').reverse().join("_of_");
                 var newAgent = objectFindByKey(agentSpec, 'id', agent); %> {
-                  cellTemplate: "<div>{{grid.appScope.gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity);}}</div>",
+                  cellTemplate: "<div>{{grid.appScope.gridOptions.actions.get<%=newAgent.name%>ConversationState(row.entity);}}</div>",
                     minWidth: 150, enableColumnResizing: true, enableHiding: false, enableSorting: false, displayName: $filter('translate')('STATE'), name: 'agent-state'
                 }, {
-                  cellTemplate: "<div>" + "<button class='btn btn-default btn-sm text-capitalize' ng-if='gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity)==null' ng-click='grid.appScope.gridOptions.actions.init<%- newAgent.name%>Conversation(row.entity);' >{{'INIT'|translate}}</button>" + <% _.each(newAgent.states, function(state, index) { %> <%
+                  cellTemplate: "<div>" + "<button class='btn btn-default btn-sm text-capitalize' ng-if='grid.appScope.gridOptions.actions.get<%=newAgent.name%>ConversationState(row.entity)==null' ng-click='grid.appScope.gridOptions.actions.init<%=newAgent.name%>Conversation(row.entity);' >{{'INIT'|translate}}</button>" + <% _.each(newAgent.states, function(state, index) { %> <%
                     var actions = _.toArray(state.elements); %> <% _.each(actions, function(action, i) { %>
-                      "<button class='btn btn-default btn-sm text-capitalize' ng-if='grid.appScope.gridOptions.actions.get<%- newAgent.name%>ConversationState(row.entity)==\"<%-state.name%>\"' ng-click='grid.appScope.gridOptions.actions.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(row.entity);' ><%- action.name%></button>" + <%
-                    }); %> <%
+                      "<button class='btn btn-default btn-sm text-capitalize' ng-if='grid.appScope.gridOptions.actions.get<%=newAgent.name%>ConversationState(row.entity)==\"<%-state.name%>\"' ng-click='grid.appScope.gridOptions.actions.do<%=agentName%>_<%=state.name %>_<%=action.name.toLowerCase()%>(row.entity);' ><%=action.name%></button>" + <%}); %> <%
                   }); %>
                   "</div>",
                     minWidth: 150, enableColumnResizing: true, enableHiding: false, enableSorting: false, displayName: $filter('translate')('ACTIONS'), name: 'agent-actions'
@@ -68,7 +66,7 @@ angular.module('<%- moduleName %>')
               }); %> <%
           } %> { <%
             var putState = 'main.' + moduleName + '.PUT'; %>
-            cellTemplate: "<div class='editCell '><a ng-click='grid.appScope.gridOptions.actions.changeState(\"<%- putState%>\", row.entity)'>{{'EDIT'|translate}}</a></div>",
+            cellTemplate: "<div class='editCell '><a ng-click='grid.appScope.gridOptions.actions.changeState(\"<%=putState%>\", row.entity)'>{{'EDIT'|translate}}</a></div>",
               width: '75', minWidth: 75, enableColumnResizing: true, enableHiding: false, enableSorting: false, displayName: $filter('translate')('EDIT'), name: 'edit'
           }, { <%
             var deleteState = 'main.' + moduleName + '.DELETE'; %>
@@ -76,24 +74,22 @@ angular.module('<%- moduleName %>')
               width: '150', minWidth: 150, enableColumnResizing: false, enableHiding: false, enableSorting: false, displayName: $filter('translate')('DELETE'), name: 'delete'
           }
         ];
-
       var _gridHeaders = <%= JSON.stringify(actions.elements.FIND.components.elements) %> ;
       <% }}%>
-
       return {
         <% for(element in actions.elements){
         if (element == 'FIND') {%>
         columnDefs: _columnDefs,
         gridHeaders: _gridHeaders,<% }
     var elementName = element.replace('_', '').toLowerCase();%>
-        <%- elementName%><%- moduleName %>: _<%- elementName%><%- moduleName %>,<% }%>
+        <%=elementName%><%=moduleName %>: _<%=elementName%><%=moduleName %>,<% }%>
           <% _.each(agents, function(agent, index){%>
             <%var newAgent = objectFindByKey(agentSpec, 'id', agent);%>
-          init<%- newAgent.name%>Conversation: <%= newAgent.name%>Services.initConversation,
+          init<%=newAgent.name%>Conversation: <%=newAgent.name%>Services.initConversation,
           <%_.each(newAgent.states, function(state, index){
             var elements = _.toArray(state.elements);
             _.each(elements, function(element, i){
               var elementName = element.name.toLowerCase();%>
-          on_<%- newAgent.name%>_<%- state.name %>_<%- elementName%>: <%= newAgent.name%>Services._on_<%- elementName%>,<%});});});%>
+          on_<%=newAgent.name%>_<%=state.name %>_<%=elementName%>: <%=newAgent.name%>Services.on_<%=elementName%>,<%});});});%>
       }
   }]);

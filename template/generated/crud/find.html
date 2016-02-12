@@ -1,11 +1,11 @@
 <div class="pageHeader">
-	<h2>{{ '<%- parentStateName%><%- moduleName%>' | translate }}</h2>
+	<h2>{{ '<%=parentStateName%> <%=moduleName%>' | translate }}</h2>
 </div>
 <br /><br />
 <!--this will run IF there is data AND we specified grid view -->
 <div ng-if="allData > 0 && grid.enabled" class="findView">
 	<br /><br />
-	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
+	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%=parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
 	<br /><br />
 	<div ng-if="gridOptions.data.length > 0">
 	   <div class="uiGridDirective" grid-data='gridOptions.data' grid-options='gridOptions.options'></div>
@@ -22,12 +22,12 @@
 <!--this is for NOT grid view BUT there needs to be data-->
 <div ng-if="allData > 0 && !grid.enabled" class="findView">
 	<br />
-	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
+	<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%=parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
 	<br /><br />
 
 	<div ng-repeat="row in gridOptions.data track by $index" class="panel panel-default">
 		<div class="panel-heading">
-		  <h3 class="panel-title"><%- parentStateName%></h3>
+		  <h3 class="panel-title"><%=parentStateName%></h3>
 		</div>
 		<div class="panel-body">
 			<p ng-repeat="(key, value) in row"><span ng-if="key != '__t' && key != '_id'">{{key}}: {{value}}</span></p>
@@ -47,16 +47,16 @@
 			_.each(agents, function(agent, index){
 				var agentName = agent.split('.').reverse().join("_of_");
 				var newAgent = objectFindByKey(agentSpec, 'id', agent); %>
-				<span ng-bind="gridActions.get<%- newAgent.name%>ConversationState(row._id);">
+				<span ng-bind="gridActions.get<%=newAgent.name%>ConversationState(row._id);">
 					{{convState}}
 				</span>
 				<br /><br />
 				<div>
-            		<button class='btn btn-default btn-sm text-capitalize' ng-if='gridActions.get<%- newAgent.name%>ConversationState(row._id)==null' ng-click='gridActions.init<%- newAgent.name%>Conversation(row._id);' >{{'INIT'|translate}}</button>
+            		<button class='btn btn-default btn-sm text-capitalize' ng-if='gridActions.get<%=newAgent.name%>ConversationState(row._id)==null' ng-click='gridActions.init<%=newAgent.name%>Conversation(row._id);' >{{'INIT'|translate}}</button>
             		<% _.each(newAgent.states, function(state, index){ %>
             			<% var actions = _.toArray(state.elements); %>
             			<% _.each(actions, function(action, i){%>
-             				<button class='btn btn-default btn-sm text-capitalize' ng-if='gridActions.get<%- newAgent.name%>ConversationState(row._id)=="<%-state.name%>"' ng-click='gridActions.do<%- agentName%>_<%- state.name %>_<%- action.name.toLowerCase()%>(row._id);' ><%- action.name%></button>
+             				<button class='btn btn-default btn-sm text-capitalize' ng-if='gridActions.get<%=newAgent.name%>ConversationState(row._id)=="<%=state.name%>"' ng-click='gridActions.do<%=agentName%>_<%=state.name %>_<%=action.name.toLowerCase()%>(row._id);' ><%=action.name%></button>
              			<%});%>
              		<% });%>
              	</div>
@@ -65,5 +65,5 @@
 	</div>
 </div>
 <br />
-<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%- parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
+<button ng-repeat="btn in actionButtons track by $index" class="btn btn-default" ui-sref="main.<%=parentStateName%>.{{btn.state}}({id: userId})">{{btn.title | translate}}</button>
 <br />
