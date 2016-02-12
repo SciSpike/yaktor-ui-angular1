@@ -1,0 +1,6 @@
+<div class="modal-body alert-modal-body">
+  <div ng-if="config.contentMsg" class="alert-message text-center">{{config.contentMsg | translate}}</div>
+</div>
+<div class="modal-footer">
+  <div class="btn btn-primary text-center" ng-click="$close()">{{"_OK" | translate}}</div>
+</div>

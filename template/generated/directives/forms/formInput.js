@@ -174,7 +174,7 @@ angular.module('views')
 
           var modalInstance = $modal.open({
             size: "lg",
-            templateUrl: clientConstants.partialsBaseLocation + '/partials/crud/' + partialString + '/POST.html',
+            templateUrl: clientConstants.partialsBaseLocation + '/crud/' + partialString + '/POST.html',
             controller: partialString + 'POSTController',
             scope: skope
           });

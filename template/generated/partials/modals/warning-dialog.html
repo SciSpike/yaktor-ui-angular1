@@ -1,0 +1,8 @@
+<div class="modal-header">
+ <h3>{{'_WARNING.TITLE' | translate}}</h3>
+</div>
+<div class="modal-body">
+  <progressbar ng-if="displayProgression" max="$root.idleMax" value="$root.idleCounter" animate="false" class="progress-striped active"></progressbar>
+  <div>{{getContent()}}</div>
+  <button class="btn btn-warning" ng-click="action()">{{'_CONTINUE' | translate}}</button>
+</div>
