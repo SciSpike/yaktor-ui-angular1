@@ -5,7 +5,7 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
 
   var service = {};
 
-  service.POST = function(endpoint, data, cb) {
+  service.POST = function(endpoint, data) {
     return serverLocation.getMainServer().then(function(serverLocation){
       return $http.post(serverLocation + endpoint, data)
         .success(function(data, status, headers, config) {
@@ -17,7 +17,7 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
     });
   };
 
-  service.FINDBYID = function(endpoint, id, cb) {
+  service.FINDBYID = function(endpoint, id) {
     return serverLocation.getMainServer().then(function(serverLocation){
       return $http.get(serverLocation + endpoint+"/"+id)
         .success(function(data, status, headers, config) {
@@ -29,11 +29,11 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
     });
   };
 
-  service.GET = function(endpoint, id, cb) {
+  service.GET = function(endpoint, id) {
     $location.path(endpoint+"/PUT/"+id);
   };
 
-  service.FIND = function(endpoint, data, page, cb) {
+  service.FIND = function(endpoint, data, page) {
     return serverLocation.getMainServer().then(function(serverLocation){
       if (data) {
         data.page = page;
@@ -48,7 +48,7 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
     });
   };
 
-  service.PUT = function(endpoint, data, id, cb) {
+  service.PUT = function(endpoint, data, id) {
     return serverLocation.getMainServer().then(function(serverLocation){
       return $http.put(serverLocation + endpoint+"/"+id, data)
         .success(function(data, status, headers, config) {
@@ -60,7 +60,7 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
     });
   };
 
-  service.DELETE = function(endpoint, id, cb) {
+  service.DELETE = function(endpoint, id) {
     return serverLocation.getMainServer().then(function(serverLocation){
       return $http.delete(serverLocation + endpoint+"/"+id)
         .success(function(data, status, headers, config) {

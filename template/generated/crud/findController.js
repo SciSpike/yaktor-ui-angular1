@@ -20,11 +20,11 @@
             },
             deleteItem: function(entity) {
               var id = $scope.gridOptions.getRowIdentity(entity);
-              <%=parentStateName%>Services.delete<%=parentStateName%>({}, id).then(function(response) {
+              <%=parentStateName%>Services.delete<%=parentStateName%>({},id).then(function(response) {
                 for (var i = 0; i < $scope.gridOptions.data.length; i++) {
                   if ($scope.gridOptions.data[i]._id == id) {
                     $scope.gridOptions.data.splice(i, 1);
-                    $scope.findData({});
+                    // $scope.findData({});
                   }
                 }
               });
