@@ -8,7 +8,7 @@ views/bower_components/
 views/node_modules/
 /views/*.*
 /views/**/*.*
-!/views/Client/**/*.*
+!/views/client/**/*.*
 !/views/shared/**/*.*
 !/views/fonts/**/*.*
 !/views/**/*_extended.js
