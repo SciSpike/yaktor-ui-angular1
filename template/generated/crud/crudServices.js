@@ -36,10 +36,10 @@ angular.module('<%=moduleName %>')
             var element = elems[elem]; %> { <%
               if (element.type == "typeAhead" || element.type == "select") { %> <%
                 if (element.ui.hasTitle) { %>
-              field: '<%=element.ui.title%>.title',
+              field: '<%=elem%>.title',
                 <%
                 } else { %>
-              field: '<%=element.ui.title%>',
+              field: '<%=elem%>',
                 <%
                 } %> <%
               } else if (element.type.toLowerCase() == "date"){ %>
