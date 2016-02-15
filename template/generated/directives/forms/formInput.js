@@ -73,7 +73,7 @@ angular.module('views')
             var endPoint = endPointData[typeRef].url;
             //NON-ASYNC
             typeRefService.getTypeRef(endPoint).then(function(response) {
-              setTypeRefData(response.results);
+              setTypeRefData(  response.data.results);
             });
 
             //ASYNC
@@ -82,7 +82,7 @@ angular.module('views')
               var data = {};
               data.title = "/" + val + ".*/";
               typeRefService.getTypeRef(endPoint, data).then(function(response) {
-                setTypeRefData(response.results);
+                setTypeRefData(  response.data.results);
               });
             };
 
@@ -159,7 +159,7 @@ angular.module('views')
             //ignore state and query here, this is just a a spoof to get what we need and avoid a goofy error
             if (newItem) {
               typeRefService.getTypeRef($scope.directiveData.endPoint[$scope.directiveData.typeRef], {}).then(function(response) {
-                setTypeRefData(response.results);
+                setTypeRefData(  response.data.results);
                 if (arrayIndex && arrayIndex != null) {
                   scope.directiveData.answer[arrayIndex] = newItem.title; //DON'T KNOW IF THIS WORKS
                 } else {

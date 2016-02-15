@@ -4,17 +4,8 @@ angular.module('views')
         if(!data){
           data = {};
         }
-        var response = $q.defer();
-        $timeout(function(){
-          RestService['FIND'](typeRef, data,null,function(err,data){
-                  if(err){
-                      console.log(err);
-                  } else {
-                   response.resolve(data);
-                  }
-            });
-        });
-        return response.promise;
+        return $q.when(RestService['FIND'](typeRef, data));
+
       }
       return {
         getTypeRef: _getTypeRef
