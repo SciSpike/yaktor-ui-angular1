@@ -1,0 +1,24 @@
+<div class="<%=moduleName%> <%=state.name %>">
+  <div ng-init="showTitle=true" class="state">
+    <% 
+    var actions;
+    var titleArray = parentUrl.replace('/', '').split('.');
+    %>
+    <h1><%=titleArray[0]%> <%=titleArray[1]%></h1>
+	    	<div class="wsPartial">
+			    <% if(Object.keys(state.elements).length == 0){%><h3>{{'<%=state.title%>'|translate}}</h3><%}%>
+			    <ul class="list-inline">
+			    <%var elements = state.elements;
+			       actions = Object.keys(elements);
+			       if(actions.length>0){
+			    	   	actions.forEach(function(a){ 
+			    		var actionable = elements[a];
+			        	var subPath =  actionable.subPath || "";%>
+			        <li>
+			        	<button class="btn btn-default btn-sm" ng-click="changeState('<%-a%>')">{{'<%=actionable.ui.title%>'|translate}}</button>
+			        </li><% });} %>
+			    </ul>
+		  </div>
+    <div class="view" ui-view="" autoscroll="false"></div>
+  </div>
+</div>

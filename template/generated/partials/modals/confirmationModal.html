@@ -1,0 +1,13 @@
+<div class="modal-header">
+ <dt>
+	 <span>{{title}}</span>
+	 <i class="icon icon-close" ng-click="close ? close() : $close()"></i>
+ </dt>
+</div>
+<div class="modal-body">
+  <div>{{message}}</div>
+  <div class="clearfix">
+	<button class="btn btn-primary pull-right" ng-click="confirm()">{{yes || '_PATIENT.CONTINUE'|translate}}</button>
+	<button class="btn pull-right" ng-click="cancel()">{{no || '_PATIENT.CANCEL'|translate}}</button>
+  </div>
+</div>

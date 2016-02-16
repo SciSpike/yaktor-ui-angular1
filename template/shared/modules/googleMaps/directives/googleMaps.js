@@ -1,5 +1,5 @@
 angular.module('googleMaps')
-  .directive('mapsDirective', ['$rootScope', 'routesExtended', function($rootScope, routesExtended, clientConstants) {
+  .directive('mapsDirective', ['$rootScope', 'routesExtended', 'clientConstants', function($rootScope, routesExtended, clientConstants) {
     return{
             restrict: 'C',
             transclude: true,

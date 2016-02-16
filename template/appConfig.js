@@ -1,5 +1,5 @@
 angular.module('views')
-.config(function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, routesExtendedProvider, htmlExtendedProvider, clientConstants) {
+.config(['$stateProvider', '$locationProvider', '$translateProvider', '$urlRouterProvider', 'htmlExtendedProvider', 'routesExtendedProvider', 'clientConstants', function($stateProvider, $locationProvider, $translateProvider, $urlRouterProvider, htmlExtendedProvider, routesExtendedProvider, clientConstants) {
   $translateProvider.preferredLanguage(clientConstants.defaultLocale);
   $translateProvider.useSanitizeValueStrategy('sanitize');
   $urlRouterProvider.when('', '/home');
@@ -18,12 +18,12 @@ angular.module('views')
    .state('main.home',{
      url: '/home',
      templateUrl: function(){
-       return clientConstants.clientBaseLocation + '/custom/homePage/home.html';
+       return clientConstants.clientBaseLocation + '/homePage/home.html';
      },
      controller: routesExtendedProvider.routes['home.index'] || 'homeController'
    });
    
-})
+}])
 
 .provider('localization', function LocalizationProvider() {
  return {
@@ -101,8 +101,8 @@ angular.module('views')
    for(agent in agents){
      var elements = agents[agent].elements;
    %>
-   <%- agents[agent].name%>:{<% for(element in elements){%>
-       <%- _.last(elements[element].actions.url.replace('/', '').split('.'))%>: "conversations.<%- elements[element].actions.url.replace('/', '')%>",
+   <%=agents[agent].name%>:{<% for(element in elements){%>
+       <%=_.last(elements[element].actions.url.replace('/', '').split('.'))%>: "conversations.<%=elements[element].actions.url.replace('/', '')%>",
      <%}%>
    },
    <%}}

@@ -6,7 +6,6 @@
     <title>{{title | translate}}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="favicon.ico" />
     <script src="https://www.google.com/recaptcha/api.js?onload=vcRecaptchaApiLoaded&render=explicit" async defer></script>
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places"></script>
     <!--CSS-->
@@ -14,6 +13,9 @@
 </head>
 <body>
   
+  <script>
+    var sessionId = "<%=sId%>";
+  </script>
   <div class="wrapper">
     <div class="uiViewOuter" ui-view autoscroll="false"></div>
   </div>
@@ -22,12 +24,7 @@
   <!--RESOURCES-->
   <!--RESOURCES END-->
   
-  <script>
-	  var qs = require('qs');
-    var sessionId = "<%=sId%>";
-  </script>
-    
-  <script src="clientConfig/clientSetup.js"></script>
+  <script src="libs/clientSetup.js"></script>
   <script src="app.js"></script>
   
   <!--SCRIPTS-->
