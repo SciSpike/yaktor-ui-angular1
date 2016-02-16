@@ -16,3 +16,4 @@ views/node_modules/
 !/views/bower.json
 !/views/package.json
 npm-debug.log
+workspace.xml
