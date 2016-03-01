@@ -17,6 +17,9 @@ angular.module('<%=moduleName %>')
       var _<%=elementName%><%=moduleName %> = function(data, id) {
         <% if (element == 'FIND') {%>
           var data = data || {};
+          if(id && !data.page){
+            data.page = id;
+          }
           return $q.when(RestService['FIND']('<%=actions.url%>', data));
         <% } else if (element == 'GET') {%>
           return $q.when(RestService['FINDBYID']('<%=actions.url%>', id));
