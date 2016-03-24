@@ -72,7 +72,7 @@ angular.module('views')
             //set endpoint in case we need to call on it elsewhere
             var endPoint = endPointData[typeRef].url;
             //NON-ASYNC
-            typeRefService.getTypeRef(endPoint).then(function(response) {
+            typeRefService.getTypeRef(endPoint,{pageSize:10000, page:1},1).then(function(response) {
               setTypeRefData(  response.data.results);
             });
 
@@ -81,7 +81,9 @@ angular.module('views')
               //add an initial data element for create new
               var data = {};
               data.title = "/" + val + ".*/";
-              typeRefService.getTypeRef(endPoint, data).then(function(response) {
+              data.page = 1;
+              data.pageSize = 10000;
+              typeRefService.getTypeRef(endPoint, data, data.page).then(function(response) {
                 setTypeRefData(  response.data.results);
               });
             };

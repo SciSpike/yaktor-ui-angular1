@@ -36,7 +36,7 @@ angular.module('<%=appname%>').service('RestService', function (serverLocation, 
   service.FIND = function(endpoint, data, page) {
     return serverLocation.getMainServer().then(function(serverLocation){
       if (data && !data.page) {
-        data.page = page;
+        data.page = page || 1;
       }
       return $http.get(serverLocation + endpoint+"?"+$.param(data))
         .success(function(data, status, headers, config) {
