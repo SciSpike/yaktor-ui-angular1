@@ -11,11 +11,11 @@ angular.module('views')
         }
         for (key in dataObject) {
           if (dataObject[key]) {
-            if (dataObject[key].answer) {
+            if (dataObject[key].answer || dataObject[key].allowEmpty) {
               if (dataObject[key].typeRef) {
                 dataObject[key].answer = dataObject[key].answer;
               }
-              if (dataObject[key].answer != '') {
+              if (dataObject[key].allowEmpty || (dataObject[key].answer != '')) {
                 answersObject[key] = dataObject[key].answer;
               } else {
                 delete answersObject[key];
