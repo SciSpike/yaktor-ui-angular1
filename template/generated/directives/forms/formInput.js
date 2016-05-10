@@ -48,10 +48,6 @@ angular.module('views')
             typeRef = $scope.directiveData.typeRef;
 
           if (endPointData[typeRef]) {
-
-            //this $translate can probably be removed pending some testing
-            // $translate($scope.directiveData.ui.title).then(function (translatedTitle) {
-
             $scope.translatedTitle = $translate.instant($scope.directiveData.ui.title);
             $scope.objectRef = $scope.translatedTitle.toLowerCase();
             var setTypeRefData = function(data) {
@@ -87,10 +83,8 @@ angular.module('views')
                 setTypeRefData(  response.data.results);
               });
             };
-
-            // }); //end $translate
           } else {
-            $scope.directiveData.ui.type = 'string';
+            $scope.directiveData.ui.type = 'text';
           }
 
         }
