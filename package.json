@@ -11,16 +11,16 @@
     "node": ">= 0.8.0"
   },
   "scripts": {
-    "test": "nodeunit test/json2angular_test.js",
-    "gen-docs": "ruby doc/buildAll.rb",
-    "gen-views": "engine-ui generate",
-    "start": "node app.js"
+    "patch": "grunt release-patch",
+    "minor": "grunt release-minor",
+    "lint": "standard --verbose",
+    "format": "standard-format -w"
   },
   "bin": {
     "engine-ui": "./bin/engine-ui"
   },
   "dependencies": {
-	"async": "0.2.9",
+    "async": "0.2.9",
     "walk": "2.3.x",
     "ansi": "0.2.x",
     "string": "1.7.x",
@@ -33,19 +33,17 @@
     "emitter-component": "1.1.1",
     "commander": "2.0.0",
     "prettyjson": "~0.10.0",
-    "which":"1.0.5"
+    "which": "1.0.5"
   },
   "devDependencies": {
-    "nodeunit": "~0.8.2",
-    "grunt-cli": "0.1.13",
     "grunt": "0.4.5",
-    "load-grunt-tasks": "0.6.0",
+    "grunt-bump": "0.0.16",
+    "grunt-cli": "0.1.13",
     "grunt-shell": "0.7.0",
-    "grunt-bump": "0.0.16"
-  },
-  "scripts": {
-    "patch": "grunt release-patch",
-    "minor": "grunt release-minor"
+    "load-grunt-tasks": "0.6.0",
+    "nodeunit": "~0.8.2",
+    "standard": "^7.0.1",
+    "standard-format": "^2.1.1"
   },
   "keywords": [
     "angularjs",
