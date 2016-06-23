@@ -1,26 +1,12 @@
-# json2angular
-
 Generate AngularJS applications based on a JSON application grammar.
 
 ## Usage
 
-A SciSpike application is automatically generated from a `.cdsl` file. The generated files include an `allInOne.js` file containing an application's state matrix and various view descriptions located in subdirectories of `public`. `json2angular` is able to generated a client side application using either mechanism.
+A yaktor-ui  is automatically generated from `cl` files. The generated files include a `public/api` containing an application's state matrix and various view descriptions. From the api we generate a client side application using.
 
-### State Matrix Usage
-
-    json2angular -n "Application Name" -s allInOne.js
-
-### Views Usage
-
-    json2angular -n "Application Name" -d scispike-app/public
-
-In each case, the `json2angular` utility creates an intermediary user interface model that is used to generate an [AngularJS](http://angularjs.org/) application. This intermediary UI model is described in JSON Specification.
-
-## Development
-
-`json2angular` is a Node module to generate AngularJS projects based on a JSON specification. The module consumes a JSON file describing the application title and states. Each state is coupled with UI elements, and information about how those UI elements affect the application state.
-
-This module uses [Mustache](https://npmjs.org/package/mustache) to generate HTML templates.
+```
+yaktor-ui create
+```
 
 ## JSON Specification
 
@@ -117,5 +103,3 @@ Each state transition must:
 * Expect view key to be a valid URL. Parse accordingly.
 * Alt text
 * ARIA support
-
-json2angular -d directory
