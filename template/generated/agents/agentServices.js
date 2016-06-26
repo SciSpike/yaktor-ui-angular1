@@ -1,23 +1,22 @@
 angular.module('<%=moduleName %>')
-  .factory('<%=moduleName %>Services', ['$rootScope', '$q', '$timeout', 'RestService', 'SocketService', '$eventsCommon', function($rootScope, $q, $timeout, RestService, SocketService, $eventsCommon){
+  .factory('<%=moduleName %>Services', function($rootScope, SocketService, $eventsCommon){
     
     var _initConversation = function(initData){
-      var initData = initData;
-      if(SocketService['init']){
-              SocketService['init']('<%=actions.url%>',initData, initData, function(err,stateName){
-                var nextState = stateName.replace('state:', '');
-                var currentState = stateName.replace('.state:', '');
-
-                var emitData = {
-                  data: initData,
-                  nextState: nextState,
-                  currentState: currentState
-                }
-                $rootScope.$emit($eventsCommon.conversations.<%=actions.url.replace('/', '')%>, emitData);
-              });
-          } else {
-              SocketService.doAction('<%=actions.url%>','init', initData, initData, function(err,data){});
+      SocketService['init']('<%=actions.url%>',initData).then(function(api){
+        api.onAny(function(err,stateName,payload){
+          var v = /.*:state:([^:]*):.*/; 
+          var nextState = stateName.replace(v, '.$1');
+          var currentState = stateName.replace(v, '$1');
+          
+          var emitData = {
+            data: initData,
+            event:payload,
+            nextState: nextState,
+            currentState: currentState
           }
+          $rootScope.$emit($eventsCommon.conversations.<%=actions.url.replace('/', '')%>, emitData);
+        });
+      });
     }
     <%
     for(state in states){
@@ -38,4 +37,4 @@ angular.module('<%=moduleName %>')
       on_<%=elementName%>: _on_<%=elementName%>,<%}}%>
     }
     
-  }]);
+  });

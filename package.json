@@ -1,7 +1,7 @@
 {
-  "name": "engine-ui",
+  "name": "yaktor-ui-angular1",
   "description": "Generate AngularJS applications based on a JSON application grammar",
-  "version": "6.0.9",
+  "version": "0.0.6-pre.0",
   "homepage": "https://github.com/SciSpike/engine-ui",
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     "format": "standard-format -w"
   },
   "bin": {
-    "engine-ui": "./bin/engine-ui"
+    "yaktor-ui": "./bin/yaktor-ui"
   },
   "dependencies": {
     "async": "0.2.9",
@@ -29,7 +29,6 @@
     "ejs": "1.0.0",
     "underscore": "1.6.0",
     "js-beautify": "1.4.x",
-    "sockjs-client-ws": "0.1.1",
     "emitter-component": "1.1.1",
     "commander": "2.0.0",
     "prettyjson": "~0.10.0",
