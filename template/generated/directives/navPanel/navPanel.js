@@ -24,7 +24,7 @@ angular.module('<%=appname%>')
           $('.navPanel').toggleClass('panelClosed');
         };
         
-        //standardNav is built by engine-ui
+        //standardNav is built by yaktor-ui
         var standardNav = [
           <% _.each(moduleNames.agents, function(moduleName, index) { %>
           {

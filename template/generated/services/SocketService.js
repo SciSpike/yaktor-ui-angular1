@@ -31,7 +31,7 @@ angular.module('<%=appname%>').service(
         });
       };
 
-      var init = function () {
+      var init = this.init = function () {
         defer.resolve();
         client.subscribe(agentName + ":state:+:" + agentId, {
           qos: 1
@@ -126,7 +126,7 @@ angular.module('<%=appname%>').service(
     
     service.init = function (sUrl, initData, autoDisconnect) {
       if(instances[sUrl.replace(/:state.*/, "")+initData._id]){
-        return Promise.resolve(instances[sUrl.replace(/:state.*/, "")+initData._id]);
+        return Promise.reject(instances[sUrl.replace(/:state.*/, "")+initData._id]);
       }
       var authFunction = function(cb){
         var token = null;

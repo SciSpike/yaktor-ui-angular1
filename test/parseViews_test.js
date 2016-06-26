@@ -3,7 +3,6 @@
 var fs = require('fs');
 var path = require('path');
 var parse = require('../lib/parse');
-var prettyjson = require('prettyjson');
 
 exports['parseView_test'] = {
   setUp: function(done) {
@@ -15,7 +14,7 @@ exports['parseView_test'] = {
   'should parse views': function(test) {
     var model = parse.fromViews('Views', this.views);
     
-    console.log( prettyjson.render(model) );
+    console.log( JSON.stringify(model,null,2) );
     test.done();
   },
   

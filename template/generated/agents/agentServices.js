@@ -16,6 +16,8 @@ angular.module('<%=moduleName %>')
           }
           $rootScope.$emit($eventsCommon.conversations.<%=actions.url.replace('/', '')%>, emitData);
         });
+      },function(api){
+        api.init();
       });
     }
     <%
