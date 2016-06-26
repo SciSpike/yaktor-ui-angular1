@@ -4,7 +4,6 @@ var fs = require('fs'),
     path = require('path'),
     cp = require('child_process'),
     parse = require('../lib/parse'),
-    prettyjson = require('prettyjson');
     argv = require('commander')
   , which = require('which');
 

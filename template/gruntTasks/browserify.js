@@ -1,14 +1,12 @@
 var browserifyLibExternal = [
-  './bower_components/emitter/index.js',
-  './bower_components/node-querystring/index.js',
-  '../node_modules/tv4/tv4.js',
+  '../node_modules/emitter-component/index.js',
+  '../node_modules/qs/index.js',
   '../public/socketApi.js'
 ];
 
 var browserifyLibAlias = [
-  './bower_components/emitter/index.js:emitter-component',
-  './bower_components/node-querystring/index.js:qs',
-  '../node_modules/tv4/tv4.js:tv4',
+  '../node_modules/emitter-component/index.js:emitter-component',
+  '../node_modules/qs/index.js:qs',
   '../public/socketApi.js:socketApi',
   './bower_components/jquery/dist/jquery.min.js:$',
   './bower_components/ng-grid/build/ng-grid.debug.js:ngGrid',

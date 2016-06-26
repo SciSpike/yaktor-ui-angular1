@@ -143,25 +143,27 @@ angular.module('<%=appname%>').service(
           console.log(e);
         }
       };
-      var config = {
-        socketServiceUrl: serverLocation,
-        authCall: authFunction,
-        sessionId: sessionId,
-        initData: initData,
-        agentName: sUrl.replace("/",""),
-        cb: cb
-      };
-      var apiInstance = socketWrapper(config);
-      instances[sUrl+initData._id]=apiInstance;
-      if (autoDisconnect) {
-        var off = $rootScope.$on("$stateChangeStart", function () {
-          off();
-          apiInstance.$conclude();
-          delete instances[sUrl.replace(/:state.*/, "")+initData._id];
-        });
-      }
-      deferred.resolve(apiInstance);
-      return deferred.promise;
+      return serverLocation.getMainServer().then(function(serverLocation){
+        var config = {
+          socketServiceUrl: serverLocation,
+          authCall: authFunction,
+          sessionId: sessionId,
+          initData: initData,
+          agentName: sUrl.replace("/",""),
+          cb: cb
+        };
+        var apiInstance = socketWrapper(config);
+        instances[sUrl+initData._id]=apiInstance;
+        if (autoDisconnect) {
+          var off = $rootScope.$on("$stateChangeStart", function () {
+            off();
+            apiInstance.$conclude();
+            delete instances[sUrl.replace(/:state.*/, "")+initData._id];
+          });
+        }
+        deferred.resolve(apiInstance);
+        return deferred.promise;
+      });
     };
     service.doAction = function (sUrl, action, initData, data, cb) {
       instances[sUrl.replace(/:state.*/, "")+initData._id][action](data, cb);

@@ -3,7 +3,6 @@
 var fs = require('fs');
 var path = require('path');
 var parse = require('../lib/parse');
-var prettyjson = require('prettyjson');
 
 exports['parseMatrix_test'] = {
   setUp: function(done) {
@@ -17,7 +16,7 @@ exports['parseMatrix_test'] = {
   'should parse state matrix': function(test) {
     var model = parse.fromStateMatrix('SodaPurchaser', this.stateMatrix);
     
-    console.log( prettyjson.render(model) );
+    console.log( JSON.stringify(model,null,2) );
     test.done();
   },
   
