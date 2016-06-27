@@ -17,7 +17,7 @@
     "ng-grid": "2.0.14",
     "ngstorage": "0.3",
     "moment": "2.8.1",
-    "moment-timezone": "0.3.1"
+    "moment-timezone": "0.3.1",
     "viz.js": "https://github.com/mdaines/viz.js/releases/download/0.0.3/viz.js"
  },
   "resolutions": {
