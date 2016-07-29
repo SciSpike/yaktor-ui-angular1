@@ -40,7 +40,7 @@ argv.command('generate')
   });
   
 argv.command('file <file>')
-  .description("re/build the ui from a sinlge file")
+  .description("re/build the ui from a single file")
   .option("-n, --name [name]","the name which lots of stuff will expect to be views","views")
   .action(function(file,args) {
       // Create a UI model from a SciSpike State Matrix and pass to json2angular.
