@@ -20,6 +20,9 @@ argv.command('create')
     var views = require('../lib/driver').crawlForViews(args.directory);
     var model = parse.fromViews(args.name, views);
       
+      
+      
+      
     require('../lib/json2angular').create(model, function(){
     	process.exit(0);
     });
@@ -45,7 +48,7 @@ argv.command('file <file>')
   .action(function(file,args) {
       // Create a UI model from a SciSpike State Matrix and pass to json2angular.
       var allInOne = require(path.join(process.cwd(), file));
-      // Search for the most shallow occurance of stateMatrix on an object
+      // Search for the most shallow occurrence of stateMatrix on an object
       var stateMatrix;
       var crawlForStateMatrix = function (obj) {
         if ( obj.hasOwnProperty('stateMatrix') ) {
