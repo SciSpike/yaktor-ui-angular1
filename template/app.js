@@ -7,7 +7,6 @@
   require('angular.translate');
   require('ngStorage');
   require('uiBootstrap');
-  require('ngGrid');
   require('ngTouch');
   require('uiGrid');
   require('uiSelect');
@@ -22,14 +21,13 @@
       'ui.router',
       'pascalprecht.translate',
       'ngStorage',
-      'ngGrid',
       'ngResource',
       'ui.grid',
-	  'ui.grid.autoResize',
-	  'ui.grid.cellNav',
-	  'ui.grid.edit',
-	  'ui.grid.i18n',
-	  'ui.grid.importer',
+	    'ui.grid.autoResize',
+	    'ui.grid.cellNav',
+	    'ui.grid.edit',
+	    'ui.grid.i18n',
+	    'ui.grid.importer',
       'ui.grid.infiniteScroll',
       'ui.grid.expandable',
       'ui.grid.exporter',

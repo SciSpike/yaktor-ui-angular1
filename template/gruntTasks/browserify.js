@@ -9,7 +9,6 @@ var browserifyLibAlias = [
   '../node_modules/qs/index.js:qs',
   '../public/socketApi.js:socketApi',
   './bower_components/jquery/dist/jquery.min.js:$',
-  './bower_components/ng-grid/build/ng-grid.debug.js:ngGrid',
   './bower_components/angular-touch/angular-touch.min.js:ngTouch',
   './bower_components/angular/angular.js:angular',
   './node_modules/angular-animate/angular-animate.js:ngAnimate',
@@ -20,19 +19,16 @@ var browserifyLibAlias = [
   './bower_components/ngstorage/ngStorage.min.js:ngStorage',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js:uiBootstrap',
   './bower_components/angular-ui-select/dist/select.js:uiSelect',
-  './bower_components/ng-grid/ng-grid-2.0.14.min.js:ngGrid',
   './bower_components/angular-ui-grid/ui-grid.min.js:uiGrid',
   './bower_components/angular-recaptcha/release/angular-recaptcha.js:vcRecaptcha',
   './node_modules/textangular/dist/textAngular-rangy.min.js:rangy',
   './node_modules/textangular/dist/textAngular.min.js:textAngular',
   './bower_components/moment/moment.js:moment',
   './bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js:moment.timezone'
-  
  ];
 
 var mainExternals = [
   './bower_components/jquery/dist/jquery.min.js',
-  './bower_components/ng-grid/build/ng-grid.debug.js',
   './bower_components/angular-touch/angular-touch.min.js',
   './bower_components/angular/angular.js',
   './node_modules/angular-animate/angular-animate.js',
@@ -43,7 +39,6 @@ var mainExternals = [
   './bower_components/ngstorage/ngStorage.min.js',
   './bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
   './bower_components/angular-ui-select/dist/select.js',
-  './bower_components/ng-grid/ng-grid-2.0.14.min.js',
   './bower_components/angular-ui-grid/ui-grid.min.js',
   './bower_components/angular-recaptcha/release/angular-recaptcha.js',
   './node_modules/textangular/dist/textAngular-rangy.min.js',
@@ -66,8 +61,8 @@ module.exports = {
           {
             cwd: '../public/api',
             src: ['*/*.js'],
-            dest: '',
-          },
+            dest: ''
+          }
         ]
       },
       src: [],
@@ -131,11 +126,6 @@ module.exports = {
             'uiSelect': {
                 path: './bower_components/angular-ui-select/dist/select.js',
                 exports: 'uiSelect',
-                depends: {jquery: '$', angular: 'angular'}
-            },
-            'ngGrid': {
-                path: './bower_components/ng-grid/ng-grid-2.0.14.min.js',
-                exports: 'ngGrid',
                 depends: {jquery: '$', angular: 'angular'}
             },
             'vcRecaptcha': {
