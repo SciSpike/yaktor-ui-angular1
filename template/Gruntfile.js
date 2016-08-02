@@ -200,7 +200,7 @@ module.exports = function(grunt) {
     },
     'shell': {
       'install-packages': {
-        'command': ['npm install', '$(npm bin)/bower install --verbose'].join('&&'),
+        'command': ['npm install', '$(npm bin)/bower install --verbose --allow-root'].join('&&'),
         'help': "Runs npm install and bower install"
       },
       'cordova-create': {
