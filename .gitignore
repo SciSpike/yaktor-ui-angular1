@@ -2,6 +2,7 @@ node_modules
 .DS_Store
 .project
 .settings
+.idea/*
 example/**/
 server/
 views/bower_components/
@@ -17,4 +18,3 @@ views/node_modules/
 !/views/package.json
 npm-debug.log
 workspace.xml
-/.idea/misc.xml
