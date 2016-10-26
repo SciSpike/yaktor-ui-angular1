@@ -1,11 +1,11 @@
 var browserifyLibExternal = [
-  '../node_modules/emitter-component/index.js',
+  '../node_modules/eventemitter2/lib/eventemitter2.js',
   '../node_modules/qs/index.js',
   '../public/socketApi.js'
 ];
 
 var browserifyLibAlias = [
-  '../node_modules/emitter-component/index.js:emitter-component',
+  '../node_modules/eventemitter2/lib/eventemitter2.js:eventemitter2',
   '../node_modules/qs/index.js:qs',
   '../public/socketApi.js:socketApi',
   './bower_components/jquery/dist/jquery.min.js:$',

@@ -1,4 +1,4 @@
-var emitter = require('emitter-component');
+var emitter = require('eventemitter2');
 var $ = require('$');
 angular.module('views').factory('AuthService', ['$rootScope', '$interval', '$browser', '$q', '$sessionStorage', '$window', function ($rootScope, $interval, $browser, $q, $sessionStorage, $window) {
   var _authenticated = false;
