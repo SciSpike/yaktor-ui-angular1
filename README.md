@@ -1,5 +1,7 @@
 Generate AngularJS applications based on a JSON application grammar.
 
+> NOTE: Please report issues at https://github.com/SciSpike/yaktor-issues/issues.
+
 ## Usage
 
 A yaktor-ui  is automatically generated from `cl` files. The generated files include a `public/api` containing an application's state matrix and various view descriptions. From the api we generate a client side application using.
